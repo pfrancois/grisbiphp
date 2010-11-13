@@ -12,11 +12,11 @@
 <script type="text/javascript" language="JavaScript1.2" src="lib/basiccalendar.js"></script>
 <script type="text/javascript" language="JavaScript1.2" src="lib/operation.js"></script>
 
-<title>{if ($type_action=='edit')}modification{/if}{if ($type_action=='new')}nouvelle op&eacute;ration{/if} </title>
+<title>{if ($type_action == 'edit')}modification{/if}{if ($type_action == 'new')}nouvelle op&eacute;ration{/if} </title>
 </head>
 <body onload="select_type_init()">
 
-<h1>{if ($type_action=='edit')}modification{/if}{if ($type_action=='new')}nouvelle op&eacute;ration{/if} dans cpt: {$compte_nom}</h1>
+<h1>{if ($type_action == 'edit')}modification{/if}{if ($type_action == 'new')}nouvelle op&eacute;ration{/if} dans cpt: {$compte_nom}</h1>
 <form id="form1" method="get" action="action.php" >
     <fieldset class="operationMainTable">
     	<legend>d&eacute;tails op&eacute;ration</legend>
@@ -25,7 +25,7 @@
 {*id de l'operation *}
 		<input type="hidden" name="ope_id" value="{$ope.id}" />
 {* type de l'operation *}
-    	{if ($type_action=='new')}
+    	{if ($type_action == 'new')}
     		<input type="hidden" name="action" value="new" />
     	{else}
     		<input type="hidden" name="action" value="edit" />
@@ -42,10 +42,10 @@
         	<select name="tiers" id="tiers" onchange="verifie_numero_visible_selon_texte(this.selectedIndex,'tiers','nom_nx_tiers_span','-1','nom_nx_tiers')">
 					<option value="-1">"nouveau tiers"</option>
         		{foreach from=$tiers item=tier}
-					<option value="{$tier.id}"{if ($tier.id==$ope.tier)} selected="selected"{/if}>{$tier.nom|escape:'htmlall':'UTF-8'}</option>
+					<option value="{$tier.id}"{if ($tier.id == $ope.tier)} selected="selected"{/if}>{$tier.nom|escape:'htmlall':'UTF-8'}</option>
 				{/foreach}
 			</select>
-			<span id='nom_nx_tiers_span' {if ($type_action!='new')}style="display: none"{/if}><label for="nom_nx_tiers">nom: </label>
+			<span id='nom_nx_tiers_span' {if ($type_action != 'new')}style="display: none"{/if}><label for="nom_nx_tiers">nom: </label>
 				<input type="text"  id="nom_nx_tiers" name="nom_nx_tiers" />
 			</span>
         </div>
@@ -54,10 +54,10 @@
 		<label for="cat">Cat&eacute;gorie: </label>
 			<select name="cat" id="cat">
 				{foreach from=$cats_debit item=cat_en_cours}
-					<option class="DebitCatElement" value="{$cat_en_cours.id}"{if ($cat_en_cours.id==$ope.cat)} selected="selected"{/if}>{$cat_en_cours.nom|escape:'htmlall':'UTF-8'}(-)</option>
+					<option class="DebitCatElement" value="{$cat_en_cours.id}"{if ($cat_en_cours.id == $ope.cat)} selected="selected"{/if}>{$cat_en_cours.nom|escape:'htmlall':'UTF-8'}(-)</option>
 				{/foreach}
 				{foreach from=$cats_credit item=cat_en_cours}
-					<option class="CreditCatElement" value="{$cat_en_cours.id}"{if ($cat_en_cours.id==$ope.cat)} selected="selected"{/if}>{$cat_en_cours.nom|escape:'htmlall':'UTF-8'}(+)</option>
+					<option class="CreditCatElement" value="{$cat_en_cours.id}"{if ($cat_en_cours.id == $ope.cat)} selected="selected"{/if}>{$cat_en_cours.nom|escape:'htmlall':'UTF-8'}(+)</option>
 				{/foreach}
 			</select>
         </div>
@@ -67,7 +67,7 @@
 			<label for="moyen">moyen de paiment: </label>
 			<select name="moyen" id="moyen" onchange="verifie_numero_visible_selon_css(this.selectedIndex,'moyen','num_chq','moyenAvecNumero','numero_chq')">
 			{foreach from=$moyens item=moyen_en_cours}
-				<option value="{$moyen_en_cours.id}" {if ($moyen_en_cours.id==$ope.moyen)} selected="selected"{/if} {if ($moyen_en_cours.entree)} class="moyenAvecNumero"{/if}>{$moyen_en_cours.nom|escape:'htmlall':'UTF-8'}{if ($moyen_en_cours.entree==1)}(*){/if}</option>
+				<option value="{$moyen_en_cours.id}" {if ($moyen_en_cours.id == $ope.moyen)} selected="selected"{/if} {if ($moyen_en_cours.entree)} class="moyenAvecNumero"{/if}>{$moyen_en_cours.nom|escape:'htmlall':'UTF-8'}{if ($moyen_en_cours.entree == 1)}(*){/if}</option>
 			{/foreach}
 			</select>
 			<span id='num_chq'  style="display: none"><label for="numero_chq">numero: </label>
@@ -95,7 +95,7 @@
 		<td width="50%" class="boutton"><a href="javascript:document.forms['form1'].submit();">Ok</a></td>
 		<td width="50%" class="boutton"><a href="operations.php?cpt_id={$compte_id}">Annuler</a></td>
 	</tr>
-	{if ($type_action!='new')}
+	{if ($type_action != 'new')}
 		 <tr>
 		<td colspan="2" class="boutton"><a href="delete_ope.php?action=delete&amp;date={$smarty.now|date_format:"%d%m%Y"}&amp;ope_id={$ope.id}&amp;cpt_id={$compte_id}">Supprimer</a></td>
 		</tr>

@@ -38,9 +38,10 @@ if (util::get_page_param('action')=='delete' && date('dmY',time())==util::get_pa
 			}//end try
 	}
 	if (DEBUG){
-		$tpl->assign('titre',"operations effectues");
+		$tpl->assign('titre',"op&eacute;rations &eacute;fface&eacute;es");
 		$tpl->assign('lien','operations.php?cpt_id='.$cpt_id);
-		$tpl->display('resultats.tpl');
+		$tpl->assign("nom_classe_css","progress");
+		$tpl->display('resultats.smarty');
 	} else {
 		util::redirection_header('operations.php?cpt_id='.$cpt_id);
 	}

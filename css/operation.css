@@ -29,9 +29,7 @@ span label{
 	padding-left: 0.5em;
 }
 input[type='text'] {
-    font-style:italic;
     padding: 0.5em;
-	vertical-align:50%;
 }
 select{
 	padding: 0.5em;

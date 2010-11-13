@@ -7,15 +7,13 @@
 <meta http-equiv="PRAGMA" content="NO-CACHE" />
 <meta http-equiv="EXPIRES" content="0" />
 <link rel="stylesheet" type="text/css" href="css/common.css" />
-<link rel="stylesheet" type="text/css" href="css/operation.css" />
-<link rel="stylesheet" type="text/css" href="css/calendar.css" />
-  <title>modification apportes</title>
+  <title>{$titre}</title>
 </head>
 <body >
+<H1> {$titre}</H1>
 {foreach from=$resultats item=resultat}
-		<div class='progress'>{$resultat}</div>
+		<div class='{$nom_classe_css}'>{$resultat}</div>
 {/foreach}
 <div class="error"><a href='{$lien}'>suite</a></div>
-
 </body>
 </html>

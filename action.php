@@ -21,29 +21,6 @@ $ope_montant=util::get_page_param('ope_montant');
 $ope_num_chq=util::get_page_param( 'numero_chq' );
 $ope_notes=util::get_page_param( 'rem' );
 $ope_moyen=(integer)util::get_page_param('moyen');
-/**
- * $action ='new';
- * $cpt_id =2;
- * $ope_id =14;
- * //verification de la date
- * try {
- * 	$ope_date=util::datefr2time( '19/09/2010' );
- * } catch (InvalidArgumentException $except) {
- * 	$tpl->critic("la date n'est pas valide", "operations.php?cpt_id=$cpt_id");
- * }
-
- * $notes = 'test';
- * $moyen_id =1;
- * $tiers_id=1;
- * $tiers_nom='';
- * $cat__et_scat_id = explode( ':', '6:1' );
- * $cat_id=trim($cat__et_scat_id[0]);
- * $scat_id=trim($cat__et_scat_id[1]);
- * $ope_montant='12345678900';
- * $ope_num_chq='';
- * $ope_notes='';
- * $ope_moyen=1;
- */
 //---------------------------gestion du processus---------------
 //creation du nouveau tiers au besoin
 if (  $tiers_id== -1 ) {
@@ -73,6 +50,7 @@ if ($action=="edit"){
 		$tpl->critic("impossible d'&eacute;diter une operation point&eacute;e ou rapproch&eacute;e".PHP_EOL."impossible d'editer une operation ventil&eacute;e" ,
 		 "operations.php?cpt_id=$cpt_id");
 	}
+	$tpl->assign('titre',"op&eacute;ration modifi&eacute;e");
 } elseif ($action=="new"){
 	try{
 		$compte=$gsb_comptes->get_by_id($cpt_id);
@@ -84,6 +62,7 @@ if ($action=="edit"){
 			$tpl->critic( "{$except->message}" , "operations.php?cpt_id=$cpt_id");
 		}
 	}
+	$tpl->assign('titre',"op&eacute;ration ajout&eacute;e");
 }else {
 	$tpl->critic('il faut choisir soit edit ou new' , "operations.php?cpt_id=$cpt_id");
 }
@@ -116,10 +95,10 @@ try{
 		$tpl->critic("{$except->message}" , "operations.php?cpt_id=$cpt_id");
 	}
 }
-if ($tpl->debugging){
-	$tpl->assign('titre',"operations effectues");
+if (DEBUG){
+	$tpl->assign("nom_classe_css","progress");
 	$tpl->assign('lien',"operations.php?cpt_id=$cpt_id");
-	$tpl->display('resultats.tpl');
+	$tpl->display('resultats.smarty');
 } else {
 	util::redirection_header("operations.php?cpt_id=$cpt_id");
 }

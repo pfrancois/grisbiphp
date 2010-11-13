@@ -51,6 +51,7 @@ if ($action=="edit") {
 			$tpl->critic("{$except->message}" , "operations.php?cpt_id=$compte_destination");
 		}
 	}//end try
+	$tpl->assign('titre',"op&eacute;rations modifi&eacute;es");
 }elseif ($action=="new"){
 	//verification de l'integrite referentielle
 	try {
@@ -64,14 +65,15 @@ if ($action=="edit") {
 			$tpl->critic("{$except->message}" , "operations.php?cpt_id=$compte_destination");
 		}
 	}//end try
+	$tpl->assign('titre',"op&eacute;rations ajout&eacute;es");
 }else{
 	$tpl->critic('type d\'operation invalide, il doit etre soit "edit" soit "new"','operations.php?cpt_id ='.$compte_destination->get_id());
 }
 
 if (DEBUG){
-	$tpl->assign('titre',"operations effectues");
+	$tpl->assign("nom_classe_css","progress");
 	$tpl->assign('lien','operations.php?cpt_id='.$compte_destination->get_id());
-	$tpl->display('resultats.tpl');
+	$tpl->display('resultats.smarty');
 } else {
 	util::redirection_header('operations.php?cpt_id='.$compte_destination->get_id());
 }

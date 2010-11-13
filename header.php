@@ -35,7 +35,7 @@ define("SUR_FREE", true) ;
  * id de la devise generalement utilise
  */
 define("DEVISE",1);
-define('DEBUG',false);
+define('DEBUG', true);
 /**
  * Id du tiers par defaut pour les virement
  */
@@ -51,7 +51,7 @@ define('TIERS_VIREMENT',2);
 require_once ('smarty/libs/Smarty.class.php') ;
 
 /**
- * class template qui etend smarty et qui sert � l'affichage
+ * class template qui etend smarty et qui sert a  l'affichage
  *
  */
 class template extends Smarty {
@@ -62,7 +62,7 @@ class template extends Smarty {
 		$this->config_dir = './templates/config' ;
 		$this->cache_dir = './templates/cache' ;
 		if (DEBUG){
-			$this->debugging=true;
+			//~ $this->debugging=true;
 		}
 		$this->caching = false ;
 		$this->config_read_hidden = true ;
@@ -84,7 +84,8 @@ class template extends Smarty {
 	public function critic($msg,$lien){
 			$this->append("resultats",$msg);
 			$this->assign('lien',"$lien");
-			$this->display('resultats.tpl') ;
+			$tpl->assign("nom_classe_css","error");
+			$this->display('resultats.smarty') ;
 			exit( 1 );
 	}
 	/**
