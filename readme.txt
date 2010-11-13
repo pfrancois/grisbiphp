@@ -3,6 +3,8 @@ il suffit de mettre dans header.php l'emplacement où est le fichier gsb.
 le fichier gsb est un fichier qui est produit par le logiciel grisbi. www.grisbi.org
 
 attention, pour l'instant, il faut utiliser la version 0.5.9 de grisbi
+pour que ca marche, il faut renommer le fichier __index.php__ en index.php
+
 
 * This software is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
