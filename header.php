@@ -35,7 +35,7 @@ define("SUR_FREE", true) ;
  * id de la devise generalement utilise
  */
 define("DEVISE",1);
-define('DEBUG', true);
+define('DEBUG', false);
 /**
  * Id du tiers par defaut pour les virement
  */
@@ -62,7 +62,7 @@ class template extends Smarty {
 		$this->config_dir = './templates/config' ;
 		$this->cache_dir = './templates/cache' ;
 		if (DEBUG){
-			//~ $this->debugging=true;
+			$this->debugging=true;
 		}
 		$this->caching = false ;
 		$this->config_read_hidden = true ;
