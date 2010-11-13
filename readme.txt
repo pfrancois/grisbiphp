@@ -2,4 +2,19 @@ pour installer.
 il suffit de mettre dans header.php l'emplacement où est le fichier gsb.
 le fichier gsb est un fichier qui est produit par le logiciel grisbi. www.grisbi.org
 
-attention, pour l'instant, il faut utiliser la version 0.5.9
+attention, pour l'instant, il faut utiliser la version 0.5.9 de grisbi
+
+* This software is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation;
+ * version 3 of the License.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ 
