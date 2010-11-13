@@ -1,0 +1,32 @@
+{* $Id: pee.smarty 34 2010-08-22 22:59:50Z pfrancois $ *}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="CACHE-CONTROL" content="NO-CACHE" />
+  <meta http-equiv="PRAGMA" content="NO-CACHE" />
+  <meta http-equiv="EXPIRES" content="0" />
+  <title>operations effectues sur le pee</title>
+</head>
+<body>
+la derniere mise &agrave; jour des cours a &eacute;t&eacute; le {$derniere_date_maj}
+<form method="get" action="{$smarty.server.SCRIPT_NAME}">
+<p>date de mise a jour <input type="text" name="date" value='{$date|date_format:"%d/%m/%Y"}'/></p>
+<p>montant affect&eacute; sur le peeA <input type="text" name='montantA' value='{$ma}' ></input> total PEEA: <input type="text" name='totalA' value='{$ta}'></input> actuellement il y a {$total_init_PEEA|nbfr} sur le PEEA</p>
+<p>montant affect&eacute; sur le peeB <input type="text" name='montantB' value='{$mb}'></input> total PEEB: <input type="text" name='totalB' value='{$tb}'></input> actuellement il y a {$total_init_PEEB|nbfr} sur le PEEB </p>
+<p>montant affect&eacute; sur le peeD <input type="text" name='montantD' value='{$md}'></input> total PEED: <input type="text" name='totalD'value='{$td}'></input> actuellement il y a {$total_init_PEED|nbfr} sur le PEED </p>
+<p>montant affect&eacute; sur le peeE <input type="text" name='montantE' value='{$me}'></input> total PEEE: <input type="text" name='totalE' value='{$te}'></input> actuellement il y a {$total_init_PEEE|nbfr} sur le PEEE</p>
+<p>soit un total de {$total_init_PEEA+$total_init_PEEB+$total_init_PEED+$total_init_PEEE|nbfr}</p>
+<p>montant des frais <input type="text" name='montantfrais' value='{$mfrais}'></input></p>
+<p>montant des impots <input type="text" name='montantimpots' value='{$mimpots}'></input></p>
+    <input type="submit" name="partie1" />
+</form>
+{if $partie eq 1}
+<p>on arrivera &agrave; un total de {$ta+$tb+$td+$te|nbfr}</p>
+<p><a href='pee.php?montantA={$ma}&amp;totalA={$ta}&amp;montantB={$mb}&amp;totalB={$tb}&amp;montantD={$md}&amp;totalD={$td}&amp;montantE={$me}&amp;totalE={$te}&amp;date={$date}&amp;partie2=Envoyer&amp;frais={$mfrais}&amp;impots={$mimpots}'> cliquer ici pour confirmer </a></p>
+{/if}
+{if $partie eq 2}
+<p>mise &agrave; faite.</p>
+{/if}
+</body>
+</html>

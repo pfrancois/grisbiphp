@@ -1,0 +1,74 @@
+﻿// $Id: note_de_version.txt 36 2010-08-23 01:29:01Z pfrancois $
+
+tout marche en version 2
+
+2010-04-18
+correction bug virement(maintenant, il affiche comme prevu, en destinataire le compte)
+enlevé de tous les endroit, le save_xml automatique
+normalement lorsque il y a une erreur, il n'y pas de raffraichissement de page automatique
+une constante nouvelle: le compte par defaut pour origine de virement
+rajout dans xpath.php du nombre de resultat
+2010-03-14 19:39:06
+correction bug common.css(les totaux survoles ne change plus de couleur comme si c'était des liens).
+correction template operation afin qu'il soit plus conforme aux standard
+
+2010-03-07 10:42:05
+modification du template operation n95:
+-image du calendrier
+-enlevage de tout le javascript
+
+
+2010-02-14
+ajout d'une page pour faire l'operation sur le pee
+suppression des exceptions specifiques
+creation de fonction de retour retour_id_nom_(categorie,tiers,compte)
+
+2009-12-06 20:31:00
+correction d'un bug sur les ajout de tiers
+verification que la date est bien  JJMMAAAA
+rajout d'un index.php
+xpath.php utilise maintenant les fonctions usuelles
+
+2009-11-15 22:23:55
+gestion des virement
+lorsque on cree une nouvelle operation, le moyen de paiment selectionné est celui par défaut du compte
+gestion  d'un bug de free qui fait que l'on ne peut pas utiliser libcompact
+
+7/11
+ajout d'un template operation special n95
+resolu certain bugs de css
+
+1/11
+refactoring des variables
+ajout de la fonction delete
+ajout de l'utilisation de dom pour utilisation avec free.
+gere le magic quote de free
+
+31 Oct
+affiche du numero de chq
+bug du "--"
+
+Sat Oct 10 14:43:53 CEST 2009
+affichage du montant
+si type où il faut rentrer un numero, un champ apparait
+si "nouveau tiers", un champ apparait
+
+Wed Oct 07 00:38:03 CEST 2009
+affichage des comptes d'actif et de passif
+affiche d'abord les categories de depenses puis les autres
+logger marche
+si pas d'operation ni de compte ca marche, ca prend le dernier numero et le compte courant
+
+2009-08-25  lafayette  <lafayette@lafayette-laptop>
+n'affiche que les operations des 60 derniers jours
+pour les types: si il y a une etoile, il faut noter le numero du cheqUE
+lors d'une nouvelle operation, le type par defaut est le type de depense par defaut
+
+version 0.2:
+telechargement du fichier OK
+quelques modif dans la documentation
+crée un fichier header.php qui a l'entete pour tous
+CORRIGE: version 0.1
+bug si aucune operation non pointée
+les operations apparaissent en bleu si en credit.
+plus de variable non defini

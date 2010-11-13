@@ -1,0 +1,10 @@
+/*$Id: xpath.css 40 2010-09-10 17:09:10Z pfrancois $*/
+.xpath
+{
+	font-family: monospace;
+	font-size: 1.2em;
+        border: solid #BBB;
+	background: #DDD;
+	overflow: auto;
+
+}

@@ -1,0 +1,84 @@
+{* $Id: cloture.smarty 45 2010-09-20 03:12:17Z pfrancois $ *}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta http-equiv="CACHE-CONTROL" content="NO-CACHE" />
+<meta http-equiv="PRAGMA" content="NO-CACHE" />
+<meta http-equiv="EXPIRES" content="0" />
+<link rel="stylesheet" type="text/css" href="css/common.css" />
+<link rel="stylesheet" type="text/css" href="css/operation.css" />
+
+<title>visualisation d'une operation dans un compte cloture </title>
+</head>
+<body >
+
+<h1>visualisation d'une operation dans un compte cloture</h1>
+<form id="form1" method="get" action="" >
+	<fieldset class="operationMainTable">
+		<legend>d&eacute;tails op&eacute;ration</legend>
+{* id du compte *}
+		<input type="hidden" name="cpt_id" value="{$compte_id}" />
+{*id de l'operation *}
+		<input type="hidden" name="ope_id" value="{$ope.id}" />
+{* type de l'operation *}
+			<input type="hidden" name="action" value="edit" />
+{* date *}
+		<div class="ligne" >
+		<label for="ope_date_ope">Date:</label>
+		<span id="ope_date_ope">{$ope.date|date_format:"%d%m%Y"}</span>
+		</div>
+{* tiers *}
+		<div class="ligne">
+			<label for="tiers">Tiers: </label>
+			{foreach from=$tiers item=tier}
+			{if ($tier.id==$ope.tier)}<span id="tiers">{$tier.nom|escape:'htmlall':"utf-8"}</span>{/if}
+			{/foreach}
+		</div>
+{* categorie *}
+		<div class="ligne">
+		<label for="cat">Cat&eacute;gorie: </label>
+				{foreach from=$cats_debit item=cat}
+					{if ($cat.id==$ope.cat)}<span id="cat">{$cat.nom|escape:'htmlall':'UTF-8'}</span>{/if}
+				{/foreach}
+				{foreach from=$cats_credit item=cat}
+					{if ($cat.id==$ope.cat)}<span id="cat">{$cat.nom|escape:'htmlall':'UTF-8'}</span>{/if}
+				{/foreach}
+		</div>
+{* moyen *}
+		<div class="ligne">
+		{if !empty($moyens)}
+			<label for="moyen">moyen de paiment: </label>
+			{foreach from=$moyens item=moyen}
+				{if ($moyen.id==$ope.moyen)}<span id="moyen">{$moyen.nom|escape:'htmlall':'UTF-8'}</span>{/if}
+			{/foreach}
+			{if !empty($ope.num_chq)}
+			<label for="numero_chq">num&eacute;ro de l'op&eacute; pour la banque </label>
+			<span id="numero_chq">{$ope.num_chq} </span>
+			{/if}
+		{else}
+			<input type="hidden" id="moyen" name="moyen" value=""/>
+			<input type="hidden" id="numero_chq" name="numero_chq" value=""/>
+		{/if}
+		</div>
+{* montant *}
+		<div class="ligne">
+		<label for="ope_montant" id="label_montant">Montant: </label>
+			<span id="ope_montant">{$ope.montant}</span> {$compte_devise}
+		</div>
+		<div class="ligne">
+{* notes *}
+		<label for="rem">notes: </label>
+			<span id="rem">{$ope.note|escape:'htmlall':"utf-8"}</span>
+		</div>
+	</fieldset>
+</form>
+<br/>
+{* boutons de validations *}
+<table class="editOperationBtns">
+	<tr>
+		<td width="100%" class="boutton"><a href="operations.php?cpt_id={$compte_id}">retour &agrave; la liste des op&eacute;rations</a></td>
+	</tr>
+</table>
+</body>
+</html>
