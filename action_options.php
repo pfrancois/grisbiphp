@@ -45,10 +45,6 @@ if ($action=="effacer_tiers_vides"){
 		$tpl->assign("nom_classe_css","progress");
 		$tpl->assign("lien","options.php");
 		$tpl->display('resultats.smarty');
-
-		echo "$i tiers en moins<br />";
-		echo('<a href="comptes.php">revenir au d&eacute;but</a>');
-		exit();
 	}
 }
 //---------------specifique----------------------
@@ -67,7 +63,7 @@ if ($action=="specifique"){
 		';
 	$xpath="//Operation";
 	function callback($iter){
-		//fait ce qui est demandé
+		//fait ce qui est demandÃ©
 		try {
 //			var_dump($iter);
 			if ($iter['N']!=''){
