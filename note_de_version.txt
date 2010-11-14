@@ -1,6 +1,4 @@
-﻿// $Id: note_de_version.txt 36 2010-08-23 01:29:01Z pfrancois $
-
-tout marche en version 2
+﻿tout marche en version 2
 
 2010-04-18
 correction bug virement(maintenant, il affiche comme prevu, en destinataire le compte)
