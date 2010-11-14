@@ -5,7 +5,7 @@ le fichier gsb est un fichier qui est produit par le logiciel grisbi. www.grisbi
 attention, pour l'instant, il faut utiliser la version 0.5.9 de grisbi
 pour que ca marche, il faut renommer le fichier __index.php__ en index.php
 
-
+***************************************************
 * This software is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
  * License as published by the Free Software Foundation;
@@ -19,4 +19,4 @@ pour que ca marche, il faut renommer le fichier __index.php__ en index.php
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- 
+ ***************************************************
