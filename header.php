@@ -1,11 +1,5 @@
-<?php
-// $Id: header.php 46 2010-09-20 20:44:12Z pfrancois $
-/**
-@todo ameliorer la gestion des comptes clotures
-@todo pouvoir deplacer une operation de compte
-@todo gestion des operations ventilees
-@todo gestion des devises
-*/
+<?php  /* coding: utf-8 */
+
 require_once ('class/loader.php') ;
 require_once('basic_ope_inc.php');
 

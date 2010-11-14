@@ -1,5 +1,5 @@
-<?php
-//$Id: action.php 47 2010-09-21 23:19:02Z pfrancois $
+<?php  /* coding: utf-8 */   /* coding: utf-8 */
+
 require_once('header.php');
 //----------------gestion des variables d'entree-----------------
 $action = util::get_page_param( 'action' );
@@ -102,4 +102,3 @@ if (DEBUG){
 } else {
 	util::redirection_header("operations.php?cpt_id=$cpt_id");
 }
-

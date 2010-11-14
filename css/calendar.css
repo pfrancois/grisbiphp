@@ -1,5 +1,5 @@
-/*$Id: calendar.css 40 2010-09-10 17:09:10Z pfrancois $*/
-
+@charset "UTF-8";
+/* coding: utf-8 */
 .editDate {
     border-collapse:collapse;
     width: 100%;

@@ -1,6 +1,6 @@
-<?php
+<?php  /* coding: utf-8 */ 
 
-//$Id: banque.php 31 2010-08-20 15:45:31Z pfrancois $
+
 class banque extends item {
     /**
      * demande le cib de la banque

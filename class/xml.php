@@ -1,5 +1,5 @@
-<?php
-// $Id: xml.php 45 2010-09-20 03:12:17Z pfrancois $
+<?php  /* coding: utf-8 */ 
+
 class xml {
     /**
      * ficher xml simplexmlise

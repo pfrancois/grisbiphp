@@ -1,5 +1,5 @@
-<?php
-// $Id: utilTest.php 45 2010-09-20 03:12:17Z pfrancois $
+<?php  /* coding: utf-8 */ 
+
 require_once 'PHPUnit/Framework.php';
 require_once 'G:\zmws\_web.zmwsc\comptes\class\util.php';
 date_default_timezone_set('Europe/Paris');

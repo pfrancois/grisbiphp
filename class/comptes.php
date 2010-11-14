@@ -1,5 +1,5 @@
-<?php
-//$Id: comptes.php 45 2010-09-20 03:12:17Z pfrancois $
+<?php  /* coding: utf-8 */
+
 /**
  * class d'abstraction de l'ensemble compte
  */
@@ -13,7 +13,7 @@ class comptes extends items {
 	/**
 	 * renvoi le compte dont on donne l'id
 	 *
-	 * @param integer $id id du compte demandé
+	 * @param integer $id id du compte demandÃ©
 	 * @return compte
 	 * @throws exception_not_exist si l'id n'existe pas
 	 * @throws exception_parametre_invalide si $id n'est integer

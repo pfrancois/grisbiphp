@@ -1,5 +1,5 @@
-<?php
-//$Id: rapp.php 41 2010-09-10 17:10:30Z pfrancois $
+<?php  /* coding: utf-8 */ 
+
 class rapp extends item {
     const POINTEE = 1 ;
     const RAPPROCHEE = 2 ;

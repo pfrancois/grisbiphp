@@ -1,10 +1,11 @@
-<?php
-// $Id: modifier.nbfr.php 45 2010-09-20 03:12:17Z pfrancois $
+<?php  /* coding: utf-8 */
+
 /**
  * Smarty plugin
  * @package Smarty
  * @subpackage plugins
  * @author  francois pegory
+ * @2010-01-01
  */
 /**
  * Smarty string_format modifier plugin
@@ -29,4 +30,3 @@ function smarty_modifier_nbfr($n,$devise='&#8364;') {
 	return $s;
 }
 $tpl->register_modifier('nbfr', 'smarty_modifier_nbfr');
-?>

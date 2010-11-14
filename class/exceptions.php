@@ -1,5 +1,5 @@
-<?php
-//$Id: exceptions.php 45 2010-09-20 03:12:17Z pfrancois $
+<?php  /* coding: utf-8 */ 
+
 // @codeCoverageIgnoreStart
 class Exception_base extends Exception {
     public $message = 'Unknown exception' ; // Exception message

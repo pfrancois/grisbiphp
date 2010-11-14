@@ -1,7 +1,7 @@
-<?php
-// $Id: action_virement.php 47 2010-09-21 23:19:02Z pfrancois $
-require_once 'header.php';
+<?php  /* coding: utf-8 */
 
+require_once 'header.php';
+//----------------gestion des variables d'entree-----------------
 $action = (string) util::get_page_param('action');
 $ope_id_origine = (int) util::get_page_param('ope_origine_id');
 $ope_id_destination = (int) util::get_page_param('ope_destination_id');
@@ -77,4 +77,3 @@ if (DEBUG){
 } else {
 	util::redirection_header('operations.php?cpt_id='.$compte_destination->get_id());
 }
-

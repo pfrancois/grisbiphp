@@ -1,5 +1,5 @@
-<?php
-//$Id: ib.php 38 2010-08-30 23:45:19Z pfrancois $
+<?php  /* coding: utf-8 */ 
+
 class ib extends subitems {
     const DEBIT = categorie::DEBIT ;
     const CREDIT = categorie::CREDIT ;

@@ -1,5 +1,5 @@
-<?php
-//$Id: categorie.php 38 2010-08-30 23:45:19Z pfrancois $
+<?php  /* coding: utf-8 */ 
+
 class categorie extends subitems {
     const DEBIT = 1 ;
     const CREDIT = 0 ;

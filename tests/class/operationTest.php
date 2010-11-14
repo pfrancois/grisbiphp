@@ -1,6 +1,6 @@
-<?php
+<?php  /* coding: utf-8 */ 
 
-// $Id: operationTest.php 45 2010-09-20 03:12:17Z pfrancois $
+
 require_once 'PHPUnit/Framework.php';
 require_once 'G:\zmws\_web.zmwsc\comptes\class\loader.php';
 

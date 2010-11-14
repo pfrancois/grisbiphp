@@ -1,4 +1,4 @@
-<?php
+<?php  /* coding: utf-8 */ 
 
 /**
  * Project:     Smarty: the PHP compiling template engine
@@ -29,8 +29,6 @@
  * @package Smarty
  * @version 2.6.26
  */
-
-/* $Id: Smarty.class.php 25 2010-08-09 22:05:46Z pfrancois $ */
 
 /**
  * DIR_SEP isn't used anymore, but third party apps might
@@ -188,7 +186,7 @@ class Smarty
     var $cache_modified_check = false;
 
     /**
-     * This determines how Smarty handles "<?php ... ?>" tags in templates.
+     * This determines how Smarty handles "<?php  /* coding: utf-8 */  ... ?>" tags in templates.
      * possible values:
      * <ul>
      *  <li>SMARTY_PHP_PASSTHRU -> print tags as plain text</li>

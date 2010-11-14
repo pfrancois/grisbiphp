@@ -1,4 +1,4 @@
-<?php
+<?php  /* coding: utf-8 */ 
 $langueprefere=setlocale(LC_ALL,'C');
 define('N',"\n");
 define('T',"  ");

@@ -1,4 +1,4 @@
-<?php
+<?php  /* coding: utf-8 */ 
 /*parser
 v23092005 necessite simple xml et rien d'autre
 v07012008 mies des fonctions dans un ficher annexe

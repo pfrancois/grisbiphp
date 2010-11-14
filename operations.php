@@ -1,5 +1,5 @@
-<?php
-// $Id: operations.php 46 2010-09-20 20:44:12Z pfrancois $
+<?php  /* coding: utf-8 */ 
+
 require_once 'header.php' ;
 $cpt_id = (int)util::get_page_param('cpt_id') ;
 

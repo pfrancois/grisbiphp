@@ -1,5 +1,5 @@
-<?php
-//$Id: util.php 45 2010-09-20 03:12:17Z pfrancois $
+<?php  /* coding: utf-8 */ 
+
 /**
  * Classe utilitaire qui donne des differentes fonctions utilise ailleurs.
  *

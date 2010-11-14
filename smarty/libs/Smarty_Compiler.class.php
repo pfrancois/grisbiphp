@@ -1,4 +1,4 @@
-<?php
+<?php  /* coding: utf-8 */ 
 
 /**
  * Project:     Smarty: the PHP compiling template engine
@@ -289,7 +289,7 @@ class Smarty_Compiler extends Smarty {
                 for ($curr_sp = 0, $for_max2 = count($sp_match[1]); $curr_sp < $for_max2; $curr_sp++) {
                     if ($this->php_handling == SMARTY_PHP_PASSTHRU) {
                         /* echo php contents */
-                        $text_blocks[$curr_tb] = str_replace('%%%SMARTYSP'.$curr_sp.'%%%', '<?php echo \''.str_replace("'", "\'", $sp_match[1][$curr_sp]).'\'; ?>'."\n", $text_blocks[$curr_tb]);
+                        $text_blocks[$curr_tb] = str_replace('%%%SMARTYSP'.$curr_sp.'%%%', '<?php  /* coding: utf-8 */  echo \''.str_replace("'", "\'", $sp_match[1][$curr_sp]).'\'; ?>'."\n", $text_blocks[$curr_tb]);
                     } else if ($this->php_handling == SMARTY_PHP_QUOTE) {
                         /* quote php tags */
                         $text_blocks[$curr_tb] = str_replace('%%%SMARTYSP'.$curr_sp.'%%%', htmlspecialchars($sp_match[1][$curr_sp]), $text_blocks[$curr_tb]);
@@ -298,7 +298,7 @@ class Smarty_Compiler extends Smarty {
                         $text_blocks[$curr_tb] = str_replace('%%%SMARTYSP'.$curr_sp.'%%%', '', $text_blocks[$curr_tb]);
                     } else {
                         /* SMARTY_PHP_ALLOW, but echo non php starting tags */
-                        $sp_match[1][$curr_sp] = preg_replace('~(<\?(?!php|=|$))~i', '<?php echo \'\\1\'?>'."\n", $sp_match[1][$curr_sp]);
+                        $sp_match[1][$curr_sp] = preg_replace('~(<\?(?!php|=|$))~i', '<?php  /* coding: utf-8 */  echo \'\\1\'?>'."\n", $sp_match[1][$curr_sp]);
                         $text_blocks[$curr_tb] = str_replace('%%%SMARTYSP'.$curr_sp.'%%%', $sp_match[1][$curr_sp], $text_blocks[$curr_tb]);
                     }
                 }
@@ -337,7 +337,7 @@ class Smarty_Compiler extends Smarty {
                         /* remove trailing whitespaces from the last text_block */
                         $text_blocks[$j] = rtrim($text_blocks[$j]);
                     }
-                    $text_blocks[$j] = "<?php echo '" . strtr($text_blocks[$j], array("'"=>"\'", "\\"=>"\\\\")) . "'; ?>";
+                    $text_blocks[$j] = "<?php  /* coding: utf-8 */  echo '" . strtr($text_blocks[$j], array("'"=>"\'", "\\"=>"\\\\")) . "'; ?>";
                     if ($compiled_tags[$j] == '{/strip}') {
                         $compiled_tags[$j] = "\n"; /* slurped by php, but necessary
                                     if a newline is following the closing strip-tag */
@@ -367,8 +367,8 @@ class Smarty_Compiler extends Smarty {
         $compiled_content .= str_replace('<?', $tag_guard, $text_blocks[$i]);
 
         // escape php tags created by interleaving
-        $compiled_content = str_replace('<?', "<?php echo '<?' ?>\n", $compiled_content);
-        $compiled_content = preg_replace("~(?<!')language\s*=\s*[\"\']?\s*php\s*[\"\']?~", "<?php echo 'language=php' ?>\n", $compiled_content);
+        $compiled_content = str_replace('<?', "<?php  /* coding: utf-8 */  echo '<?' ?>\n", $compiled_content);
+        $compiled_content = preg_replace("~(?<!')language\s*=\s*[\"\']?\s*php\s*[\"\']?~", "<?php  /* coding: utf-8 */  echo 'language=php' ?>\n", $compiled_content);
 
         // recover legit tags
         $compiled_content = str_replace($tag_guard, '<?', $compiled_content); 
@@ -379,7 +379,7 @@ class Smarty_Compiler extends Smarty {
         }
 
         if (!empty($this->_cache_serial)) {
-            $compiled_content = "<?php \$this->_cache_serials['".$this->_cache_include."'] = '".$this->_cache_serial."'; ?>" . $compiled_content;
+            $compiled_content = "<?php  /* coding: utf-8 */  \$this->_cache_serials['".$this->_cache_include."'] = '".$this->_cache_serial."'; ?>" . $compiled_content;
         }
 
         // run compiled template through postfilter functions
@@ -397,7 +397,7 @@ class Smarty_Compiler extends Smarty {
         }
 
         // put header at the top of the compiled template
-        $template_header = "<?php /* Smarty version ".$this->_version.", created on ".strftime("%Y-%m-%d %H:%M:%S")."\n";
+        $template_header = "<?php  /* coding: utf-8 */  /* Smarty version ".$this->_version.", created on ".strftime("%Y-%m-%d %H:%M:%S")."\n";
         $template_header .= "         compiled from ".strtr(urlencode($resource_name), array('%2F'=>'/', '%3A'=>':'))." */ ?>\n";
 
         /* Emit code to load needed plugins. */
@@ -411,14 +411,14 @@ class Smarty_Compiler extends Smarty {
                 }
             }
             $_plugins_params .= '))';
-            $plugins_code = "<?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');\nsmarty_core_load_plugins($_plugins_params, \$this); ?>\n";
+            $plugins_code = "<?php  /* coding: utf-8 */  require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');\nsmarty_core_load_plugins($_plugins_params, \$this); ?>\n";
             $template_header .= $plugins_code;
             $this->_plugin_info = array();
             $this->_plugins_code = $plugins_code;
         }
 
         if ($this->_init_smarty_vars) {
-            $template_header .= "<?php require_once(SMARTY_CORE_DIR . 'core.assign_smarty_interface.php');\nsmarty_core_assign_smarty_interface(null, \$this); ?>\n";
+            $template_header .= "<?php  /* coding: utf-8 */  require_once(SMARTY_CORE_DIR . 'core.assign_smarty_interface.php');\nsmarty_core_assign_smarty_interface(null, \$this); ?>\n";
             $this->_init_smarty_vars = false;
         }
 
@@ -453,7 +453,7 @@ class Smarty_Compiler extends Smarty {
         if (preg_match('~^' . $this->_num_const_regexp . '|' . $this->_obj_call_regexp . '|' . $this->_var_regexp . '$~', $tag_command)) {
             /* tag name is a variable or object */
             $_return = $this->_parse_var_props($tag_command . $tag_modifier);
-            return "<?php echo $_return; ?>" . $this->_additional_newline;
+            return "<?php  /* coding: utf-8 */  echo $_return; ?>" . $this->_additional_newline;
         }
 
         /* If the tag name is a registered object, we process it. */
@@ -478,7 +478,7 @@ class Smarty_Compiler extends Smarty {
                     $this->_syntax_error('unexpected {else}', E_USER_ERROR, __FILE__, __LINE__);
                 else
                     $this->_push_tag('else');
-                return '<?php else: ?>';
+                return '<?php  /* coding: utf-8 */  else: ?>';
 
             case 'elseif':
                 list($_open_tag) = end($this->_tag_stack);
@@ -490,7 +490,7 @@ class Smarty_Compiler extends Smarty {
 
             case '/if':
                 $this->_pop_tag('if');
-                return '<?php endif; ?>';
+                return '<?php  /* coding: utf-8 */  endif; ?>';
 
             case 'capture':
                 return $this->_compile_capture_tag(true, $tag_args);
@@ -510,15 +510,15 @@ class Smarty_Compiler extends Smarty {
 
             case 'sectionelse':
                 $this->_push_tag('sectionelse');
-                return "<?php endfor; else: ?>";
+                return "<?php  /* coding: utf-8 */  endfor; else: ?>";
                 break;
 
             case '/section':
                 $_open_tag = $this->_pop_tag('section');
                 if ($_open_tag == 'sectionelse')
-                    return "<?php endif; ?>";
+                    return "<?php  /* coding: utf-8 */  endif; ?>";
                 else
-                    return "<?php endfor; endif; ?>";
+                    return "<?php  /* coding: utf-8 */  endfor; endif; ?>";
 
             case 'foreach':
                 $this->_push_tag('foreach');
@@ -527,14 +527,14 @@ class Smarty_Compiler extends Smarty {
 
             case 'foreachelse':
                 $this->_push_tag('foreachelse');
-                return "<?php endforeach; else: ?>";
+                return "<?php  /* coding: utf-8 */  endforeach; else: ?>";
 
             case '/foreach':
                 $_open_tag = $this->_pop_tag('foreach');
                 if ($_open_tag == 'foreachelse')
-                    return "<?php endif; unset(\$_from); ?>";
+                    return "<?php  /* coding: utf-8 */  endif; unset(\$_from); ?>";
                 else
-                    return "<?php endforeach; endif; unset(\$_from); ?>";
+                    return "<?php  /* coding: utf-8 */  endforeach; endif; unset(\$_from); ?>";
                 break;
 
             case 'strip':
@@ -565,14 +565,14 @@ class Smarty_Compiler extends Smarty {
                         return '';
 
                     case 3: /* literal */
-                        return "<?php echo '" . strtr($block[2], array("'"=>"\'", "\\"=>"\\\\")) . "'; ?>" . $this->_additional_newline;
+                        return "<?php  /* coding: utf-8 */  echo '" . strtr($block[2], array("'"=>"\'", "\\"=>"\\\\")) . "'; ?>" . $this->_additional_newline;
 
                     case 4: /* php */
                         if ($this->security && !$this->security_settings['PHP_TAGS']) {
                             $this->_syntax_error("(secure mode) php tags not permitted", E_USER_WARNING, __FILE__, __LINE__);
                             return;
                         }
-                        return '<?php ' . $block[3] .' ?>';
+                        return '<?php  /* coding: utf-8 */  ' . $block[3] .' ?>';
                 }
                 break;
 
@@ -648,7 +648,7 @@ class Smarty_Compiler extends Smarty {
             if ($have_function) {
                 $output = call_user_func_array($plugin_func, array($tag_args, &$this));
                 if($output != '') {
-                $output = '<?php ' . $this->_push_cacheable_state('compiler', $tag_command)
+                $output = '<?php  /* coding: utf-8 */  ' . $this->_push_cacheable_state('compiler', $tag_command)
                                    . $output
                                    . $this->_pop_cacheable_state('compiler', $tag_command) . ' ?>';
                 }
@@ -734,7 +734,7 @@ class Smarty_Compiler extends Smarty {
             $this->_pop_tag($tag_command);
 
         if ($start_tag) {
-            $output = '<?php ' . $this->_push_cacheable_state('block', $tag_command);
+            $output = '<?php  /* coding: utf-8 */  ' . $this->_push_cacheable_state('block', $tag_command);
             $attrs = $this->_parse_attrs($tag_args);
             $_cache_attrs='';
             $arg_list = $this->_compile_arg_list('block', $tag_command, $attrs, $_cache_attrs);
@@ -742,7 +742,7 @@ class Smarty_Compiler extends Smarty {
             $output .= '$_block_repeat=true;' . $this->_compile_plugin_call('block', $tag_command).'($this->_tag_stack[count($this->_tag_stack)-1][1], null, $this, $_block_repeat);';
             $output .= 'while ($_block_repeat) { ob_start(); ?>';
         } else {
-            $output = '<?php $_block_content = ob_get_contents(); ob_end_clean(); ';
+            $output = '<?php  /* coding: utf-8 */  $_block_content = ob_get_contents(); ob_end_clean(); ';
             $_out_tag_text = $this->_compile_plugin_call('block', $tag_command).'($this->_tag_stack[count($this->_tag_stack)-1][1], $_block_content, $this, $_block_repeat)';
             if ($tag_modifier != '') {
                 $this->_parse_modifiers($_out_tag_text, $tag_modifier);
@@ -821,7 +821,7 @@ class Smarty_Compiler extends Smarty {
         }
 
         if($output != '') {
-            $output =  '<?php ' . $_cacheable_state . $_cache_attrs . 'echo ' . $output . ';'
+            $output =  '<?php  /* coding: utf-8 */  ' . $_cacheable_state . $_cache_attrs . 'echo ' . $output . ';'
                 . $this->_pop_cacheable_state('function', $tag_command) . "?>" . $this->_additional_newline;
         }
 
@@ -919,7 +919,7 @@ class Smarty_Compiler extends Smarty {
             $output = '';
         }
 
-        return '<?php ' . $prefix . $output . $postfix . "?>" . $newline;
+        return '<?php  /* coding: utf-8 */  ' . $prefix . $output . $postfix . "?>" . $newline;
     }
 
     /**
@@ -957,7 +957,7 @@ class Smarty_Compiler extends Smarty {
 
         $_params = "array('args' => array(".implode(', ', (array)$arg_list)."))";
 
-        return "<?php require_once(SMARTY_CORE_DIR . 'core.run_insert_handler.php');\necho smarty_core_run_insert_handler($_params, \$this); ?>" . $this->_additional_newline;
+        return "<?php  /* coding: utf-8 */  require_once(SMARTY_CORE_DIR . 'core.run_insert_handler.php');\necho smarty_core_run_insert_handler($_params, \$this); ?>" . $this->_additional_newline;
     }
 
     /**
@@ -988,7 +988,7 @@ class Smarty_Compiler extends Smarty {
             $arg_list[] = "'$arg_name' => $arg_value";
         }
 
-        $output = '<?php ';
+        $output = '<?php  /* coding: utf-8 */  ';
 
         if (isset($assign_var)) {
             $output .= "ob_start();\n";
@@ -1041,7 +1041,7 @@ class Smarty_Compiler extends Smarty {
 
         $_params = "array('smarty_file' => " . $attrs['file'] . ", 'smarty_assign' => '$assign_var', 'smarty_once' => $once_var, 'smarty_include_vars' => array(".implode(',', $arg_list)."))";
 
-        return "<?php require_once(SMARTY_CORE_DIR . 'core.smarty_include_php.php');\nsmarty_core_smarty_include_php($_params, \$this); ?>" . $this->_additional_newline;
+        return "<?php  /* coding: utf-8 */  require_once(SMARTY_CORE_DIR . 'core.smarty_include_php.php');\nsmarty_core_smarty_include_php($_params, \$this); ?>" . $this->_additional_newline;
     }
 
 
@@ -1056,7 +1056,7 @@ class Smarty_Compiler extends Smarty {
         $attrs = $this->_parse_attrs($tag_args);
         $arg_list = array();
 
-        $output = '<?php ';
+        $output = '<?php  /* coding: utf-8 */  ';
         $section_name = $attrs['name'];
         if (empty($section_name)) {
             $this->_syntax_error("missing section name", E_USER_ERROR, __FILE__, __LINE__);
@@ -1191,7 +1191,7 @@ class Smarty_Compiler extends Smarty {
             $name = null;
         }
 
-        $output = '<?php ';
+        $output = '<?php  /* coding: utf-8 */  ';
         $output .= "\$_from = $from; if (!is_array(\$_from) && !is_object(\$_from)) { settype(\$_from, 'array'); }";
         if (isset($name)) {
             $foreach_props = "\$this->_foreach[$name]";
@@ -1226,11 +1226,11 @@ class Smarty_Compiler extends Smarty {
             $assign = isset($attrs['assign']) ? $attrs['assign'] : null;
             $append = isset($attrs['append']) ? $attrs['append'] : null;
             
-            $output = "<?php ob_start(); ?>";
+            $output = "<?php  /* coding: utf-8 */  ob_start(); ?>";
             $this->_capture_stack[] = array($buffer, $assign, $append);
         } else {
             list($buffer, $assign, $append) = array_pop($this->_capture_stack);
-            $output = "<?php \$this->_smarty_vars['capture'][$buffer] = ob_get_contents(); ";
+            $output = "<?php  /* coding: utf-8 */  \$this->_smarty_vars['capture'][$buffer] = ob_get_contents(); ";
             if (isset($assign)) {
                 $output .= " \$this->assign($assign, ob_get_contents());";
             }
@@ -1414,9 +1414,9 @@ class Smarty_Compiler extends Smarty {
         }
 
         if ($elseif)
-            return '<?php elseif ('.implode(' ', $tokens).'): ?>';
+            return '<?php  /* coding: utf-8 */  elseif ('.implode(' ', $tokens).'): ?>';
         else
-            return '<?php if ('.implode(' ', $tokens).'): ?>';
+            return '<?php  /* coding: utf-8 */  if ('.implode(' ', $tokens).'): ?>';
     }
 
 

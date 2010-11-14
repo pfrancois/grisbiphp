@@ -8,8 +8,8 @@
 <title>verification du xsd avec le fichier grisbi actuel</title>
 </head>
 <body>
-<?php
-// $Id: xsd.php 36 2010-08-23 01:29:01Z pfrancois $
+<?php  /* coding: utf-8 */ 
+
 function libxml_display_error($error)
 {
     $return = "<br/>\n";

@@ -1,5 +1,5 @@
-<?php
-//$Id: banques.php 38 2010-08-30 23:45:19Z pfrancois $
+<?php  /* coding: utf-8 */ 
+
 class banques extends items {
 	/**
 	 * @const la chaine qui permet une iteration facile

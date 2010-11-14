@@ -1,5 +1,5 @@
-<?php
-//$Id: tier.php 41 2010-09-10 17:10:30Z pfrancois $
+<?php  /* coding: utf-8 */ 
+
 class tier extends item {
     /**
      * constructeur

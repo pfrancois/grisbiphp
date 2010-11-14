@@ -1,5 +1,5 @@
-<?php
-//$Id: etatsTest.php 30 2010-08-20 15:22:44Z pfrancois $
+<?php  /* coding: utf-8 */ 
+
 require_once 'PHPUnit/Framework.php';
 require_once 'G:\zmws\_web.zmwsc\comptes\class\loader.php';
 /**

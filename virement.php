@@ -1,6 +1,7 @@
-<?php
-// $Id: virement.php 46 2010-09-20 20:44:12Z pfrancois $
+<?php  /* coding: utf-8 */
+
 require_once('header.php');
+//----------------gestion des variables d'entree-----------------
 $ope_destination_id = util::get_page_param('ope_id');
 
 if ($ope_destination_id === "") {//nouvelle operation
@@ -17,7 +18,7 @@ if ($ope_destination_id === "") {//nouvelle operation
 }
 else {//edition
 	$tpl->assign('type_action','edit');
-	
+
 	$operation=$gsb_operations->get_by_id($ope_destination_id);
 	// operation jumelle
 	$jumelle=$operation->get_operation_contrepartie();
@@ -36,7 +37,7 @@ else {//edition
 
 	//date (il y a une seule date)
 	$tpl->assign('ope_date_ope',$operation->get_date());
-	
+
    	//montant
 	$tpl->assign('ope_value',-1*$operation->get_montant());
 
