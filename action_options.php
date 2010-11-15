@@ -1,5 +1,9 @@
 <?php  /* coding: utf-8 */   /* coding: utf-8 */
 require_once('header.php');
+function ral ($string){
+	global $tpl;
+	ral($string);
+}
 //----------------gestion des variables d'entree-----------------
 $action = util::get_page_param( 'action' );
 $phase=util::get_page_param( 'phase' );
@@ -19,7 +23,7 @@ if ($action=="effacer_tiers_vides"){
 			try {
 				$nom=(string)$tier->get_nom();
 				$tier->delete();
-				$tpl->append("resultat",$nom);
+				ral($nom);
 				$i++;
 			} catch (exception_integrite_referentielle $e) {
 				$i=$i;
@@ -41,40 +45,30 @@ if ($action=="effacer_tiers_vides"){
 			}
 		}
 		$gsb_xml->save();
-		$tpl->append("resultat","$i tiers effac&eacutes");
+		ral("$i tiers effac&eacutes");
 		$tpl->assign("nom_classe_css","progress");
 		$tpl->assign("lien","options.php");
 		$tpl->display('resultats.smarty');
+		exit();
 	}
 }
-//---------------specifique----------------------
-if ($action=="specifique"){
-				echo '
-		<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
-<head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-<meta http-equiv="CACHE-CONTROL" content="NO-CACHE" />
-<meta http-equiv="PRAGMA" content="NO-CACHE" />
-<meta http-equiv="EXPIRES" content="0" />
-<title>Comptes-outil_custom</title>
-</head>
-<body>
-		';
+//-----------------------------change les dates des retraits
+
+//---------------------------change les date des operations cartes differes
+if ($action=="dates_ope_diff"){
 	$xpath="//Operation";
 	function callback($iter){
 		//fait ce qui est demandé
+		//attention, elle peut changer
 		try {
 //			var_dump($iter);
 			if ($iter['N']!=''){
 				preg_match('#CARTE X9438 (../..)#', $iter['N'],$n);
-				var_dump($n);
 				if (substr($n, 2)>10){
 					ral("operation ".$iter['No']);
 					$n=$n."/2010";
 				}
 				ral($n);
-
 				return 1;
 			}
 			 throw new Exception_no_reponse('pas de reponse');
@@ -82,6 +76,7 @@ if ($action=="specifique"){
 			return 0;
 		}
 	}
+	///// normalement, pas besoin de changer en dessous
 	if ($phase==""){
 		$i=0;
 		ral('liste des actions effectues sur '.$gsb_xml->get_xmlfile());
@@ -90,13 +85,13 @@ if ($action=="specifique"){
 			foreach ($gsb_xml->xpath_iter($xpath) as $iter) {
 				$i=$i+callback($iter);
 			}
-			echo "$i actions effectu&eacute;"."<br />";
+			ral("$i actions effectu&eacute;");;
 		} catch (Exception_no_reponse $e) {
-			echo "aucune actions effectu&eacute; car &laquo;$xpath&raquo; non trouv&eacute;<br />";
+			ral("aucune actions effectu&eacute; car &laquo;$xpath&raquo; non trouv&eacute;");
 		}
-
-
-		echo('<a href="action_outils.php?action=specifique&amp;phase=2">cliquez ici pour confirmer</a>');
+		$tpl->assign("nom_classe_css","ligne");
+		$tpl->assign("lien","action_outils.php?action=dates_ope_diff&amp;phase=2");
+		$tpl->display('resultats.smarty');
 		exit();
 	}
 	if ($phase==2){
@@ -107,14 +102,73 @@ if ($action=="specifique"){
 			$i=$i+callback($iter);
 		}
 		$gsb_xml->save();
-		echo "$i actions effectu&eacute;"."<br />";
-		echo('<a href="comptes.php">revenir au d&eacute;but</a>');
+		ral("$i tiers effac&eacutes");
+		$tpl->assign("nom_classe_css","progress");
+		$tpl->assign("lien","options.php");
+		$tpl->display('resultats.smarty');
+		exit();
+	}
+}
+
+
+//---------------specifique----------------------
+if ($action=="specifique"){
+	$xpath="//Operation";
+	function callback($iter){
+		//fait ce qui est demandé
+		//attention, elle peut changer
+		try {
+//			var_dump($iter);
+			if ($iter['N']!=''){
+				preg_match('#CARTE X9438 (../..)#', $iter['N'],$n);
+				if (substr($n, 2)>10){
+					ral("operation ".$iter['No']);
+					$n=$n."/2010";
+				}
+				ral($n);
+				return 1;
+			}
+			 throw new Exception_no_reponse('pas de reponse');
+		} catch (Exception_no_reponse $e) {
+			return 0;
+		}
+	}
+	///// normalement, pas besoin de changer en dessous
+	if ($phase==""){
+		$i=0;
+		ral('liste des actions effectues sur '.$gsb_xml->get_xmlfile());
+		//remplissez la requete xpath
+		try {
+			foreach ($gsb_xml->xpath_iter($xpath) as $iter) {
+				$i=$i+callback($iter);
+			}
+			ral("$i actions effectu&eacute;");;
+		} catch (Exception_no_reponse $e) {
+			ral("aucune actions effectu&eacute; car &laquo;$xpath&raquo; non trouv&eacute;");
+		}
+		$tpl->assign("nom_classe_css","ligne");
+		$tpl->assign("lien","action_outils.php?action=specifique&amp;phase=2");
+		$tpl->display('resultats.smarty');
+		exit();
+	}
+	if ($phase==2){
+		$i=0;
+		ral('liste des actions effectues sur '.$gsb_xml->get_xmlfile());
+		//remplissez la requete xpath
+		foreach ($gsb_xml->xpath_iter($xpath) as $iter) {
+			$i=$i+callback($iter);
+		}
+		$gsb_xml->save();
+		ral("$i tiers effac&eacutes");
+		$tpl->assign("nom_classe_css","progress");
+		$tpl->assign("lien","options.php");
+		$tpl->display('resultats.smarty');
 		exit();
 	}
 }
 //recupere les action inexistantes, bien mettre un exit dans les if
 if (DEBUG){
-	echo ("action demand&eacute;e inexistante: $action");
+	$tpl->critic("action demand&eacute;e inexistante: $action");
 }else {
 	util::redirection_header("comptes.php");
 }
