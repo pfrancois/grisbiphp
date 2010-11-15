@@ -1,5 +1,5 @@
-<?php
-//$Id: operation.php 47 2010-09-21 23:19:02Z pfrancois $
+<?php  /* coding: utf-8 */ 
+
 class operation extends item {
 	public function __construct(SimpleXMLElement $c, $nouvelle = false, $id = null) {
 		global $gsb_xml ;

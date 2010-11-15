@@ -1,6 +1,7 @@
-<?php
-//$Id: operation.php 45 2010-09-20 03:12:17Z pfrancois $
+<?php  /* coding: utf-8 */
+
 require_once 'header.php';
+//----------------gestion des variables d'entree-----------------
 $cpt_id=(int)util::get_page_param('cpt_id');
 $ope_id=(int)util::get_page_param('ope_id');
 if ($cpt_id === "") {

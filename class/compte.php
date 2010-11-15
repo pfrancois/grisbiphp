@@ -1,6 +1,6 @@
-<?php
+<?php  /* coding: utf-8 */ 
 
-//$Id: compte.php 45 2010-09-20 03:12:17Z pfrancois $
+
 /**
  * class compte
  * @author francois

@@ -31,13 +31,13 @@
     		<input type="hidden" name="action" value="edit" />
     	{/if}
 
-		<div class="ligne" name="div_date">
+		<div class="ligne" id="div_date">
 		<label for="ope_date_ope">Date:</label>
 	        <input type="text" name="ope_date_ope" id="ope_date_ope" value="{$ope.date|date_format:"%d%m%Y"}" style='-wap-input-format:"NNNNNNNN";' size="9" maxlength="8" />
 	        <a href="javascript:editDate('ope_date_ope');" style="display:inline"><img src="img/calendar.png"  alt="calendrier" /></a>
 		</div>
 
-		<div class="ligne" name="div_tiers">
+		<div class="ligne" id="div_tiers">
 		<label for="tiers">Tiers: </label>
         	<select name="tiers" id="tiers" onchange="verifie_numero_visible_selon_texte(this.selectedIndex,'tiers','nom_nx_tiers_span','-1','nom_nx_tiers')">
 					<option value="-1">"nouveau tiers"</option>
@@ -50,7 +50,7 @@
 			</span>
         </div>
 
-		<div class="ligne" name="div_cat_scat">
+		<div class="ligne" id="div_cat_scat">
 		<label for="cat">Cat&eacute;gorie: </label>
 			<select name="cat" id="cat">
 				{foreach from=$cats_debit item=cat_en_cours}
@@ -62,7 +62,7 @@
 			</select>
         </div>
 
-		<div class="ligne" name="div_moyens" >
+		<div class="ligne" id="div_moyens" >
 		{if !empty($moyens)}
 			<label for="moyen">moyen de paiment: </label>
 			<select name="moyen" id="moyen" onchange="verifie_numero_visible_selon_css(this.selectedIndex,'moyen','num_chq','moyenAvecNumero','numero_chq')">
@@ -78,11 +78,11 @@
         {/if}
         </div>
 
-		<div class="ligne" name="div_montant">
+		<div class="ligne" id="div_montant">
 		<label for="ope_montant" id="label_montant">Montant: </label>
         	<input name="ope_montant" id="ope_montant" type="text" value="{$ope.montant}" style='-wap-input-format:"*N";'/> {$compte_devise}
 		</div>
-		<div class="ligne" name="div_notes">
+		<div class="ligne" id="div_notes">
 		<label for="rem">notes: </label>
         	<textarea name="rem" id="rem" cols="20" rows="5"> {$ope.note|escape:'htmlall':"utf-8"}</textarea>
 		</div>

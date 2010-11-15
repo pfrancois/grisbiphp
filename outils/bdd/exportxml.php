@@ -1,4 +1,4 @@
-<?php
+<?php  /* coding: utf-8 */ 
 //mise à jour le samedi 19 janvier 2008 à 15:00
 require_once 'include/functions.php';
 $db= new MySQLConnector( 'localhost', 'root', 'mdp','test') ;

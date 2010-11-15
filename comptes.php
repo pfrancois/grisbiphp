@@ -1,5 +1,5 @@
-<?php
-// $Id: comptes.php 45 2010-09-20 03:12:17Z pfrancois $
+<?php  /* coding: utf-8 */ 
+
 require_once ('header.php') ;
 
 $solde_total_bq = 0 ;
@@ -33,4 +33,3 @@ $tpl->assign('total_bq', $solde_total_bq / 100) ;
 $tpl->assign('total_pl', $solde_total_pl / 100) ;
 
 $tpl->display('comptes.smarty') ;
-

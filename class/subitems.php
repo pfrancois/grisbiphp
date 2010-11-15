@@ -1,6 +1,5 @@
-<?php
+<?php  /* coding: utf-8 */ 
 
-//Id of last commit: $Id: subitems.php 35 2010-08-22 23:08:05Z pfrancois $
 abstract class subitems extends item implements Countable {
 	/**
 	 * @var string le chemin xpath pour atteindre la collection

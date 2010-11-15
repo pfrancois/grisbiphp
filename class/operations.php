@@ -1,5 +1,5 @@
-<?php
-//$Id: operations.php 38 2010-08-30 23:45:19Z pfrancois $
+<?php  /* coding: utf-8 */ 
+
 /**
  * class d'abstraction de l'ensemble compte
  */

@@ -1,6 +1,5 @@
-<?php
+<?php  /* coding: utf-8 */ 
 
-//Id of last commit: $Id: item.php 45 2010-09-20 03:12:17Z pfrancois $
 abstract class item {
     const NOUVELLE = true ;
     const ANCIENNE = false ;

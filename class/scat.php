@@ -1,5 +1,5 @@
-<?php
-//$Id: scat.php 35 2010-08-22 23:08:05Z pfrancois $
+<?php  /* coding: utf-8 */ 
+
 class scat extends subitem {
     public function get_mere() {
         global $gsb_xml ;

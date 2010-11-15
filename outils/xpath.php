@@ -8,10 +8,10 @@
 <title>xpath</title>
 </head>
 <body>
-<h1><?php echo realpath('20040701.gsb')?></h1>
+<h1><?php  /* coding: utf-8 */  echo realpath('20040701.gsb')?></h1>
 
-<?php
-// $Id: xpath.php 41 2010-09-10 17:10:30Z pfrancois $
+<?php  /* coding: utf-8 */ 
+
 require_once('../class/util.php');
 /**
 *  renvoie les resultats relatif à la chaine xpath
@@ -43,14 +43,14 @@ function xpath_tab($chaine){
 	}
 }
 ?>
-<form method="get" action="<?php echo $_SERVER['SCRIPT_NAME'];?>">
+<form method="get" action="<?php  /* coding: utf-8 */  echo $_SERVER['SCRIPT_NAME'];?>">
     <fieldset>
         <legend>xpath</legend>
-        <input type="text" name="xpath" size="100" maxlength="100" value="<?php if(isset($_GET['xpath'])){echo str_replace("\"","'" ,util::get_page_param('xpath'));} ?>"></input>
+        <input type="text" name="xpath" size="100" maxlength="100" value="<?php  /* coding: utf-8 */  if(isset($_GET['xpath'])){echo str_replace("\"","'" ,util::get_page_param('xpath'));} ?>"></input>
     </fieldset>
     <input type="submit" name="ok" />
 </form>
-<?php
+<?php  /* coding: utf-8 */ 
 $xml = simplexml_load_file('20040701.gsb');
 if(isset($_GET['xpath'])){
     $xpath=util::get_page_param('xpath');

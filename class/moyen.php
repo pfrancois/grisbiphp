@@ -1,5 +1,5 @@
-<?php
-//$Id: moyen.php 35 2010-08-22 23:08:05Z pfrancois $
+<?php  /* coding: utf-8 */ 
+
 class moyen extends subitem {
     const NEUTRE = 0 ;
     const DEBIT = 1 ;

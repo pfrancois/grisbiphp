@@ -1,6 +1,7 @@
-<?php
-// $Id: delete_ope.php 47 2010-09-21 23:19:02Z pfrancois $
+<?php  /* coding: utf-8 */
+
 require_once 'header.php';
+
 	$ope_id=(int) util::get_page_param('ope_id');
 	$cpt_id=(int) util::get_page_param('cpt_id');
 if (util::get_page_param('action')=='delete' && date('dmY',time())==util::get_page_param('date')){

@@ -1,5 +1,5 @@
-<?php
-//$Id: exercice.php 35 2010-08-22 23:08:05Z pfrancois $
+<?php  /* coding: utf-8 */ 
+
 class exercice extends item {
     protected $_xpath = './exercice' ;
     /**

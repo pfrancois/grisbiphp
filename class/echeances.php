@@ -1,5 +1,5 @@
-<?php
-//$Id: echeances.php 38 2010-08-30 23:45:19Z pfrancois $
+<?php  /* coding: utf-8 */ 
+
 class echeances extends items {
 	/**
 	 * @const la chaine qui permet une iteration facile

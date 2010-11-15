@@ -1,5 +1,5 @@
-<?php
-//$Id: etat.php 35 2010-08-22 23:08:05Z pfrancois $
+<?php  /* coding: utf-8 */ 
+
 class etat extends item {
     function get_id() {
         return (int)$this->_item_xml->No ;

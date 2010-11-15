@@ -28,7 +28,7 @@
 		<div class="ligne">
 		<label for="ope_date_ope">Date:</label>
 	        <input type="text" name="ope_date_ope" id="ope_date_ope" value="{$ope_date_ope|date_format:"%d%m%Y"}" style='-wap-input-format:"NNNNNNNN";' size="8" maxlength="8" />
-	        <a href="javascript:editDate('ope_date_ope');" style="display:inline"><img style="vertical-align: 20%;"src="img/calendar.png"  alt="calendrier" /></a>
+	        <a href="javascript:editDate('ope_date_ope');" style="display:inline; vertical-align: middle ;"><img src="img/calendar.png" alt="calendrier"/></a>
 		</div>
 		<div class="ligne">
 		<label for="cpt_orig"> cpt d'origine</label>
