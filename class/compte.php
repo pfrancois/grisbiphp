@@ -1,4 +1,4 @@
-<?php  /* coding: utf-8 */ 
+<?php /* coding: utf-8 */ 
 
 
 /**
@@ -32,7 +32,7 @@ class compte extends item {
     /**
      * renvoie le nombre d'operation contenu dans ce compte.
      *
-     * attention, il y a possibilité d'erreur car il n'y a pas comptage.
+     * attention, il y a possibilitï¿½ d'erreur car il n'y a pas comptage.
      *
      * @return integer
      */

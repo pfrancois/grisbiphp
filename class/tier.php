@@ -1,4 +1,4 @@
-<?php  /* coding: utf-8 */ 
+<?php /* coding: utf-8 */ 
 
 class tier extends item {
     /**
@@ -21,6 +21,7 @@ class tier extends item {
             $this->_dom->setAttributeNode(new DOMAttr('Liaison', '0')) ;
         }
     }
+    
     /**
      * tier::get_id()
      *
@@ -43,6 +44,7 @@ class tier extends item {
         }
         $this->_item_xml['Nom']=$nom ;
     }
+    
     /**
      * tier::delete()
      * efface le tier
@@ -55,7 +57,7 @@ class tier extends item {
         global $gsb_tiers ;
         //verification que le tiers existe
         $id = $this->get_id() ;
-        //verification que le tiers n'a pas d'operation reliés
+        //verification que le tiers n'a pas d'operation reliï¿½s
         try {
             $q = $gsb_xml->xpath_iter("//Operation[@T='$id']") ;
             $q = $q[0] ;

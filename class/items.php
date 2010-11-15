@@ -1,4 +1,4 @@
-<?php  /* coding: utf-8 */ 
+<?php /* coding: utf-8 */ 
 
 /**
  * class abstraite qui gere les ensembles d'items
@@ -11,6 +11,7 @@ abstract class items implements Countable {
 	 */
 	protected $_xpath = '//invalide' ;
 	public $nom_classe = __class__ ;
+	
 	/**
 	 * squelettes de fonction
 	 */

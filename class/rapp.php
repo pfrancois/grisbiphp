@@ -1,10 +1,17 @@
-<?php  /* coding: utf-8 */ 
+<?php /* coding: utf-8 */ 
 
 class rapp extends item {
     const POINTEE = 1 ;
     const RAPPROCHEE = 2 ;
     const RIEN = 0 ;
+/**
 
+ * @param SimpleXMLElement $c
+ * @param unknown_type $nouvelle
+ * @param unknown_type $id
+ * @throws exception_index
+ * @throws exception_parametre_invalide
+ */
     public function __construct(SimpleXMLElement $c, $nouvelle = false, $id = null) {
         global $gsb_rapps ;
         parent::__construct($c) ;

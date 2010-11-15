@@ -4,8 +4,7 @@
 {
 	font-family: monospace;
 	font-size: 1.2em;
-        border: solid #BBB;
+	border: solid #BBB;
 	background: #DDD;
 	overflow: auto;
-
 }

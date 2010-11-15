@@ -1,4 +1,4 @@
-<?php  /* coding: utf-8 */ 
+<?php /* coding: utf-8 */ 
 /*parser
 v23092005 necessite simple xml et rien d'autre
 v07012008 mies des fonctions dans un ficher annexe
@@ -32,7 +32,7 @@ if (isset($_GET['xml'])) {
     $db= new MySQLConnector( 'localhost', 'root', 'mdp','test') ;
   
     $db->efface_tables();
-    aff('tables effacés');
+    aff('tables effacï¿½s');
     
     //on ouvre le fichier xml en simplexml
     $xml = simplexml_load_file($xmlfile);
@@ -48,9 +48,9 @@ if (isset($_GET['xml'])) {
     $general['Version_fichier']=(string)$xml->Generalites->Version_fichier;
     #actuellement la seule version existante est 0.5.0
 	$general['Version_grisbi']=(string)$xml->Generalites->Version_grisbi;
-	#meme remarque que precedement·
+	#meme remarque que precedementï¿½
 	$general['Fichier_ouvert']=(string)$xml->Generalites->Fichier_ouvert;
-	#1 si le fichier declaré déja ouvert par gribsi 
+	#1 si le fichier declarï¿½ dï¿½ja ouvert par gribsi 
 	$general['Backup']=(string)$xml->Generalites->Backup;
 	$general['Titre']=(string)$xml->Generalites->Titre ;
 	$general['Adresse_commune']=(string)$xml->Generalites->Adresse_commune ;
@@ -76,9 +76,9 @@ if (isset($_GET['xml'])) {
 	$general['Lignes_aff_trois_lignes']=(string)$xml->Generalites->Lignes_aff_trois_lignes;
     $db->insert('generalite',$general);
     unset($general);
-    aff("generalités ok");
+    aff("generalitï¿½s ok");
     
-    //extraction des données des tiers
+    //extraction des donnï¿½es des tiers
     $nbtiers=0;
     $nbtiersmax=(int)$xml->Tiers->Generalites->Nb_tiers;
     foreach ($xml->xpath('//Tiers') as $tiers){
@@ -88,20 +88,20 @@ if (isset($_GET['xml'])) {
             $q_tiers=array();
             $q_tiers['id']=ins($tiers['No']);
             #numero d'index du tiers. attention les numeros peuvent ne pas se suivre en cas de suppression de tiers
-            #car les numeros des tiers supprimés ne sont pas reutilisés   
+            #car les numeros des tiers supprimï¿½s ne sont pas reutilisï¿½s   
             $q_tiers['nom']=ins($tiers['Nom']);
             #nom du tiers
             $q_tiers['information']=ins($tiers['Informations']);
             # commentaires
             //verification
             if ($nbtiers>$nbtiersmax) {
-                throw new Exception ('probleme de coherence au tiers N° '.$tiers['No'].' : "'.(string)$tiers['Nom']. '" car il y a plus de tiers que le max tiers');
+                throw new Exception ('probleme de coherence au tiers Nï¿½ '.$tiers['No'].' : "'.(string)$tiers['Nom']. '" car il y a plus de tiers que le max tiers');
             }
             $db->insert('tiers',$q_tiers);
         }
     }
     unset($q_tiers);
-    aff($nbtiers.' tiers inséres');
+    aff($nbtiers.' tiers insï¿½res');
     if ($db->debogagesql) echo(N.'-----------------------------------------'.N);
     
     //gestion des devises
@@ -119,7 +119,7 @@ if (isset($_GET['xml'])) {
 		$q_devises['isocode']=ins($devise['Code']);
 		#code iso
 		$q_devises['passe_euro']=ins($devise['Passage_euro']);
-		#est ce que cette monnaie est passé à l'euro
+		#est ce que cette monnaie est passï¿½ ï¿½ l'euro
 		$q_devises['Rapport_entre_devises']=ins($devise['Rapport_entre_devises']);
 		#rapport avec une devise non principale
 		$q_devises['Devise_en_rapport']=ins($devise['Devise_en_rapport']);
@@ -128,12 +128,12 @@ if (isset($_GET['xml'])) {
 		#date de derniere date de change
         //verification
         if ($nbdevises>$nbdevisesmax) {
-            throw new Exception  ('probleme de coherence à la devise "'.(string)$devise['Nom']. '" car il y a plus de devises que le max devise');
+            throw new Exception  ('probleme de coherence ï¿½ la devise "'.(string)$devise['Nom']. '" car il y a plus de devises que le max devise');
         }
         $db->insert('devise',$q_devises);
     }
     unset ($q_devises);
-    echo $nbdevises.' devises insérés'.N;
+    echo $nbdevises.' devises insï¿½rï¿½s'.N;
        if ($db->debogagesql) echo(N.'-----------------------------------------'.N); 
        
     
@@ -151,7 +151,7 @@ if (isset($_GET['xml'])) {
         //verification
         if ($nbcategories>$nbcategoriesmax) {
             echo $nbcategories.N.$nbcategoriesmax.N;
-            throw new Extension ('probleme de coherence à la categorie "'.(string)$categorie['Nom']. '" car il y a plus de categories que le max categorie');
+            throw new Extension ('probleme de coherence ï¿½ la categorie "'.(string)$categorie['Nom']. '" car il y a plus de categories que le max categorie');
         }
 		$db->insert('cat',$q_cat);
        unset($q_cat);
@@ -165,17 +165,17 @@ if (isset($_GET['xml'])) {
             $q_scat['idcat']=ins($categorie['No']);
             //verification
             if ($nbscat>(int) $categorie['No_derniere_sous_cagegorie']) {
-                throw new Exception ('probleme de coherence à la categorie "'.(string)$scat['Nom']. '" car il y a plus de categories que le max sous categorie');
+                throw new Exception ('probleme de coherence ï¿½ la categorie "'.(string)$scat['Nom']. '" car il y a plus de categories que le max sous categorie');
             }
             //bdd
             $db->insert('scat',$q_scat);
         }
     }
-    echo $nbcategories.' categories insérés'.N;
+    echo $nbcategories.' categories insï¿½rï¿½s'.N;
     //il faut rajouter la categorie virement et la categorie op ventilee
-    $db->insert('cat',array('id'=>999,'nom'=>'opération ventilée','idtypecat'=>'v'));
+    $db->insert('cat',array('id'=>999,'nom'=>'opï¿½ration ventilï¿½e','idtypecat'=>'v'));
     $db->insert('cat',array('id'=>998,'nom'=>'virement','idtypecat'=>"v"));
-    $db->insert('scat',array('id'=>999,'nom'=>'opération ventilée','idcat'=>"v"));
+    $db->insert('scat',array('id'=>999,'nom'=>'opï¿½ration ventilï¿½e','idcat'=>"v"));
     $db->insert('scat',array('id'=>998,'nom'=>'virement','idcat'=>"v"));
  
     //gestion des banques
@@ -199,12 +199,12 @@ if (isset($_GET['xml'])) {
 		
         //verification
         if ($nbbanques>$nbbanquesmax) {
-            throw new Exception ('probleme de coherence à la banque "'.(string)$banque['Nom']. '" car il y a plus de banques que le max banques');
+            throw new Exception ('probleme de coherence ï¿½ la banque "'.(string)$banque['Nom']. '" car il y a plus de banques que le max banques');
         }
         $result=$db->insert('banque',$q_ban);
 		
     }
-    echo $nbbanques.' banques insérées'.N;  
+    echo $nbbanques.' banques insï¿½rï¿½es'.N;  
     unset($q_ban);
     
 
@@ -229,7 +229,7 @@ if (isset($_GET['xml'])) {
         $q_cpt['nom']=ins($compte->Nom);
 		$q_cpt['id']=ins($compte->No_de_compte);
 		$q_cpt['titulaire']=ins($compte->Titulaire);
-		$q_cpt['idtype']=ins($compte->Type_de_compte); #0 = bancaire, 1 = espèce, 2 = passif, 3= actif
+		$q_cpt['idtype']=ins($compte->Type_de_compte); #0 = bancaire, 1 = espï¿½ce, 2 = passif, 3= actif
 		#Nb_operations: recence le nombre d'ope
 		$q_cpt['iddevise']=ins($compte->Devise);
 		$q_cpt['idbanque']=ins($compte->Banque);
@@ -246,7 +246,7 @@ if (isset($_GET['xml'])) {
 		$q_cpt['date_dernier_releve']=ins(xml2date($compte->Date_dernier_releve));
 		$q_cpt['solde_dernier_releve']=fr2uk((string)$compte->Solde_dernier_releve);
 		$q_cpt['dernier_numero_de_rapprochement']=ins($compte->Dernier_no_de_rapprochement);
-		$q_cpt['compte_cloture']=ins($compte->compte_cloture); # si = 1 => cloturé
+		$q_cpt['compte_cloture']=ins($compte->compte_cloture); # si = 1 => cloturï¿½
 		$q_cpt['Affichage_r']=$compte->Affichage_r;
 		$q_cpt['Nb_lignes_ope']=$compte->Nb_lignes_ope;
 		$q_cpt['notes']=ins($compte->Commentaires);
@@ -260,7 +260,7 @@ if (isset($_GET['xml'])) {
 		$result=$db->insert('compte',$q_cpt);
         unset($q_cpt);
     }
-    echo $nbcompte.' comptes insérées'.N;  
+    echo $nbcompte.' comptes insï¿½rï¿½es'.N;  
 
          //gestion des operations
     $nbope=0;
@@ -270,7 +270,7 @@ if (isset($_GET['xml'])) {
         $estopeventilemere=$ope['Ov'];
         $transactionvirement=$ope['Ro'];//transaction jumelle
         $comptevirement=$ope['Rc'];
-        $num_operation_mere=$ope['Va'];//attention c'est un operation ventilée, si ce n'en n'est pas une, c'est egale à zero
+        $num_operation_mere=$ope['Va'];//attention c'est un operation ventilï¿½e, si ce n'en n'est pas une, c'est egale ï¿½ zero
         $cat=$ope['C'];//categorie de l'operation
         if ($cat=='0') {
             if ($transactionvirement<>0 || $comptevirement <>0) {
@@ -278,46 +278,46 @@ if (isset($_GET['xml'])) {
                 //echo("vir:$date:$montant:$comptevirement");
             }elseif ($estopeventilemere=1){
                 $cat=999;
-                //echo("opération ventilée le $date de $montant");
+                //echo("opï¿½ration ventilï¿½e le $date de $montant");
             }
         }
         $q_ope['id']=ins($ope['No']);#numero de l'operation
-        $q_ope['idgrisbi']=ins($ope['Id']); # utilisé lors d'import ofx pour éviter les doublons
+        $q_ope['idgrisbi']=ins($ope['Id']); # utilisï¿½ lors d'import ofx pour ï¿½viter les doublons
         $catexist=0;
         $idcompte=$ope->xpath('../../Details/No_de_compte');//recuperation du no du compte
         $q_ope['idcompte']=ins($idcompte[0]);
         $q_ope['date_ope']=ins(xml2date($ope['D']));#date de l'operation
         $q_ope['date_val']=ins(xml2date($ope['Db']));#date de valeur
         $q_ope['montant']=fr2uk($ope['M']);#montant
-        $q_ope['iddevise']=ins($ope['De']);#devise utilisé
+        $q_ope['iddevise']=ins($ope['De']);#devise utilisï¿½
         #Rdc//TODO
-        #Tc taux de change utilisé dans l'operation de change//TODO
-        #Fc frais de change utilisés dans l'operations//TODO
+        #Tc taux de change utilisï¿½ dans l'operation de change//TODO
+        #Fc frais de change utilisï¿½s dans l'operations//TODO
         $q_ope['idtiers']=ins($ope['T']);#tiers
         $q_ope['idcat']=ins($cat);#categorie
         $q_ope['idscat']=ins($ope['Sc']);#souscat
         $q_ope['opeventilemere']=ins($estopeventilemere);# 1 si opventilemere
         $q_ope['note']=ins($ope['N']);#note
         $q_ope['idtypeope']=ins($ope['Ty']);#type de paiment de l'operation
-        $q_ope['numcheque']=ins($ope['Ct']);#ce peut être un no de chèque, de virement 
-        $q_ope['pointe']=ins($ope['P']);#0=rien, 1=pointée, 2=rapprochée, 3=T 
+        $q_ope['numcheque']=ins($ope['Ct']);#ce peut ï¿½tre un no de chï¿½que, de virement 
+        $q_ope['pointe']=ins($ope['P']);#0=rien, 1=pointï¿½e, 2=rapprochï¿½e, 3=T 
         #A  0=manuel, 1=automatique TODO
         $q_ope['idrappro']=ins($ope['R']);#numero rapprochement
-        $q_ope['idexercice']=ins($ope['E']);# exercice de l'opé
+        $q_ope['idexercice']=ins($ope['E']);# exercice de l'opï¿½
         $q_ope['idib']=ins($ope['I']);#numero de l'imputation budgetaire
         $q_ope['idsib']=ins($ope['Si']);#numero de la sous imputation budgetaire
         $q_ope['idpcompt']=ins($ope['Pc']);#no_piece_comptable
         $q_ope['idjumelle']=ins($ope['Ro']);#transaction jumelle
-        $q_ope['idcomptevirement']=ins($ope['Rc']);#relation_no_compte  -1 si compte supprimé 
+        $q_ope['idcomptevirement']=ins($ope['Rc']);#relation_no_compte  -1 si compte supprimï¿½ 
         $q_ope['idmere']=ins($num_operation_mere);#id de l'operation mere pour les operations ventiles
         $q_ope['infobq']=ins($ope['Ibg']);#idbanque
 //verification
         if ($nbope>$nbopemax) {
-            throw new Exception ('probleme de coherence à l\'operation n° "'.(string)$ope['No']. '" car il y a plus d\'ope que le max ope');
+            throw new Exception ('probleme de coherence ï¿½ l\'operation nï¿½ "'.(string)$ope['No']. '" car il y a plus d\'ope que le max ope');
         }
         $result=$db->insert('ope',$q_ope);
     }
-    echo $nbope.' ope insérées'.N;  
+    echo $nbope.' ope insï¿½rï¿½es'.N;  
     
     //gestion des rapprochements
     
@@ -347,11 +347,11 @@ if (isset($_GET['xml'])) {
     	$q_ech['periode_perso']=ins($ech['Periodicite_personnalisee']);
     	$q_ech['date_limite']=xml2date($ech['Date_limite']);
         if ($nbecheances>$nbecheancesmax) {
-            throw new Exception('probleme de coherence à l\'imputation "'.(string)$nbecheances['Nom']. '" car il y a plus d\' imputations que le max imputation');
+            throw new Exception('probleme de coherence ï¿½ l\'imputation "'.(string)$nbecheances['Nom']. '" car il y a plus d\' imputations que le max imputation');
         }
         $result=$db->insert('ech',$q_ech);
     }
-    aff($nbecheances." échéances");
+    aff($nbecheances." ï¿½chï¿½ances");
     //gestion des etats
     
     //gestion des exercices
@@ -367,7 +367,7 @@ if (isset($_GET['xml'])) {
         //verification
         if ($nbimputations>$nbimputationsmax) {
             echo $nbimputations.N.$nbimputationsmax.N;
-            die ('probleme de coherence à l\'imputation "'.(string)$imputation['Nom']. '" car il y a plus d\' imputations que le max imputation');
+            die ('probleme de coherence ï¿½ l\'imputation "'.(string)$imputation['Nom']. '" car il y a plus d\' imputations que le max imputation');
         }
         $result=$db->insert('imp',$q_imp);
         //on s'occupe des sous imputations

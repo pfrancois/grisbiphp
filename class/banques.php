@@ -1,4 +1,4 @@
-<?php  /* coding: utf-8 */ 
+<?php /* coding: utf-8 */ 
 
 class banques extends items {
 	/**
@@ -9,7 +9,7 @@ class banques extends items {
 	/**
 	 * renvoi le tiers dont on donne l'id
 	 *
-	 * @param integer $id id de la Banque demandée
+	 * @param integer $id id de la Banque demandÃ©
 	 * @return banque
 	 * @throws exception_not_exist si l'id n'existe pas
 	 * @throws exception_parametre_invalide si $id n'est integer

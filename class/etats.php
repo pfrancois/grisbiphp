@@ -1,4 +1,4 @@
-<?php  /* coding: utf-8 */ 
+<?php /* coding: utf-8 */ 
 
 class etats extends items {
     /**
@@ -6,10 +6,11 @@ class etats extends items {
      */
     protected $_xpath = '//Etat' ;
     public $nom_classe = __class__ ;
+    
     /**
      * renvoi l'operation dont on donne l'id
      *
-     * @param integer $id id du rapprochement demandée
+     * @param integer $id id du rapprochement demandï¿½e
      * @return rapp
      * @throws exception_not_exist si l'id n'existe pas
      * @throws exception_parametre_invalide si $id n'est integer
@@ -28,13 +29,13 @@ class etats extends items {
         }
         return new etat($r) ;
     }
+    
     /**
-     * renvoi l'id du compte dont on a donné le nom
+     * renvoi l'id du compte dont on a donnï¿½ le nom
      *
      * @param string $nom nom du compte cherche
      * @return integer
      * @throws exception_not_exist si le nom ne renvoit rien
-     * @assert
      */
     public function get_id_by_name($nom) {
         global $gsb_xml ;
@@ -46,6 +47,7 @@ class etats extends items {
         }
         return (int)$r->No ;
     }
+    
     /**
      * permet d'avoir le prochain id disponible
      *
@@ -62,6 +64,10 @@ class etats extends items {
         }
         return $max + 1 ;
     }
+    /**
+     * @return etat
+     * @see class/items::iter()
+     */
     public function iter() {
         global $gsb_xml ;
         return $gsb_xml->iter_class("//Etat", 'etat') ;

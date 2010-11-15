@@ -1,4 +1,4 @@
-<?php  /* coding: utf-8 */
+<?php /* coding: utf-8 */
 
 require_once('header.php');
 //----------------gestion des variables d'entree-----------------
@@ -38,13 +38,13 @@ else {//edition
 	//date (il y a une seule date)
 	$tpl->assign('ope_date_ope',$operation->get_date());
 
-   	//montant
+	//montant
 	$tpl->assign('ope_value',-1*$operation->get_montant());
 
 }
 //liste des comptes
 foreach ($gsb_comptes->iter('all') as $compte) {
-    $tpl->append('comptes', array("id" => $compte->get_id(),
+	$tpl->append('comptes', array("id" => $compte->get_id(),
 								  "nom" => $compte->get_nom()
 						   		  )
 				) ;

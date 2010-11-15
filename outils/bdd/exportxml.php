@@ -1,5 +1,5 @@
-<?php  /* coding: utf-8 */ 
-//mise à jour le samedi 19 janvier 2008 à 15:00
+<?php /* coding: utf-8 */ 
+//mise ï¿½ jour le samedi 19 janvier 2008 ï¿½ 15:00
 require_once 'include/functions.php';
 $db= new MySQLConnector( 'localhost', 'root', 'mdp','test') ;
 
@@ -9,8 +9,8 @@ $xml=simplexml_load_string($xmlinitial);
 $xml->AddChild('Generalites');
 $tab=$db->tab('select * from generalite');
 $tab=$tab[0];
-if ($tab['Version_fichier']<>'0.5.0') {throw new Exception ('attention seul la version 0.5.0 est gérée');}
-$xml->Generalites->AddChild('Version_fichier','0.5.0');//seulement cette version est géree
+if ($tab['Version_fichier']<>'0.5.0') {throw new Exception ('attention seul la version 0.5.0 est gï¿½rï¿½e');}
+$xml->Generalites->AddChild('Version_fichier','0.5.0');//seulement cette version est gï¿½ree
 $xml->Generalites->AddChild('Version_grisbi',$tab['Version_grisbi']);
 $xml->Generalites->AddChild('Fichier_ouvert',0);
 $xml->Generalites->AddChild('Backup',$tab['Backup']);
@@ -32,7 +32,7 @@ if ($num_derniere_ope==NULL) {$num_derniere_ope=0;}
 $xml->Generalites->AddChild('Numero_derniere_operation',$num_derniere_ope);
 $xml->Generalites->AddChild('Echelle_date_import',2);
 $xml->Generalites->AddChild('Utilise_logo',1);
-//comme on les a classé par id decroissant, le premier est donc le dernier. donc on prend l'id du dernier et on a le nombre d'operations
+//comme on les a classï¿½ par id decroissant, le premier est donc le dernier. donc on prend l'id du dernier et on a le nombre d'operations
 $xml->Generalites->AddChild('Chemin_logo',$tab['Chemin_logo']);
 $xml->Generalites->AddChild('Affichage_opes',$tab['Affichage_opes']);
 $xml->Generalites->AddChild('Rapport_largeur_col',$tab['Rapport_largeur_col']);

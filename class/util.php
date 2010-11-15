@@ -1,4 +1,4 @@
-<?php  /* coding: utf-8 */ 
+<?php /* coding: utf-8 */ 
 
 /**
  * Classe utilitaire qui donne des differentes fonctions utilise ailleurs.
@@ -10,18 +10,18 @@
  * @version 1.1 ajout de la fonction dump, enlevage du <? final
  */
 class util {
-	/**
-	 *  Fonction de conversion de date du format francais  en Timestamp.
-	 *
-	 *  les formats acceptes sont :
-	 *  JJ/MM/AAAA
-	 *  JJ/MM/AA
-	 *  J/M/AA
-	 *  JJMMAAAA
-	 * @param string $gd date au format francais (JJ/MM/AAAA)
-	 * @throws InvalidArgumentException date invalide
-	 * @return int Timestamp en secondes
-	 */
+/**
+ *  Fonction de conversion de date du format francais  en Timestamp.
+ *
+ *  les formats acceptes sont :
+ *  JJ/MM/AAAA
+ *  JJ/MM/AA
+ *  J/M/AA
+ *  JJMMAAAA
+ * @param string $gd date au format francais (JJ/MM/AAAA)
+ * @throws InvalidArgumentException date invalide
+ * @return int Timestamp en secondes
+ */
 	public static function datefr2time($gd) {
 		$gd=(string)$gd;
 		if ((stristr($gd,'/')===false) && (strlen($gd)==8)){
@@ -38,26 +38,26 @@ class util {
 		return mktime(0, 0, 0, $month, $day, $year) ;
 	}
 
-	/**
-	 * fonction qui permet d'ajouter une duree a une date
-	 * @param int $cd timestamp
-	 * @param integer $day  nombre de jour a ajouter
-	 * @param integer $mth nombre de mois a ajouter
-	 * @param integer $yr   nombre de yr a ajouter
-	 * @return int date nouvelle
-	 */
+/**
+ * fonction qui permet d'ajouter une duree a une date
+ * @param int $cd timestamp
+ * @param integer $day  nombre de jour a ajouter
+ * @param integer $mth nombre de mois a ajouter
+ * @param integer $yr   nombre de yr a ajouter
+ * @return int date nouvelle
+ */
 	public static function add_date($cd, $day = 0, $mth = 0, $yr = 0) {
 		$newdate =  mktime(0, 0, 0, (int)date('m', $cd) + $mth, (int)date('d',
 			$cd) + $day, (int)date('Y', $cd) + $yr) ;
 		return $newdate ;
 	}
 
-	/**
-	 * renvoit un get apres les controle de base
-	 *
-	 * @param string $paramName nom de la variable a recuperer
-	 * @return mixed la variable verifie
-	 */
+/**
+ * renvoit un get apres les controle de base
+ *
+ * @param string $paramName nom de la variable a recuperer
+ * @return mixed la variable verifie
+ */
 	public static function get_page_param($paramName) {
 		if (isset($_GET[$paramName])) {
 			$t = (string )$_GET[$paramName] ;
@@ -71,12 +71,12 @@ class util {
 		}
 	}
 
-	/**
-	 * transforme un nombre francais en centimes
-	 * @param string $n le nombre
-	 * @return int
-	 * @throws  InvalidArgumentException si $n non possible
-	 */
+/**
+ * transforme un nombre francais en centimes
+ * @param string $n le nombre
+ * @return int
+ * @throws  InvalidArgumentException si $n non possible
+ */
 	public static function fr2cent($n) {
 		$n = (string)$n ;
 		$n = str_replace(' ', '', $n) ;
@@ -93,12 +93,11 @@ class util {
 		}
 	}
 
-	 /**
-	 *transforme un nombre anglais en centimes
-	 * @param int $n le nombre a transformer en float
-	 * @return string
-	 */
-
+ /**
+ *transforme un nombre anglais en centimes
+ * @param int $n le nombre a transformer en float
+ * @return string
+ */
 	public static function cent2fr($n) {
 		if (is_numeric($n)){
 			$n=(float)$n;
@@ -110,16 +109,16 @@ class util {
 	}
 
 
-	//@codeCoverageIgnoreStart
-	/**
-	 *renvoie un nombre de mot de la chaine
-	 *
-	 * @param string $s la chaine original
-	 * @param integer $nb le nombre de mots
-	 * @param integer $debut le numero du premier mot a garder
-	 * @return string
-	 *
-	 */
+//@codeCoverageIgnoreStart
+/**
+ *renvoie un nombre de mot de la chaine
+ *
+ * @param string $s la chaine original
+ * @param integer $nb le nombre de mots
+ * @param integer $debut le numero du premier mot a garder
+ * @return string
+ *
+ */
 	public static function extract_mots($s, $nb = null, $debut = 0) {
 		$data = explode(" ", $s) ;
 		$r = "" ;
@@ -132,7 +131,7 @@ class util {
 			}
 		}
 		$data = explode(" ", implode(" ", $data)) ;
-		// si null, on le fait jusq'a la fin avec les ajustement du au $debut
+		// si nb est null, on le fait jusqu'a la fin avec les ajustement du a $debut
 		if ($nb == null) {
 			$nb = count($data) - $debut + 2 ;
 		}
@@ -142,45 +141,38 @@ class util {
 		return trim($r) ;
 	}
 
-	/**
-	 * fonction dump qui marche avec plusieurs variabales
-	 *
-	 * @param mixed $data la liste des choses a dumper
-	 */
+/**
+ * fonction dump qui marche avec plusieurs variabales
+ *
+ * @param mixed $data la liste des choses a dumper
+ */
 	public static function dump($data) {
 		if (func_num_args() > 1) {
 			$data = func_get_args() ;
 		}
 		return "<pre>" . print_r($data, true) . "</pre>" ;
 	}
-	/**
-	 * fonction qui ne fait qu'afficher avec un retoura la ligne
-	 */
-	public static function aff($data) {
-		echo $data . PHP_EOL ;
-	}
+	
 	// @codeCoverageIgnoreEnd
 
-	/**
-	 * Cette fonction calcule une clïe RIB a partir des informations bancaires
-	 * La fonction implïemente l'algorithme de clïe RIB
-	 * Une clïe RIB n'est valable que si elle se trouve dans l'intervalle 01 - 97
-	 *
-	 * @param string code unique de la banque
-	 * @param string code unique du guichet (agence ou se trouve le compte)
-	 * @param string numïero du compte bancaire (peut contenir des lettres)
-	 * @return string clïe rib calculïee
-	 **/
+/**
+ * Cette fonction calcule une clÃ© RIB a partir des informations bancaires
+ * La fonction implÃ©mente l'algorithme de clÃ© RIB
+ * Une clÃ© RIB n'est valable que si elle se trouve dans l'intervalle 01 - 97
+ *
+ * @param string code unique de la banque
+ * @param string code unique du guichet (agence ou se trouve le compte)
+ * @param string numÃ©ro du compte bancaire (peut contenir des lettres)
+ * @return string clÃ© rib calculÃ©e
+ **/
 	public static function calculerCleRib($sCodeBanque, $sCodeGuichet, $sNumeroCompte) {
 		// Variables locales
 		$iCleRib = 0 ;
 		$sCleRib = '' ;
 
-		// Calcul de la clïe RIBa partir des informations bancaires
-		$sNumeroCompte = strtr(strtoupper($sNumeroCompte), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-			'12345678912345678923456789') ;
-		$iCleRib = 97 - (int)fmod(89 * $sCodeBanque + 15 * $sCodeGuichet + 3 * $sNumeroCompte,
-			97) ;
+		// Calcul de la clÃ© RIB a partir des informations bancaires
+		$sNumeroCompte = strtr(strtoupper($sNumeroCompte), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', '12345678912345678923456789') ;
+		$iCleRib = 97 - (int)fmod(89 * $sCodeBanque + 15 * $sCodeGuichet + 3 * $sNumeroCompte, 97) ;
 
 		// Valeur de retour
 		if ($iCleRib < 10) {
@@ -190,6 +182,12 @@ class util {
 		}
 		return $sCleRib ;
 	}
+/**
+ * 
+ * renvoi vers une url via les fonction header
+ * @param $url
+ * @return void
+ */	
 	public static function redirection_header($url){
 		$url='http://'.$_SERVER['HTTP_HOST'].substr($_SERVER['SCRIPT_NAME'],0,strrpos($_SERVER['SCRIPT_NAME'],'/')).'/'.$url;
 		header( 'Request-URI: '.$url );

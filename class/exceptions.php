@@ -1,4 +1,4 @@
-<?php  /* coding: utf-8 */ 
+<?php /* coding: utf-8 */ 
 
 // @codeCoverageIgnoreStart
 class Exception_base extends Exception {

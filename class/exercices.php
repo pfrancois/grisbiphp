@@ -1,4 +1,4 @@
-<?php  /* coding: utf-8 */ 
+<?php /* coding: utf-8 */ 
 
 class exercices extends items {
 	/**
@@ -10,7 +10,7 @@ class exercices extends items {
 	/**
 	 * renvoi le tiers dont on donne l'id
 	 *
-	 * @param integer $id id de l' exercide demandée
+	 * @param integer $id id de l' exercide demandï¿½e
 	 * @return exercice
 	 * @throws exception_not_exist si l'id n'existe pas
 	 * @throws exception_parametre_invalide si $id n'est integer

@@ -1,4 +1,4 @@
-<?php  /* coding: utf-8 */ 
+<?php /* coding: utf-8 */ 
 
 class ibs extends items {
 	/**
@@ -9,7 +9,7 @@ class ibs extends items {
 	/**
 	 * renvoi le tiers dont on donne l'id
 	 *
-	 * @param integer $id id de l'imputation demandée
+	 * @param integer $id id de l'imputation demandï¿½e
 	 * @return ibs
 	 * @throws exception_not_exist si l'id n'existe pas
 	 * @throws exception_parametre_invalide si $id n'est integer
@@ -40,7 +40,7 @@ class ibs extends items {
 		return $r + 1 ;
 	}
 	/**
-	 * renvoi l'id de l'ib dont on a donné le nom
+	 * renvoi l'id de l'ib dont on a donnï¿½ le nom
 	 *
 	 * @param string $nom nom du compte cherche
 	 * @return integer

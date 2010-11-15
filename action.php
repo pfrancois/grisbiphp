@@ -1,5 +1,4 @@
-<?php  /* coding: utf-8 */   /* coding: utf-8 */
-
+<?php /* coding: utf-8 */
 require_once('header.php');
 //----------------gestion des variables d'entree-----------------
 $action = util::get_page_param( 'action' );

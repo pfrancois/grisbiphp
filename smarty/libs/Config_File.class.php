@@ -1,4 +1,4 @@
-<?php  /* coding: utf-8 */ 
+<?php
 
 /**
  * Config_File class.

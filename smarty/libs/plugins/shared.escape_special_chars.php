@@ -1,4 +1,4 @@
-<?php  /* coding: utf-8 */ 
+<?php
 /**
  * Smarty shared plugin
  * @package Smarty

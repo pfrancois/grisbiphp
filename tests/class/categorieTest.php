@@ -1,4 +1,4 @@
-<?php  /* coding: utf-8 */ 
+<?php /* coding: utf-8 */ 
 
 require_once 'PHPUnit/Framework.php';
 require_once 'G:\zmws\_web.zmwsc\comptes\class\loader.php';
@@ -159,7 +159,7 @@ class categorieTest extends PHPUnit_Framework_TestCase{
 	}
 
 	/**
-	*test afin de verifier la possiblité d'effacer une categorie. renvoi exception
+	*test afin de verifier la possiblitï¿½ d'effacer une categorie. renvoi exception
 	*/
 	public function testDelete_integrite(){
 		global $gsb_categories;
@@ -167,7 +167,7 @@ class categorieTest extends PHPUnit_Framework_TestCase{
 		$this->object->delete();
 	}
 	/**
-	 * test afin de verifier la possibilité d'effacer
+	 * test afin de verifier la possibilitï¿½ d'effacer
 	 */
 	public function testDelete(){
 		global $gsb_categories;

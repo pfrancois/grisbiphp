@@ -1,8 +1,0 @@
-correction d'un bug suite a suppression fonction us2fr dans class devise
-correction indentation util
-separation entre has_echus et ecrire _echus dans echances
-correction bug affichage calendrier virement
-ajout fonction ajout_ope_simple et ajout virement
-changement du texte d'une erreur
-suppression de controle d'integrité inutile dans action_virement
-integration des deux fonctions dans virement.php

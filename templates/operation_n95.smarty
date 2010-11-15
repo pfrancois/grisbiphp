@@ -1,4 +1,3 @@
-{* $Id: operation_n95.smarty 41 2010-09-10 17:10:30Z pfrancois $ *}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
 <head>
@@ -84,13 +83,13 @@
         	<textarea name="rem" id="rem" cols="20" rows="5"> {$ope.note|escape:'htmlall':"utf-8"}</textarea>
 		</div>
 	</fieldset>
-	<fieldset name="button">
+	<fieldset id="button">
 		<button id="ok" name="ok" title="ok" type="submit" >Ok</button>
 		<br/>
-		<button id="retour" name="retour" title="annuler" type="button"  onClick="window.location.href='operations.php?cpt_id={$compte_id}'">Annuler</button>
+		<button id="retour" name="retour" title="annuler" type="button"  onclick="window.location.href='operations.php?cpt_id={$compte_id}'">Annuler</button>
 		<br/>
 		{if ($type_action!='new')}
-		<button class="boutton" id="delete" name="delete" title="effacer" type="button"  onClick="window.location.href='delete_ope.php?action=delete&amp;date={$smarty.now|date_format:"%d%m%Y"}&amp;ope_id={$ope.id}&amp;cpt_id={$compte_id}'">Effacer l'op&eacute;ration</button>
+		<button class="boutton" id="delete" name="delete" title="effacer" type="button"  onclick="window.location.href='delete_ope.php?action=delete&amp;date={$smarty.now|date_format:"%d%m%Y"}&amp;ope_id={$ope.id}&amp;cpt_id={$compte_id}'">Effacer l'op&eacute;ration</button>
 		{/if}
 	</fieldset>
 

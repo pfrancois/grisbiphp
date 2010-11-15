@@ -1,4 +1,4 @@
-<?php  /* coding: utf-8 */ 
+<?php /* coding: utf-8 */ 
 
 require_once 'PHPUnit/Framework.php';
 require_once 'G:\zmws\_web.zmwsc\comptes\class\util.php';
@@ -33,14 +33,14 @@ class utilTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals('-2594,9100000',util::cent2fr(-259491));
 	}
 	/**
-	 * permet de voir si lorsque on lui met des mauvaises données, il dit merde
+	 * permet de voir si lorsque on lui met des mauvaises donnï¿½es, il dit merde
 	 * @expectedException InvalidArgumentException
 	 */
 	public function test_cent2fr_argument_non_decimal(){
 		util::cent2fr('tptp');
 	}
 	/**
-	 * permet de voir si lorsque on lui met des mauvaises données, il dit merde
+	 * permet de voir si lorsque on lui met des mauvaises donnï¿½es, il dit merde
 	 * @expectedException InvalidArgumentException
 	 */
 	public function test_centimes_argument_non_decimal(){

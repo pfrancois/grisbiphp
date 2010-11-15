@@ -1,4 +1,4 @@
-<?php  /* coding: utf-8 */ 
+<?php /* coding: utf-8 */ 
 
 class ib extends subitems {
     const DEBIT = categorie::DEBIT ;

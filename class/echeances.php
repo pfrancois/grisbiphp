@@ -1,4 +1,4 @@
-<?php  /* coding: utf-8 */ 
+<?php /* coding: utf-8 */ 
 
 class echeances extends items {
 	/**
@@ -9,7 +9,7 @@ class echeances extends items {
 	/**
 	 * renvoi le tiers dont on donne l'id
 	 *
-	 * @param integer $id id de l'echeance demandée
+	 * @param integer $id id de l'echeance demandï¿½e
 	 * @return echeance
 	 * @throws exception_not_exist si l'id n'existe pas
 	 * @throws exception_parametre_invalide si $id n'est integer

@@ -1,4 +1,4 @@
-<?php  /* coding: utf-8 */
+<?php /* coding: utf-8 */
 
 require_once ('class/loader.php') ;
 require_once('basic_ope_inc.php');

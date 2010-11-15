@@ -1,4 +1,4 @@
-<?php  /* coding: utf-8 */ 
+<?php /* coding: utf-8 */ 
 
 class tiers extends items {
     /**
@@ -42,6 +42,7 @@ class tiers extends items {
         (int)$req = $gsb_xml->xpath_uniq('//Tiers/Generalites/No_dernier_tiers') ;
         return $req + 1 ;
     }
+    
     /**
      * retourne un tier si on lui donne le nom
      *
@@ -58,6 +59,7 @@ class tiers extends items {
         }
         return new tier($r) ;
     }
+    
 	/**
 	 * renvoie un nouveau tiers
 	 * attention, il faut en remplir les proprietes

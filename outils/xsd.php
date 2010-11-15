@@ -8,7 +8,8 @@
 <title>verification du xsd avec le fichier grisbi actuel</title>
 </head>
 <body>
-<?php  /* coding: utf-8 */ 
+<h1><?php echo realpath('20040701.gsb')?></h1>
+<?php /* coding: utf-8 */ 
 
 function libxml_display_error($error)
 {

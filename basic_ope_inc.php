@@ -1,4 +1,4 @@
-<?php  /* coding: utf-8 */
+<?php /* coding: utf-8 */
 /**
  * ajoute une operation de base sans aucun truc specifique
  *

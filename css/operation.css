@@ -12,7 +12,7 @@
 display:inline;
 }
 .operationMainTable {
-    background:#3A0000;
+	background:#3A0000;
 }
 
 .ligne{
@@ -22,8 +22,8 @@ label {
 	display:inline;
 	float:left;
 	font-size: .9em;
-    font-weight:bold;
-    width:15%;
+	font-weight:bold;
+	width:15%;
 }
 span label{
 	float:none;
@@ -42,7 +42,7 @@ border:0;
 legend {
 	font-size: 110%;
 	padding-bottom: .5em;
-    color:#FFFFFF;
+	color:#FFFFFF;
 }
 
 .invisible{

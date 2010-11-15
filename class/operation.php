@@ -1,6 +1,12 @@
-<?php  /* coding: utf-8 */ 
+<?php /* coding: utf-8 */ 
 
 class operation extends item {
+	/**
+	 * @param SimpleXMLElement $c
+	 * @param unknown_type $nouvelle
+	 * @param unknown_type $id
+	 * @throws exception_integrite
+	 */
 	public function __construct(SimpleXMLElement $c, $nouvelle = false, $id = null) {
 		global $gsb_xml ;
 		global $gsb_operations ;
@@ -12,7 +18,7 @@ class operation extends item {
 			//verification avant la creation
 			try{
 				$gsb_operations->get_by_id($id);
-				throw new exception_integrite("il y a une probleme d'int&eacute;grit&eacute; referencielle avec l'operation de type ope num $id");
+				throw new exception_integrite("il y a une probleme d'int&eacute;grit&eacute; referencielle avec l'op&eacute;ration de type ope num $id");
 			} catch (Exception_not_exist $except) {}
 			//numerotation generale
 			if ($id > ($gsb_operations->get_next() - 1)) {
@@ -23,7 +29,7 @@ class operation extends item {
 			//numerotation dans le compte
 			// on ajoute l'attribut comme on ne peut pas le changer
 			$this->_dom->setAttributeNode(new DOMAttr('No', $id)) ;
-			//pour les autres champs qui ne sont pas chang� par l'application
+			//pour les autres champs qui ne sont pas chang� par l'application
 			$this->_dom->setAttributeNode(new DOMAttr('Id', '')) ;
 			$this->_dom->setAttributeNode(new DOMAttr('D', '0/0/0')) ;
 			$this->set_date(time()) ; //date du jour par defaut
@@ -53,15 +59,17 @@ class operation extends item {
 			$this->_dom->setAttributeNode(new DOMAttr('Va', '0')) ;
 		}
 	}
+	
 	/**
-	 * renvoie l'id de l'operation
+	 * renvoie l'id de l'opération
 	 * @return int
 	 */
 	public function get_id() {
 		return (int)$this->_item_xml['No'] ;
 	}
+	
 	/**
-	 * renvoi le compte de l'operation
+	 * renvoi le compte de l'opération
 	 * @return compte
 	 */
 	public function get_compte() {
@@ -69,8 +77,9 @@ class operation extends item {
 		$req = $gsb_xml->xpath_uniq('./../..', $this->_item_xml) ;
 		return new compte($req) ;
 	}
+	
 	/**
-	 * renvoie la date au format timestamp de l'operation
+	 * renvoie la date au format timestamp de l'opération
 	 * @return string
 	 */
 	public function get_date() {
@@ -78,15 +87,17 @@ class operation extends item {
 		$date = util::datefr2time($date) ;
 		return $date ;
 	}
+	
 	/**
-	 * renvoie le montant en centime de l'operation
+	 * renvoie le montant en centime de l'opération
 	 * @return int
 	 */
 	public function get_montant() {
 		return util::fr2cent((string )$this->_item_xml['M']) ;
 	}
+	
 	/**
-	 * renvoie le tiers de l'operation
+	 * renvoie le tiers de l'opération
 	 * @return tiers
 	 */
 	public function get_tiers() {
@@ -102,6 +113,7 @@ class operation extends item {
 			}
 		}
 	}
+	
 	/**
 	 * renvoie la categorie
 	 * @return categorie
@@ -119,6 +131,7 @@ class operation extends item {
 			}
 		}
 	}
+	
 	/**
 	 * @return scat
 	 **/
@@ -134,6 +147,7 @@ class operation extends item {
 			}
 		}
 	}
+	
 	/**
 	 * @return bool
 	 */
@@ -145,6 +159,7 @@ class operation extends item {
 			return false ;
 		}
 	}
+	
 	/**
 	 * renvoie les notes
 	 * attention, aucun filtre de sanitization si affichage
@@ -173,7 +188,7 @@ class operation extends item {
 	}
 
 	/**
-	 * renvoie le numero du cheque (le numero peut etre string)
+	 * renvoie le numero du cheque (le numero peut &ecirc;tre string)
 	 *
 	 * @return string
 	 */
@@ -326,38 +341,38 @@ class operation extends item {
 			throw new exception_not_exist("compte", $id) ;
 		}
 		$op=array(
-		(string) $this->_item_xml['No'] ,
-		(string) $this->_item_xml['Id'],
-		(string) $this->_item_xml['D'] ,
-		(string) $this->_item_xml['Db'],
-		(string) $this->_item_xml['M'],
-		(string) $this->_item_xml['De'],
-		(string) $this->_item_xml['Rdc'],
-		(string) $this->_item_xml['Tc'],
-		(string) $this->_item_xml['Fc'],
-		(string) $this->_item_xml['T'],
-		(string) $this->_item_xml['C'],
-		(string) $this->_item_xml['Sc'],
-		(string) $this->_item_xml['Ov'],
-		(string) $this->_item_xml['N'] ,
-		(string) $this->_item_xml['Ty'],
-		(string) $this->_item_xml['Ct'],
-		(string) $this->_item_xml['P'],
-		(string) $this->_item_xml['A'],
-		(string) $this->_item_xml['R'],
-		(string) $this->_item_xml['E'],
-		(string) $this->_item_xml['I'],
-		(string) $this->_item_xml['Si'],
-		(string) $this->_item_xml['Pc'],
-		(string) $this->_item_xml['Ibg'],
-		(string) $this->_item_xml['Ro'],
-		(string) $this->_item_xml['Rc'],
-		(string) $this->_item_xml['Va']
+			(string) $this->_item_xml['No'] ,
+			(string) $this->_item_xml['Id'],
+			(string) $this->_item_xml['D'] ,
+			(string) $this->_item_xml['Db'],
+			(string) $this->_item_xml['M'],
+			(string) $this->_item_xml['De'],
+			(string) $this->_item_xml['Rdc'],
+			(string) $this->_item_xml['Tc'],
+			(string) $this->_item_xml['Fc'],
+			(string) $this->_item_xml['T'],
+			(string) $this->_item_xml['C'],
+			(string) $this->_item_xml['Sc'],
+			(string) $this->_item_xml['Ov'],
+			(string) $this->_item_xml['N'] ,
+			(string) $this->_item_xml['Ty'],
+			(string) $this->_item_xml['Ct'],
+			(string) $this->_item_xml['P'],
+			(string) $this->_item_xml['A'],
+			(string) $this->_item_xml['R'],
+			(string) $this->_item_xml['E'],
+			(string) $this->_item_xml['I'],
+			(string) $this->_item_xml['Si'],
+			(string) $this->_item_xml['Pc'],
+			(string) $this->_item_xml['Ibg'],
+			(string) $this->_item_xml['Ro'],
+			(string) $this->_item_xml['Rc'],
+			(string) $this->_item_xml['Va']
 		);
 		$this->_dom->parentNode->removeChild($this->_dom) ;
 		$compte->Detail_des_operations->addChild("Operation");
 		$this->_dom->setAttributeNode(new DOMAttr('No', $op[0])) ;
-		//pour les autres champs qui ne sont pas chang� par l'application
+		//pour les autres champs qui ne sont pas changés par l'application
 		$this->_dom->setAttributeNode(new DOMAttr('Id', $op[1])) ;
 		$this->_dom->setAttributeNode(new DOMAttr('D', $op[2])) ;
 		$this->_dom->setAttributeNode(new DOMAttr('Db', $op[3])) ;
@@ -395,25 +410,23 @@ class operation extends item {
 			$date = date('j/n/Y', $date) ;
 			$this->_item_xml['D']=$date;
 		} else {
-			throw new exception_parametre_invalide("la date '$date' doit etre au format timestamp. il s'agit de l'operation" .
-			$this->get_id()) ;
+			throw new exception_parametre_invalide("la date '$date' doit &ecirc;tre au format timestamp. il s'agit de l'op&eacute;ration".$this->get_id());
 		}
 	}
 
 	/**
-	 * @param integer $value montant de l'operation en centime
+	 * @param integer $value montant de l'opération en centime
 	 * @return void
 	 * @throw exception_parametre_invalide si le montant n'est pas int
 	 */
 	public function set_montant($value){
-        global $gsb_xml;
+		global $gsb_xml;
 		if (is_numeric($value)) {
 			$this->_item_xml['M']=util::cent2fr($value) ;
 			$compte=$this->get_compte();
 			$compte->set_solde_courant($value+$compte->get_solde_courant());
 		} else {
-			throw new exception_parametre_invalide("le montant '$value' doit etre en centime. il s'agit de l'operation" .
-			$this->get_id()) ;
+			throw new exception_parametre_invalide("le montant '$value' doit &ecirc;tre en centime. il s'agit de l'op&eacute;ration".$this->get_id()) ;
 		}
 	}
 
@@ -426,7 +439,7 @@ class operation extends item {
 	}
 
 	/**
-	 * si la cat n'a pas de scat, mise automatique de scat � 0
+	 * si la cat n'a pas de scat, mise automatique de scat à 0
 	 * @param categorie $id
 	 * @return void
 	 */
@@ -453,7 +466,7 @@ class operation extends item {
 	}
 
 	/**
-	 * pas encore fais mais normalement cela permet de gerer les operations ventilees
+	 * pas encore fais mais normalement cela permet de gerer les operations ventilées
 	 * operation::set_ventilee()
 	 *
 	 * @param bool $v
@@ -461,7 +474,7 @@ class operation extends item {
 	 */
 	public function set_ventilee($v) {
 		if (!is_bool($v)) {
-			throw new exception_parametre_invalide('$v non bool dans operation' . $this->get_id
+			throw new exception_parametre_invalide('$v non bool dans opération' . $this->get_id
 			()) ;
 		}
 		$this->_item_xml['Ov']=$v;
@@ -490,9 +503,7 @@ class operation extends item {
 		if ($compte->get_id() == (int)$this->get_compte()->get_id()) {
 			$this->_item_xml['Ty']=$id->get_id();
 		} else {
-			throw new exception_parametre_invalide("moyen invalide. vous donnez un moyen du compte " .
-			$compte . " alors que l'operation est dans le compte" . (int)$this->get_compte()->get_id
-			()) ;
+			throw new exception_parametre_invalide("moyen invalide. vous donnez un moyen du compte " . $compte . " alors que l'op&eacute;ration est dans le compte" . (int)$this->get_compte()->get_id()) ;
 		}
 	}
 
@@ -517,7 +528,7 @@ class operation extends item {
 		if ($type === 0 || $type === 1 || $type === 2) {
 			$this->_item_xml['P']=$type;
 		} else {
-			throw new exception_parametre_invalide("'$type' parametre invalide. il doit etre  0, 1 ou 2") ;
+			throw new exception_parametre_invalide("'$type' parametre invalide. il doit &ecirc;tre  0, 1 ou 2") ;
 		}
 	}
 
@@ -590,7 +601,7 @@ class operation extends item {
 	}
 
 	/**
-	 * @param operation $id l'id de l'operation en contrepartie
+	 * @param operation $id l'id de l'opération en contrepartie
 	 */
 	public function set_operation_contrepartie(operation $id) {
 		$this->_item_xml['Ro']=$id->get_id(); //id ope
@@ -623,6 +634,8 @@ class operation extends item {
 	public function set_nom($nom) {
 		throw new exception_base("attention, une operation n'a pas de nom alors que vous voulez lui mettre comme nom '$nom'") ;
 	}
+	
+	
 	//------------------------------------ ITER ---------------------------------
 	/**
 	 * operation::get_operation_ventilees()
@@ -639,8 +652,9 @@ class operation extends item {
 			throw new Exception_no_reponse("pas possible car $this n'est pas une operation ventilee") ;
 		}
 	}
+	
 	/**
-	 *@param bool integrite gere l'integrit� referentielle
+	 *@param bool $controle_integrite gere l'integrité référentielle
 	 */
 	public function delete($controle_integrite = true) {
 		global $gsb_operations ;
@@ -656,7 +670,7 @@ class operation extends item {
 				catch (exception_not_exist $e) {
 					// @codeCoverageIgnoreStart
 					throw new BadMethodCallException("cette operation " . $this->get_id() .
-						" a ete definie comme une ventilation mais n'a pas d'operation fille. probleme dans la structure du fichier. effacement annul�") ;
+						" a été définie comme une ventilation mais n'a pas d'opération fille. probleme dans la structure du fichier. effacement annulé") ;
 					// @codeCoverageIgnoreEnd
 				}
 			}
@@ -669,20 +683,18 @@ class operation extends item {
 				catch (exception_not_exist $e) {
 					// @codeCoverageIgnoreStart
 					throw new BadMethodCallException("cette operation " . $this->get_id() .
-						" a ete definie comme un virement mais n'a pas d'operation en contrepartie. probleme dans l'effacement") ;
+						" a été définie comme une ventilation mais n'a pas d'opération en contrepartie. probleme dans l'effacement") ;
 					// @codeCoverageIgnoreEnd
 				}
 			}
 			if ($this->is_ventilation() == true) {
 				try {
 					$this->get_operation_mere() ;
-					throw new exception_integrite_referentielle('operation', $this->get_id(),
-						'operation', $this->get_operation_mere()->get_id()) ;
+					throw new exception_integrite_referentielle('operation', $this->get_id(),'operation', $this->get_operation_mere()->get_id()) ;
 					// @codeCoverageIgnoreStart
 				}
 				catch (exception_not_exist $e) {
-					throw new BadMethodCallException("cette operation a ete definie " . $this->get_id
-					() . " mais aucune operations ventillee. attention, impossible d'effacer") ;
+					throw new BadMethodCallException("cette operation a été définie " . $this->get_id() . " mais aucune operation ventilée. attention, impossible d'effacer") ;
 				} // @codeCoverageIgnoreEnd
 			}
 
@@ -704,8 +716,7 @@ class operation extends item {
 		}
 		//nb d'operations pour ce compte
 		$nb = count($mere->iter_operations()) ;
-		$req = $gsb_xml->xpath_uniq("//Compte/Details/No_de_compte[.='" . $mere->get_id
-		() . "']/..") ;
+		$req = $gsb_xml->xpath_uniq("//Compte/Details/No_de_compte[.='" . $mere->get_id() . "']/..") ;
 		$req->Nb_operations = $nb ;
 	}
 }

@@ -5,10 +5,8 @@
     <title>test</title>
 </head>
 <body>
-	jgfdhk
 {if $partie eq 2}
 <p>mise &agrave; faite.</p>
 {/if}
-ejkfjezklfkl
 </body>
 </html>

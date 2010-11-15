@@ -1,4 +1,4 @@
-<?php  /* coding: utf-8 */ 
+<?php /* coding: utf-8 */ 
 $langueprefere=setlocale(LC_ALL,'C');
 define('N',"\n");
 define('T',"  ");
@@ -19,7 +19,7 @@ function start_timing() {
 /**
  * seconde fonction de chrono
  *
- * @param $start_time: le top depart précédement donné
+ * @param $start_time: le top depart prï¿½cï¿½dement donnï¿½
  * @return number le temps mit depuis le top depart
  */
 function print_timing($start_time) {
@@ -97,7 +97,7 @@ function ins($t){
 function sansaccent($t){
 //retourne une chaine sans accent ni espace
     $string= strtr($t, 
-        "ÀÁÂÃÄÅàáâãäåÒÓÔÕÖØòóôõöøÈÉÊËèéêëÇçÌÍÎÏìíîïÙÚÛÜùúûüÿÑñ ", 
+        "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ", 
         "AAAAAAaaaaaaOOOOOoooooooEEEEeeeeCcIIIIiiiiUUUUuuuuyNn_");  
     return $string;  
 }
@@ -119,11 +119,11 @@ return iconv("iso-8859-1","UTF-8",stripslashes($t));
  */
 class MySQLConnector {
     /**
-     * permet le passage en mode debogage, si true , cela affiche la requete et le nombre de lignes affectés
+     * permet le passage en mode debogage, si true , cela affiche la requete et le nombre de lignes affectï¿½s
      */
 	public $debogagesql=false;
 	/**
-	 * nom de la base de donnée 
+	 * nom de la base de donnï¿½e 
 	 *
 	 * @var public
 	 */
@@ -168,13 +168,13 @@ class MySQLConnector {
 		}
 		$result = mysql_query($sql,$this->link) ;
 		if (($this->debogagesql)&& (mysql_affected_rows($this->link)!=1)){
-			printf("lignes affectées: %d\n", mysql_affected_rows($this->link));
+			printf("lignes affectï¿½es: %d\n", mysql_affected_rows($this->link));
 			echo("<BR>\n");
 		}
 		
 		try {
 			if (!$result) {
-				throw new Exception(mysql_error()." \n à la ligne ".xdebug_call_line().' du fichier '.xdebug_call_file()." à la fonction ".xdebug_call_function()."\n"." alors que la requete sql était \"".$sql."\"");
+				throw new Exception(mysql_error()." \n ï¿½ la ligne ".xdebug_call_line().' du fichier '.xdebug_call_file()." ï¿½ la fonction ".xdebug_call_function()."\n"." alors que la requete sql ï¿½tait \"".$sql."\"");
 			}
 			return $result;
 		} catch (Exception $e) {
@@ -216,15 +216,15 @@ class MySQLConnector {
 			$q="DELETE from `$r[0]`";
 			if ($this->debogagesql) echo($q.N);
 			$result2=$this->q($q,false);
-			if ($this->debogagesql) echo "$r[0] est effacé.\n";
-			if (!$result2) throw new Exception("imposible d'effacer les tables \n en particulier".mysql_error()." \n à la ligne ".xdebug_call_line().' du fichier '.xdebug_call_file()."à la fonction ".xdebug_call_function()."\n"." alors que la requete sql était ".$sql);
+			if ($this->debogagesql) echo "$r[0] est effacï¿½.\n";
+			if (!$result2) throw new Exception("imposible d'effacer les tables \n en particulier".mysql_error()." \n ï¿½ la ligne ".xdebug_call_line().' du fichier '.xdebug_call_file()."ï¿½ la fonction ".xdebug_call_function()."\n"." alors que la requete sql ï¿½tait ".$sql);
 		}
 		mysql_free_result($result);	
 	}
 	/**
-	 * insert les données dans la base de la table
+	 * insert les donnï¿½es dans la base de la table
 	 *
-	 * @param $s array associatif avec comme cle les noms des champs ou rentrer les données 
+	 * @param $s array associatif avec comme cle les noms des champs ou rentrer les donnï¿½es 
 	 * @param string $table
 	 */
 	public function insert($table,$s){
@@ -232,12 +232,12 @@ class MySQLConnector {
 		$val='\''.implode('\',\'',$s).'\'';
 		$q="insert into $table ($key) values($val)";
 		$r=$this->q($q,false);
-		if (!$r) throw new Exception(mysql_error()." \n à la ligne ".xdebug_call_line().' du fichier '.xdebug_call_file()." à la fonction ".xdebug_call_function()."\n");
+		if (!$r) throw new Exception(mysql_error()." \n ï¿½ la ligne ".xdebug_call_line().' du fichier '.xdebug_call_file()." ï¿½ la fonction ".xdebug_call_function()."\n");
 	}
 	
 	public function tab($q){
 		$r=$this->q($q,false);
-		if (!$r) throw new Exception(mysql_error()." \n à la ligne ".xdebug_call_line().' du fichier '.xdebug_call_file()." à la fonction ".xdebug_call_function()."\n");
+		if (!$r) throw new Exception(mysql_error()." \n ï¿½ la ligne ".xdebug_call_line().' du fichier '.xdebug_call_file()." ï¿½ la fonction ".xdebug_call_function()."\n");
 		$tab=array();
 		while ($row = mysql_fetch_array($r, MYSQL_ASSOC)) {
 			if ($this->debogagesql) var_dump($row);
@@ -250,9 +250,9 @@ class MySQLConnector {
 
 
 /**
- * Affiche le contenu d'une variable (pour débugage, pratique pour les booléens et les tableaux).
+ * Affiche le contenu d'une variable (pour dï¿½bugage, pratique pour les boolï¿½ens et les tableaux).
  *
- * @param string $var le nom de la variable à tester (chaine)
+ * @param string $var le nom de la variable ï¿½ tester (chaine)
  * @return void
  */
 function debog($nomvar,$v,$html=true) {
@@ -281,7 +281,7 @@ highlight_string($t);
 }
 
 /**
- * affiche $s plus retour à la ligne
+ * affiche $s plus retour ï¿½ la ligne
  *
  * @param string $s
  */

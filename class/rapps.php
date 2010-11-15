@@ -1,4 +1,4 @@
-<?php  /* coding: utf-8 */ 
+<?php /* coding: utf-8 */ 
 
 class rapps extends items {
     /**
@@ -9,7 +9,7 @@ class rapps extends items {
     /**
      * renvoi l'operation dont on donne l'id
      *
-     * @param integer $id id du rapprochement demandée
+     * @param integer $id id du rapprochement demandï¿½e
      * @return rapp
      * @throws exception_not_exist si l'id n'existe pas
      * @throws exception_parametre_invalide si $id n'est integer
@@ -45,6 +45,10 @@ class rapps extends items {
         }
         return $max + 1 ;
     }
+    /**
+     * @return rapp
+     * @see class/items::iter()
+     */
     public function iter() {
         global $gsb_xml ;
         return $gsb_xml->iter_class("//Rapprochement", 'rapp') ;

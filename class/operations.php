@@ -1,4 +1,4 @@
-<?php  /* coding: utf-8 */ 
+<?php /* coding: utf-8 */ 
 
 /**
  * class d'abstraction de l'ensemble compte
@@ -13,7 +13,7 @@ class operations extends items {
     /**
      * renvoi l'operation dont on donne l'id
      *
-     * @param integer $id id de l'operation demandée
+     * @param integer $id id de l'operation demandï¿½e
      * @throws exception_not_exist si l'id n'existe pas
      * @throws exception_parametre_invalide si $id n'est integer
      * @return operation

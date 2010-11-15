@@ -1,4 +1,4 @@
-<?php  /* coding: utf-8 */ 
+<?php /* coding: utf-8 */ 
 
 require_once 'header.php' ;
 $cpt_id = (int)util::get_page_param('cpt_id') ;
