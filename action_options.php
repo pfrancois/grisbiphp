@@ -5,8 +5,16 @@ $action = util::get_page_param( 'action' );
 $phase=util::get_page_param( 'phase' );
 //--------------------telechargment du fichier--------------------
 if ($action=="get_file"){
-	header("Content-disposition:filename=".$gsb_xml->get_xmlfile());
-	header("Content-type:application/octetstream");
+	$user_agent = strtolower ($_SERVER["HTTP_USER_AGENT"]);
+	$filename=$gsb_xml->get_xmlfile();
+	if ((is_integer (strpos($user_agent, "msie" ))) && (is_integer (strpos($user_agent, "win" )))) {
+	   header( "Content-Disposition: filename=".basename($filename).";" );
+	} else {
+	   header( "Content-Disposition: attachment; filename=".basename($filename).";" );
+	}
+	header("Content-type:application/octet-stream");
+	header("Content-Type: application/force-download" );
+	readfile("$filename" );
 	exit();
 }
 
