@@ -93,16 +93,17 @@ class util {
  /**
  *transforme un nombre anglais en centimes
  * @param int $n le nombre a transformer en float
+ * @param int $digit le nombre de chiffres apres la virgule
  * @return string
  */
-	public static function cent2fr($n) {
+	public static function cent2fr($n,$digit=7) {
 		if (is_numeric($n)){
 			$n=(float)$n;
 		} else {
 			throw new InvalidArgumentException('probleme, '.$n."n'est pas un nombre");
 		}
 		$n = floatval($n / 100 );
-		return str_replace('.', ',', sprintf("%01.7f", $n)) ;
+		return str_replace('.', ',', sprintf("%01.".$digit."f", $n)) ;
 	}
 
 

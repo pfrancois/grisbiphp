@@ -22,10 +22,9 @@ if ($action=="get_file"){
 	exit();
 }
 
-$action="effacer_tiers_vides";
 //------------------effacer les tiers qui n'ont ni operation ni echeances
 if ($action=="effacer_tiers_vides"){
-	$tpl->assign('titre',"tiers supprimés");
+	$tpl->assign('titre',"Tiers supprimés");
 	if ($phase==""){
 		$i=0;
 		foreach ($gsb_tiers->iter() as $tier) {
@@ -34,12 +33,13 @@ if ($action=="effacer_tiers_vides"){
 				$tier->delete();
 				ral($nom);
 				$i++;
-				vardump($tpl);
 			} catch (exception_integrite_referentielle $e) {
 				$i=$i;
 			}
 		}
-
+		if ($i>0){
+			ral("$i tiers à effacer");
+		} else {ral("aucun tiers à effacer");}
 		$tpl->assign("nom_classe_css","ligne");
 		$tpl->assign("lien","action_options.php?action=effacer_tiers_vides&amp;phase=2");
 		$tpl->display('resultats.smarty');
@@ -56,7 +56,9 @@ if ($action=="effacer_tiers_vides"){
 			}
 		}
 		$gsb_xml->save();
-		ral("$i tiers effac&eacutes");
+		if ($i>0){
+			ral("$i tiers effac&eacute;s");
+		} else {ral("aucun tiers effacés");}
 		$tpl->assign("nom_classe_css","progress");
 		$tpl->assign("lien","options.php");
 		$tpl->display('resultats.smarty');
@@ -85,7 +87,7 @@ if ($action=="dates_ope_diff"){
 						$iter->set_date($date_a_verifier);
 						$nouvelle_note=str_replace("CARTE X9438","CB SG",$notes);
 						$iter->set_notes($nouvelle_note);
-						ral("operation ".$iter->get_id());
+						ral("operation ".$iter->get_id()." du ".$iter->get_date()." pour ".(util::cent2fr($iter->get_montant(),2)));
 						return 1;
 					}
 				}
