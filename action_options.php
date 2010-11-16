@@ -2,7 +2,7 @@
 require_once('header.php');
 function ral ($string){
 	global $tpl;
-	ral($string);
+	$tpl->append("resultats",$string);
 }
 //----------------gestion des variables d'entree-----------------
 $action = util::get_page_param( 'action' );
@@ -22,9 +22,10 @@ if ($action=="get_file"){
 	exit();
 }
 
+$action="effacer_tiers_vides";
 //------------------effacer les tiers qui n'ont ni operation ni echeances
 if ($action=="effacer_tiers_vides"){
-	$tpl->assign('titre',"tiers supprim&eacute;s");
+	$tpl->assign('titre',"tiers supprimés");
 	if ($phase==""){
 		$i=0;
 		foreach ($gsb_tiers->iter() as $tier) {
@@ -33,10 +34,12 @@ if ($action=="effacer_tiers_vides"){
 				$tier->delete();
 				ral($nom);
 				$i++;
+				vardump($tpl);
 			} catch (exception_integrite_referentielle $e) {
 				$i=$i;
 			}
 		}
+
 		$tpl->assign("nom_classe_css","ligne");
 		$tpl->assign("lien","action_options.php?action=effacer_tiers_vides&amp;phase=2");
 		$tpl->display('resultats.smarty');
@@ -64,20 +67,28 @@ if ($action=="effacer_tiers_vides"){
 
 //---------------------------change les date des operations cartes differes
 if ($action=="dates_ope_diff"){
-	$xpath="//Operation";
 	function callback($iter){
 		//fait ce qui est demandé
 		//attention, elle peut changer
 		try {
 //			var_dump($iter);
-			if ($iter['N']!=''){
-				preg_match('#CARTE X9438 (../..)#', $iter['N'],$n);
-				if (substr($n, 2)>10){
-					ral("operation ".$iter['No']);
-					$n=$n."/2010";
+			$notes=$iter->get_notes();
+			if ($notes!=''){
+				if (preg_match('#CARTE X9438 (../..)#', $notes,$n)){
+					$date_a_verifier=util::datefr2time($n[1]."/".(idate("Y")));
+					//verifie si on ne met pas l'annee suivante
+					if ($date_a_verifier>time()){
+						$date_a_verifier=util::datefr2time($n[1]."/".(idate("Y")-1));
+					}
+					//ral($iter->get_date().":".$date_a_verifier);
+					if ($iter->get_date()!=$date_a_verifier){
+						$iter->set_date($date_a_verifier);
+						$nouvelle_note=str_replace("CARTE X9438","CB SG",$notes);
+						$iter->set_notes($nouvelle_note);
+						ral("operation ".$iter->get_id());
+						return 1;
+					}
 				}
-				ral($n);
-				return 1;
 			}
 			 throw new Exception_no_reponse('pas de reponse');
 		} catch (Exception_no_reponse $e) {
@@ -87,15 +98,15 @@ if ($action=="dates_ope_diff"){
 	///// normalement, pas besoin de changer en dessous
 	if ($phase==""){
 		$i=0;
-		ral('liste des actions effectues sur '.$gsb_xml->get_xmlfile());
+		$tpl->assign('titre','liste des opérations modifies sur '.$gsb_xml->get_xmlfile());
 		//remplissez la requete xpath
 		try {
-			foreach ($gsb_xml->xpath_iter($xpath) as $iter) {
+			foreach ($gsb_operations->iter() as $iter) {
 				$i=$i+callback($iter);
 			}
-			ral("$i actions effectu&eacute;");;
+			ral("$i opérations à modifier");;
 		} catch (Exception_no_reponse $e) {
-			ral("aucune actions effectu&eacute; car &laquo;$xpath&raquo; non trouv&eacute;");
+			ral("aucune actions effectué car &laquo;$xpath&raquo; non trouvé");
 		}
 		$tpl->assign("nom_classe_css","ligne");
 		$tpl->assign("lien","action_outils.php?action=dates_ope_diff&amp;phase=2");
@@ -111,7 +122,7 @@ if ($action=="dates_ope_diff"){
 		}
 		$gsb_xml->save();
 		ral("$i tiers effac&eacutes");
-		$tpl->assign("nom_classe_css","progress");
+		$tpl->assign("nom_classe_css","ligne");
 		$tpl->assign("lien","options.php");
 		$tpl->display('resultats.smarty');
 		exit();
@@ -150,9 +161,9 @@ if ($action=="specifique"){
 			foreach ($gsb_xml->xpath_iter($xpath) as $iter) {
 				$i=$i+callback($iter);
 			}
-			ral("$i actions effectu&eacute;");;
+			ral("$i actions effectué");;
 		} catch (Exception_no_reponse $e) {
-			ral("aucune actions effectu&eacute; car &laquo;$xpath&raquo; non trouv&eacute;");
+			ral("aucune actions effectué car &laquo;$xpath&raquo; non trouvé");
 		}
 		$tpl->assign("nom_classe_css","ligne");
 		$tpl->assign("lien","action_outils.php?action=specifique&amp;phase=2");
@@ -176,7 +187,7 @@ if ($action=="specifique"){
 }
 //recupere les action inexistantes, bien mettre un exit dans les if
 if (DEBUG){
-	$tpl->critic("action demand&eacute;e inexistante: $action");
+	$tpl->critic("action demandée inexistante: $action");
 }else {
 	util::redirection_header("comptes.php");
 }
