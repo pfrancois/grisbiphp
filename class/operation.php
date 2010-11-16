@@ -1,4 +1,4 @@
-<?php  /* coding: utf-8 */ 
+<?php  /* coding: utf-8 */
 
 class operation extends item {
 	public function __construct(SimpleXMLElement $c, $nouvelle = false, $id = null) {
@@ -12,7 +12,7 @@ class operation extends item {
 			//verification avant la creation
 			try{
 				$gsb_operations->get_by_id($id);
-				throw new exception_integrite("il y a une probleme d'int&eacute;grit&eacute; referencielle avec l'operation de type ope num $id");
+				throw new exception_integrite("il y a une probleme d'int&eacute;grit&eacute; referencielle avec l'operation num $id");
 			} catch (Exception_not_exist $except) {}
 			//numerotation generale
 			if ($id > ($gsb_operations->get_next() - 1)) {
@@ -23,7 +23,7 @@ class operation extends item {
 			//numerotation dans le compte
 			// on ajoute l'attribut comme on ne peut pas le changer
 			$this->_dom->setAttributeNode(new DOMAttr('No', $id)) ;
-			//pour les autres champs qui ne sont pas changé par l'application
+			//pour les autres champs qui ne sont pas changÃ©s par l'application
 			$this->_dom->setAttributeNode(new DOMAttr('Id', '')) ;
 			$this->_dom->setAttributeNode(new DOMAttr('D', '0/0/0')) ;
 			$this->set_date(time()) ; //date du jour par defaut

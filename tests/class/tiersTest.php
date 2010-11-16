@@ -1,4 +1,4 @@
-<?php  /* coding: utf-8 */ 
+<?php  /* coding: utf-8 */
 
 require_once 'PHPUnit/Framework.php';
 require_once 'G:\zmws\_web.zmwsc\comptes\class\loader.php';
@@ -95,7 +95,7 @@ class tiersTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	* verifie que l'implementation de count marche,attention, souvent on commence a 0
+	* verifie que l'implementation de count marche,attention, souvent on commence à 0
 	*/
 	public function test_count(){
 		$this->assertEquals(4,count($this->object));
@@ -110,13 +110,18 @@ class tiersTest extends PHPUnit_Framework_TestCase
 		}
 		$this->assertEquals(4,count($x));
 	}
+	/**
+	* verification des nouveaux tiers
+	*/
 	public function test_newtiers(){
 		$this->object->new_tier();
 		$this->assertEquals(5,count($this->object));
+		$this->assertEquals(7,$this->object->get_next());
 	}
 	public function test_newtiers2(){
 		$this->object->new_tier(2566);
 		$this->assertEquals(5,count($this->object));
+		$this->assertEquals(2567,$this->object->get_next());
 	}
 
 }
