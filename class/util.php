@@ -1,10 +1,8 @@
-<?php /* coding: utf-8 */ 
+<?php  /* coding: utf-8 */
 
 /**
  * Classe utilitaire qui donne des differentes fonctions utilise ailleurs.
- *
- *
- *
+
  * @since 2009-08-25
  * @version 1.2 modification de add_date
  * @version 1.1 ajout de la fonction dump, enlevage du <? final
@@ -47,8 +45,7 @@ class util {
  * @return int date nouvelle
  */
 	public static function add_date($cd, $day = 0, $mth = 0, $yr = 0) {
-		$newdate =  mktime(0, 0, 0, (int)date('m', $cd) + $mth, (int)date('d',
-			$cd) + $day, (int)date('Y', $cd) + $yr) ;
+		$newdate =  mktime(0, 0, 0, (int)date('m', $cd) + $mth, (int)date('d',$cd) + $day, (int)date('Y', $cd) + $yr) ;
 		return $newdate ;
 	}
 
@@ -152,19 +149,19 @@ class util {
 		}
 		return "<pre>" . print_r($data, true) . "</pre>" ;
 	}
-	
+
 	// @codeCoverageIgnoreEnd
 
-/**
- * Cette fonction calcule une clé RIB a partir des informations bancaires
- * La fonction implémente l'algorithme de clé RIB
- * Une clé RIB n'est valable que si elle se trouve dans l'intervalle 01 - 97
- *
- * @param string code unique de la banque
- * @param string code unique du guichet (agence ou se trouve le compte)
- * @param string numéro du compte bancaire (peut contenir des lettres)
- * @return string clé rib calculée
- **/
+	/**
+	 * Cette fonction calcule une clé RIB a partir des informations bancaires
+	 * La fonction implemente l'algorithme de clé RIB
+	 * Une clé RIB n'est valable que si elle se trouve dans l'intervalle 01 - 97
+	 *
+	 * @param string code unique de la banque
+	 * @param string code unique du guichet (agence ou se trouve le compte)
+	 * @param string numéro du compte bancaire (peut contenir des lettres)
+	 * @return string clé rib calculée
+	 **/
 	public static function calculerCleRib($sCodeBanque, $sCodeGuichet, $sNumeroCompte) {
 		// Variables locales
 		$iCleRib = 0 ;
@@ -183,11 +180,11 @@ class util {
 		return $sCleRib ;
 	}
 /**
- * 
+ *
  * renvoi vers une url via les fonction header
  * @param $url
  * @return void
- */	
+ */
 	public static function redirection_header($url){
 		$url='http://'.$_SERVER['HTTP_HOST'].substr($_SERVER['SCRIPT_NAME'],0,strrpos($_SERVER['SCRIPT_NAME'],'/')).'/'.$url;
 		header( 'Request-URI: '.$url );

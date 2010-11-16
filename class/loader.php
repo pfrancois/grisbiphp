@@ -93,3 +93,5 @@ $gsb_rapps = new rapps() ;
  * @var etats
  */
 $gsb_etats = new etats() ;
+
+define("GSB_DIR",realpath(str_replace($_SERVER['DOCUMENT_ROOT'], '', str_replace('\\', '/', dirname(__FILE__)))."/.."));

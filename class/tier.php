@@ -1,4 +1,4 @@
-<?php /* coding: utf-8 */ 
+<?php  /* coding: utf-8 */
 
 class tier extends item {
     /**
@@ -11,17 +11,31 @@ class tier extends item {
     public function __construct(SimpleXMLElement $c, $nouvelle = false, $id = null) {
         parent::__construct($c) ;
         global $gsb_tiers ;
+        global $gsb_xml;
         if ($nouvelle) {
             if (is_null($id)) {
                 $id = $gsb_tiers->get_next() ;
             }
+            //verification avant la creation
+			try{
+				$gsb_tiers->get_by_id($id);
+				throw new exception_integrite("il y a une probleme d'int&eacute;grit&eacute; referencielle avec le tiers num $id");
+			} catch (Exception_not_exist $except) {}
+			//numerotation generale
+            $gen=$gsb_xml->xpath_uniq('Tiers/Generalites');
+			if ($id > ($gsb_tiers->get_next() - 1)) {
+				//gestion des id a changer
+				$gen->No_dernier_tiers = $id ;
+			}
+            $gen->Nb_tiers = $gen->Nb_tiers + 1  ;
             $this->_dom->setAttributeNode(new DOMAttr('No', $id)) ;
             $this->_dom->setAttributeNode(new DOMAttr('Nom', "")) ;
             $this->_dom->setAttributeNode(new DOMAttr('Informations', '')) ;
             $this->_dom->setAttributeNode(new DOMAttr('Liaison', '0')) ;
         }
+
     }
-    
+
     /**
      * tier::get_id()
      *
@@ -44,7 +58,7 @@ class tier extends item {
         }
         $this->_item_xml['Nom']=$nom ;
     }
-    
+
     /**
      * tier::delete()
      * efface le tier

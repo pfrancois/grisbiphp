@@ -1,4 +1,4 @@
-<?php /* coding: utf-8 */ 
+<?php  /* coding: utf-8 */
 
 class operation extends item {
 	/**
@@ -18,7 +18,7 @@ class operation extends item {
 			//verification avant la creation
 			try{
 				$gsb_operations->get_by_id($id);
-				throw new exception_integrite("il y a une probleme d'int&eacute;grit&eacute; referencielle avec l'op&eacute;ration de type ope num $id");
+				throw new exception_integrite("il y a une probleme d'int&eacute;grit&eacute; referencielle avec l'operation num $id");
 			} catch (Exception_not_exist $except) {}
 			//numerotation generale
 			if ($id > ($gsb_operations->get_next() - 1)) {
@@ -29,7 +29,7 @@ class operation extends item {
 			//numerotation dans le compte
 			// on ajoute l'attribut comme on ne peut pas le changer
 			$this->_dom->setAttributeNode(new DOMAttr('No', $id)) ;
-			//pour les autres champs qui ne sont pas chang� par l'application
+			//pour les autres champs qui ne sont pas changés par l'application
 			$this->_dom->setAttributeNode(new DOMAttr('Id', '')) ;
 			$this->_dom->setAttributeNode(new DOMAttr('D', '0/0/0')) ;
 			$this->set_date(time()) ; //date du jour par defaut
@@ -59,7 +59,7 @@ class operation extends item {
 			$this->_dom->setAttributeNode(new DOMAttr('Va', '0')) ;
 		}
 	}
-	
+
 	/**
 	 * renvoie l'id de l'opération
 	 * @return int
@@ -67,7 +67,7 @@ class operation extends item {
 	public function get_id() {
 		return (int)$this->_item_xml['No'] ;
 	}
-	
+
 	/**
 	 * renvoi le compte de l'opération
 	 * @return compte
@@ -77,7 +77,7 @@ class operation extends item {
 		$req = $gsb_xml->xpath_uniq('./../..', $this->_item_xml) ;
 		return new compte($req) ;
 	}
-	
+
 	/**
 	 * renvoie la date au format timestamp de l'opération
 	 * @return string
@@ -87,7 +87,7 @@ class operation extends item {
 		$date = util::datefr2time($date) ;
 		return $date ;
 	}
-	
+
 	/**
 	 * renvoie le montant en centime de l'opération
 	 * @return int
@@ -95,7 +95,7 @@ class operation extends item {
 	public function get_montant() {
 		return util::fr2cent((string )$this->_item_xml['M']) ;
 	}
-	
+
 	/**
 	 * renvoie le tiers de l'opération
 	 * @return tiers
@@ -113,7 +113,7 @@ class operation extends item {
 			}
 		}
 	}
-	
+
 	/**
 	 * renvoie la categorie
 	 * @return categorie
@@ -131,7 +131,7 @@ class operation extends item {
 			}
 		}
 	}
-	
+
 	/**
 	 * @return scat
 	 **/
@@ -147,7 +147,7 @@ class operation extends item {
 			}
 		}
 	}
-	
+
 	/**
 	 * @return bool
 	 */
@@ -159,7 +159,7 @@ class operation extends item {
 			return false ;
 		}
 	}
-	
+
 	/**
 	 * renvoie les notes
 	 * attention, aucun filtre de sanitization si affichage
@@ -634,8 +634,8 @@ class operation extends item {
 	public function set_nom($nom) {
 		throw new exception_base("attention, une operation n'a pas de nom alors que vous voulez lui mettre comme nom '$nom'") ;
 	}
-	
-	
+
+
 	//------------------------------------ ITER ---------------------------------
 	/**
 	 * operation::get_operation_ventilees()
@@ -652,7 +652,7 @@ class operation extends item {
 			throw new Exception_no_reponse("pas possible car $this n'est pas une operation ventilee") ;
 		}
 	}
-	
+
 	/**
 	 *@param bool $controle_integrite gere l'integrité référentielle
 	 */

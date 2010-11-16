@@ -1,4 +1,4 @@
-<?php /* coding: utf-8 */
+<?php  /* coding: utf-8 */   /* coding: utf-8 */
 /**
  * class echeance
  * @author francois
@@ -17,7 +17,7 @@ class echeance extends item {
 			}
 		}
 	}
-	
+
 	public function enregistre_echus(){
 		global $gsb_comptes;
 		global $gsb_categories;
@@ -74,6 +74,6 @@ class echeance extends item {
 			if ($this->_item_xml['Intervalle_periodicite']==2){
 				$this->_item_xml['Date']=date('j/n/Y', util::add_date($date_ech,0,0,(int)$this->_item_xml['Intervalle_periodicite']));
 			}
-
+		}
 	}
 }
