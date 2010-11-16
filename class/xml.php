@@ -1,4 +1,4 @@
-<?php  /* coding: utf-8 */ 
+<?php  /* coding: utf-8 */
 
 class xml {
     /**
@@ -42,7 +42,7 @@ class xml {
     }
 
     /**
-     * renvoi un tableau de la classe demandé suite a la requete demande
+     * renvoi un tableau de la classe demandÃ©e suite a la requete demande
      * @param string $chaine la chaine xpath qui renvoit la collection
      * @param string $type le nom de la classe a renvoyer
      * @param SimpleXMLElement $_xml si rempli cela fait la requete xpath sur le xml fourni sinon ca utilise le xml habituel
@@ -66,7 +66,7 @@ class xml {
         }
     }
     /**
-     * renvoie un tableau relatif à la chaine xpath
+     * renvoie un tableau relatif Ã  la chaine xpath
      * @param string $chaine la chaine xpath
      * @param SimpleXMLElement, si rempli cela fait la requete xpath sur le xml fourni sinon ca utilise le xml habituel
      * @throws Exception_no_reponse si pas de reponse
@@ -83,7 +83,7 @@ class xml {
         return $req ;
     }
     /**
-     * renvoie les resultats relatif à la chaine xpath
+     * renvoie les resultats relatif Ã  la chaine xpath
      * @param string $chaine la chaine xpath
      * @param SimpleXMLElement $_xml element xml sur laquelle on fait la requete
      * @return SimpleXMLElement

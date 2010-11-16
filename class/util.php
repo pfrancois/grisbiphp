@@ -1,4 +1,4 @@
-<?php  /* coding: utf-8 */ 
+<?php  /* coding: utf-8 */
 
 /**
  * Classe utilitaire qui donne des differentes fonctions utilise ailleurs.
@@ -162,21 +162,21 @@ class util {
 	// @codeCoverageIgnoreEnd
 
 	/**
-	 * Cette fonction calcule une clïe RIB a partir des informations bancaires
-	 * La fonction implïemente l'algorithme de clïe RIB
-	 * Une clïe RIB n'est valable que si elle se trouve dans l'intervalle 01 - 97
+	 * Cette fonction calcule une clÃ© RIB a partir des informations bancaires
+	 * La fonction implemente l'algorithme de clÃ© RIB
+	 * Une clÃ© RIB n'est valable que si elle se trouve dans l'intervalle 01 - 97
 	 *
 	 * @param string code unique de la banque
 	 * @param string code unique du guichet (agence ou se trouve le compte)
-	 * @param string numïero du compte bancaire (peut contenir des lettres)
-	 * @return string clïe rib calculïee
+	 * @param string numÃ©ro du compte bancaire (peut contenir des lettres)
+	 * @return string clÃ© rib calculÃ©e
 	 **/
 	public static function calculerCleRib($sCodeBanque, $sCodeGuichet, $sNumeroCompte) {
 		// Variables locales
 		$iCleRib = 0 ;
 		$sCleRib = '' ;
 
-		// Calcul de la clïe RIBa partir des informations bancaires
+		// Calcul de la clÃ© RIB a partir des informations bancaires
 		$sNumeroCompte = strtr(strtoupper($sNumeroCompte), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
 			'12345678912345678923456789') ;
 		$iCleRib = 97 - (int)fmod(89 * $sCodeBanque + 15 * $sCodeGuichet + 3 * $sNumeroCompte,
