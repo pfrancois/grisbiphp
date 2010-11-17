@@ -1,4 +1,4 @@
-<?php /* coding: utf-8 */ 
+<?php /* coding: utf-8 */
 
 require_once 'PHPUnit/Framework.php';
 require_once 'G:\zmws\_web.zmwsc\comptes\class\loader.php';
@@ -27,7 +27,7 @@ class categoriesTest extends PHPUnit_Framework_TestCase
 		$this->object = $gsb_categories;
 	}
 	protected function tearDown(){
-			@unlink('test.gsb');
+		@unlink('test.gsb');
 	}
 	/**
 	 * test afin de voir si on recoit bien le categorie que l'on veut
@@ -57,13 +57,13 @@ class categoriesTest extends PHPUnit_Framework_TestCase
 	}
 	/**
 	 * test afin de voir si en lui donnant une valeur incorrect (une chaine au lieur d'un chiffre) il renvoit bien une exception
-	* @expectedException exception_parametre_invalide
+	 * @expectedException exception_parametre_invalide
 	 */
 	public function testGet_by_id_var_incorrect()	{
 		$r=$this->object->get_by_id('toto');
 	}
 
-/**
+	/**
 	 * test afin de voir si on recoit bien le numero si on connait le nom
 	 */
 	public function testGet_id_by_name()	{
@@ -95,14 +95,14 @@ class categoriesTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	* verifie que l'implementation de count marche,attention, souvent on commence a 0
-	*/
+	 * verifie que l'implementation de count marche,attention, souvent on commence a 0
+	 */
 	public function test_count(){
 		$this->assertEquals(5,count($this->object));
 	}
 	/**
-	* test que ca nous renvoit un iter comme on veut
-	*/
+	 * test que ca nous renvoit un iter comme on veut
+	 */
 	public function testiter_categories(){
 		$x=$this->object->iter();
 		foreach ($x as $y){

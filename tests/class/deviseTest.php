@@ -1,4 +1,4 @@
-<?php /* coding: utf-8 */ 
+<?php /* coding: utf-8 */
 
 require_once 'PHPUnit/Framework.php';
 
@@ -22,7 +22,7 @@ class deviseTest extends PHPUnit_Framework_TestCase{
 	protected function setUp(){
 		global $gsb_xml;
 		global $gsb_devises;
-	//on prend le fichier de test et on remplace avec celui actuel
+		//on prend le fichier de test et on remplace avec celui actuel
 		copy('G:/zmws/_web.zmwsc/comptes/tests/fichiers/test_original.gsb','test.gsb');
 		$gsb_xml=new xml('test.gsb');
 		$this->object=$gsb_devises->get_by_id(1);
@@ -57,13 +57,13 @@ class deviseTest extends PHPUnit_Framework_TestCase{
 	}
 
 	public function testGet_Date_dernier_change() {
-	global $gsb_devises;
-	$this->assertEquals( util::datefr2time("01/01/2010"), $gsb_devises->get_by_id(2)->get_date_dernier_change() );
+		global $gsb_devises;
+		$this->assertEquals( util::datefr2time("01/01/2010"), $gsb_devises->get_by_id(2)->get_date_dernier_change() );
 	}
 
 	public function testGet_change() {
-	global $gsb_devises;
-	$this->assertEquals( 10, $gsb_devises->get_by_id(2)->get_change());
+		global $gsb_devises;
+		$this->assertEquals( 10, $gsb_devises->get_by_id(2)->get_change());
 	}
 }
 ?>

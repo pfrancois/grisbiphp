@@ -29,7 +29,7 @@ if ($ope_id === 0) {//nouvelle operation
 										"num_chq"=>$num_chq,
 										"montant"=>"",
 										"id"=>$ope_id
-										));
+		));
 	}
 } else {
 	$tpl->assign('type_action', 'edit');
@@ -59,7 +59,7 @@ if ($ope_id === 0) {//nouvelle operation
 	}else {
 		$cat=$operation->get_categorie()->get_id().':0';
 	}
-		$tpl->assign('ope',array("date"=>$operation->get_date(),
+	$tpl->assign('ope',array("date"=>$operation->get_date(),
 										"tier"=>$operation->get_tiers()->get_id(),
 										"note"=>$operation->get_notes(),
 										"cat"=>$cat,
@@ -67,7 +67,7 @@ if ($ope_id === 0) {//nouvelle operation
 										"num_chq"=>$operation->get_num_chq(),
 										"montant"=>$value,
 										"id"=>$ope_id
-										));
+	));
 
 }
 
@@ -100,15 +100,15 @@ foreach ($gsb_categories->iter() as $categorie) {
 													'id' => $categorie->get_id().":".$scat->get_id(),
 													'nom' => $categorie->get_nom()." : ".$scat->get_nom(),
 													'type' => $categorie->get_type(),
-												)
-								);
+				)
+				);
 			} else {
 				$tpl->append('cats_credit', array(
 													'id' => $categorie->get_id().":".$scat->get_id(),
 													'nom' => $categorie->get_nom()." : ".$scat->get_nom(),
 													'type' => $categorie->get_type(),
-												)
-								);
+				)
+				);
 			}
 		}
 	} else {
@@ -117,13 +117,13 @@ foreach ($gsb_categories->iter() as $categorie) {
 						'id' => $categorie->get_id().":0",
 						'nom' => $categorie->get_nom(),
 						'type' => $categorie->get_type(),
-						));
+			));
 		} else {
 			$tpl->append('cats_credit', array(
 						'id' => $categorie->get_id().":0",
 						'nom' => $categorie->get_nom(),
 						'type' => $categorie->get_type(),
-						));
+			));
 		}
 	}//end if
 }//end foreach
@@ -131,13 +131,13 @@ $tpl->assign('moyens',array());
 foreach ($compte->iter_moyens() as $moyen) {
 	$tpl->append(
 		'moyens',
-		array(
+	array(
 			'id' => $moyen->get_id(),
 			'nom' => $moyen->get_nom(),
 			'num_en_cours' => $moyen->get_next_num(),
 			'entree' => $moyen->has_entree_compl(),
 			'signe' => $moyen->get_signe(),
-		)
+	)
 	);
 }
 if ($compte->is_cloture()){

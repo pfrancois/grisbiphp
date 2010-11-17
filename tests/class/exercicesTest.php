@@ -1,4 +1,4 @@
-<?php /* coding: utf-8 */ 
+<?php /* coding: utf-8 */
 
 require_once 'PHPUnit/Framework.php';
 require_once 'G:\zmws\_web.zmwsc\comptes\class\loader.php';
@@ -57,7 +57,7 @@ class exercicesTest extends PHPUnit_Framework_TestCase
 	}
 	/**
 	 * test afin de voir si en lui donnant une valeur incorrect (une chaine au lieur d'un chiffre) il renvoit bien une exception
-	* @expectedException exception_parametre_invalide
+	 * @expectedException exception_parametre_invalide
 	 */
 	public function testGet_by_id_var_incorrect()	{
 		$r=$this->object->get_by_id('toto');
@@ -69,14 +69,14 @@ class exercicesTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	* verifie que l'implementation de count marche,attention, souvent on commence a 0
-	*/
+	 * verifie que l'implementation de count marche,attention, souvent on commence a 0
+	 */
 	public function test_count(){
 		$this->assertEquals(2,count($this->object));
 	}
 	/**
-	* test que ca nous renvoit un iter comme on veut
-	*/
+	 * test que ca nous renvoit un iter comme on veut
+	 */
 	public function testiter_tiers(){
 		$x=$this->object->iter();
 		foreach ($x as $y){

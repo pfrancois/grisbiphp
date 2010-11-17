@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<phpunit colors="false" stopOnFailure="true" verbose="true" strict="true">
-        <testsuite name="compta">
-                <directory>./</directory>
-        </testsuite>
-    <filter>
-        <whitelist>
-            <directory suffix=".php">../class/</directory>
-            <exclude>
-                <directory suffix=".php">./</directory>
-            </exclude>
-        </whitelist>
-    </filter>
-    <logging>
-        <log type="coverage-html" target="./coverage" yui="true" highlight="true" lowUpperBound="35" highLowerBound="70"/>
-    </logging>
+<phpunit colors="false" stopOnFailure="true" verbose="true"
+	strict="true">
+	<testsuite name="compta">
+		<directory>./</directory>
+	</testsuite>
+	<filter>
+		<whitelist>
+			<directory suffix=".php">../class/</directory>
+			<exclude>
+				<directory suffix=".php">./</directory>
+			</exclude>
+		</whitelist>
+	</filter>
+	<logging>
+		<log type="coverage-html" target="./coverage" yui="true"
+			highlight="true" lowUpperBound="35" highLowerBound="70" />
+	</logging>
 </phpunit>

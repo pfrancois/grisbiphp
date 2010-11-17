@@ -9,17 +9,18 @@
 <link rel="stylesheet" type="text/css" href="css/common.css" />
 <style type="text/css" media="screen">
 <!--
-.item a {$smarty.ldelim}
-    text-decoration: none;
-    padding: 0;
-    margin: 0;
-    color:#FFFFFF;
-    display:block;
-    border-top:1px solid #4D0000;
-	padding-top: 0.4em;
-	padding-bottom: 0.6em;
+.item a { $smarty .ldelim
+	
+}
 
-{$smarty.rdelim}
+text-decoration: none ;
+    padding:  0; margin:  0; color:#FFFFFF ;
+    display:block ;
+    border-top: 1px solid #4D0000 ;
+	padding-top:  0.4em ;
+	padding-bottom:  0.6em ; { $smarty .rdelim
+	
+}
 -->
 </style>
 <title>Comptes</title>
@@ -27,26 +28,36 @@
 <body>
 <h1 class="hover"><a href="options.php">Comptes</a></h1>
 <h2>comptes esp&egrave;ces ou bancaires</h2>
-<table >
-{foreach from=$comptes item=cpt}
-		<tr class="hover item">
-			<td class="cptLabel"><a href="operations.php?cpt_id={$cpt.id}" >{$cpt.nom|escape:'htmlall'}</a></td>
-			<td class="cptSolde"><a href="operations.php?cpt_id={$cpt.id}" >{$cpt.m|nbfr:$cpt.devise}</a></td>
-		</tr>
-{/foreach}
-	<tr class="totalintermediaire"><td class="cptLabel">Solde comptes banques et comptes esp&egrave;ces</td><td class="cptSolde">{$total_bq|nbfr:$devise}</td></tr>
+<table>
+	{foreach from=$comptes item=cpt}
+	<tr class="hover item">
+		<td class="cptLabel"><a href="operations.php?cpt_id={$cpt.id}">{$cpt.nom|escape:'htmlall'}</a></td>
+		<td class="cptSolde"><a href="operations.php?cpt_id={$cpt.id}">{$cpt.m|nbfr:$cpt.devise}</a></td>
+	</tr>
+	{/foreach}
+	<tr class="totalintermediaire">
+		<td class="cptLabel">Solde comptes banques et comptes
+		esp&egrave;ces</td>
+		<td class="cptSolde">{$total_bq|nbfr:$devise}</td>
+	</tr>
 </table>
 
 <h2>autres comptes (Actifs et Passifs)</h2>
 <table>
-{foreach from=$placements item=pla name=plac}
-    <tr >
-        <td class="cptLabel item">{$pla.nom|escape:'htmlall'}</td>
-        <td class="cptSolde item">{$pla.m|nbfr:$pla.devise}</td>
-    </tr>
-{/foreach}
-<tr  class="totalintermediaire"><td class="cptLabel">Solde des autres comptes</td><td class="cptSolde">{$total_pl|nbfr:$devise}</td></tr>
-<tr><td class="cptLabel footerBar">Solde GLOBAL</td><td class="footerBar cptSolde">{$total_pl+$total_bq|nbfr:$devise}</td></tr>
+	{foreach from=$placements item=pla name=plac}
+	<tr>
+		<td class="cptLabel item">{$pla.nom|escape:'htmlall'}</td>
+		<td class="cptSolde item">{$pla.m|nbfr:$pla.devise}</td>
+	</tr>
+	{/foreach}
+	<tr class="totalintermediaire">
+		<td class="cptLabel">Solde des autres comptes</td>
+		<td class="cptSolde">{$total_pl|nbfr:$devise}</td>
+	</tr>
+	<tr>
+		<td class="cptLabel footerBar">Solde GLOBAL</td>
+		<td class="footerBar cptSolde">{$total_pl+$total_bq|nbfr:$devise}</td>
+	</tr>
 </table>
 </body>
 </html>

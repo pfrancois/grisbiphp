@@ -56,7 +56,7 @@ if ($action=="edit"){
 		$operation=$compte->new_operation($ope_id);
 	} catch (Exception $except) {
 		if (DEBUG){
-		$tpl->critic(get_class($except) . " '{$except->message}' in {$except->file}({$except->line})\n {$except->getTraceAsString()}" , "operations.php?cpt_id=$cpt_id");
+			$tpl->critic(get_class($except) . " '{$except->message}' in {$except->file}({$except->line})\n {$except->getTraceAsString()}" , "operations.php?cpt_id=$cpt_id");
 		}else {
 			$tpl->critic( "{$except->message}" , "operations.php?cpt_id=$cpt_id");
 		}
@@ -89,7 +89,7 @@ try{
 	$tpl->append("resultats",$action." operation $ope_id, ok");
 } catch (Exception $except) {
 	if (DEBUG){
-	$tpl->critic( get_class($except) . " '{$except->message}' in {$except->file}({$except->line})\n {$except->getTraceAsString()}" , "operations.php?cpt_id=$cpt_id");
+		$tpl->critic( get_class($except) . " '{$except->message}' in {$except->file}({$except->line})\n {$except->getTraceAsString()}" , "operations.php?cpt_id=$cpt_id");
 	}else {
 		$tpl->critic("{$except->message}" , "operations.php?cpt_id=$cpt_id");
 	}

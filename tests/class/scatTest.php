@@ -1,4 +1,4 @@
-<?php /* coding: utf-8 */ 
+<?php /* coding: utf-8 */
 
 require_once 'PHPUnit/Framework.php';
 
@@ -37,7 +37,7 @@ class scatTest extends PHPUnit_Framework_TestCase{
 	}
 
 	public function testGet_mere()	{
-			$this->assertEquals(6, $this->object->get_mere()->get_id());
+		$this->assertEquals(6, $this->object->get_mere()->get_id());
 	}
 	public function testGet_id() {
 		$this->assertEquals(1, $this->object->get_id());

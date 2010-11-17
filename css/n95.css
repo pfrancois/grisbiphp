@@ -1,44 +1,48 @@
 @charset "UTF-8";
+
 /* coding: utf-8 */
-body{
+body {
 	position: absolute;
 	left: 0;
 	padding: 0;
-	font-family:sans-serif;
-    background-color:#333333;
-    color:#FFFFFF;
-    font-size: 100%;
+	font-family: sans-serif;
+	background-color: #333333;
+	color: #FFFFFF;
+	font-size: 100%;
 }
 
 a {
-    text-decoration: none;
-   padding: 0;
-    margin: 0;
-    display:block;
+	text-decoration: none;
+	padding: 0;
+	margin: 0;
+	display: block;
 }
 
-h1{
+h1 {
 	font-size: 2.5em;
 	padding-top: .3em;
 	padding-bottom: .5em;
 	font-weight: bold;
 	background-color: #990000;
 	margin-top: 0em;
-    text-align: center;
+	text-align: center;
 }
-form{
+
+form {
 	margin-left: 5px;
 	margin-right: 10px;
 }
-form *{
-	margin-left:5px;
+
+form * {
+	margin-left: 5px;
 	display: block;
 }
+
 fieldset {
 	padding-bottom: 10px;
 	padding-top: 10px;
 	margin-top: 0;
-	background:#3A0000;
+	background: #3A0000;
 }
 
 legend {
@@ -46,22 +50,24 @@ legend {
 	font-weight: bold;
 	padding-bottom: .5em;
 }
+
 form label {
-	float:none;
+	float: none;
 	font-size: .9em;
 	margin-bottom: .5em;
 	margin-top: .5em;
-    font-weight:bold;
-    width:200px
+	font-weight: bold;
+	width: 200px
 }
 
-option{
-	margin-left:0px;
-	}
-
-#ope_date_ope{
-	width:auto ;
+option {
+	margin-left: 0px;
 }
+
+#ope_date_ope {
+	width: auto;
+}
+
 textarea {
 	line-height: normal;
 	margin-bottom: .7em;
@@ -73,18 +79,19 @@ select {
 	padding-top: 0.3em;
 	padding-bottom: 0.3em;
 	margin: 0.2em 0;
-	margin-left:5px;
+	margin-left: 5px;
 }
 
-button{
+button {
 	background-color: #554444;
-	border:#ffffff solid 1px;
+	border: #ffffff solid 1px;
 	text-align: center;
 	font-size: 2em;
-	margin-bottom:10px;
-	color:#ffffff;
+	margin-bottom: 10px;
+	color: #ffffff;
 	width: 200px;
 }
-button::hover{
-    background-color: #706666;
+
+button::hover {
+	background-color: #706666;
 }

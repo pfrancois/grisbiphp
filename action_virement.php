@@ -46,7 +46,7 @@ if ($action=="edit") {
 		$gsb_xml->save();
 	} catch (Exception $except) {
 		if (DEBUG){
-		$tpl->critic(get_class($except) . " '{$except->message}' in {$except->file}({$except->line})\n {$except->getTraceAsString()}" , "operations.php?cpt_id=$compte_destination");
+			$tpl->critic(get_class($except) . " '{$except->message}' in {$except->file}({$except->line})\n {$except->getTraceAsString()}" , "operations.php?cpt_id=$compte_destination");
 		}else {
 			$tpl->critic("{$except->message}" , "operations.php?cpt_id=$compte_destination");
 		}
@@ -60,7 +60,7 @@ if ($action=="edit") {
 		$tpl->append("resultats","ok pour les operations $ope_id_origine et $ope_id_destination");
 	} catch (Exception $except) {
 		if (DEBUG){
-		$tpl->critic(get_class($except) . " '{$except->message}' in {$except->file}({$except->line})\n {$except->getTraceAsString()}" , "operations.php?cpt_id=$compte_destination");
+			$tpl->critic(get_class($except) . " '{$except->message}' in {$except->file}({$except->line})\n {$except->getTraceAsString()}" , "operations.php?cpt_id=$compte_destination");
 		}else {
 			$tpl->critic("{$except->message}" , "operations.php?cpt_id=$compte_destination");
 		}

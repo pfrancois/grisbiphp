@@ -12,9 +12,9 @@ if ($action=="get_file"){
 	$user_agent = strtolower ($_SERVER["HTTP_USER_AGENT"]);
 	$filename=$gsb_xml->get_xmlfile();
 	if ((is_integer (strpos($user_agent, "msie" ))) && (is_integer (strpos($user_agent, "win" )))) {
-	   header( "Content-Disposition: filename=".basename($filename).";" );
+		header( "Content-Disposition: filename=".basename($filename).";" );
 	} else {
-	   header( "Content-Disposition: attachment; filename=".basename($filename).";" );
+		header( "Content-Disposition: attachment; filename=".basename($filename).";" );
 	}
 	header("Content-type:application/octet-stream");
 	header("Content-Type: application/force-download" );
@@ -68,17 +68,45 @@ if ($action=="effacer_tiers_vides"){
 
 //---------------------------verifications des differents totaux
 if ($action=="verif_totaux"){
-	///// normalement, pas besoin de changer en dessous
+	if ($gsb_xml->version!="0.5"){
+		if (DEBUG){
+			$tpl->critic("action demandée inexistante: $action");
+		}else {
+			util::redirection_header("comptes.php");
+		}
+	}
 	if ($phase==""){
 		$tpl->assign('titre','verification des totaux sur '.$gsb_xml->get_xmlfile());
-		$i=0;
-		try {
-			foreach ($gsb_operations->iter() as $iter) {
-				$i=$i+callback($iter);
+		//verif operations
+		$nb_ope=0;
+		$nb_ope_max=0;
+		$x=$gsb_xml->get_xml();
+		$nb_a_changer=0;
+		foreach ($gsb_operations->iter() as $iter) {
+			$nb_ope++;
+			if ($iter->get_id()>$nb_ope_max){
+				$nb_ope_max=$iter->get_id();
 			}
-			ral("$i opérations à modifier");;
-		} catch (Exception_no_reponse $e) {
-			ral("aucune actions effectué car &laquo;$xpath&raquo; non trouvé");
+		}
+		if ($nb_ope_max != ($gsb_operations->get_next())-1) {
+			ral("numero derniere operation incorrect");
+			$x->Generalites->Numero_derniere_operation=$nb_ope_max;
+		}
+		//verif des comptes
+		foreach ($gsb_comptes as $compte) {
+			$nb_ope=0;
+			//operation du compte
+			foreach ($compte->iter_operations() as $operation) {
+				$nb_ope++;
+				//TODO : mettreen place un verification des soldes en meme tps 
+			}
+			if ()
+			//moyens de p du cpt
+			$nb_moyen=0;
+			foreach ($compte->iter_moyens() as $moyen){
+				$nb_moyen++;
+			}
+			
 		}
 		$tpl->assign("nom_classe_css","ligne");
 		$tpl->assign("lien","action_outils.php?action=dates_ope_diff&amp;phase=2");
@@ -122,7 +150,7 @@ if ($action=="dates_ope_diff"){
 					}
 				}
 			}
-			 throw new Exception_no_reponse('pas de reponse');
+			throw new Exception_no_reponse('pas de reponse');
 		} catch (Exception_no_reponse $e) {
 			return 0;
 		}
@@ -172,7 +200,7 @@ if ($action=="specifique"){
 		//fait ce qui est demandé
 		//attention, elle peut changer
 		try {
-//			var_dump($iter);
+			//			var_dump($iter);
 			if ($iter['N']!=''){
 				preg_match('#CARTE X9438 (../..)#', $iter['N'],$n);
 				if (substr($n, 2)>10){
@@ -182,7 +210,7 @@ if ($action=="specifique"){
 				ral($n);
 				return 1;
 			}
-			 throw new Exception_no_reponse('pas de reponse');
+			throw new Exception_no_reponse('pas de reponse');
 		} catch (Exception_no_reponse $e) {
 			return 0;
 		}

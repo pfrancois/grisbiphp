@@ -2,10 +2,10 @@
 
 require_once('../class/util.php');
 /**
-*  renvoie les resultats relatif � la chaine xpath
-*  @param string $chaine la chaine xpath
-*  @return SimpleXMLElement
-*/
+ *  renvoie les resultats relatif � la chaine xpath
+ *  @param string $chaine la chaine xpath
+ *  @return SimpleXMLElement
+ */
 function xpath($chaine) {
 	global $xml;
 	$r = $xml->xpath($chaine);
@@ -16,10 +16,10 @@ function xpath($chaine) {
 	}
 }
 /**
-*  renvoie un tableau relatif à la chaine xpath
-*  @param string $chaine la chaine xpath
-*  @return SimpleXMLElement
-*/
+ *  renvoie un tableau relatif à la chaine xpath
+ *  @param string $chaine la chaine xpath
+ *  @return SimpleXMLElement
+ */
 
 function xpath_tab($chaine){
 	global $xml;
@@ -44,21 +44,20 @@ function xpath_tab($chaine){
 <h1><?php echo realpath('20040701.gsb')?></h1>
 
 <form method="get" action="<?php echo $_SERVER['SCRIPT_NAME'];?>">
-    <fieldset>
-        <legend>xpath</legend>
-        <input type="text" name="xpath" size="100" maxlength="100" value="<?php if(isset($_GET['xpath'])){echo str_replace("\"","'" ,util::get_page_param('xpath'));} ?>"></input>
-    </fieldset>
-    <input type="submit" name="ok" />
-</form>
-<?php 
+<fieldset><legend>xpath</legend> <input type="text" name="xpath"
+	size="100" maxlength="100"
+	value="<?php if(isset($_GET['xpath'])){echo str_replace("\"","'" ,util::get_page_param('xpath'));} ?>"></input>
+</fieldset>
+<input type="submit" name="ok" /></form>
+<?php
 $xml = simplexml_load_file('20040701.gsb');
 if(isset($_GET['xpath'])){
-    $xpath=util::get_page_param('xpath');
-    echo 'requete:<pre style="font-family: monospace;font-size: 1.2em;border: solid #BBB;background: #DDD;">'.$xpath.'</pre><br/>';
-    $req=xpath_tab($xpath);
-    if (!$req){
-       echo 'aucune r&eacute;ponse';
-    }else{
+	$xpath=util::get_page_param('xpath');
+	echo 'requete:<pre style="font-family: monospace;font-size: 1.2em;border: solid #BBB;background: #DDD;">'.$xpath.'</pre><br/>';
+	$req=xpath_tab($xpath);
+	if (!$req){
+		echo 'aucune r&eacute;ponse';
+	}else{
 		if (count($req)==1){
 			$req=$req[0];
 			echo 'reponse:<pre>';
@@ -67,7 +66,7 @@ if(isset($_GET['xpath'])){
 		}
 		var_dump($req);
 		echo '</pre>';
-    }
+	}
 }
 ?>
 </body>

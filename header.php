@@ -29,7 +29,7 @@ define("SUR_FREE", true) ;
  * id de la devise generalement utilise
  */
 define("DEVISE",1);
-define('DEBUG', false);
+define('DEBUG', true);
 /**
  * Id du tiers par defaut pour les virement
  */
@@ -76,11 +76,11 @@ class template extends Smarty {
 	 * @param bool $critique si true, lance l'affichage et arrete le script apres
 	 */
 	public function critic($msg,$lien){
-			$this->append("resultats",$msg);
-			$this->assign('lien',"$lien");
-			$tpl->assign("nom_classe_css","error");
-			$this->display('resultats.smarty') ;
-			exit( 1 );
+		$this->append("resultats",$msg);
+		$this->assign('lien',"$lien");
+		$tpl->assign("nom_classe_css","error");
+		$this->display('resultats.smarty') ;
+		exit( 1 );
 	}
 	/**
 	 * fonction afin d'inserer au mieux firebug sans smarty

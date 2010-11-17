@@ -1,53 +1,61 @@
 @charset "UTF-8";
+
 /* coding: utf-8 */
-.CreditCatElement:before{
-
+.CreditCatElement:before {
+	
 }
 
-.DebitCatElement:before{
-
+.DebitCatElement:before {
+	
 }
 
-.moyenAvecNumero{
-display:inline;
+.moyenAvecNumero {
+	display: inline;
 }
+
 .operationMainTable {
-	background:#3A0000;
+	background: #3A0000;
 }
 
-.ligne{
+.ligne {
 	padding: 0.5em;
 }
+
 label {
-	display:inline;
-	float:left;
+	display: inline;
+	float: left;
 	font-size: .9em;
-	font-weight:bold;
-	width:15%;
+	font-weight: bold;
+	width: 15%;
 }
-span label{
-	float:none;
+
+span label {
+	float: none;
 	padding-left: 0.5em;
 }
+
 input[type='text'] {
-    padding: 0.5em;
+	padding: 0.5em;
 }
-select{
+
+select {
 	padding: 0.5em;
 }
 
 input {
-border:0;
+	border: 0;
 }
+
 legend {
 	font-size: 110%;
 	padding-bottom: .5em;
-	color:#FFFFFF;
+	color: #FFFFFF;
 }
 
-.invisible{
-	display:none;
+.invisible {
+	display: none;
 }
-#ope_date_ope{
-	width:auto ;
+
+#ope_date_ope {
+	width: auto;
 }

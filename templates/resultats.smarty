@@ -8,10 +8,10 @@
 <link rel="stylesheet" type="text/css" href="css/common.css" />
 <title>{$titre}</title>
 </head>
-<body >
-<h1> {$titre} </h1>
+<body>
+<h1>{$titre}</h1>
 {foreach from=$resultats item=resultat}
-		<div class='{$nom_classe_css}'>{$resultat}</div>
+<div class='{$nom_classe_css}'>{$resultat}</div>
 {/foreach}
 <div class="error"><a href='{$lien}'>suite</a></div>
 </body>

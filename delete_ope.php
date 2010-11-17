@@ -2,22 +2,22 @@
 
 require_once 'header.php';
 
-	$ope_id=(int) util::get_page_param('ope_id');
-	$cpt_id=(int) util::get_page_param('cpt_id');
+$ope_id=(int) util::get_page_param('ope_id');
+$cpt_id=(int) util::get_page_param('cpt_id');
 if (util::get_page_param('action')=='delete' && date('dmY',time())==util::get_page_param('date')){
 	$operation=$gsb_operations->get_by_id($ope_id);
 	if (!$operation->is_virement()){
-			try {
-				$operation->delete(true);
-			} catch (Exception $except) {
-				if (DEBUG){
+		try {
+			$operation->delete(true);
+		} catch (Exception $except) {
+			if (DEBUG){
 				$tpl->critic(get_class($except) . " '{$except->message}' in {$except->file}({$except->line})\n {$except->getTraceAsString()}" , "operations.php?cpt_id=$cpt_id");
-				}else {
-					$tpl->critic("{$except->message}" , "operations.php?cpt_id=$cpt_id");
-				}
-			}//end try
-				$gsb_xml->save();
-				$tpl->append("resultat","suppression de l'op&eacute;ration: Ok");
+			}else {
+				$tpl->critic("{$except->message}" , "operations.php?cpt_id=$cpt_id");
+			}
+		}//end try
+		$gsb_xml->save();
+		$tpl->append("resultat","suppression de l'op&eacute;ration: Ok");
 
 	}else{
 		try{
@@ -30,13 +30,13 @@ if (util::get_page_param('action')=='delete' && date('dmY',time())==util::get_pa
 			$jumelle->delete(false);
 			$gsb_xml->save();
 			$tpl->append("resultats","ok pour les operations");
-			} catch (Exception $except) {
-				if (DEBUG){
+		} catch (Exception $except) {
+			if (DEBUG){
 				$tpl->critic(get_class($except) . " '{$except->message}' in {$except->file}({$except->line})\n {$except->getTraceAsString()}" , "operations.php?cpt_id=$cpt_id");
-				}else {
-					$tpl->critic("{$except->message}" , "operations.php?cpt_id=$cpt_id");
-				}
-			}//end try
+			}else {
+				$tpl->critic("{$except->message}" , "operations.php?cpt_id=$cpt_id");
+			}
+		}//end try
 	}
 	if (DEBUG){
 		$tpl->assign('titre',"op&eacute;rations &eacute;fface&eacute;es");
