@@ -25,23 +25,23 @@ if ($action=="edit") {
 		if ($ope_date!=$ope_orig->get_date()){
 			$ope_orig->set_date($ope_date);
 			$ope_dest->set_date($ope_date);
-			$tpl->append("resultats","date modifie pour les operation $ope_id_origine et $ope_id_destination, ok");
+			$tpl->ral("resultats","date modifie pour les operation $ope_id_origine et $ope_id_destination, ok");
 		}
 
 		if ($ope_value!=$ope_dest->get_montant()){
 			$ope_orig->set_montant($ope_value*-1);
 			$ope_dest->set_montant($ope_date);
-			$tpl->append("resultats","montant modifie pour l'operation $ope_id_origine et $ope_id_destination, ok");
+			$tpl->ral("resultats","montant modifie pour l'operation $ope_id_origine et $ope_id_destination, ok");
 		}
 		if ($ope_orig->get_compte()->get_id()!=$compte_origine->get_id()){
 			//modification du compte
 			$ope_orig->set_compte($compte_origine);
-			$tpl->append("resultats","compte modifie pour l'operation $ope_id_origine, ok");
+			$tpl->ral("resultats","compte modifie pour l'operation $ope_id_origine, ok");
 		}
 		if ($ope_dest->get_compte()->get_id()!=$compte_destination->get_id()){
 			//modification du compte
 			$ope_dest->set_compte($compte_destination);
-			$tpl->append("resultats","compte modifie pour l'operation $ope_id_destination, ok");
+			$tpl->ral("resultats","compte modifie pour l'operation $ope_id_destination, ok");
 		}
 		$gsb_xml->save();
 	} catch (Exception $except) {
@@ -57,7 +57,7 @@ if ($action=="edit") {
 	try {
 		ajout_virement_simple($compte_origine,$compte_destination,$ope_date,$ope_value,$ope_id_origine,$ope_id_destination);
 		$gsb_xml->save();
-		$tpl->append("resultats","ok pour les operations $ope_id_origine et $ope_id_destination");
+		$tpl->ral("resultats","ok pour les operations $ope_id_origine et $ope_id_destination");
 	} catch (Exception $except) {
 		if (DEBUG){
 			$tpl->critic(get_class($except) . " '{$except->message}' in {$except->file}({$except->line})\n {$except->getTraceAsString()}" , "operations.php?cpt_id=$compte_destination");

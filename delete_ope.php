@@ -29,7 +29,7 @@ if (util::get_page_param('action')=='delete' && date('dmY',time())==util::get_pa
 			$operation->delete(false);
 			$jumelle->delete(false);
 			$gsb_xml->save();
-			$tpl->append("resultats","ok pour les operations");
+			$tpl->ral("resultats","ok pour les operations");
 		} catch (Exception $except) {
 			if (DEBUG){
 				$tpl->critic(get_class($except) . " '{$except->message}' in {$except->file}({$except->line})\n {$except->getTraceAsString()}" , "operations.php?cpt_id=$cpt_id");

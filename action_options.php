@@ -27,16 +27,15 @@ if ($action=="effacer_tiers_vides"){
 			try {
 				$nom=(string)$tier->get_nom();
 				$tier->delete();
-				$this->ral($nom);
+				$tpl->ral($nom);
 				$i++;
 			} catch (exception_integrite_referentielle $e) {
 				$i=$i;
 			}
 		}
 		if ($i>0){
-			ral("$i tiers à effacer");
-		} else {ral("aucun tiers à effacer");}
-		$tpl->assign("nom_classe_css","ligne");
+			$tpl->ral("$i tiers à effacer");
+		} else {$tpl->ral("aucun tiers à effacer");}
 		$tpl->assign("lien","action_options.php?action=effacer_tiers_vides&amp;phase=2");
 		$tpl->display('resultats.smarty');
 		exit();
@@ -53,9 +52,8 @@ if ($action=="effacer_tiers_vides"){
 		}
 		$gsb_xml->save();
 		if ($i>0){
-			ral("$i tiers effac&eacute;s");
-		} else {ral("aucun tiers effacés");}
-		$tpl->assign("nom_classe_css","progress");
+			$tpl->ral("$i tiers effac&eacute;s","progress");
+		} else {$tpl->ral("aucun tiers effacés","progress");}
 		$tpl->assign("lien","options.php");
 		$tpl->display('resultats.smarty');
 		exit();
@@ -93,9 +91,9 @@ if ($action=="verif_totaux"){
 			}
 			//verification
 			if ($nb_ope_c!=(int)$compte->get_xml()->Details->Nb_operations)  {
-				ral ("problème dans le comptage des opération du compte ". $compte->get_nom());
+				$tpl->ral ("problème dans le comptage des opération du compte ". $compte->get_nom());
 			}else {
-				ral ("ok dans le comptage des opération du compte ". $compte->get_nom());
+				$tpl->ral ("ok dans le comptage des opération du compte ". $compte->get_nom());
 			}
 			//moyens de p du cpt
 			$nb_moyen=0;
@@ -104,33 +102,30 @@ if ($action=="verif_totaux"){
 			}
 		}
 				if ($nb_ope_max<$nb_ope){
-			ral("le numero max est trop petit.");
+			$tpl->ral("le numero max est trop petit.");
 			$nb_ope_max=$nb_ope;
 		}else {
-			ral("numero max d'opération ok"); 
+			$tpl->ral("numero max d'opération ok"); 
 		}
 		if ($nb_ope_max != ($gsb_operations->get_next())-1) {
-			ral("numero derniere operation incorrect");
+			$tpl->ral("numero derniere operation incorrect");
 			$x->Generalites->Numero_derniere_operation=$nb_ope_max;
 		}else {
-			ral("numero derniere opération ok"); 
+			$tpl->ral("numero derniere opération ok"); 
 		}
-
-		$tpl->assign("nom_classe_css","ligne");
 		$tpl->assign("lien","action_outils.php?action=dates_ope_diff&amp;phase=2");
 		$tpl->display('resultats.smarty');
 		exit();
 	}
 	if ($phase==2){
 		$i=0;
-		ral('liste des actions effectues sur '.$gsb_xml->get_xmlfile());
+		$tpl->ral('liste des actions effectues sur '.$gsb_xml->get_xmlfile());
 		//remplissez la requete xpath
 		foreach ($gsb_xml->xpath_iter($xpath) as $iter) {
 			$i=$i+callback($iter);
 		}
 		$gsb_xml->save();
-		ral("$i opérations modifiées");
-		$tpl->assign("nom_classe_css","ligne");
+		$tpl->ral("$i opérations modifiées","progress");
 		$tpl->assign("lien","options.php");
 		$tpl->display('resultats.smarty');
 		exit();
@@ -153,7 +148,7 @@ if ($action=="dates_ope_diff"){
 						$iter->set_date($date_a_verifier);
 						$nouvelle_note=str_replace("CARTE X9438","CB SG",$notes);
 						$iter->set_notes($nouvelle_note);
-						ral("operation ".$iter->get_id()." du ".$iter->get_date()." pour ".(util::cent2fr($iter->get_montant(),2)));
+						$tpl->ral("operation ".$iter->get_id()." du ".$iter->get_date()." pour ".(util::cent2fr($iter->get_montant(),2)));
 						return 1;
 					}
 				}
@@ -171,29 +166,27 @@ if ($action=="dates_ope_diff"){
 			foreach ($gsb_operations->iter() as $iter) {
 				$i=$i+callback($iter);
 			}
-			ral("$i opérations à modifier");;
+			$tpl->ral("$i opérations à modifier");;
 		} catch (Exception_no_reponse $e) {
-			ral("aucune actions effectué car &laquo;$xpath&raquo; non trouvé");
+			$tpl->ral("aucune actions effectué car &laquo;$xpath&raquo; non trouvé");
 		}
-		$tpl->assign("nom_classe_css","ligne");
 		$tpl->assign("lien","action_outils.php?action=dates_ope_diff&amp;phase=2");
 		$tpl->display('resultats.smarty');
 		exit();
 	}
 	if ($phase==2){
 		$i=0;
-		ral('liste des actions effectues sur '.$gsb_xml->get_xmlfile());
+		$tpl->ral('liste des actions effectues sur '.$gsb_xml->get_xmlfile());
 		try {
 			foreach ($gsb_operations->iter() as $iter) {
 				$i=$i+callback($iter);
 			}
-			ral("$i opérations modifiées");;
+			$tpl->ral("$i opérations modifiées","progress");;
 		} catch (Exception_no_reponse $e) {
-			ral("aucune actions effectué car &laquo;$xpath&raquo; non trouvé");
+			$tpl->ral("aucune actions effectué car &laquo;$xpath&raquo; non trouvé");
 		}
 		$gsb_xml->save();
-		ral("$i opérations modifiées");
-		$tpl->assign("nom_classe_css","ligne");
+		$tpl->ral("$i opérations modifiées","progress");
 		$tpl->assign("lien","options.php");
 		$tpl->display('resultats.smarty');
 		exit();
@@ -212,10 +205,10 @@ if ($action=="specifique"){
 			if ($iter['N']!=''){
 				preg_match('#CARTE X9438 (../..)#', $iter['N'],$n);
 				if (substr($n, 2)>10){
-					ral("operation ".$iter['No']);
+					$tpl->ral("operation ".$iter['No']);
 					$n=$n."/2010";
 				}
-				ral($n);
+				$tpl->ral($n);
 				return 1;
 			}
 			throw new Exception_no_reponse('pas de reponse');
@@ -226,31 +219,29 @@ if ($action=="specifique"){
 	///// normalement, pas besoin de changer en dessous
 	if ($phase==""){
 		$i=0;
-		ral('liste des actions effectues sur '.$gsb_xml->get_xmlfile());
+		$tpl->ral('liste des actions effectues sur '.$gsb_xml->get_xmlfile());
 		//remplissez la requete xpath
 		try {
 			foreach ($gsb_xml->xpath_iter($xpath) as $iter) {
 				$i=$i+callback($iter);
 			}
-			ral("$i actions effectué");;
+			$tpl->ral("$i actions effectué");;
 		} catch (Exception_no_reponse $e) {
-			ral("aucune actions effectué car &laquo;$xpath&raquo; non trouvé");
+			$tpl->ral("aucune actions effectué car &laquo;$xpath&raquo; non trouvé");
 		}
-		$tpl->assign("nom_classe_css","ligne");
 		$tpl->assign("lien","action_outils.php?action=specifique&amp;phase=2");
 		$tpl->display('resultats.smarty');
 		exit();
 	}
 	if ($phase==2){
 		$i=0;
-		ral('liste des actions effectues sur '.$gsb_xml->get_xmlfile());
+		$tpl->ral('liste des actions effectues sur '.$gsb_xml->get_xmlfile());
 		//remplissez la requete xpath
 		foreach ($gsb_xml->xpath_iter($xpath) as $iter) {
 			$i=$i+callback($iter);
 		}
 		$gsb_xml->save();
-		ral("$i tiers effac&eacutes");
-		$tpl->assign("nom_classe_css","progress");
+		$tpl->ral("$i tiers effac&eacutes","progress");
 		$tpl->assign("lien","options.php");
 		$tpl->display('resultats.smarty');
 		exit();
