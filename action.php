@@ -85,8 +85,8 @@ try{
 	$operation->set_num_chq($ope_num_chq);
 	$operation->set_notes($ope_notes);
 	$operation->set_tiers($tier);
-	$gsb_xml->save();
-	$tpl->append("resultats",$action." operation $ope_id, ok");
+	//$gsb_xml->save();
+	$tpl->ral($action." operation $ope_id, ok");
 } catch (Exception $except) {
 	if (DEBUG){
 		$tpl->critic( get_class($except) . " '{$except->message}' in {$except->file}({$except->line})\n {$except->getTraceAsString()}" , "operations.php?cpt_id=$cpt_id");

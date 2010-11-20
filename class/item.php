@@ -50,4 +50,10 @@ abstract class item{
 	public function __toString() {
 		return get_class($this) . ' n ' . $this->get_id() ;
 	}
+	/**
+	 * @return simplexml
+	 */
+	public function get_xml(){
+		return $this->_item_xml;
+	}
 }

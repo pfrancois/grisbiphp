@@ -1,9 +1,5 @@
 <?php /* coding: utf-8 */
 require_once('header.php');
-function ral ($string){
-	global $tpl;
-	$tpl->append("resultats",$string);
-}
 //----------------gestion des variables d'entree-----------------
 $action = util::get_page_param( 'action' );
 $phase=util::get_page_param( 'phase' );
@@ -24,14 +20,14 @@ if ($action=="get_file"){
 
 //------------------effacer les tiers qui n'ont ni operation ni echeances
 if ($action=="effacer_tiers_vides"){
-	$tpl->assign('titre',"Tiers supprimés");
+	$tpl->assign('titre',"tiers supprim&eacute;s");
 	if ($phase==""){
 		$i=0;
 		foreach ($gsb_tiers->iter() as $tier) {
 			try {
 				$nom=(string)$tier->get_nom();
 				$tier->delete();
-				ral($nom);
+				$this->ral($nom);
 				$i++;
 			} catch (exception_integrite_referentielle $e) {
 				$i=$i;
@@ -70,7 +66,7 @@ if ($action=="effacer_tiers_vides"){
 if ($action=="verif_totaux"){
 	if ($gsb_xml->version!="0.5"){
 		if (DEBUG){
-			$tpl->critic("action demandée inexistante: $action");
+			$tpl->critic("mauvais format de fichier, il faut que le fichier bsg soit au format 0.5.");
 		}else {
 			util::redirection_header("comptes.php");
 		}
@@ -82,32 +78,44 @@ if ($action=="verif_totaux"){
 		$nb_ope_max=0;
 		$x=$gsb_xml->get_xml();
 		$nb_a_changer=0;
-		foreach ($gsb_operations->iter() as $iter) {
-			$nb_ope++;
-			if ($iter->get_id()>$nb_ope_max){
-				$nb_ope_max=$iter->get_id();
-			}
-		}
-		if ($nb_ope_max != ($gsb_operations->get_next())-1) {
-			ral("numero derniere operation incorrect");
-			$x->Generalites->Numero_derniere_operation=$nb_ope_max;
-		}
 		//verif des comptes
 		foreach ($gsb_comptes as $compte) {
-			$nb_ope=0;
+			$nb_ope_c=0;
+			$solde=util::fr2cent($compte->get_xml()->Details->Solde_initial);
 			//operation du compte
 			foreach ($compte->iter_operations() as $operation) {
 				$nb_ope++;
-				//TODO : mettreen place un verification des soldes en meme tps 
+				$nb_ope_c++;
+				if ($operation->get_id()>$nb_ope_max){
+					$nb_ope_max=$operation->get_id();
+				}
+				$solde=$operation->get_montant()+$solde;
 			}
-			if ()
+			//verification
+			if ($nb_ope_c!=(int)$compte->get_xml()->Details->Nb_operations)  {
+				ral ("problème dans le comptage des opération du compte ". $compte->get_nom());
+			}else {
+				ral ("ok dans le comptage des opération du compte ". $compte->get_nom());
+			}
 			//moyens de p du cpt
 			$nb_moyen=0;
 			foreach ($compte->iter_moyens() as $moyen){
 				$nb_moyen++;
 			}
-			
 		}
+				if ($nb_ope_max<$nb_ope){
+			ral("le numero max est trop petit.");
+			$nb_ope_max=$nb_ope;
+		}else {
+			ral("numero max d'opération ok"); 
+		}
+		if ($nb_ope_max != ($gsb_operations->get_next())-1) {
+			ral("numero derniere operation incorrect");
+			$x->Generalites->Numero_derniere_operation=$nb_ope_max;
+		}else {
+			ral("numero derniere opération ok"); 
+		}
+
 		$tpl->assign("nom_classe_css","ligne");
 		$tpl->assign("lien","action_outils.php?action=dates_ope_diff&amp;phase=2");
 		$tpl->display('resultats.smarty');

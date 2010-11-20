@@ -1,3 +1,4 @@
+{* coding: utf-8 *}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
 <head>
@@ -9,18 +10,17 @@
 <link rel="stylesheet" type="text/css" href="css/common.css" />
 <style type="text/css" media="screen">
 <!--
-.item a { $smarty .ldelim
-	
-}
+.item a {$smarty.ldelim}
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+    color:#FFFFFF;
+    display:block;
+    border-top:1px solid #4D0000;
+	padding-top: 0.4em;
+	padding-bottom: 0.6em;
 
-text-decoration: none ;
-    padding:  0; margin:  0; color:#FFFFFF ;
-    display:block ;
-    border-top: 1px solid #4D0000 ;
-	padding-top:  0.4em ;
-	padding-bottom:  0.6em ; { $smarty .rdelim
-	
-}
+{$smarty.rdelim}
 -->
 </style>
 <title>Comptes</title>
@@ -28,18 +28,14 @@ text-decoration: none ;
 <body>
 <h1 class="hover"><a href="options.php">Comptes</a></h1>
 <h2>comptes esp&egrave;ces ou bancaires</h2>
-<table>
-	{foreach from=$comptes item=cpt}
-	<tr class="hover item">
-		<td class="cptLabel"><a href="operations.php?cpt_id={$cpt.id}">{$cpt.nom|escape:'htmlall'}</a></td>
-		<td class="cptSolde"><a href="operations.php?cpt_id={$cpt.id}">{$cpt.m|nbfr:$cpt.devise}</a></td>
-	</tr>
-	{/foreach}
-	<tr class="totalintermediaire">
-		<td class="cptLabel">Solde comptes banques et comptes
-		esp&egrave;ces</td>
-		<td class="cptSolde">{$total_bq|nbfr:$devise}</td>
-	</tr>
+<table >
+{foreach from=$comptes item=cpt}
+		<tr class="hover item">
+			<td class="cptLabel"><a href="operations.php?cpt_id={$cpt.id}" >{$cpt.nom|escape:'htmlall'}</a></td>
+			<td class="cptSolde"><a href="operations.php?cpt_id={$cpt.id}" >{$cpt.m|nbfr:$cpt.devise}</a></td>
+		</tr>
+{/foreach}
+	<tr class="totalintermediaire"><td class="cptLabel">Solde comptes banques et comptes esp&egrave;ces</td><td class="cptSolde">{$total_bq|nbfr:$devise}</td></tr>
 </table>
 
 <h2>autres comptes (Actifs et Passifs)</h2>
