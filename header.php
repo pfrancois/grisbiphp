@@ -85,7 +85,7 @@ class template extends Smarty {
 		$this->display('resultats.smarty') ;
 		exit( 1 );
 	}
-	
+
 	/**
 	 * @param string $string la chaine a afficher
 	 * @param $css string le style css a afficher
@@ -97,7 +97,7 @@ class template extends Smarty {
 	/**
 	 * fonction afin d'inserer au mieux firebug sans smarty
 	 */
-	 
+
 	public function DebugFirePHP() {
 		//get required debug variables
 		$assigned_vars = $this->_tpl_vars ;

@@ -15,5 +15,6 @@
 <p><a href="action_options.php?action=dates_ope_diff">change les date des operations cartes differés</a></p>
 <p><a href="action_options.php?action=verif_totaux">verifie les totaux</a></p>
 <p><a href="action_options.php?action=specifique"> travaux en batch </a></p>
+<p><a href="comptes.php">retour vers le menu général</a></p>
 </body>
 </html>

@@ -85,8 +85,9 @@ try{
 	$operation->set_num_chq($ope_num_chq);
 	$operation->set_notes($ope_notes);
 	$operation->set_tiers($tier);
-	//$gsb_xml->save();
-	$tpl->ral($action." operation $ope_id, ok");
+	$gsb_xml->save();
+	$t=" opération $ope_id, d'un montant de $ope_montant ".$operation->get_compte()->get_devise()->get_isocode().", à ".$tier->get_nom()." le ".date('d/m/Y',$ope_date)." ok";
+	$tpl->ral($action.$t);
 } catch (Exception $except) {
 	if (DEBUG){
 		$tpl->critic( get_class($except) . " '{$except->message}' in {$except->file}({$except->line})\n {$except->getTraceAsString()}" , "operations.php?cpt_id=$cpt_id");
