@@ -10,11 +10,10 @@
 <title>Options</title>
 </head>
 <body>
-<a href="action_options.php?action=get_file"> telecharger le fichier </a>
-<a href="action_options.php?action=effacer_tiers_vides"> effacer les
-tiers vides </a>
-<a href="action_options.php?action=dates_ope_diff">change les date des
-operations cartes differes</a>
-<a href="action_options.php?action=specifique"> travaux en batch </a>
+<p><a href="action_options.php?action=get_file"> telecharger le fichier </a></p>
+<p><a href="action_options.php?action=effacer_tiers_vides"> effacer les tiers vides </a></p>
+<p><a href="action_options.php?action=dates_ope_diff">change les date des operations cartes differés</a></p>
+<p><a href="action_options.php?action=verif_totaux">verifie les totaux</a></p>
+<p><a href="action_options.php?action=specifique"> travaux en batch </a></p>
 </body>
 </html>
