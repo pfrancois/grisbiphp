@@ -46,14 +46,14 @@ else {//edition
 foreach ($gsb_comptes->iter('all') as $compte) {
 	$tpl->append('comptes', array("id" => $compte->get_id(),
 								  "nom" => $compte->get_nom()
-						   		  )
-				) ;
+	)
+	) ;
 }
 $ua=$_SERVER['HTTP_USER_AGENT'];
 if (!stripos($_SERVER['HTTP_USER_AGENT'], 'n95') && !stripos($_SERVER['HTTP_USER_AGENT'], 'iphone')) {
 	$tpl->display('virement.smarty');
 } else {
- $tpl->display('virement_n95.smarty');
+	$tpl->display('virement_n95.smarty');
 }
 
 ?>

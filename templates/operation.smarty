@@ -1,3 +1,4 @@
+{* coding: utf-8 *}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
 <head>
@@ -17,37 +18,37 @@
 
 <h1>{if ($type_action == 'edit')}modification{/if}{if ($type_action == 'new')}nouvelle op&eacute;ration{/if} dans cpt: {$compte_nom}</h1>
 <form id="form1" method="get" action="action.php" >
-    <fieldset class="operationMainTable">
-    	<legend>d&eacute;tails op&eacute;ration</legend>
+	<fieldset class="operationMainTable">
+		<legend>d&eacute;tails op&eacute;ration</legend>
 {* id du compte *}
 		<input type="hidden" name="cpt_id" value="{$compte_id}" />
 {*id de l'operation *}
 		<input type="hidden" name="ope_id" value="{$ope.id}" />
 {* type de l'operation *}
-    	{if ($type_action == 'new')}
-    		<input type="hidden" name="action" value="new" />
-    	{else}
-    		<input type="hidden" name="action" value="edit" />
-    	{/if}
+		{if ($type_action == 'new')}
+			<input type="hidden" name="action" value="new" />
+		{else}
+			<input type="hidden" name="action" value="edit" />
+		{/if}
 
 		<div class="ligne" id="div_date">
 		<label for="ope_date_ope">Date:</label>
-	        <input type="text" name="ope_date_ope" id="ope_date_ope" value="{$ope.date|date_format:"%d%m%Y"}" style='-wap-input-format:"NNNNNNNN";' size="9" maxlength="8" />
-	        <a href="javascript:editDate('ope_date_ope');" style="display:inline"><img src="img/calendar.png"  alt="calendrier" /></a>
+			<input type="text" name="ope_date_ope" id="ope_date_ope" value="{$ope.date|date_format:"%d%m%Y"}" style='-wap-input-format:"NNNNNNNN";' size="9" maxlength="8" />
+			<a href="javascript:editDate('ope_date_ope');" style="display:inline"><img src="img/calendar.png"  alt="calendrier" /></a>
 		</div>
 
 		<div class="ligne" id="div_tiers">
 		<label for="tiers">Tiers: </label>
-        	<select name="tiers" id="tiers" onchange="verifie_numero_visible_selon_texte(this.selectedIndex,'tiers','nom_nx_tiers_span','-1','nom_nx_tiers')">
+			<select name="tiers" id="tiers" onchange="verifie_numero_visible_selon_texte(this.selectedIndex,'tiers','nom_nx_tiers_span','-1','nom_nx_tiers')">
 					<option value="-1">"nouveau tiers"</option>
-        		{foreach from=$tiers item=tier}
+				{foreach from=$tiers item=tier}
 					<option value="{$tier.id}"{if ($tier.id == $ope.tier)} selected="selected"{/if}>{$tier.nom|escape:'htmlall':'UTF-8'}</option>
 				{/foreach}
 			</select>
 			<span id='nom_nx_tiers_span' {if ($type_action != 'new')}style="display: none"{/if}><label for="nom_nx_tiers">nom: </label>
 				<input type="text"  id="nom_nx_tiers" name="nom_nx_tiers" />
 			</span>
-        </div>
+		</div>
 
 		<div class="ligne" id="div_cat_scat">
 		<label for="cat">Cat&eacute;gorie: </label>
@@ -59,7 +60,7 @@
 					<option class="CreditCatElement" value="{$cat_en_cours.id}"{if ($cat_en_cours.id == $ope.cat)} selected="selected"{/if}>{$cat_en_cours.nom|escape:'htmlall':'UTF-8'}(+)</option>
 				{/foreach}
 			</select>
-        </div>
+		</div>
 
 		<div class="ligne" id="div_moyens" >
 		{if !empty($moyens)}
@@ -71,21 +72,21 @@
 			</select>
 			<span id='num_chq'  style="display: none"><label for="numero_chq">numero: </label>
 			<input type="text"  id="numero_chq" name="numero_chq" value="{$ope.num_chq}"/> </span>
-        {else}
+		{else}
 			<input type="hidden" id="moyen" name="moyen" value=""/>
 			<input type="hidden" id="numero_chq" name="numero_chq" value=""/>
-        {/if}
-        </div>
+		{/if}
+		</div>
 
 		<div class="ligne" id="div_montant">
 		<label for="ope_montant" id="label_montant">Montant: </label>
-        	<input name="ope_montant" id="ope_montant" type="text" value="{$ope.montant}" style='-wap-input-format:"*N";'/> {$compte_devise}
+			<input name="ope_montant" id="ope_montant" type="text" value="{$ope.montant}" style='-wap-input-format:"*N";'/> {$compte_devise}
 		</div>
 		<div class="ligne" id="div_notes">
 		<label for="rem">notes: </label>
-        	<textarea name="rem" id="rem" cols="20" rows="5"> {$ope.note|escape:'htmlall':"utf-8"}</textarea>
+			<textarea name="rem" id="rem" cols="20" rows="5"> {$ope.note|escape:'htmlall':"utf-8"}</textarea>
 		</div>
-    </fieldset>
+	</fieldset>
 </form>
 <br/>
 {* boutons de validations *}

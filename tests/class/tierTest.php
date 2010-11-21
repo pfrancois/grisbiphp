@@ -21,7 +21,7 @@ class tierTest extends PHPUnit_Framework_TestCase{
 	protected function setUp() {
 		global $gsb_xml;
 		global $gsb_tiers;
-	//on prend le fichier de test et on remplace avec celui actuel
+		//on prend le fichier de test et on remplace avec celui actuel
 		copy('G:/zmws/_web.zmwsc/comptes/tests/fichiers/test_original.gsb','test.gsb');
 		$gsb_xml=new xml('test.gsb');
 		$this->object=$gsb_tiers->get_by_id(1);
@@ -64,8 +64,8 @@ class tierTest extends PHPUnit_Framework_TestCase{
 	}
 
 	/**
-	*test afin de verifier la possiblité d'effacer un tiers. renvoi exception car il existe dans une operation
-	*/
+	 *test afin de verifier la possiblité d'effacer un tiers. renvoi exception car il existe dans une operation
+	 */
 	public function testDelete_integrite(){
 		$this->setExpectedException('exception_integrite_referentielle');
 		$this->object->delete();

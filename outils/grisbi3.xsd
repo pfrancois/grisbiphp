@@ -3,10 +3,10 @@
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:grisbi="http://www.grisbi.org" elementFormDefault="unqualified" version="1.1">
 	<xsd:annotation>
 		<xsd:documentation>
-    version 2009-04-09 1.3.2
+		version 2009-04-09 1.3.2
 	ajout des special gribsi 5.7
-  mise a jour de qq commentaires
-    </xsd:documentation>
+	mise a jour de qq commentaires
+		</xsd:documentation>
 	</xsd:annotation>
 	<xsd:simpleType name="vide">
 		<xsd:restriction base="xsd:string">
@@ -153,11 +153,11 @@
 										</xsd:annotation>
 									</xsd:element>
 									<xsd:element name="Titulaire" type="xsd:string"/>
-									<xsd:element name="Type_de_compte" type="index">
+									<xsd:element name="Type_de_compte">
 										<xsd:simpleType>
 											<xsd:restriction base="xsd:integer">
 												<xsd:minInclusive value="0"/>
-												<xsd:maxInclusive value="2"/>
+												<xsd:maxInclusive value="4"/>
 											</xsd:restriction>
 										</xsd:simpleType>
 									</xsd:element>
@@ -252,20 +252,28 @@
 												</xsd:annotation>
 											</xsd:attribute>
 											<xsd:attribute name="De" type="index" use="required">
-												  <xsd:annotation>
+													<xsd:annotation>
 													<xsd:documentation>devise utilisée</xsd:documentation>
-												  </xsd:annotation>
-											  </xsd:attribute>
+													</xsd:annotation>
+												</xsd:attribute>
 											<xsd:attribute name="Rdc" type="index" use="required">
 												<xsd:annotation>
 													<xsd:documentation>inconnu TODO</xsd:documentation>
 												</xsd:annotation>
 											</xsd:attribute>
-											<xsd:attribute name="Tc" type="nombres" use="required"/>
-											<xsd:attribute name="Fc" type="nombres" use="required"/>
+											<xsd:attribute name="Tc" type="nombres" use="required">
+												<xsd:annotation>
+													<xsd:documentation>taux de change</xsd:documentation>
+												</xsd:annotation>
+											</xsd:attribute>
+											<xsd:attribute name="Fc" type="nombres" use="required">
+												<xsd:annotation>
+													<xsd:documentation>frais de change</xsd:documentation>
+												</xsd:annotation>
+											</xsd:attribute>
 											<xsd:attribute name="T" type="index" use="required">
 												<xsd:annotation>
-													<xsd:documentation>tiers</xsd:documentation>
+													<xsd:documentation>index du tiers</xsd:documentation>
 												</xsd:annotation>
 												</xsd:attribute>
 											<xsd:attribute name="C" type="index" use="required">
@@ -274,7 +282,7 @@
 												</xsd:annotation>
 											</xsd:attribute>
 											<xsd:attribute name="Sc" type="index" use="required">
-											  <xsd:annotation>
+												<xsd:annotation>
 													<xsd:documentation>index de la sous-categorie</xsd:documentation>
 												</xsd:annotation>
 											</xsd:attribute>
@@ -289,61 +297,61 @@
 												</xsd:annotation>
 											</xsd:attribute>
 											<xsd:attribute name="Ty" type="index" use="required">
-											  <xsd:annotation>
+												<xsd:annotation>
 												<xsd:documentation>type de paiment de l'operation</xsd:documentation>
-											  </xsd:annotation>
-										  </xsd:attribute>
+												</xsd:annotation>
+											</xsd:attribute>
 											<xsd:attribute name="Ct" use="required">
-											  <xsd:annotation>
+												<xsd:annotation>
 												<xsd:documentation>numero du cheque</xsd:documentation>
-											  </xsd:annotation>
-										  </xsd:attribute>
+												</xsd:annotation>
+											</xsd:attribute>
 											<xsd:attribute name="P" use="required">
-											  <xsd:annotation>
+												<xsd:annotation>
 												<xsd:documentation>pointée ou rapprochée TODO verifier les cas possibles</xsd:documentation>
-											  </xsd:annotation>
-										  </xsd:attribute>
+												</xsd:annotation>
+											</xsd:attribute>
 											<xsd:attribute name="A" use="required"/>
 											<xsd:attribute name="R" use="required">
-												  <xsd:annotation>
+													<xsd:annotation>
 													<xsd:documentation>numero de rapprochement</xsd:documentation>
-												  </xsd:annotation>
-											  </xsd:attribute>
+													</xsd:annotation>
+												</xsd:attribute>
 											<xsd:attribute name="E" use="required">
-												  <xsd:annotation>
+													<xsd:annotation>
 													<xsd:documentation>numero de l'exercice</xsd:documentation>
-												  </xsd:annotation>
-											  </xsd:attribute>
+													</xsd:annotation>
+												</xsd:attribute>
 											<xsd:attribute name="I" type="index" use="required">
-												  <xsd:annotation>
+													<xsd:annotation>
 													<xsd:documentation>index de l'imputation budgetaire</xsd:documentation>
-												  </xsd:annotation>
-											  </xsd:attribute>
+													</xsd:annotation>
+												</xsd:attribute>
 											<xsd:attribute name="Si" type="index" use="required">
 												<xsd:annotation>
 													<xsd:documentation>index de la sous imputation budgetaire</xsd:documentation>
-												  </xsd:annotation>
-											  </xsd:attribute>
+													</xsd:annotation>
+												</xsd:attribute>
 											<xsd:attribute name="Pc" use="required">
-												  <xsd:annotation>
+													<xsd:annotation>
 													<xsd:documentation>numero piece comptable</xsd:documentation>
-												  </xsd:annotation>
-											  </xsd:attribute>
+													</xsd:annotation>
+												</xsd:attribute>
 											<xsd:attribute name="Ibg" use="required">
 												<xsd:annotation>
 													<xsd:documentation>id banque</xsd:documentation>
-												  </xsd:annotation>
-											  </xsd:attribute>
+													</xsd:annotation>
+												</xsd:attribute>
 											<xsd:attribute name="Ro" type="index" use="required">
-												  <xsd:annotation>
+													<xsd:annotation>
 													<xsd:documentation>transaction jumelle dans le cadre d'un virement</xsd:documentation>
-												  </xsd:annotation>
-											  </xsd:attribute>
+													</xsd:annotation>
+												</xsd:attribute>
 											<xsd:attribute name="Rc" use="required">
-												  <xsd:annotation>
+													<xsd:annotation>
 													<xsd:documentation>compte en relation pour les virements</xsd:documentation>
-												  </xsd:annotation>
-											  </xsd:attribute>
+													</xsd:annotation>
+												</xsd:attribute>
 											<xsd:attribute name="Va" use="required"/>
 										</xsd:complexType>
 									</xsd:element>

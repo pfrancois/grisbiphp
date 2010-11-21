@@ -1,4 +1,4 @@
-<?php /* coding: utf-8 */ 
+<?php /* coding: utf-8 */
 
 require_once 'PHPUnit/Framework.php';
 require_once 'G:\zmws\_web.zmwsc\comptes\class\util.php';
@@ -58,7 +58,7 @@ class utilTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals("<pre>1</pre>", util::dump(1));
 		$this->assertEquals("<pre>Array\n(\n    [0] => 1\n    [1] => 2\n)\n</pre>", util::dump(1,2));
 	}
-	
+
 	public function test_rib(){
 		$this->assertEquals('40', util::calculerCleRib('30001','01635','001234567890'));
 	}

@@ -1,4 +1,4 @@
-<?php /* coding: utf-8 */ 
+<?php /* coding: utf-8 */
 
 require_once 'PHPUnit/Framework.php';
 require_once 'G:\zmws\_web.zmwsc\comptes\class\loader.php';
@@ -57,7 +57,7 @@ class comptesTest extends PHPUnit_Framework_TestCase
 	}
 	/**
 	 * test afin de voir si en lui donnant une valeur incorrect (une chaine au lieur d'un chiffre) il renvoit bien une exception
-	* @expectedException exception_parametre_invalide
+	 * @expectedException exception_parametre_invalide
 	 */
 	public function testGet_by_id_var_incorrect()	{
 		$this->object->get_by_id('toto');
@@ -95,29 +95,29 @@ class comptesTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	* verifie que l'implementation de count marche,attention, souvent on commence a 0
-	*/
+	 * verifie que l'implementation de count marche,attention, souvent on commence a 0
+	 */
 	public function test_count(){
 		$this->assertEquals(7,count($this->object));
 	}
 
 	/**
-	* verifie que le compte courant est bien renvoye
-	*/
+	 * verifie que le compte courant est bien renvoye
+	 */
 	public function testGet_compte_courant()	{
 		$this->assertEquals(0,$this->object->get_compte_courant());
 	}
 
 	/**
-	* verifie que on peut bien modifier le compte courant
-	*/
+	 * verifie que on peut bien modifier le compte courant
+	 */
 	public function testSet_compte_courant()	{
 		$this->object->set_compte_courant(1);
 		$this->assertEquals(1,$this->object->get_compte_courant());
 	}
 
 	/**
-	* teste que si on met un id inexistant, cela renvoit une erreur
+	 * teste que si on met un id inexistant, cela renvoit une erreur
 	 * @expectedException exception_not_exist
 	 */
 	public function testSet_compte_courant_id_inexistant()	{
@@ -125,15 +125,15 @@ class comptesTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	* teste que si on met un id inexistant, cela renvoit une erreur
+	 * teste que si on met un id inexistant, cela renvoit une erreur
 	 * @expectedException exception_parametre_invalide
 	 */
 	public function testSet_compte_courant_id_invalide()	{
 		$this->object->set_compte_courant('toto');
 	}
 	/**
-	* test que ca nous renvoit un iter comme on veut
-	*/
+	 * test que ca nous renvoit un iter comme on veut
+	 */
 	public function testiter_comptes(){
 		$x=$this->object->iter();
 		foreach ($x as $y){
@@ -141,14 +141,14 @@ class comptesTest extends PHPUnit_Framework_TestCase
 		}
 		$this->assertEquals(4,count($x));
 	}
-    public function testiter_compte_modification_type(){
+	public function testiter_compte_modification_type(){
 		$x=$this->object->iter(array(compte::T_PASSIF,compte::T_ACTIF,compte::T_BANCAIRE,compte::T_ESPECE));
 		foreach ($x as $y){
 			$this->assertType('compte',$y);
 		}
 		$this->assertEquals(7,count($x));
 	}
-    public function testcount(){
-        $this->assertEquals(7,count($this->object));
-    }
+	public function testcount(){
+		$this->assertEquals(7,count($this->object));
+	}
 }

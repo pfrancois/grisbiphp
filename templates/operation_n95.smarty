@@ -10,18 +10,18 @@
 
 <title>{if ($type_action=='edit')}modification{/if}{if ($type_action=='new')}nouvelle op&eacute;ration{/if} </title>
 </head>
-<body >
+<body>
 
 <h1>{if ($type_action=='edit')}modification{/if}{if ($type_action=='new')}nouvelle {/if} dans {$compte_nom}</h1>
 <form id="form1" method="get" action="action.php" >
-    <fieldset class="operationMainTable">
+	<fieldset class="operationMainTable">
 		<legend>d&eacute;tails op&eacute;ration</legend>
 {* id du compte *}
 		<input type="hidden" name="cpt_id" value="{$compte_id}" />
 {*id de l'operation *}
 		<input type="hidden" name="ope_id" value="{$ope.id}" />
 {* type de l'operation *}
-    	{if ($type_action=='new')}
+		{if ($type_action=='new')}
 			<input type="hidden" name="action" value="new" />
 		{else}
 			<input type="hidden" name="action" value="edit" />
@@ -55,7 +55,7 @@
 					<option class="CreditCatElement" value="{$cat_en_cours.id}"{if ($cat_en_cours.id==$ope.cat)} selected="selected"{/if}>{$cat_en_cours.nom|escape:'htmlall':'UTF-8'}(+)</option>
 				{/foreach}
 			</select>
-        </div>
+		</div>
 		<div class="ligne">
 {* moyen *}
 		{if !empty($moyens)}
@@ -67,20 +67,20 @@
 			</select>
 			{*<span id="num_chq"><label for="numero_chq">numero: </label>*}
 			<input type="text"  id="numero_chq" name="numero_chq" value="{$ope.num_chq}"/> </span>
-        {else}
+		{else}
 			<input type="hidden" id="moyen" name="moyen" value=""/>
 			<input type="hidden" id="numero_chq" name="numero_chq" value=""/>
-        {/if}
-        </div>
-        <div class="ligne">
+		{/if}
+		</div>
+		<div class="ligne">
 {* montant *}
 		<label for="ope_montant" id="label_montant">Montant: </label>
-        	<input name="ope_montant" id="ope_montant" type="text" value="{$ope.montant}" style='-wap-input-format:"*N";'/>{if ($compte_devise!=EUR)}{$compte_devise}{/if}
+			<input name="ope_montant" id="ope_montant" type="text" value="{$ope.montant}" style='-wap-input-format:"*N";'/>{if ($compte_devise!=EUR)}{$compte_devise}{/if}
 		</div>
 		<div class="ligne">
 {* notes *}
 		<label for="rem">notes: </label>
-        	<textarea name="rem" id="rem" cols="20" rows="5"> {$ope.note|escape:'htmlall':"utf-8"}</textarea>
+			<textarea name="rem" id="rem" cols="20" rows="5"> {$ope.note|escape:'htmlall':"utf-8"}</textarea>
 		</div>
 	</fieldset>
 	<fieldset id="button">

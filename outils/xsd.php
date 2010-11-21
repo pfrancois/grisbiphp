@@ -9,38 +9,38 @@
 </head>
 <body>
 <h1><?php echo realpath('20040701.gsb')?></h1>
-<?php /* coding: utf-8 */ 
+<?php /* coding: utf-8 */
 
 function libxml_display_error($error)
 {
-    $return = "<br/>\n";
-    switch ($error->level) {
-        case LIBXML_ERR_WARNING:
-            $return .= "<b>Warning $error->code</b>: ";
-            break;
-        case LIBXML_ERR_ERROR:
-            $return .= "<b>Error $error->code</b>: ";
-            break;
-        case LIBXML_ERR_FATAL:
-            $return .= "<b>Fatal Error $error->code</b>: ";
-            break;
-    }
-    $return .= trim($error->message);
-    if ($error->file) {
-        $return .=    " in <b>$error->file</b>";
-    }
-    $return .= " on line <b>$error->line</b><<BR/>\n";
+	$return = "<br/>\n";
+	switch ($error->level) {
+		case LIBXML_ERR_WARNING:
+			$return .= "<b>Warning $error->code</b>: ";
+			break;
+		case LIBXML_ERR_ERROR:
+			$return .= "<b>Error $error->code</b>: ";
+			break;
+		case LIBXML_ERR_FATAL:
+			$return .= "<b>Fatal Error $error->code</b>: ";
+			break;
+	}
+	$return .= trim($error->message);
+	if ($error->file) {
+		$return .=    " in <b>$error->file</b>";
+	}
+	$return .= " on line <b>$error->line</b><<BR/>\n";
 
-    return $return;
+	return $return;
 }
 
 function libxml_display_errors() {
-    $errors = libxml_get_errors();
-    foreach ($errors as $error) {
-        $desc=$error->message;
-        echo libxml_display_error($error);
-    }
-    libxml_clear_errors();
+	$errors = libxml_get_errors();
+	foreach ($errors as $error) {
+		$desc=$error->message;
+		echo libxml_display_error($error);
+	}
+	libxml_clear_errors();
 }
 
 // Enable user error handling
@@ -64,11 +64,11 @@ $t->addAttribute('No_derniere_sous_cagegorie','0');
 $s->Categories->Generalites->Nb_categories=(int)$s->Categories->Generalites->Nb_categories+1;
 
 if (!$xml->schemaValidate('grisbi.xsd')) {
-    print '<b>DOMDocument::schemaValidate() Generated Errors!</b><BR/>'."\n";
-    libxml_display_errors();
+	print '<b>DOMDocument::schemaValidate() Generated Errors!</b><BR/>'."\n";
+	libxml_display_errors();
 }
 else {
-echo "validated";
+	echo "validated";
 }
 ?>
 </body>

@@ -1,4 +1,4 @@
-<?php /* coding: utf-8 */ 
+<?php /* coding: utf-8 */
 
 require_once 'PHPUnit/Framework.php';
 require_once 'G:\zmws\_web.zmwsc\comptes\class\loader.php';
@@ -23,7 +23,7 @@ class operationsTest extends PHPUnit_Framework_TestCase
 		$gsb_xml->reload();
 		$this->c = $gsb_operations;
 	}
-/**
+	/**
 	 * Tears down the fixture, for example, closes a network connection.
 	 * This method is called after a test is executed.
 	 */
@@ -48,14 +48,14 @@ class operationsTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	* verifie que l'implementation de count marche
-	*/
+	 * verifie que l'implementation de count marche
+	 */
 	public function test_count(){
 		$this->assertEquals(13,count($this->c));
 	}
 	/**
-	* test que ca nous renvoit un iter comme on veut
-	*/
+	 * test que ca nous renvoit un iter comme on veut
+	 */
 	public function testiter_ope(){
 		$x=$this->c->iter();
 		foreach ($x as $y){
@@ -83,7 +83,7 @@ class operationsTest extends PHPUnit_Framework_TestCase
 	}
 	/**
 	 * test afin de voir si en lui donnant une valeur incorrect (une chaine au lieur d'un chiffre) il renvoit bien une exception
-	* @expectedException exception_parametre_invalide
+	 * @expectedException exception_parametre_invalide
 	 */
 	public function testGet_by_id_var_incorrect()	{
 		$r=$this->c->get_by_id('toto');

@@ -39,14 +39,20 @@
 
 <h2>autres comptes (Actifs et Passifs)</h2>
 <table>
-{foreach from=$placements item=pla name=plac}
-    <tr >
-        <td class="cptLabel item">{$pla.nom|escape:'htmlall'}</td>
-        <td class="cptSolde item">{$pla.m|nbfr:$pla.devise}</td>
-    </tr>
-{/foreach}
-<tr  class="totalintermediaire"><td class="cptLabel">Solde des autres comptes</td><td class="cptSolde">{$total_pl|nbfr:$devise}</td></tr>
-<tr><td class="cptLabel footerBar">Solde GLOBAL</td><td class="footerBar cptSolde">{$total_pl+$total_bq|nbfr:$devise}</td></tr>
+	{foreach from=$placements item=pla name=plac}
+	<tr>
+		<td class="cptLabel item">{$pla.nom|escape:'htmlall'}</td>
+		<td class="cptSolde item">{$pla.m|nbfr:$pla.devise}</td>
+	</tr>
+	{/foreach}
+	<tr class="totalintermediaire">
+		<td class="cptLabel">Solde des autres comptes</td>
+		<td class="cptSolde">{$total_pl|nbfr:$devise}</td>
+	</tr>
+	<tr>
+		<td class="cptLabel footerBar">Solde GLOBAL</td>
+		<td class="footerBar cptSolde">{$total_pl+$total_bq|nbfr:$devise}</td>
+	</tr>
 </table>
 </body>
 </html>

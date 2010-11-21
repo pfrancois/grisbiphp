@@ -61,7 +61,7 @@ class tiersTest extends PHPUnit_Framework_TestCase
 
 	/**
 	 * test afin de voir si en lui donnant une valeur incorrect (une chaine au lieur d'un chiffre) il renvoit bien une exception
-	* @expectedException exception_parametre_invalide
+	 * @expectedException exception_parametre_invalide
 	 */
 	public function testGet_by_id_var_incorrect()	{
 		$r=$this->object->get_by_id('toto');
@@ -100,14 +100,14 @@ class tiersTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	* verifie que l'implementation de count marche,attention, souvent on commence à 0
-	*/
+	 * verifie que l'implementation de count marche,attention, souvent on commence à 0
+	 */
 	public function test_count(){
 		$this->assertEquals(4,count($this->object));
 	}
 	/**
-	* test que ca nous renvoit un iter comme on veut
-	*/
+	 * test que ca nous renvoit un iter comme on veut
+	 */
 	public function testiter_tiers(){
 		$x=$this->object->iter();
 		foreach ($x as $y){
@@ -117,8 +117,8 @@ class tiersTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	* verification des nouveaux tiers
-	*/
+	 * verification des nouveaux tiers
+	 */
 	public function test_newtiers(){
 		$this->object->new_tier();
 		$this->assertEquals(5,count($this->object));
@@ -130,5 +130,13 @@ class tiersTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals(5,count($this->object));
 		$this->assertEquals(2567,$this->object->get_next());
 	}
-
+	/**
+	* verifie que si on rajoute un tiers en double, c'est pas possible
+	*/
+	public function test_newtiers_erreur_index(){
+		$this->object->new_tier(1);
+		$this->assertEquals(5,count($this->object));
+		$this->assertEquals(7,$this->object->get_next());
+		
+	}
 }

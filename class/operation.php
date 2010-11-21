@@ -45,7 +45,7 @@ class operation extends item {
 			$this->_dom->setAttributeNode(new DOMAttr('Ov', '0')) ;
 			$this->_dom->setAttributeNode(new DOMAttr('N', '')) ;
 			$this->_dom->setAttributeNode(new DOMAttr('Ty', '0')) ;
-			$this->_dom->setAttributeNode(new DOMAttr('Ct', '0')) ;
+			$this->_dom->setAttributeNode(new DOMAttr('Ct', '')) ;
 			$this->_dom->setAttributeNode(new DOMAttr('P', '0')) ;
 			$this->_dom->setAttributeNode(new DOMAttr('A', '0')) ;
 			$this->_dom->setAttributeNode(new DOMAttr('R', '0')) ;
@@ -341,33 +341,33 @@ class operation extends item {
 			throw new exception_not_exist("compte", $id) ;
 		}
 		$op=array(
-			(string) $this->_item_xml['No'] ,
-			(string) $this->_item_xml['Id'],
-			(string) $this->_item_xml['D'] ,
-			(string) $this->_item_xml['Db'],
-			(string) $this->_item_xml['M'],
-			(string) $this->_item_xml['De'],
-			(string) $this->_item_xml['Rdc'],
-			(string) $this->_item_xml['Tc'],
-			(string) $this->_item_xml['Fc'],
-			(string) $this->_item_xml['T'],
-			(string) $this->_item_xml['C'],
-			(string) $this->_item_xml['Sc'],
-			(string) $this->_item_xml['Ov'],
-			(string) $this->_item_xml['N'] ,
-			(string) $this->_item_xml['Ty'],
-			(string) $this->_item_xml['Ct'],
-			(string) $this->_item_xml['P'],
-			(string) $this->_item_xml['A'],
-			(string) $this->_item_xml['R'],
-			(string) $this->_item_xml['E'],
-			(string) $this->_item_xml['I'],
-			(string) $this->_item_xml['Si'],
-			(string) $this->_item_xml['Pc'],
-			(string) $this->_item_xml['Ibg'],
-			(string) $this->_item_xml['Ro'],
-			(string) $this->_item_xml['Rc'],
-			(string) $this->_item_xml['Va']
+		(string) $this->_item_xml['No'] ,
+		(string) $this->_item_xml['Id'],
+		(string) $this->_item_xml['D'] ,
+		(string) $this->_item_xml['Db'],
+		(string) $this->_item_xml['M'],
+		(string) $this->_item_xml['De'],
+		(string) $this->_item_xml['Rdc'],
+		(string) $this->_item_xml['Tc'],
+		(string) $this->_item_xml['Fc'],
+		(string) $this->_item_xml['T'],
+		(string) $this->_item_xml['C'],
+		(string) $this->_item_xml['Sc'],
+		(string) $this->_item_xml['Ov'],
+		(string) $this->_item_xml['N'] ,
+		(string) $this->_item_xml['Ty'],
+		(string) $this->_item_xml['Ct'],
+		(string) $this->_item_xml['P'],
+		(string) $this->_item_xml['A'],
+		(string) $this->_item_xml['R'],
+		(string) $this->_item_xml['E'],
+		(string) $this->_item_xml['I'],
+		(string) $this->_item_xml['Si'],
+		(string) $this->_item_xml['Pc'],
+		(string) $this->_item_xml['Ibg'],
+		(string) $this->_item_xml['Ro'],
+		(string) $this->_item_xml['Rc'],
+		(string) $this->_item_xml['Va']
 		);
 		$this->_dom->parentNode->removeChild($this->_dom) ;
 		$compte->Detail_des_operations->addChild("Operation");
@@ -431,6 +431,7 @@ class operation extends item {
 	}
 
 	/**
+	 * change le tiers en rapport avec cette operation
 	 * @param tier $id
 	 * @return void
 	 */

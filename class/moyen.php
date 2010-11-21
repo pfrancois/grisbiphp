@@ -1,33 +1,33 @@
-<?php /* coding: utf-8 */ 
+<?php /* coding: utf-8 */
 
 class moyen extends subitem {
 	const NEUTRE = 0 ;
 	const DEBIT = 1 ;
 	const CREDIT = 2 ;
-	
 
-/**
- * @return compte le compte mere
- */
+
+	/**
+	 * @return compte le compte mere
+	 */
 	public function get_mere() {
 		global $gsb_xml ;
 		return new compte($gsb_xml->xpath_uniq('../..', $this->_item_xml)) ;
 	}
 
-/**
- * @return int (retourne le signe du moyen (0,1 ou 2) cf constante de la classe
- */
+	/**
+	 * @return int (retourne le signe du moyen (0,1 ou 2) cf constante de la classe
+	 */
 	public function get_signe() {
 		return (int)$this->_item_xml['Signe'] ;
 	}
 
-/**
- * change le signe par defaut du moyen. les types sont des const de classes.
- * 
- * @param integer $type le type de la categorie
- * @throws exception_parametre_invalide si $type n'est pas int
- * @return void
- */
+	/**
+	 * change le signe par defaut du moyen. les types sont des const de classes.
+	 *
+	 * @param integer $type le type de la categorie
+	 * @throws exception_parametre_invalide si $type n'est pas int
+	 * @return void
+	 */
 	public function set_signe($type) {
 		if ($type === 0 || $type === 1 || $type === 2) {
 			$this->_item_xml['Signe']=$type ;
@@ -36,9 +36,9 @@ class moyen extends subitem {
 		}
 	}
 
-/**
-@return bool
- */
+	/**
+	@return bool
+	*/
 	public function has_numerotation_auto() {
 		$r = (string )$this->_item_xml['Numerotation_auto'] ;
 		if ($r === '1') {
@@ -48,10 +48,10 @@ class moyen extends subitem {
 		}
 	}
 
-/**
- * @param $etat
- * @return void
- */
+	/**
+	 * @param $etat
+	 * @return void
+	 */
 	public function set_numerotation_auto($etat) {
 		if ($etat === true || $etat === false) {
 			if ($etat == true) {
@@ -83,17 +83,17 @@ class moyen extends subitem {
 	public function get_entree_comp() {
 		return (string )$this->_item_xml['No_en_cours'] ;
 	}
-	
+
 	/**
 	@param string $entree
 	@return void
-	 */
+	*/
 	public function set_entree_comp($entree) {
 		$this->_item_xml['Affiche_entree']=1 ;
 		$id = (string )$entree ;
 		$this->_item_xml['No_en_cours']=$entree ;
 	}
-	
+
 	/**
 	 * @return void
 	 */
@@ -101,7 +101,7 @@ class moyen extends subitem {
 		$this->_item_xml['Affiche_entree']=0 ;
 		$this->_item_xml['No_en_cours']="" ;
 	}
-	
+
 	/**
 	 * @return int
 	 */

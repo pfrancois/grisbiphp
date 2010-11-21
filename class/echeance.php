@@ -6,9 +6,9 @@
  */
 class echeance extends item {
 	/**
-	* verifie si les differentes echeances ne sont pas echus
-	* @return bool
-	*/
+	 * verifie si les differentes echeances ne sont pas echus
+	 * @return bool
+	 */
 	public function verif_echus(){
 		$date_ech=util::datefr2time($this->_item_xml['Date']);
 		if ($date_ech<time()) {
@@ -34,7 +34,7 @@ class echeance extends item {
 		}
 		$ope_montant=util::fr2cent((string)$this->_item_xml['Montant']);
 		$operation->set_montant($ope_montant);
-//TODO gestion des devises a revoir
+		//TODO gestion des devises a revoir
 		$moyen=$compte->get_moyen_by_id((int)$this->_item_xml['Type']);
 		$operation->set_moyen($moyen);
 		if ($moyen->has_numerotation_auto()){

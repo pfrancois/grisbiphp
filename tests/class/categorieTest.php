@@ -1,4 +1,4 @@
-<?php /* coding: utf-8 */ 
+<?php /* coding: utf-8 */
 
 require_once 'PHPUnit/Framework.php';
 require_once 'G:\zmws\_web.zmwsc\comptes\class\loader.php';
@@ -25,7 +25,7 @@ class categorieTest extends PHPUnit_Framework_TestCase{
 		copy('G:/zmws/_web.zmwsc/comptes/tests/fichiers/test_original.gsb','test.gsb');
 		$gsb_xml=new xml('test.gsb');
 		$gsb_xml->reload();
-	//on prend le fichier de test et on remplace avec celui actuel
+		//on prend le fichier de test et on remplace avec celui actuel
 		$this->object=$gsb_categories->get_by_id(5);
 	}
 
@@ -104,7 +104,7 @@ class categorieTest extends PHPUnit_Framework_TestCase{
 		}
 		$this->assertEquals(9,count($x));
 	}
-		/**
+	/**
 	 * test afin de voir si en lui donnant un id de compte inexistant il renvoit bien une exception
 	 * @expectedException exception_not_exist
 	 */
@@ -126,14 +126,14 @@ class categorieTest extends PHPUnit_Framework_TestCase{
 	}
 	/**
 	 * test afin de voir si en lui donnant une valeur incorrect (une chaine au lieu d'un chiffre) il renvoit bien une exception
-	* @expectedException exception_parametre_invalide
+	 * @expectedException exception_parametre_invalide
 	 */
 	public function testGet_sub_by_id_var_incorrect()	{
 		global $gsb_categories;
 		$r=$gsb_categories->get_by_id(6)->get_sub_by_id('toto');
 	}	/**
-	 * test afin de voir si on recoit bien le numero
-	 */
+	* test afin de voir si on recoit bien le numero
+	*/
 	public function testGet_sub_by_id()	{
 		global $gsb_categories;
 		$r=$gsb_categories->get_by_id(6)->get_sub_by_id(1);
@@ -159,8 +159,8 @@ class categorieTest extends PHPUnit_Framework_TestCase{
 	}
 
 	/**
-	*test afin de verifier la possiblit� d'effacer une categorie. renvoi exception
-	*/
+	 *test afin de verifier la possiblit� d'effacer une categorie. renvoi exception
+	 */
 	public function testDelete_integrite(){
 		global $gsb_categories;
 		$this->setExpectedException('exception_integrite_referentielle');

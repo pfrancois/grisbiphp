@@ -13,18 +13,18 @@
 <h1>{if ($type_action=='edit')}modification d'un virement{/if}{if ($type_action=='new')}nouveau virement{/if}  </h1>
 
 <form id="form1" method="get" action="action_virement.php" >
-    <fieldset id="operationMainTable">
-    	<legend>d&eacute;tails virement interne</legend>
-    	<input type="hidden" name="ope_origine_id" value="{$ope_origine_id}" />
-    	<input type="hidden" name="ope_destination_id" value="{$ope_destination_id}" />
-    	{if ($type_action=='new')}
-    		<input type="hidden" name="action" value="new" />
-    	{else}
-    		<input type="hidden" name="action" value="edit" />
-    	{/if}
+	<fieldset id="operationMainTable">
+		<legend>d&eacute;tails virement interne</legend>
+		<input type="hidden" name="ope_origine_id" value="{$ope_origine_id}" />
+		<input type="hidden" name="ope_destination_id" value="{$ope_destination_id}" />
+		{if ($type_action=='new')}
+			<input type="hidden" name="action" value="new" />
+		{else}
+			<input type="hidden" name="action" value="edit" />
+		{/if}
 		<div class="ligne">
 		<label for="ope_date_ope">Date:</label>
-	        <input type="text" name="ope_date_ope" id="ope_date_ope" value="{$ope_date_ope|date_format:"%d%m%Y"}" style='-wap-input-format:"NNNNNNNN";' size="8" maxlength="8" />
+			<input type="text" name="ope_date_ope" id="ope_date_ope" value="{$ope_date_ope|date_format:"%d%m%Y"}" style='-wap-input-format:"NNNNNNNN";' size="8" maxlength="8" />
 		</div>
 		<div class="ligne">
 		<label for="cpt_orig"> cpt d'origine</label>
@@ -44,10 +44,10 @@
 			</select>
 		</div>
 		<div class="ligne">
-        <label for="ope_value" id="label_value">Montant: </label>
-        	<input name="ope_value" id="ope_value" type="text" value="{$ope_value}" style='-wap-input-format:"*N";'/>
+		<label for="ope_value" id="label_value">Montant: </label>
+			<input name="ope_value" id="ope_value" type="text" value="{$ope_value}" style='-wap-input-format:"*N";'/>
 		</div>
-    </fieldset>
+	</fieldset>
 	 <fieldset id="buttons">
 		<button id="ok" name="ok" title="ok" type="submit" >Ok</button>
 		<br/>

@@ -1,4 +1,4 @@
-<?php /* coding: utf-8 */ 
+<?php /* coding: utf-8 */
 //mise � jour le samedi 19 janvier 2008 � 15:00
 require_once 'include/functions.php';
 $db= new MySQLConnector( 'localhost', 'root', 'mdp','test') ;
@@ -46,16 +46,16 @@ $xml->Comptes->AddChild('Generalites');
 
 
 /* TODO
-se rappeler de l'ordre des comptes.
-le compte courant est par defaut le premier ce qui n'est pas necessairement le cas.
-*/
+ se rappeler de l'ordre des comptes.
+ le compte courant est par defaut le premier ce qui n'est pas necessairement le cas.
+ */
 //nombre de comptes
 $sql='SELECT id FROM `compte`';
 $result=$db->q($sql);
 $nbcomptes=mysql_num_rows($result);
 $ligne="";
 while ($row = mysql_fetch_row($result)) {
-   $ligne=$ligne.$row[0].'-';
+	$ligne=$ligne.$row[0].'-';
 }
 $contenu=substr($ligne,0,-1);
 $xml->Comptes->Generalites->AddChild('Ordre_des_comptes',$contenu);
@@ -99,7 +99,7 @@ while ($r = mysql_fetch_array($resultcomptes)) {
 	$xml->Comptes->Compte[$n]->Details->AddChild('Dernier_no_de_rapprochement',$db->s("SELECT dernier_numero_de_rapprochement FROM `compte` where id=$n"));
 	$xml->Comptes->Compte[$n]->Details->AddChild('Compte_cloture',$db->s("SELECT compte_cloture FROM `compte` where id=$n"));
 	$xml->Comptes->Compte[$n]->Details->AddChild('Affichage_r',$db->s("SELECT affichage_r FROM `compte` where id=$n"));
-	
+
 	$xml->Comptes->Compte[$n]->Details->AddChild('Nb_lignes_ope',$db->s("SELECT nb_lignes_ope FROM `compte` where id=$n"));
 	$xml->Comptes->Compte[$n]->Details->AddChild('Commentaires',unins($db->s("SELECT notes FROM `compte` where id=$n")));
 	$xml->Comptes->Compte[$n]->Details->AddChild('Adresse_du_titulaire',unins($db->s("SELECT adresse_du_titulaire FROM `compte` where id=$n")));
@@ -109,7 +109,7 @@ while ($r = mysql_fetch_array($resultcomptes)) {
 	$xml->Comptes->Compte[$n]->Details->AddChild('Tri_par_type',$db->s("SELECT tri_par_type FROM `compte` where id=$n"));
 	$xml->Comptes->Compte[$n]->Details->AddChild('Neutres_inclus',$db->s("SELECT neutres_inclus FROM `compte` where id=$n"));
 	$xml->Comptes->Compte[$n]->Details->AddChild('Ordre_du_tri',$db->s("SELECT ordre_du_tri FROM `compte` where id=$n"));
-	
+
 	//gestion des types
 	$xml->Comptes->Compte[$n]->AddChild('Detail_de_Types');
 	$tabtype=$db->tab('select * from types where cpt='.$n);
@@ -122,7 +122,7 @@ while ($r = mysql_fetch_array($resultcomptes)) {
 		$temp->AddAttribute('Numerotation_auto',$type['num_auto']);
 		$temp->AddAttribute('No_en_cours',$type['num_en_cours']);
 	}
-	
+
 	//gestion des operations du compte
 	$xml->Comptes->Compte[$n]->AddChild('Detail_des_operations');
 	unset($result);
@@ -297,25 +297,25 @@ while ($row = mysql_fetch_assoc($result)) {
 $xml->AddChild('Rapprochements');
 $xml->Rapprochements->AddChild('Detail_des_rapprochements');
 //Etats
-$xml->AddChild('Etats'); 
+$xml->AddChild('Etats');
 $xml->Etats->AddChild('Generalites');
 
 //enregistrement du fichier sous temp.gsb
-    if (file_exists("temp.gsb")) {unlink("temp.gsb");}
-    $file=fopen("temp.gsb","wb");
-	$data=$xml->AsXML();
-  	$achercher=array('<',' />',' xmlns=""',"\n <?xml"," <","<Backup></Backup>");
-	$aremplacer=array("\n <",'/>','',"<?xml","<","<Backup/>");
-	$data=str_replace($achercher,$aremplacer,$data);
-	$data=str_replace("\n</","</",$data);
-	$achercher=array('</Generalites>',"\n\n");
-	$aremplacer=array("\n </Generalites>","\n");
-	$data=str_replace($achercher,$aremplacer,$data);
-	//$data=preg_replace('|<(.*)>0</.*>|','<\1/>',$data);
-	highlight_string($data);
-    fwrite($file,$data);
-    fclose($file);
-    chmod('temp.gsb',0777);
-    chown('temp.gsb','francois');
-	echo date('r');
+if (file_exists("temp.gsb")) {unlink("temp.gsb");}
+$file=fopen("temp.gsb","wb");
+$data=$xml->AsXML();
+$achercher=array('<',' />',' xmlns=""',"\n <?xml"," <","<Backup></Backup>");
+$aremplacer=array("\n <",'/>','',"<?xml","<","<Backup/>");
+$data=str_replace($achercher,$aremplacer,$data);
+$data=str_replace("\n</","</",$data);
+$achercher=array('</Generalites>',"\n\n");
+$aremplacer=array("\n </Generalites>","\n");
+$data=str_replace($achercher,$aremplacer,$data);
+//$data=preg_replace('|<(.*)>0</.*>|','<\1/>',$data);
+highlight_string($data);
+fwrite($file,$data);
+fclose($file);
+chmod('temp.gsb',0777);
+chown('temp.gsb','francois');
+echo date('r');
 ?>

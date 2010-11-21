@@ -55,6 +55,10 @@ class template extends Smarty {
 		$this->compile_dir = './templates/compiled' ;
 		$this->config_dir = './templates/config' ;
 		$this->cache_dir = './templates/cache' ;
+		if (!defined("DEBUG")) {
+			define("DEBUG", false);
+		}
+
 		if (DEBUG){
 			$this->debugging=true;
 		}
@@ -76,15 +80,24 @@ class template extends Smarty {
 	 * @param bool $critique si true, lance l'affichage et arrete le script apres
 	 */
 	public function critic($msg,$lien){
-			$this->append("resultats",$msg);
-			$this->assign('lien',"$lien");
-			$tpl->assign("nom_classe_css","error");
-			$this->display('resultats.smarty') ;
-			exit( 1 );
+		$this->append("resultats",array("texte"=>$string,"css"=>"error"));
+		$this->assign('lien',"$lien");
+		$this->display('resultats.smarty') ;
+		exit( 1 );
+	}
+
+	/**
+	 * @param string $string la chaine a afficher
+	 * @param $css string le style css a afficher
+	 * @return void
+	 */
+	public function ral($string,$css="ligne"){
+		$this->append("resultats",array("texte"=>$string,"css"=>$css));
 	}
 	/**
 	 * fonction afin d'inserer au mieux firebug sans smarty
 	 */
+
 	public function DebugFirePHP() {
 		//get required debug variables
 		$assigned_vars = $this->_tpl_vars ;

@@ -1,4 +1,4 @@
-<?php /* coding: utf-8 */ 
+<?php /* coding: utf-8 */
 
 require_once 'PHPUnit/Framework.php';
 
@@ -22,7 +22,7 @@ class rappTest extends PHPUnit_Framework_TestCase{
 	protected function setUp(){
 		global $gsb_xml;
 		global $gsb_rapps;
-	//on prend le fichier de test et on remplace avec celui actuel
+		//on prend le fichier de test et on remplace avec celui actuel
 		copy('G:/zmws/_web.zmwsc/comptes/tests/fichiers/test_original.gsb','test.gsb');
 		$gsb_xml=new xml('test.gsb');
 		$this->object=$gsb_rapps->get_by_id(1);
