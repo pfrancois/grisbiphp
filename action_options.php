@@ -77,7 +77,7 @@ if ($action=="verif_totaux"){
 		$x=$gsb_xml->get_xml();
 		$nb_a_changer=0;
 		//verif des comptes
-		foreach ($gsb_comptes as $compte) {
+		foreach ($gsb_comptes->iter() as $compte) {
 			$nb_ope_c=0;
 			$solde=util::fr2cent($compte->get_xml()->Details->Solde_initial);
 			//operation du compte
@@ -91,10 +91,17 @@ if ($action=="verif_totaux"){
 			}
 			//verification
 			if ($nb_ope_c!=(int)$compte->get_xml()->Details->Nb_operations)  {
-				$tpl->ral ("problème dans le comptage des opération du compte ". $compte->get_nom());
+				$tpl->ral ("problème dans le comptage des opération du compte ". $compte->get_nom()." il y a noté ".$compte->get_xml()->Details->Nb_operations." alors qu'il y a ".$nb_ope_c,"error" );
 			}else {
 				$tpl->ral ("ok dans le comptage des opération du compte ". $compte->get_nom());
 			}
+			if ($solde!=util::fr2cent($compte->get_xml()->Details->Solde_courant)){
+
+				$tpl->ral ("problème dans le solde des opération du compte ". $compte->get_nom()." il y a noté ".(util::fr2cent($compte->get_xml()->Details->Solde_courant)/100).$compte->get_devise()->get_isocode()." alors qu'il y a ".($solde/100).$compte->get_devise()->get_isocode(),"error" );
+			}else {
+				$tpl->ral ("ok pour le solde des opération du compte ". $compte->get_nom());
+			}
+
 			//moyens de p du cpt
 			$nb_moyen=0;
 			foreach ($compte->iter_moyens() as $moyen){
@@ -105,13 +112,13 @@ if ($action=="verif_totaux"){
 			$tpl->ral("le numero max est trop petit.");
 			$nb_ope_max=$nb_ope;
 		}else {
-			$tpl->ral("numero max d'opération ok"); 
+			$tpl->ral("numero max d'opération ok");
 		}
 		if ($nb_ope_max != ($gsb_operations->get_next())-1) {
 			$tpl->ral("numero derniere operation incorrect");
 			$x->Generalites->Numero_derniere_operation=$nb_ope_max;
 		}else {
-			$tpl->ral("numero derniere opération ok"); 
+			$tpl->ral("numero derniere opération ok");
 		}
 		$tpl->assign("lien","action_outils.php?action=dates_ope_diff&amp;phase=2");
 		$tpl->display('resultats.smarty');

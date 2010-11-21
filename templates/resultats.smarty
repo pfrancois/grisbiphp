@@ -11,8 +11,8 @@
 <body>
 <h1>{$titre}</h1>
 {foreach from=$resultats item=resultat}
-<div class='{$resultat["css"]}'>{$resultat["texte"]}</div>
+<div class='{$resultat.css}'>{$resultat.texte}</div>
 {/foreach}
-<div class="error"><a href='{$lien}'>{$suite|default:"suite"}</a></div>
+<div class="progress"><a href='{$lien}'>{$suite|default:"suite"}</a></div>
 </body>
 </html>
