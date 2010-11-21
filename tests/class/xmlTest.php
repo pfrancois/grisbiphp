@@ -21,7 +21,7 @@ class xmlTest extends PHPUnit_Framework_TestCase {
 		copy('G:/zmws/_web.zmwsc/comptes/tests/fichiers/test_original.gsb', 'test.gsb') ;
 	}
 	protected function tearDown() {
-		//@unlink('test.gsb') ;
+		@unlink('test.gsb') ;
 	}
 
 	public function testGet_nom_de_fichier_inconnu() {
@@ -122,7 +122,7 @@ class xmlTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testget_xmlfile() {
 		$f = new xml('test.gsb') ;
-		$this->assertEquals(dirname(__FILE__).'\\test.gsb', (string )$f->get_xmlfile()) ;
+		$this->assertEquals('test.gsb', basename((string )$f->get_xmlfile())) ;
 	}
 	public function test_reload() {
 		$f = new xml('test.gsb') ;

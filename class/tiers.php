@@ -39,7 +39,7 @@ class tiers extends items {
 	 */
 	public function get_next() {
 		global $gsb_xml ;
-		(int)$req = $gsb_xml->xpath_uniq('//Tiers/Generalites/No_dernier_tiers') ;
+		$req = (int)$gsb_xml->get_xml()->Tiers->Generalites->No_dernier_tiers ;
 		return $req + 1 ;
 	}
 
@@ -63,24 +63,14 @@ class tiers extends items {
 	/**
 	 * renvoie un nouveau tiers
 	 * attention, il faut en remplir les proprietes
-	 * @param integer  $id si non NULL, il renvoit le nouveau tiers de l'id
-	 * @throws exception_index
+	 * @param integer $id si non NULL, il renvoit le nouveau tiers de l'id
 	 * @return tier
 	 */
-	public function new_tier($id = null) {
+	public function new_tier($id = NULL) {
 		global $gsb_xml ;
-		try {
-			if ($id!=null){
-				$this->get_by_id($id);
-			}else {
-				throw new  Exception_not_exist('tier',0);
-			}
-			throw new exception_index('tiers',$id);
-		} catch (Exception_not_exist $except) {
-			$n=$gsb_xml->get_xml()->Tiers->Detail_des_tiers;
-			$n = $n->addChild("Tiers") ;
-			$t = new tier($n, item::NOUVELLE, $id) ;
-			return $t ;
-		}
+		$n=$gsb_xml->get_xml()->Tiers->Detail_des_tiers;
+		$n = $n->addChild("Tiers") ;
+		$t = new tier($n, item::NOUVELLE, $id) ;
+		return $t ;
 	}
 }

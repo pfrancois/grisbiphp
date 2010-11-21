@@ -130,5 +130,13 @@ class tiersTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals(5,count($this->object));
 		$this->assertEquals(2567,$this->object->get_next());
 	}
-
+	/**
+	* verifie que si on rajoute un tiers en double, c'est pas possible
+	*/
+	public function test_newtiers_erreur_index(){
+		$this->object->new_tier(1);
+		$this->assertEquals(5,count($this->object));
+		$this->assertEquals(7,$this->object->get_next());
+		
+	}
 }

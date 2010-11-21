@@ -18,9 +18,12 @@ class tier extends item {
 			}
 			//verification avant la creation
 			try{
-				$gsb_tiers->get_by_id($id);
-				throw new exception_integrite("il y a une probleme d'int&eacute;grit&eacute; referencielle avec le tiers num $id");
-			} catch (Exception_not_exist $except) {}
+				$n=$gsb_tiers->get_by_id($id);
+				//formule qui renvoit le dernier par une fonction xpath
+				$id=((int)$gsb_xml->xpath_uniq('/Grisbi/Tiers/Detail_des_tiers/Tiers[not(@No < /Grisbi/Tiers/Detail_des_tiers/Tiers/@No)]/@No'))+1;
+				$gsb_xml->get_xml()->Tiers->Generalites->No_dernier_tiers=$id;
+			}
+			catch (exception_not_exist $except) {}
 			//numerotation generale
 			$gen=$gsb_xml->xpath_uniq('Tiers/Generalites');
 			if ($id > ($gsb_tiers->get_next() - 1)) {
