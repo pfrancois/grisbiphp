@@ -45,7 +45,7 @@ class operation extends item {
 			$this->_dom->setAttributeNode(new DOMAttr('Ov', '0')) ;
 			$this->_dom->setAttributeNode(new DOMAttr('N', '')) ;
 			$this->_dom->setAttributeNode(new DOMAttr('Ty', '0')) ;
-			$this->_dom->setAttributeNode(new DOMAttr('Ct', '0')) ;
+			$this->_dom->setAttributeNode(new DOMAttr('Ct', '')) ;
 			$this->_dom->setAttributeNode(new DOMAttr('P', '0')) ;
 			$this->_dom->setAttributeNode(new DOMAttr('A', '0')) ;
 			$this->_dom->setAttributeNode(new DOMAttr('R', '0')) ;
@@ -431,6 +431,7 @@ class operation extends item {
 	}
 
 	/**
+	 * change le tiers en rapport avec cette operation
 	 * @param tier $id
 	 * @return void
 	 */

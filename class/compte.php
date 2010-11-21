@@ -206,7 +206,7 @@ class compte extends item {
 		} catch (exception_not_exist $except) {
 			$n = $this->_item_xml->Detail_des_operations->addChild("Operation");
 			$op = new operation($n, item::NOUVELLE, $id);
-			$this->_item_xml->Details->Nb_operations = count($this->_item_xml->Detail_des_operations->Operation);
+			$this->_item_xml->Details->Nb_operations = ((int)$this->_item_xml->Details->Nb_operations)+1;
 		}
 		return $op;
 	}
