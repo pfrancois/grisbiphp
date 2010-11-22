@@ -30,9 +30,7 @@ foreach ($operations as $operation) {
 			$nbfiltre_date++ ;
 		}
 	} else {
-		if (($pointe == rapp::RIEN || $pointe == rapp::POINTEE)) {
 			$nb_rapp++;
-		}
 	}
 }
 
