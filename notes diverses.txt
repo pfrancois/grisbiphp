@@ -1,0 +1,6 @@
+list des xpath potentielles interressant pou 0.5.9
+numero du dernier tiers
+/Grisbi/Tiers/Detail_des_tiers/Tiers[@No and position() = last()]
+max
+/Grisbi/Tiers/Detail_des_tiers/Tiers[not(@No < /Grisbi/Tiers/Detail_des_tiers/Tiers/@No)]/@No
+
