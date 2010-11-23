@@ -249,7 +249,15 @@ class operation extends item {
 	public function get_ib() {
 		global $gsb_ibs ;
 		$t = (int)$this->_item_xml['I'] ;
-		return $gsb_ibs->get_by_id($t) ;
+		try{
+			return $gsb_ibs->get_by_id($t) ;
+		} catch (exception_not_exist $except){
+			if ($t==0){
+				return null;
+			}else {
+				throw $except;
+			}
+		}
 	}
 
 	/**
@@ -258,8 +266,17 @@ class operation extends item {
 	 * @return sib
 	 */
 	public function get_sib() {
+			$t = (int)$this->_item_xml['Si'] ;
+		try{
+			return  $this->get_ib()->get_sub_by_id($t) ;
+		} catch (exception_not_exist $except){
+			if ($t==0){
+				return null;
+			}else {
+				throw $except;
+			}
+		}
 		$t = (int)$this->_item_xml['Si'] ;
-		return $this->get_ib()->get_sub_by_id($t) ;
 	}
 
 	/**
