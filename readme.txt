@@ -26,5 +26,6 @@ http://prdownloads.sourceforge.net/grisbi4win/grisbi-0.5.9-win32-gcc-gtk-2.6.9-0
 attention, pour l'instant, il faut utiliser la version 0.5.9 de grisbi
 pour que ca marche, il faut renommer le fichier __index.php__ en index.php
 
-
+petite chose: actuellemnent, il n'y a pas de moyen d'uploader le fichier vers le serveur.
+je pense que cela va le rester tant que j'aurais pas mis une bonne securité (afin de limiter les problemes)
 
