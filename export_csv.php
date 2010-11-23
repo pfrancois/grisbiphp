@@ -2,8 +2,8 @@
 
 require_once ('header.php') ;
 $csv=array();
+//on parcourt les operations
 foreach ($gsb_operations->iter() as $ope) {
-	//var_dump($ope);
 	//gestion des categories preablable
 	if ($ope->is_virement()){
 		$cat="virement";
@@ -35,9 +35,10 @@ foreach ($gsb_operations->iter() as $ope) {
 	(is_null($ope->get_ib()))?"":utf8_decode ($ope->get_ib()->get_nom()),
 	$ope->get_num_chq(),
 	($ope->is_virement())?$ope->get_operation_contrepartie()->get_id():0,
-	($ope->is_ventilation())?$ope->get_operation_mere():0	
+	($ope->is_ventilation())?$ope->get_operation_mere():0
 	);
 }
+//creation du csv
 $file='comptes.csv';
 $fp = fopen($file, 'w');
 fputcsv($fp, array("id","nom_compte","date","montant","R","P","moyen","categorie","tiers","notes","projet","chequ","virement","ovm"),';','"');
@@ -45,12 +46,15 @@ foreach ($csv as $fields) {
 	fputcsv($fp, $fields,';','"');
 }
 fclose($fp);
+//affichage
 header('Content-type: application/vnd.ms-excel');
 header('Content-Disposition: attachment; filename="'.$file.'"');
 header('Pragma: no-cache');
 header('Expires: 0');
 header('Content-Length: ' . filesize($file));
 readfile($file);
+//nettoyage
+unlink($file);
 exit();
 
 
