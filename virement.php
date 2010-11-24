@@ -44,10 +44,12 @@ else {//edition
 }
 //liste des comptes
 foreach ($gsb_comptes->iter('all') as $compte) {
-	$tpl->append('comptes', array("id" => $compte->get_id(),
-								  "nom" => $compte->get_nom()
-	)
-	) ;
+	if (!$compte->is_cloture()){
+		$tpl->append('comptes', array("id" => $compte->get_id(),
+									  "nom" => $compte->get_nom()
+					)
+		) ;
+	}
 }
 $ua=$_SERVER['HTTP_USER_AGENT'];
 if (!stripos($_SERVER['HTTP_USER_AGENT'], 'n95') && !stripos($_SERVER['HTTP_USER_AGENT'], 'iphone')) {
