@@ -12,7 +12,6 @@ $compte = $gsb_comptes->get_by_id($cpt_id) ;
 $tpl->assign('compte_nom', $compte->get_nom()) ;
 $tpl->assign('cpt_id', $cpt_id) ;
 $operations = $compte->iter_operations() ;
-//var_dump($operations);
 //TODO gestion des operations ventilee
 $nbfiltre_date = 0 ;
 $nb_rapp = 0;
@@ -92,4 +91,8 @@ if (isset($operations_apres_filtre)) {
 $tpl->assign('solde_compte', ($compte->get_solde_courant()/100)) ;
 $tpl->assign('devise',$compte->get_devise()->get_isocode());
 //afichage final
-$tpl->display('operations.smarty') ;
+if ($compte->is_cloture()){
+	$tpl->display('cloture.smarty') ;
+	}else {
+	$tpl->display('operations.smarty') ;
+}
