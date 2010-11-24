@@ -11,13 +11,12 @@ if (empty($cpt_id) &&  $cpt_id!==0){
 $compte = $gsb_comptes->get_by_id($cpt_id) ;
 $tpl->assign('compte_nom', $compte->get_nom()) ;
 $tpl->assign('cpt_id', $cpt_id) ;
-$operations = $compte->iter_operations() ;
 //TODO gestion des operations ventilee
 $nbfiltre_date = 0 ;
 $nb_rapp = 0;
 //ne fait apparaitre que les operations non rapprochees.
 //pour les operations ventilees, cela fait apparaitres les operation filles mais pas la mere
-foreach ($operations as $operation) {
+foreach ($compte->iter_operations() as $operation) {
 	$pointe = $operation->get_statut_pointage() ;
 	if (($operation->is_ventilee() === false) && ($pointe == rapp::RIEN || $pointe == rapp::POINTEE)) {
 		$date = $operation->get_date() ;
