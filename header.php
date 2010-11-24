@@ -6,7 +6,7 @@ require_once('basic_ope_inc.php');
 /**
  * nom du fichier
  */
-define('CPT_FILE', "outils/20040701.gsb") ;
+define('CPT_FILE', "20040701.gsb") ;
 
 /**
  * tableau des comptes affiches

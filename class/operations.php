@@ -13,7 +13,7 @@ class operations extends items {
 	/**
 	 * renvoi l'operation dont on donne l'id
 	 *
-	 * @param integer $id id de l'operation demand�e
+	 * @param integer $id id de l'operation demandée
 	 * @throws exception_not_exist si l'id n'existe pas
 	 * @throws exception_parametre_invalide si $id n'est integer
 	 * @return operation

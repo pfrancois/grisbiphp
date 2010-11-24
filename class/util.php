@@ -192,4 +192,56 @@ class util {
 		header( 'Content-Location: '.$url );
 		header( 'Location: '.$url,301 );
 	}
+
+
+	/**
+	 * ecrit fichier ini
+	 *
+	 * @param array $assoc_arr (array imbriqué si sections)
+	 * @param string $path
+	 * @throws exception_parametre_invalide si probleme fichier
+	 * @return void
+	 */
+	public static function write_ini_file($assoc_arr, $path) {
+		$content = "";
+		if (is_array($assoc_arr[0])) {
+			foreach ($assoc_arr as $key=>$elem) {
+				$content .= "[".$key."]\n";
+				foreach ($elem as $key2=>$elem2) {
+					if(is_array($elem2))
+					{
+						for($i=0;$i<count($elem2);$i++)
+						{
+							$content .= $key2."[] = \"".$elem2[$i]."\"\n";
+						}
+					}
+					else if($elem2=="") $content .= $key2." = \n";
+					else $content .= $key2." = \"".$elem2."\"\n";
+				}
+			}
+		}
+		else {
+			foreach ($assoc_arr as $key=>$elem) {
+				if(is_array($elem))
+				{
+					for($i=0;$i<count($elem);$i++)
+					{
+						$content .= $key."[] = \"".$elem[$i]."\"\n";
+					}
+				}
+				else if($elem=="") $content .= $key." = \n";
+				else $content .= $key." = \"".$elem."\"\n";
+			}
+		}
+
+		if (!$handle = fopen($path, 'w')) {
+			throw new exception_parametre_invalide("le ficher $path ne peut etre ouvert");
+		}
+		if (!fwrite($handle, $content)) {
+			throw new exception_parametre_invalide("le ficher $path ne peut etre ecris");
+		}
+		fclose($handle);
+	}
+
+
 }
