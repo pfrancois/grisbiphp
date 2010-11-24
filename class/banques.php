@@ -7,7 +7,7 @@ class banques extends items {
 	protected $_xpath = '//Banques/Detail_des_banques/Banque' ;
 	public $nom_classe = __class__ ;
 	/**
-	 * renvoi le tiers dont on donne l'id
+	 * renvoi la banque dont on donne l'id
 	 *
 	 * @param integer $id id de la Banque demandé
 	 * @return banque

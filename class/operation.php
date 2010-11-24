@@ -98,53 +98,42 @@ class operation extends item {
 
 	/**
 	 * renvoie le tiers de l'opération
-	 * @return tiers
+	 * @return tiers|null
 	 */
 	public function get_tiers() {
 		global $gsb_tiers ;
 		$t = (int)$this->_item_xml['T'] ;
-		try{
+		if ($t==0){
+			return null;
+		}else {
 			return $gsb_tiers->get_by_id($t) ;
-		} catch (exception_not_exist $except){
-			if ($t==0){
-				return null;
-			}else {
-				throw $except;
-			}
 		}
 	}
 
 	/**
 	 * renvoie la categorie
-	 * @return categorie
+	 * @return categorie|null
 	 */
 	public function get_categorie() {
 		global $gsb_categories ;
 		$t = (int)$this->_item_xml['C'] ;
-		try{
+		if ($t==0){
+			return null;
+		}else {
 			return $gsb_categories->get_by_id($t) ;
-		} catch (exception_not_exist $except){
-			if ($t==0){
-				return null;
-			}else {
-				throw $except;
-			}
 		}
 	}
 
 	/**
-	 * @return scat
+	 * @return scat|null
 	 **/
 	public function get_scat() {
 		$t = (int)$this->_item_xml['Sc'] ;
 		try{
+		if ($t==0){
+			return null;
+		}else {
 			return  $this->get_categorie()->get_sub_by_id($t) ;
-		} catch (exception_not_exist $except){
-			if ($t==0){
-				return null;
-			}else {
-				throw $except;
-			}
 		}
 	}
 
@@ -176,19 +165,15 @@ class operation extends item {
 	 */
 	public function get_moyen() {
 		$t = (int)$this->_item_xml['Ty'] ;
-		try{
+		if ($t==0){
+			return null;
+		}else {
 			return $this->get_compte()->get_moyen_by_id($t) ;
-		} catch (exception_not_exist $except){
-			if ($t==0){
-				return null;
-			}else {
-				throw $except;
-			}
 		}
 	}
 
 	/**
-	 * renvoie le numero du cheque (le numero peut &ecirc;tre string)
+	 * renvoie le numero du cheque (le numero peut être uen chaine)
 	 *
 	 * @return string
 	 */
@@ -233,12 +218,16 @@ class operation extends item {
 	/**
 	 * operation::get_exercice()
 	 *
-	 * @return exercice
+	 * @return exercice|null
 	 */
 	public function get_exercice() {
 		global $gsb_exercices ;
 		$t = (int)$this->_item_xml['E'] ;
-		return $gsb_exercices->get_by_id($t) ;
+		if ($t==0){
+			return null;
+		}else {
+			return $gsb_exercices->get_by_id($t) ;
+		}
 	}
 
 	/**
@@ -249,14 +238,10 @@ class operation extends item {
 	public function get_ib() {
 		global $gsb_ibs ;
 		$t = (int)$this->_item_xml['I'] ;
-		try{
-			return $gsb_ibs->get_by_id($t) ;
-		} catch (exception_not_exist $except){
-			if ($t==0){
-				return null;
-			}else {
-				throw $except;
-			}
+		if ($t==0){
+			return null;
+		}else {
+			return $gsb_ibs->get_by_id($t);
 		}
 	}
 
@@ -266,17 +251,12 @@ class operation extends item {
 	 * @return sib
 	 */
 	public function get_sib() {
-			$t = (int)$this->_item_xml['Si'] ;
-		try{
-			return  $this->get_ib()->get_sub_by_id($t) ;
-		} catch (exception_not_exist $except){
-			if ($t==0){
-				return null;
-			}else {
-				throw $except;
-			}
-		}
 		$t = (int)$this->_item_xml['Si'] ;
+		if ($t==0){
+			return null;
+		}else {
+			return  $this->get_ib()->get_sub_by_id($t);
+		}
 	}
 
 	/**

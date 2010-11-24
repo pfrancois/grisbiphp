@@ -56,6 +56,7 @@ class categorie extends subitems {
 			$gsb_xml->get_xml()->Categories->Generalites->Nb_categories = $nb ;
 		}
 	}
+
 	/**
 	 * categorie::get_sub_by_id()
 	 *

@@ -15,7 +15,7 @@ class ib extends subitems {
 	public function delete() {
 		global $gsb_xml ;
 		global $gsb_ibs ;
-		//verification que la ib n'existe pas
+		//verification que la ib n'pas utilisé chez les operations
 		try {
 			$id = $this->get_id() ;
 			$q = $gsb_xml->xpath_iter("//Operation[@I='$id']") ;

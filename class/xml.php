@@ -174,4 +174,16 @@ class xml {
 			// @codeCoverageIgnoreEnd
 		}
 	}
+	/**
+	 * renvoie les resultats relatif à la chaine xpath
+	 * @param string $chaine la chaine xpath
+	 * @param SimpleXMLElement $_xml element xml sur laquelle on fait la requete
+	 * @return SimpleXMLElement
+	 */
+	public function exist($chaine, SimpleXMLElement $_xml = null) {
+	try {
+		$this->xpath_iter($chaine,$_xml);
+	} catch (Exception_no_reponse $e) {
+		return false
+	}
 }

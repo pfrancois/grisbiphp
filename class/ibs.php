@@ -7,9 +7,9 @@ class ibs extends items {
 	protected $_xpath = '//Imputation' ;
 	public $nom_classe = __class__ ;
 	/**
-	 * renvoi le tiers dont on donne l'id
+	 * renvoi l'ib dont on donne l'id
 	 *
-	 * @param integer $id id de l'imputation demand�e
+	 * @param integer $id id de l'imputation demandée
 	 * @return ibs
 	 * @throws exception_not_exist si l'id n'existe pas
 	 * @throws exception_parametre_invalide si $id n'est integer

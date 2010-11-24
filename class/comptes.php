@@ -34,7 +34,7 @@ class comptes extends items {
 	}
 
 	/**
-	 * renvoi l'id du compte dont on a donn� le nom
+	 * renvoi l'id du compte dont on a donné le nom
 	 *
 	 * @param string $nom nom du compte cherche
 	 * @return integer

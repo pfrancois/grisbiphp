@@ -110,11 +110,7 @@ class compte extends item {
 			$r = $gsb_xml->xpath_uniq($xpath, $this->_item_xml);
 			return new moyen($r);
 		} catch (Exception_no_reponse $except) {
-			if ($id != 0) {
 				throw new Exception_no_reponse($except->message);
-			} else {
-				return null;
-			}
 		}
 	}
 
@@ -135,7 +131,13 @@ class compte extends item {
 	public function get_devise() {
 		global $gsb_xml;
 		global $gsb_devises;
-		return $gsb_devises->get_by_id((int) $this->_item_xml->Details->Devise);
+		$id=(int) $this->_item_xml->Details->Devise;
+		if ($id != 0) {
+			return $gsb_devises->get_by_id($id;);
+		} else {
+			return null;
+		}
+
 	}
 
 	//---------------------------SETTERS
@@ -215,14 +217,12 @@ class compte extends item {
 	//ITERATEURS
 	public function iter_operations() {
 		global $gsb_xml;
-		return $gsb_xml->iter_class("//Compte/Details/No_de_compte[.='" . $this->get_id
-		() . "']/../../Detail_des_operations/Operation", 'operation');
+		return $gsb_xml->iter_class("//Compte/Details/No_de_compte[.='" . $this->get_id() . "']/../../Detail_des_operations/Operation", 'operation');
 	}
 
 	public function iter_moyens() {
 		global $gsb_xml;
-		return $gsb_xml->iter_class("//Compte/Details/No_de_compte[.='" . $this->get_id
-		() . "']/../../Detail_de_Types/Type", 'moyen');
+		return $gsb_xml->iter_class("//Compte/Details/No_de_compte[.='" . $this->get_id() . "']/../../Detail_de_Types/Type", 'moyen');
 	}
 
 }
