@@ -41,15 +41,11 @@ if (isset($operations_apres_filtre)) {
 	foreach ($operations_apres_filtre as $key => $operation) {
 		$ope_item = array() ;
 		$ope_item['date'] = $operation->get_date() ;
-		try {
-			$categorie=$operation->get_categorie();
-			if (isset($categorie)){
-				$ope_item['cat_name']= $categorie->get_nom() ;
-			} else {
-				$ope_item['cat_name']='' ;
-			}
-		} catch (exception_not_exist $e){
-			$ope_item['cat_name']="inconnu";
+		$categorie=$operation->get_categorie();
+		if (!is_null($categorie)){
+			$ope_item['cat_name']= $categorie->get_nom() ;
+		} else {
+			$ope_item['cat_name']='N/D' ;
 		}
 		try {
 			if (!is_null($operation->get_tiers())){

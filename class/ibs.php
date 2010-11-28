@@ -40,7 +40,7 @@ class ibs extends items {
 		return $r + 1 ;
 	}
 	/**
-	 * renvoi l'id de l'ib dont on a donn� le nom
+	 * renvoi l'id de l'ib dont on a donné le nom
 	 *
 	 * @param string $nom nom du compte cherche
 	 * @return integer
