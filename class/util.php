@@ -83,11 +83,7 @@ class util {
 		} else {
 			throw new InvalidArgumentException('probleme, '.$n."n'est pas un nombre");
 		}
-		if ( intval(round($n * 100))== round($n * 100)){
-			return intval(round($n * 100)) ;
-		}else {
-			return round($n * 100) ;
-		}
+		return intval(round($n * 100)) ;
 	}
 
 	/**
@@ -180,6 +176,7 @@ class util {
 		}
 		return $sCleRib ;
 	}
+	//@codeCoverageIgnoreStart
 	/**
 	 *
 	 * renvoi vers une url via les fonction header
@@ -198,7 +195,7 @@ class util {
 	 * ecrit fichier ini
 	 *
 	 * @param array $assoc_arr (array imbriqué si sections)
-	 * @param string $path
+	 * @param string $path chmin du fichier ini
 	 * @throws exception_parametre_invalide si probleme fichier
 	 * @return void
 	 */
@@ -242,6 +239,5 @@ class util {
 		}
 		fclose($handle);
 	}
-
-
+//@codeCoverageIgnoreEnd
 }

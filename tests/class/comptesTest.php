@@ -148,6 +148,13 @@ class comptesTest extends PHPUnit_Framework_TestCase
 		}
 		$this->assertEquals(7,count($x));
 	}
+	public function testiter_compte_type_all(){
+		$x=$this->object->iter("all");
+		foreach ($x as $y){
+			$this->assertType('compte',$y);
+		}
+		$this->assertEquals(7,count($x));
+	}
 	public function testcount(){
 		$this->assertEquals(7,count($this->object));
 	}

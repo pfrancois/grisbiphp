@@ -129,7 +129,6 @@ class operation extends item {
 	 **/
 	public function get_scat() {
 		$t = (int)$this->_item_xml['Sc'] ;
-		try{
 		if ($t==0){
 			return null;
 		}else {

@@ -32,7 +32,7 @@ class compte extends item {
 	/**
 	 * renvoie le nombre d'operation contenu dans ce compte.
 	 *
-	 * attention, il y a possibilit� d'erreur car il n'y a pas comptage.
+	 * attention, il y a possibilité d'erreur car il n'y a pas comptage.
 	 *
 	 * @return integer
 	 */
@@ -100,6 +100,7 @@ class compte extends item {
 	 * compte::get_moyen_by_id()
 	 *
 	 * @param integer $id
+	 * @throw Exception_no_reponse
 	 * @return moyen
 	 */
 	public function get_moyen_by_id($id) {
@@ -132,12 +133,7 @@ class compte extends item {
 		global $gsb_xml;
 		global $gsb_devises;
 		$id=(int) $this->_item_xml->Details->Devise;
-		if ($id != 0) {
-			return $gsb_devises->get_by_id($id;);
-		} else {
-			return null;
-		}
-
+		return $gsb_devises->get_by_id($id);
 	}
 
 	//---------------------------SETTERS

@@ -33,7 +33,7 @@ class utilTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals('-2594,9100000',util::cent2fr(-259491));
 	}
 	/**
-	 * permet de voir si lorsque on lui met des mauvaises donn�es, il dit merde
+	 * permet de voir si lorsque on lui met des mauvaises données, il dit merde
 	 * @expectedException InvalidArgumentException
 	 */
 	public function test_cent2fr_argument_non_decimal(){

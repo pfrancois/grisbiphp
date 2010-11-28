@@ -35,7 +35,9 @@ class devise extends item {
 		if (is_numeric($n)){
 			$change=(float)$n;
 		} else {
+			//@codeCoverageIgnoreStart
 			throw new InvalidArgumentException('probleme, '.$n."n'est pas un nombre");
+			//@codeCoverageIgnoreEnd
 		}
 		if($change==0){
 			$change=1;

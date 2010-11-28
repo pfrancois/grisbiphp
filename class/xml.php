@@ -181,9 +181,10 @@ class xml {
 	 * @return SimpleXMLElement
 	 */
 	public function exist($chaine, SimpleXMLElement $_xml = null) {
-	try {
-		$this->xpath_iter($chaine,$_xml);
-	} catch (Exception_no_reponse $e) {
-		return false
+		try {
+			$this->xpath_iter($chaine,$_xml);
+		} catch (Exception_no_reponse $e) {
+			return false;
+		}
 	}
 }

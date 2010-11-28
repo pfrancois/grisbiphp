@@ -74,55 +74,66 @@ class compteTest extends PHPUnit_Framework_TestCase{
 		global $gsb_comptes;
 		$this->assertEquals(true, $gsb_comptes->get_by_id(1)->is_cloture());
 	}
+	public function testGet_devise() {
+		$this->assertType('devise', $this->object->get_devise());
+		$this->assertEquals(1,$this->object->get_devise()->get_id());
+	}
 
-	/**
-	 * Generated from @assert () == compte::T_BANCAIRE.
-	 */
-	public function testGet_type_compte() {
+
+	public function testGet_type_compte_bancaire() {
 		global $gsb_comptes;
 		$this->assertEquals(compte::T_BANCAIRE, $gsb_comptes->get_by_id(1)->get_type_compte());
 	}
-	public function testGet_type_compte2() {
+
+	public function testGet_type_compte_espece() {
 		global $gsb_comptes;
 		$this->assertEquals(compte::T_ESPECE, $gsb_comptes->get_by_id(2)->get_type_compte());
 	}
-	public function testGet_type_compte3() {
+
+	public function testGet_type_compte_actif() {
 		global $gsb_comptes;
 		$this->assertEquals(compte::T_ACTIF, $gsb_comptes->get_by_id(5)->get_type_compte());
 	}
-	public function testGet_type_compte4() {
+
+	public function testGet_type_compte_passif() {
 		global $gsb_comptes;
 		$this->assertEquals(compte::T_PASSIF, $gsb_comptes->get_by_id(4)->get_type_compte());
 	}
+
 	public function testGet_next_moyen(){
 		$this->assertEquals(6, $this->object->get_next_moyen());
 	}
-	/**
-	 * Generated from @assert (2) type moyen.
-	 */
+
 	public function testGet_moyen_by_id() {
 		$this->assertType('moyen', $this->object->get_moyen_by_id(2));
 		$this->assertEquals(2,$this->object->get_moyen_by_id(2)->get_id());
 	}
+
+	/**
+	 * @expectedException Exception_no_reponse
+	 */
+	public function testGet_moyen_by_id_inconnu() {
+		$this->object->get_moyen_by_id(39);
+	}
+
 	public function testGet_moyen_by_name() {
 		$this->assertEquals(1, $this->object->get_moyen_by_name("Virement")->get_id());
 	}
+
 	public function testget_moyen_debit_defaut(){
 		$this->assertEquals(3, $this->object->get_moyen_debit_defaut()->get_id());
 	}
+
 	public function testget_moyen_credit_defaut(){
 		$this->assertEquals(2, $this->object->get_moyen_credit_defaut()->get_id());
 	}
-	/**
-	 * Generated from @assert ('toto') set $this->object->get_nom().
-	 */
+
 	public function testSet_nom() {
 		$this->object->set_nom('toto');
 		$this->assertEquals('toto', $this->object->get_nom());
 	}
 
 	/**
-	 * Generated from @assert ('caisse') throws exception_index.
 	 * @expectedException exception_index
 	 */
 	public function testSet_nom2() {
@@ -130,52 +141,48 @@ class compteTest extends PHPUnit_Framework_TestCase{
 	}
 
 	/**
-	 * Generated from @assert ('') throws exception_parametre_invalide.
 	 * @expectedException exception_parametre_invalide
 	 */
 	public function testSet_nom3() {
 		$this->object->set_nom('');
 	}
 
-	/**
-	 * Generated from @assert (true) set $this->object->is_cloture().
-	 */
 	public function testSet_cloture() {
 		$this->object->set_cloture();
 		$this->assertEquals(true, $this->object->is_cloture());
 	}
 
-	/**
-	 * Generated from @assert (false) set $this->object->is_cloture().
-	 */
 	public function testSet_non_cloture() {
 		$this->object->set_non_cloture();
 		$this->assertEquals(false, $this->object->is_cloture());
 	}
 
 
-	/**
-	 * Generated from @assert (300) set $this->object->get_solde_courant().
-	 */
 	public function testSet_solde_courant() {
 		$this->object->set_solde_courant(300);
 		$this->assertEquals(300, $this->object->get_solde_courant());
 	}
 
 	/**
-	 * Generated from @assert ('nom') throws exception_parametre_invalide.
 	 * @expectedException exception_parametre_invalide
 	 */
 	public function testSet_solde_courant2() {
 		$this->object->set_solde_courant('nom');
 	}
 
-	public function testNew_operation_avec_id() {
+	public function testNew_operation_sans_id() {
 		$this->assertEquals(15, $this->object->new_operation()->get_id());
 	}
 
-	public function testNew_operation_sans_id() {
+	public function testNew_operation_avec_id() {
 		$this->assertEquals(30000, $this->object->new_operation(30000)->get_id());
+	}
+
+	/**
+	 * @expectedException exception_index
+	 */
+	public function testNew_operation_avec_id_mais_integrite_referentielle() {
+		$this->object->new_operation(11);
 	}
 
 	public function testIter_operations()

@@ -65,5 +65,10 @@ class deviseTest extends PHPUnit_Framework_TestCase{
 		global $gsb_devises;
 		$this->assertEquals( 10, $gsb_devises->get_by_id(2)->get_change());
 	}
+	public function testGet_change_egal_a_1() {
+		global $gsb_devises;
+		$this->assertEquals( 1, $gsb_devises->get_by_id(1)->get_change());
+	}
+
 }
 ?>
