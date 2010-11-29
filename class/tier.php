@@ -74,14 +74,14 @@ class tier extends item {
 		global $gsb_tiers ;
 		//verification que le tiers existe
 		$id = $this->get_id() ;
-		//verification que le tiers n'a pas d'operation reli�s
+		//verification que le tiers n'a pas d'operation reliée
 		try {
 			$q = $gsb_xml->xpath_iter("//Operation[@T='$id']") ;
 			$q = $q[0] ;
 			throw new exception_integrite_referentielle('tiers', $id, 'operation', $q['No']) ;
 		}
 		catch (Exception_no_reponse $except) {
-			//verification qu'il n'y a pas d'echeances relies
+			//verification qu'il n'y a pas d'echeance reli&e
 			try {
 				$q = $gsb_xml->xpath_iter("//Echeance[@Tiers='$id']") ;
 				$q = $q[0] ;

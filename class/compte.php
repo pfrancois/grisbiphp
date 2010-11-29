@@ -194,18 +194,9 @@ class compte extends item {
 	public function new_operation($id = null) {
 		global $gsb_xml;
 		global $gsb_operations;
-		try {
-			if (empty($id)){
-				throw new exception_not_exist('operation',0);
-			}else {
-				$gsb_operations->get_by_id($id);
-				throw new exception_index('operation', $id);
-			}
-		} catch (exception_not_exist $except) {
-			$n = $this->_item_xml->Detail_des_operations->addChild("Operation");
-			$op = new operation($n, item::NOUVELLE, $id);
-			$this->_item_xml->Details->Nb_operations = ((int)$this->_item_xml->Details->Nb_operations)+1;
-		}
+		$n = $this->_item_xml->Detail_des_operations->addChild("Operation");
+		$op = new operation($n, item::NOUVELLE, $id);
+		$this->_item_xml->Details->Nb_operations = ((int)$this->_item_xml->Details->Nb_operations)+1;
 		return $op;
 	}
 

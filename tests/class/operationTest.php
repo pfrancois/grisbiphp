@@ -149,6 +149,16 @@ class operationTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals(1, $c->get_id());
 	}
 
+	public function testGet_cat_null(){
+		global $gsb_operations;
+		$this->assertEquals( null,$gsb_operations->get_by_id(2)->get_categorie());
+	}
+
+	public function testGet_scat_null(){
+		global $gsb_operations;
+		$this->assertEquals( null,$gsb_operations->get_by_id(2)->get_scat());
+	}
+
 	public function testGet_categorie() {
 		$c = $this->object->get_categorie();
 		$this->assertType('categorie', $c);
@@ -166,6 +176,11 @@ class operationTest extends PHPUnit_Framework_TestCase {
 		$this->assertType('moyen', $c);
 		$this->assertEquals(5, $c->get_id());
 		$this->assertEquals(0, $c->get_mere()->get_id());
+	}
+
+	public function testGet_moyen_null(){
+		global $gsb_operations;
+		$this->assertEquals( null,$gsb_operations->get_by_id(9)->get_moyen());
 	}
 
 	public function testGet_rapp() {
@@ -205,6 +220,11 @@ class operationTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals("2010", $this->object->get_exercice()->get_nom());
 	}
 
+	public function testGet_exercice_null(){
+		global $gsb_operations;
+		$this->assertEquals( null,$gsb_operations->get_by_id(3)->get_exercice());
+	}
+
 	public function testget_ib() {
 		$this->assertType('ib', $this->object->get_ib());
 		$this->assertEquals("2", $this->object->get_ib()->get_id());
@@ -215,12 +235,43 @@ class operationTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals("1", $this->object->get_sib()->get_id());
 	}
 
+	public function testGet_ib_null(){
+		global $gsb_operations;
+		$this->assertEquals( null,$gsb_operations->get_by_id(2)->get_ib());
+	}
+
+	public function testGet_sib_null(){
+		global $gsb_operations;
+		$this->assertEquals( null,$gsb_operations->get_by_id(2)->get_sib());
+	}
+
 	public function testSet_compte() {
 		global $gsb_operations;
 		$this->object->set_compte(2);
 		$operation = $gsb_operations->get_by_id(2);
 		$this->assertEquals('2',$operation->get_id());
 	}
+
+	/**
+	 * @expectedException exception_not_exist
+	 */
+	public function test_set_compte_inexistant(){
+		$this->object->set_compte(3355);
+	}
+
+	/**
+	 * @expectedException exception_parametre_invalide
+	 */
+	public function test_set_compte_invalide(){
+		$this->object->set_compte('test');
+	}
+
+	public function test_get_xml	() {
+		$x=$this->object->get_xml();
+		$this->assertType('SimpleXMLElement',$x);
+		$this->assertEquals(1,(int)$x['No']);
+	}
+
 
 	/**
 	 * Generated from @assert ('r') throws exception_parametre_invalide.
@@ -264,9 +315,16 @@ class operationTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @expectedException exception_no_reponse
 	 */
-	public function testSet_moyen2() {
+	public function testSet_moyen_inexistant() {
 		global $gsb_comptes;
 		$this->object->set_moyen($gsb_comptes->get_by_id(1)->get_moyen_by_id(2));
+	}
+	/**
+	 * @expectedException exception_parametre_invalide
+	 */
+	public function testSet_moyen_autre_compte() {
+		global $gsb_comptes;
+		$this->object->set_moyen($gsb_comptes->get_by_id(2)->get_moyen_by_id(1));
 	}
 
 	/**

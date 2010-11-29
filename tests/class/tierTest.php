@@ -64,11 +64,20 @@ class tierTest extends PHPUnit_Framework_TestCase{
 	}
 
 	/**
-	 *test afin de verifier la possiblité d'effacer un tiers. renvoi exception car il existe dans une operation
+	 *test afin de verifier la possiblité d'effacer un tiers. renvoi exception car existe dans une operation
 	 */
-	public function testDelete_integrite(){
+	public function testDelete_integrite_operation(){
 		$this->setExpectedException('exception_integrite_referentielle');
 		$this->object->delete();
+	}
+
+	/**
+	 *test afin de verifier la possiblité d'effacer un tiers. renvoi exception car existe dans une échéance
+	 */
+	public function testDelete_integrite_echeance(){
+		global $gsb_tiers;
+		//~ $this->setExpectedException('exception_integrite_referentielle');
+		$gsb_tiers->get_by_id(4)->delete();
 	}
 
 	/**

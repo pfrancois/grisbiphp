@@ -5,7 +5,7 @@ class operation extends item {
 	 * @param SimpleXMLElement $c
 	 * @param unknown_type $nouvelle
 	 * @param unknown_type $id
-	 * @throws exception_integrite
+	 * @throws exception_index
 	 */
 	public function __construct(SimpleXMLElement $c, $nouvelle = false, $id = null) {
 		global $gsb_xml ;
@@ -18,7 +18,7 @@ class operation extends item {
 			//verification avant la creation
 			try{
 				$gsb_operations->get_by_id($id);
-				throw new exception_integrite("il y a une probleme d'int&eacute;grit&eacute; referencielle avec l'operation num $id");
+				throw new exception_index("operation",$id);
 			} catch (Exception_not_exist $except) {}
 			//numerotation generale
 			if ($id > ($gsb_operations->get_next() - 1)) {
@@ -103,9 +103,11 @@ class operation extends item {
 	public function get_tiers() {
 		global $gsb_tiers ;
 		$t = (int)$this->_item_xml['T'] ;
+		//@codeCoverageIgnoreStart
 		if ($t==0){
 			return null;
 		}else {
+		//@codeCoverageIgnoreEnd
 			return $gsb_tiers->get_by_id($t) ;
 		}
 	}

@@ -103,7 +103,15 @@ class moyenTest extends PHPUnit_Framework_TestCase{
 		$this->assertEquals(0,$this->object->get_entree_comp());
 		$this->assertEquals(12345,$this->object->get_mere()->get_moyen_by_id(5)->get_entree_comp());
 	}
+	public function testget_next_num(){
+		//renvoi 0 car pas automatique
+		$this->assertEquals(0,$this->object->get_next_num());
+		//renvoie 12346 car automatique
+		$this->assertEquals(12346,$this->object->get_mere()->get_moyen_by_id(5)->get_next_num());
+		//renvoie "" car pas de num
+		$this->assertEquals("",$this->object->get_mere()->get_moyen_by_id(2)->get_next_num());
 
+	}
 	public function testset_entree_comp(){
 		$this->object->set_entree_comp(12345);
 		$this->assertEquals(12345,$this->object->get_entree_comp());
@@ -114,4 +122,7 @@ class moyenTest extends PHPUnit_Framework_TestCase{
 		$this->assertEquals(false,$this->object->has_entree_compl());
 		$this->assertEquals("",$this->object->get_entree_comp());
 	}
+
+
+
 }

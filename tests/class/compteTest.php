@@ -182,7 +182,7 @@ class compteTest extends PHPUnit_Framework_TestCase{
 	 * @expectedException exception_index
 	 */
 	public function testNew_operation_avec_id_mais_integrite_referentielle() {
-		$this->object->new_operation(11);
+		$this->object->new_operation(1);
 	}
 
 	public function testIter_operations()
