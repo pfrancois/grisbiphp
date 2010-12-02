@@ -47,23 +47,18 @@ if (isset($operations_apres_filtre)) {
 		} else {
 			$ope_item['cat_name']='N/D' ;
 		}
-		try {
-			if (!is_null($operation->get_tiers())){
-				$ope_item['tiers_name']= $operation->get_tiers()->get_nom() ;
-			}else {
-				$ope_item['tiers_name']= '' ;
-			}
-		} catch (exception_not_exist $e){
-			$ope_item['tiers_name']="";
+		if (!is_null($operation->get_tiers())){
+			$ope_item['tiers_name']= $operation->get_tiers()->get_nom() ;
+		}else {
+			$ope_item['tiers_name']= '' ;
 		}
 		if ($operation->is_virement()) {
 			if ($operation->get_montant() < 0) {
-				$ope_item['tiers_name'] = "virement (interne) emis" ;
-				$ope_item['cat_name'] = "virement" ;
+				$ope_item['tiers_name'] = $operation->get_compte()->get_nom()." => ".$operation->get_cpt_contrepartie()->get_nom() ;
 			} else {
-				$ope_item['tiers_name'] = "virement (interne) recu" ;
-				$ope_item['cat_name'] = "virement" ;
+				$ope_item['tiers_name'] = $operation->get_cpt_contrepartie()->get_nom()." => ".$operation->get_compte()->get_nom() ;
 			}
+			$ope_item['cat_name'] = "virement" ;
 		}
 
 		$value = $operation->get_montant() ;
