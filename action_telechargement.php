@@ -46,7 +46,7 @@ else {
 	$tpl->assign('lien',"options.php");
 	$tpl->display('resultats.smarty');
 	} else {
-		util::redirection_header("options.php");
+		util::redirection_header("comptes.php");
 	}
 }
 //~ $tpl->assign("lien","options.php");
