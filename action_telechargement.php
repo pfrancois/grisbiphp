@@ -8,16 +8,16 @@ if (!isset($_FILES['temp_gsb'])){
 if ($_FILES['temp_gsb']['error']) {
 	switch ($_FILES['temp_gsb']['error']){
 		case 1: // UPLOAD_ERR_INI_SIZE
-		   $tpl->critic("Le fichier dÈpasse la limite autorisÈe par le serveur (fichier php.ini) !","outils.php");
+		   $tpl->critic("Le fichier d√©passe la limite autoris√©e par le serveur (fichier php.ini) !","outils.php");
 		   break;
 		case 2: // UPLOAD_ERR_FORM_SIZE
-		   $tpl->critic("Le fichier dÈpasse la limite autorisÈe dans le formulaire HTML !","outils.php");
+		   $tpl->critic("Le fichier d√©passe la limite autoris√©e dans le formulaire HTML !","outils.php");
 		   break;
 		case 3: // UPLOAD_ERR_PARTIAL
-		   $tpl->critic("L'envoi du fichier a ÈtÈ interrompu pendant le transfert !","outils.php");
+		   $tpl->critic("L'envoi du fichier a √©t√© interrompu pendant le transfert !","outils.php");
 		   break;
 		case 4: // UPLOAD_ERR_NO_FILE
-		   $tpl->critic("Le fichier que vous avez envoyÈ a une taille nulle !","outils.php");
+		   $tpl->critic("Le fichier que vous avez envoy√© une taille nulle !","outils.php");
 		   break;
 	}
 }
