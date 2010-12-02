@@ -64,6 +64,6 @@ j7HK8QSqCTSglPmw9gSjKiPwqLx8/JVAlo6s5+t8XGJxm315IAImvV4RjpFhdjJHLmDi5JPd7dSYW+Lc
 		<td class="footerBar cptSolde">{$total_pl+$total_bq|nbfr:$devise}</td>
 	</tr>
 </table>
-<p>PS: il y a {$nbclos} compte{if $nbclos>1}s{/if} clos.</p>
+{if $nbclos>0}<p>PS: il y a {$nbclos} compte{if $nbclos>1}s{/if} clos.</p>{if}
 </body>
 </html>
