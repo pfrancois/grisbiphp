@@ -71,7 +71,7 @@ if ($action=="verif_totaux"){
 
 		if ($gsb_xml->version!="0.5"){
 			if (DEBUG){
-				$tpl->critic("mauvais format de fichier, il faut que le fichier bsg soit au format 0.5.");
+				$tpl->critic("mauvais format de fichier, il faut que le fichier bsg soit au format 0.5.","outils.php");
 			}else {
 				util::redirection_header("comptes.php");
 			}
@@ -140,7 +140,7 @@ if ($action=="verif_totaux"){
 			$x->Tiers->Generalites->No_dernier_tiers=$id_tiers_max;
 		} else {
 			$tpl->ral ("ok pour le dernier id des tiers ");
-			
+
 		}
 			}
 	if ($phase==""){
@@ -270,7 +270,7 @@ if ($action=="specifique"){
 }
 //recupere les action inexistantes, bien mettre un exit dans les if
 if (DEBUG){
-	$tpl->critic("action demandée inexistante: $action");
+	$tpl->critic("action demandée inexistante: $action","outils.php");
 }else {
 	util::redirection_header("comptes.php");
 }
