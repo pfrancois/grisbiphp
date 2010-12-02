@@ -16,6 +16,13 @@
 <p><a href="action_options.php?action=dates_ope_diff">change les date des operations cartes differés</a></p>
 <p><a href="action_options.php?action=verif_totaux">verifie les totaux</a></p>
 <p><a href="action_options.php?action=specifique"> travaux en batch </a></p>
+<form method="post" action="action_telechargement.php" enctype="multipart/form-data">
+	<fieldset class="operationMainTable">
+	<legend>chargement sur le serveur d'un nouveau fichier gsb</legend>
+	<input type="file" name="temp_gsb"/><br/>
+	<input type="submit" value="Envoyer"/><br/>
+	</fieldset>
+</form>
 <p><a href="comptes.php">retour vers le menu général</a></p>
 </body>
 </html>
