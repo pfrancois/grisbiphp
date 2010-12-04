@@ -1,1 +1,4 @@
-php 1
+AuthName "Veuillez vous identifier"
+AuthType Basic
+AuthUserFile "/home/alpha/.htpasswd"
+Require valid-user
