@@ -144,7 +144,7 @@ class util {
 		if (func_num_args() > 1) {
 			$data = func_get_args() ;
 		}
-		return "<pre>" . print_r($data, true) . "</pre>" ;
+		return "<pre>" . var_dump($data, true) . "</pre>" ;
 	}
 
 	// @codeCoverageIgnoreEnd
