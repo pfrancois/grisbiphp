@@ -34,6 +34,18 @@ define('DEBUG', true);
  * Id du tiers par defaut pour les virement
  */
 define('TIERS_VIREMENT',2);
+/**
+* id de la categorie pour plus ou moins values latentes
+*/
+define('PMVALUES',25);
+/**
+* id de la categorie des operations sur titres
+*/
+define('OSTITRES',31);
+/**
+* id de la categorie pour operations sur titres
+*/
+define('OPE_TITRE',31);
 
 //-----------fin de la configuration a changer, normalement vous n'avez pas a modifier en dessous
 
