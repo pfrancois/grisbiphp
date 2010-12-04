@@ -4,3 +4,6 @@ numero du dernier tiers
 max
 /Grisbi/Tiers/Detail_des_tiers/Tiers[not(@No < /Grisbi/Tiers/Detail_des_tiers/Tiers/@No)]/@No
 
+pour les titres!:
+attention, par convention, il ne prend en compte que les tiers commençant par "titre_ "
+dans l'affichage, il est enlevé cette partie
