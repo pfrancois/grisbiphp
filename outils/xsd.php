@@ -10,7 +10,7 @@
 <body>
 <h1><?php echo realpath('20040701.gsb')?></h1>
 <?php /* coding: utf-8 */
-
+define('CPT_FILE','20040701.gsb');
 function libxml_display_error($error)
 {
 	$return = "<br/>\n";
@@ -50,20 +50,9 @@ $xml = new DOMDocument();
 $xml->load(CPT_FILE);
 
 $s=simplexml_import_dom($xml);
-$t=$s->Tiers->Detail_des_tiers->addChild('Tiers');
-$t->addAttribute('No','0');
-$t->addAttribute('Nom','virement');
-$t->addAttribute('Informations','');
-$t->addAttribute('Liaison','0');
-$s->Tiers->Generalites->Nb_tiers=(int)$s->Tiers->Generalites->Nb_tiers+1;
-$t=$s->Categories->Detail_des_categories->addChild('Categorie');
-$t->addAttribute('No','0');
-$t->addAttribute('Nom','virement');
-$t->addAttribute('Type','0');
-$t->addAttribute('No_derniere_sous_cagegorie','0');
-$s->Categories->Generalites->Nb_categories=(int)$s->Categories->Generalites->Nb_categories+1;
 
-if (!$xml->schemaValidate('grisbi.xsd')) {
+
+if (!$xml->schemaValidate('grisbi_0_5_9.xsd')) {
 	print '<b>DOMDocument::schemaValidate() Generated Errors!</b><BR/>'."\n";
 	libxml_display_errors();
 }

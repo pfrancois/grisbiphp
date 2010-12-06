@@ -1,9 +1,0 @@
-bare: yes
-clean: yes
-add-xml-decl: no 
-doctype: strict 
-indent: auto
-repeated-attributes: keep-last
-drop-font-tags: no
-enclose-text: yes
-fix-bad-comments
