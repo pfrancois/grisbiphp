@@ -16,7 +16,9 @@ foreach ($gsb_operations->iter() as $ope) {
 			}else{
 				$cat=$ope->get_categorie()->get_nom();
 				if (!is_null($ope->get_scat())){
-					$cat=$cat."/".$ope->get_scat()->get_nom();
+					$scat=$ope->get_scat()->get_nom();
+				}else {
+					$scat="";
 				}
 			}
 		}
@@ -30,6 +32,7 @@ foreach ($gsb_operations->iter() as $ope) {
 		($ope->get_statut_pointage() == rapp::POINTEE)?1:0,
 		(is_null($ope->get_moyen()))?"":utf8_decode ($ope->get_moyen()->get_nom()),
 		utf8_decode ($cat),
+		utf8_decode ($scat),
 		utf8_decode ($ope->get_tiers()->get_nom()),
 		utf8_decode ($ope->get_notes()),
 		(is_null($ope->get_ib()))?"":utf8_decode ($ope->get_ib()->get_nom()),
@@ -41,7 +44,7 @@ foreach ($gsb_operations->iter() as $ope) {
 //creation du csv
 $file='comptes.csv';
 $fp = fopen($file, 'w');
-fputcsv($fp, array("id","nom_compte","date","montant","R","P","moyen","categorie","tiers","notes","projet","cheque","virement","ventilation"),';','"');
+fputcsv($fp, array("id","nom_compte","date","montant","R","P","moyen","categorie","sous-categorie","tiers","notes","projet","cheque","virement","ventilation"),';','"');
 foreach ($csv as $fields) {
 	fputcsv($fp, $fields,';','"');
 }
