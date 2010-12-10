@@ -29,7 +29,7 @@ define("SUR_FREE", true) ;
  * id de la devise generalement utilise
  */
 define("DEVISE",1);
-define('DEBUG', true);
+define('DEBUG', false);
 /**
  * Id du tiers par defaut pour les virement
  */

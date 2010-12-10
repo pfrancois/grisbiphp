@@ -51,8 +51,8 @@ j7HK8QSqCTSglPmw9gSjKiPwqLx8/JVAlo6s5+t8XGJxm315IAImvV4RjpFhdjJHLmDi5JPd7dSYW+Lc
 <table>
 	{foreach from=$placements item=pla name=plac}
 	<tr>
-		<td class="cptLabel item">{$pla.nom|escape:'htmlall'}</td>
-		<td class="cptSolde item">{$pla.m|nbfr:$pla.devise}</td>
+		<td class="cptLabel item"><a href="placements.php?cpt_id={$pla.id}" >{$pla.nom|escape:'htmlall'}</a></td>
+		<td class="cptSolde item"><a href="placements.php?cpt_id={$pla.id}" >{$pla.m|nbfr:$pla.devise}</a></td>
 	</tr>
 	{/foreach}
 	<tr class="totalintermediaire">

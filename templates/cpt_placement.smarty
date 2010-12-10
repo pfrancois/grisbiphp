@@ -23,8 +23,7 @@ j7HK8QSqCTSglPmw9gSjKiPwqLx8/JVAlo6s5+t8XGJxm315IAImvV4RjpFhdjJHLmDi5JPd7dSYW+Lc
 <h1>{$compte_nom|escape:'htmlall':'UTF-8'}</h1>
 <table width="100%" id="boutons">
 	<tr>
-		<td width="50%" class="boutton" ><a href="comptes.php">retour liste comptes</a></td>
-		<td width="50%" class="boutton" > <a href="virement.php?cpt_id={$cpt_id}" > Nouveau Virement vers {$compte_nom|escape:'htmlall':'UTF-8'} </a></td>
+		<td width="100%" class="boutton" ><a href="comptes.php">retour liste comptes</a></td>
 	</tr>
 </table>
 <br/>
@@ -32,17 +31,17 @@ j7HK8QSqCTSglPmw9gSjKiPwqLx8/JVAlo6s5+t8XGJxm315IAImvV4RjpFhdjJHLmDi5JPd7dSYW+Lc
 	<thead>
 		<tr>
 			<th >placement</th>
-			<th>montant placé</th>
+			<th align="right">montant placé</th>
 			<th >+/- values</th>
 			<th >total</th>
 		</tr>
 	</thead>
-	{foreach from=$opes item=ope}
-	<tr class="item hover {$ope.class2}">
-		<td class="opTier"><a href="placement.php?cpt_id={$cpt_id}&amp;titre={$titre.id}">{$titre.name|escape:'htmlall':'UTF-8'}</a></td>
-		<td class="opTier"><a href="placement.php?cpt_id={$cpt_id}&amp;titre={$titre.id}">{$titre.montant|nbfr:$devise}</a></td>
+	{foreach from=$titres item=titre}
+	<tr class="item hover">
+		<td class="opTier"><a href="placement.php?cpt_id={$cpt_id}&amp;titre={$titre.id}">{$titre.nom|escape:'htmlall':'UTF-8'}</a></td>
+		<td class="opDebit"><a href="placement.php?cpt_id={$cpt_id}&amp;titre={$titre.id}">{$titre.mise|nbfr:$devise}</a></td>
 		<td class="opCredit"><a href="placement.php?cpt_id={$cpt_id}&amp;titre={$titre.id}">{$titre.pmv|nbfr:$devise}</a></td>
-		<td class="opDebit"><a href="placement.php?cpt_id={$cpt_id}&amp;titre={$titre.id}">{$ope.total|nbfr:$devise}</a></td>
+		<td class="opDebit"><a href="placement.php?cpt_id={$cpt_id}&amp;titre={$titre.id}">{$titre.mise+$titre.pmv|nbfr:$devise}</a></td>
 	</tr>
 	{foreachelse}
 		<tr class="item">
@@ -51,6 +50,12 @@ j7HK8QSqCTSglPmw9gSjKiPwqLx8/JVAlo6s5+t8XGJxm315IAImvV4RjpFhdjJHLmDi5JPd7dSYW+Lc
 			</td>
 		</tr>
 	{/foreach}
+	<tr class="item hover">
+		<td class="opTier">compte espèce</td>
+		<td class="opDebit">{$espece|nbfr:$devise}</td>
+		<td class="opCredit">&nbsp;</td>
+		<td class="opDebit">{$espece|nbfr:$devise}</td>
+	</tr>
 		<tr >
 			<td colspan="3" class="cptLabel footerBar">Solde</td><td colspan="2" class="cptSolde footerBar">{$solde_compte|nbfr:$devise}</td>
 		</tr>
