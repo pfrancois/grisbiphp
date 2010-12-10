@@ -13,6 +13,7 @@ foreach ($gsb_operations->iter() as $ope) {
 		}else {
 			if (is_null($ope->get_categorie())){
 				$cat="";
+				$scat="";
 			}else{
 				$cat=$ope->get_categorie()->get_nom();
 				if (!is_null($ope->get_scat())){
