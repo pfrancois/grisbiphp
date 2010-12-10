@@ -12,8 +12,7 @@ $compte = $gsb_comptes->get_by_id($cpt_id) ;
 $tpl->assign('compte_nom', $compte->get_nom()) ;
 $tpl->assign('cpt_id', $cpt_id) ;
 if ($compte->get_type_compte() != compte::T_ACTIF){
-	echo $compte->get_type_compte();
-	//util::redirection_header("operations.php?cpt_id=$cpt_id");
+	util::redirection_header("operations.php?cpt_id=$cpt_id");
 	exit();
 }
 $titres=array();
