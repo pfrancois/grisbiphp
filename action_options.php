@@ -3,7 +3,7 @@ require_once('header.php');
 //----------------gestion des variables d'entree-----------------
 $action = util::get_page_param( 'action' );
 $phase=util::get_page_param( 'phase' );
-//--------------------telechargment du fichier--------------------
+//--------------------telechargement du fichier--------------------
 if ($action=="get_file"){
 	$user_agent = strtolower ($_SERVER["HTTP_USER_AGENT"]);
 	$filename=$gsb_xml->get_xmlfile();
@@ -92,7 +92,9 @@ if ($action=="verif_totaux"){
 				if ($operation->get_id()>$nb_ope_max){
 					$nb_ope_max=$operation->get_id();
 				}
-				$solde=$operation->get_montant()+$solde;
+				if (!$operation->is_ventilee()) {
+					$solde=$operation->get_montant()+$solde;
+				}
 			}
 			//verification
 			if ($nb_ope_c!=(int)$compte->get_xml()->Details->Nb_operations) {
