@@ -7,6 +7,7 @@ foreach ($gsb_operations->iter() as $ope) {
 	//gestion des categories preablable
 	if ($ope->is_virement()){
 		$cat="virement";
+		$scat="";
 	} else {
 		if ($ope->is_ventilee()) {
 			continue;// on  ne prend pas les operation meres des ventilees
@@ -28,6 +29,8 @@ foreach ($gsb_operations->iter() as $ope) {
 		$ope->get_id(),
 		utf8_decode ($ope->get_compte()->get_nom()),
 		date("d/m/Y",$ope->get_date()),
+		date("Y",$ope->get_date()),
+		date("m",$ope->get_date()),
 		util::cent2fr($ope->get_montant()),
 		($ope->get_statut_pointage() == rapp::RAPPROCHEE)?1:0,
 		($ope->get_statut_pointage() == rapp::POINTEE)?1:0,
@@ -45,7 +48,7 @@ foreach ($gsb_operations->iter() as $ope) {
 //creation du csv
 $file='comptes.csv';
 $fp = fopen($file, 'w');
-fputcsv($fp, array("id","nom_compte","date","montant","R","P","moyen","categorie","sous-categorie","tiers","notes","projet","cheque","virement","ventilation"),';','"');
+fputcsv($fp, array("id","nom_compte","date","annee","mois","montant","R","P","moyen","categorie","sous-categorie","tiers","notes","projet","cheque","virement","ventilation"),';','"');
 foreach ($csv as $fields) {
 	fputcsv($fp, $fields,';','"');
 }
