@@ -62,18 +62,11 @@ table {
 
 .item {
 	background-color: #3A0000;
-	border-top: 1px solid #4D0000;
-	padding-top: 0.4em;
-	padding-bottom: 0.6em;
+}
+.item:hover {
+	background-color: #706666;
 }
 
-.footerBar {
-	background-color: #990000;
-	font-weight: bold;
-	padding: .7em 0em;
-	border-top: 10px solid #333333;
-	height: 3em;
-}
 
 .cptLabel {
 	text-align: left;
@@ -98,17 +91,6 @@ table {
 	background: #ff00ff;
 	text-align: center;
 	font-size: 2.5em;
-}
-
-.totalintermediaire {
-	background-color: #990000;
-	font-weight: bold;
-	padding-top: 0.4em;
-	padding-bottom: 0.6em;
-}
-
-thead {
-	background-color: #706666;
 }
 
 .creditElement {
@@ -144,10 +126,30 @@ thead {
 	text-align: left;
 }
 
-.hover:hover {
+.survol:hover {
 	background-color: #706666;
 }
-
+.entete>td{
+	background-color: #990000;
+	font-weight: bold;
+	padding-top: 0.4em;
+	padding-bottom: 0.6em;
+}
+.footerbar>td {
+	background-color: #990000;
+	font-weight: bold;
+	padding: .7em 0em;
+	border-top: 10px solid #333333;
+	height: 3em;
+}
+.padding>td{
+	padding-top: 0.4em;
+	padding-bottom: 0.6em;
+}
+td{
+	border-top: 1px solid #4D0000;
+}
 th {
+	background-color: #706666;
 	text-align: left;
 }

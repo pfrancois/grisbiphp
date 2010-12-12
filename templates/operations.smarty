@@ -23,12 +23,17 @@ j7HK8QSqCTSglPmw9gSjKiPwqLx8/JVAlo6s5+t8XGJxm315IAImvV4RjpFhdjJHLmDi5JPd7dSYW+Lc
 <h1>{$compte_nom|escape:'htmlall':'UTF-8'}</h1>
 <table width="100%" id="boutons">
 	<tr>
+	{if $cloture}
+		<td  width="100%"  class="boutton" ><a href="comptes.php">retour liste comptes</a></td>
+	</tr>
+	{else}
 		<td width="50%" class="boutton" ><a href="operation.php?cpt_id={$cpt_id}">Nouvelle Op.</a></td>
 		<td  width="50%"  class="boutton" ><a href="comptes.php">retour liste comptes</a></td>
-	</tr>
+			</tr>
 	<tr>
 		<td width="100%" class="boutton" colspan="2"> <a href="virement.php?cpt_id={$cpt_id}" > Nouveau Virement vers {$compte_nom|escape:'htmlall':'UTF-8'} </a></td>
 	</tr>
+	{/if}
 </table>
 <br/>
 <table width="100%" id="main">
@@ -42,22 +47,42 @@ j7HK8QSqCTSglPmw9gSjKiPwqLx8/JVAlo6s5+t8XGJxm315IAImvV4RjpFhdjJHLmDi5JPd7dSYW+Lc
 		</tr>
 	</thead>
 	{foreach from=$opes item=ope}
-	{if $ope.virement}
-		<tr class="item hover {$ope.class2}">
-			<td class="opDate"><a href="virement.php?cpt_id={$cpt_id}&amp;ope_id={$ope.id}">{$ope.date|date_format:"%d/%m/%Y"}</a></td>
-			<td class="opTier"><a href="virement.php?cpt_id={$cpt_id}&amp;ope_id={$ope.id}">{$ope.tiers_name|escape:'htmlall':'UTF-8'}</a></td>
-			<td class="opTier"><a href="virement.php?cpt_id={$cpt_id}&amp;ope_id={$ope.id}">virement</a></td>
-			<td class="opCredit"><a href="virement.php?cpt_id={$cpt_id}&amp;ope_id={$ope.id}">{$ope.credit|nbfr:$devise}</a></td>
-			<td class="opDebit"><a href="virement.php?cpt_id={$cpt_id}&amp;ope_id={$ope.id}">{$ope.debit|nbfr:$devise}</a></td>
-		</tr>
+	{if $cloture}
+		{if $ope.virement}
+			<tr class="item hover {$ope.class2}">
+				<td class="opDate">{$ope.date|date_format:"%d/%m/%Y"}</td>
+				<td class="opTier">{$ope.tiers_name|escape:'htmlall':'UTF-8'}</td>
+				<td class="opTier">virement</td>
+				<td class="opCredit">{$ope.credit|nbfr:$devise}</td>
+				<td class="opDebit">{$ope.debit|nbfr:$devise}</td>
+			</tr>
+		{else}
+			<tr class="item hover {$ope.class2}">
+				<td class="opDate">{$ope.date|date_format:"%d/%m/%Y"}</td>
+				<td class="opTier">{$ope.tiers_name|escape:'htmlall':'UTF-8'}</td>
+				<td class="opTier">{$ope.cat_name|escape:'htmlall':'UTF-8'}</td>
+				<td class="opCredit">{$ope.credit|nbfr:$devise}</td>
+				<td class="opDebit">{$ope.debit|nbfr:$devise}</td>
+			</tr>
+		{/if}
 	{else}
-		<tr class="item hover {$ope.class2}">
-			<td class="opDate"><a href="operation.php?cpt_id={$cpt_id}&amp;ope_id={$ope.id}">{$ope.date|date_format:"%d/%m/%Y"}</a></td>
-			<td class="opTier"><a href="operation.php?cpt_id={$cpt_id}&amp;ope_id={$ope.id}">{$ope.tiers_name|escape:'htmlall':'UTF-8'}</a></td>
-			<td class="opTier"><a href="operation.php?cpt_id={$cpt_id}&amp;ope_id={$ope.id}">{$ope.cat_name|escape:'htmlall':'UTF-8'}</a></td>
-			<td class="opCredit"><a href="operation.php?cpt_id={$cpt_id}&amp;ope_id={$ope.id}">{$ope.credit|nbfr:$devise}</a></td>
-			<td class="opDebit"><a href="operation.php?cpt_id={$cpt_id}&amp;ope_id={$ope.id}">{$ope.debit|nbfr:$devise}</a></td>
-		</tr>
+		{if $ope.virement}
+			<tr class="item hover {$ope.class2}">
+				<td class="opDate"><a href="virement.php?cpt_id={$cpt_id}&amp;ope_id={$ope.id}">{$ope.date|date_format:"%d/%m/%Y"}</a></td>
+				<td class="opTier"><a href="virement.php?cpt_id={$cpt_id}&amp;ope_id={$ope.id}">{$ope.tiers_name|escape:'htmlall':'UTF-8'}</a></td>
+				<td class="opTier"><a href="virement.php?cpt_id={$cpt_id}&amp;ope_id={$ope.id}">virement</a></td>
+				<td class="opCredit"><a href="virement.php?cpt_id={$cpt_id}&amp;ope_id={$ope.id}">{$ope.credit|nbfr:$devise}</a></td>
+				<td class="opDebit"><a href="virement.php?cpt_id={$cpt_id}&amp;ope_id={$ope.id}">{$ope.debit|nbfr:$devise}</a></td>
+			</tr>
+		{else}
+			<tr class="item hover {$ope.class2}">
+				<td class="opDate"><a href="operation.php?cpt_id={$cpt_id}&amp;ope_id={$ope.id}">{$ope.date|date_format:"%d/%m/%Y"}</a></td>
+				<td class="opTier"><a href="operation.php?cpt_id={$cpt_id}&amp;ope_id={$ope.id}">{$ope.tiers_name|escape:'htmlall':'UTF-8'}</a></td>
+				<td class="opTier"><a href="operation.php?cpt_id={$cpt_id}&amp;ope_id={$ope.id}">{$ope.cat_name|escape:'htmlall':'UTF-8'}</a></td>
+				<td class="opCredit"><a href="operation.php?cpt_id={$cpt_id}&amp;ope_id={$ope.id}">{$ope.credit|nbfr:$devise}</a></td>
+				<td class="opDebit"><a href="operation.php?cpt_id={$cpt_id}&amp;ope_id={$ope.id}">{$ope.debit|nbfr:$devise}</a></td>
+			</tr>
+		{/if}
 	{/if}
 	{foreachelse}
 		<tr class="item">
@@ -72,8 +97,8 @@ j7HK8QSqCTSglPmw9gSjKiPwqLx8/JVAlo6s5+t8XGJxm315IAImvV4RjpFhdjJHLmDi5JPd7dSYW+Lc
 			</td>
 		</tr>
 	{/foreach}
-		<tr >
-			<td colspan="3" class="cptLabel footerBar">Solde</td><td colspan="2" class="cptSolde footerBar">{$solde_compte|nbfr:$devise}</td>
+		<tr class="footerbar">
+			<td colspan="3" class="cptLabel">Solde</td><td colspan="2" class="cptSolde">{$solde_compte|nbfr:$devise}</td>
 		</tr>
 </table>
 {if $nbrapp>1}

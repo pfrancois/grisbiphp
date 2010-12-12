@@ -5,7 +5,7 @@
 <meta http-equiv="CACHE-CONTROL" content="NO-CACHE" />
 <meta http-equiv="PRAGMA" content="NO-CACHE" />
 <meta http-equiv="EXPIRES" content="0" />
-<link rel="stylesheet" type="text/css" href="css/reset.css" />
+
 <link rel="stylesheet" type="text/css" href="css/common.css" />
 <link href="data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QAAAAAAAD5Q7t/
 AAACeElEQVQ4y62TzUtUcRSGn3vvzDg64wejpk2FRpKBSSJBprSzoF2ErYI2ERRB6/oH2rQt/AMygoKkhdnCRJQyLc2kSQw1bXQ+HOfem
@@ -17,51 +17,38 @@ cdoqqkBSzASWib9y4TRPW/UV26KpfFB1JiBuVng+bjBh7pq8l1Z1qU8skfCb3iIf9bhNRDd8m7fwK0IZ
 cxCy3qQN/u7CgAY70BgaJgpeOkNBPZX03P7avU1FVS73NzzgffnmmE3jh/JdMVenFU1LZcwEgn8Nc1cNJbSjYrYdsSLo+XnFSGbroxrf2
 j7HK8QSqCTSglPmw9gSjKiPwqLx8/JVAlo6s5+t8XGJxm315IAImvV4RjpFhdjJHLmDi5JPd7dSYW+LcyXe/2imsXfYjNJGtxieEvgleTB
 5v/i34DxAkozbMmr3sAAAAASUVORK5CYII=" rel="icon" type="image/x-icon" />
-<style type="text/css" media="screen">
-<!--
-.item a {$smarty.ldelim}
-    text-decoration: none;
-    padding: 0;
-    margin: 0;
-    color:#FFFFFF;
-    display:block;
-    border-top:1px solid #4D0000;
-	padding-top: 0.4em;
-	padding-bottom: 0.6em;
-
-{$smarty.rdelim}
--->
-</style>
 <title>Comptes</title>
 </head>
 <body>
-<h1 class="hover"><a href="options.php">Comptes</a></h1>
+<h1 class="survol"><a href="options.php">Comptes</a></h1>
 <h2>comptes esp&egrave;ces ou bancaires</h2>
-<table >
+<table id="banques">
 {foreach from=$comptes item=cpt}
-		<tr class="hover item">
-			<td class="cptLabel"><a href="operations.php?cpt_id={$cpt.id}" >{$cpt.nom|escape:'htmlall'}</a></td>
+		<tr class="item padding">
+			<td class="cptLabel"><a href="operations.php?cpt_id={$cpt.id}" >{$cpt.nom|escape:'htmlall':'UTF-8'}</a></td>
 			<td class="cptSolde"><a href="operations.php?cpt_id={$cpt.id}" >{$cpt.m|nbfr:$cpt.devise}</a></td>
 		</tr>
 {/foreach}
-	<tr class="totalintermediaire"><td class="cptLabel">Solde comptes banques et comptes esp&egrave;ces</td><td class="cptSolde">{$total_bq|nbfr:$devise}</td></tr>
+	<tr class="entete"><td class="cptLabel">Solde comptes banques et comptes esp&egrave;ces</td><td class="cptSolde">{$total_bq|nbfr:$devise}</td></tr>
 </table>
 
 <h2>autres comptes (Actifs et Passifs)</h2>
-<table>
+<table id="placements">
 	{foreach from=$placements item=pla name=plac}
-	<tr>
-		<td class="cptLabel item"><a href="placements.php?cpt_id={$pla.id}" >{$pla.nom|escape:'htmlall'}</a></td>
-		<td class="cptSolde item"><a href="placements.php?cpt_id={$pla.id}" >{$pla.m|nbfr:$pla.devise}</a></td>
+	<tr class="item padding">
+		<td class="cptLabel"><a href="placements.php?cpt_id={$pla.id}" >{$pla.nom|escape:'htmlall':'UTF-8'}</a></td>
+		<td class="cptSolde"><a href="placements.php?cpt_id={$pla.id}" >{$pla.m|nbfr:$pla.devise}</a></td>
 	</tr>
 	{/foreach}
-	<tr class="totalintermediaire">
+	<tr class="entete">
 		<td class="cptLabel">Solde des autres comptes</td>
 		<td class="cptSolde">{$total_pl|nbfr:$devise}</td>
 	</tr>
-	<tr>
-		<td class="cptLabel footerBar">Solde GLOBAL</td>
-		<td class="footerBar cptSolde">{$total_pl+$total_bq|nbfr:$devise}</td>
+</table>
+<table id="total">
+	<tr class="footerbar">
+		<td class="cptLabel">Solde GLOBAL</td>
+		<td class="cptSolde">{$total_pl+$total_bq|nbfr:$devise}</td>
 	</tr>
 </table>
 {if $nbclos>0}<p>PS: il y a {$nbclos} compte{if $nbclos>1}s{/if} clos.</p>{/if}

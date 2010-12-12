@@ -31,7 +31,7 @@ j7HK8QSqCTSglPmw9gSjKiPwqLx8/JVAlo6s5+t8XGJxm315IAImvV4RjpFhdjJHLmDi5JPd7dSYW+Lc
 	<thead>
 		<tr>
 			<th >placement</th>
-			<th align="right">montant placé</th>
+			<th align="right">montant plac&eacute;</th>
 			<th >+/- values</th>
 			<th >total</th>
 		</tr>
@@ -56,8 +56,8 @@ j7HK8QSqCTSglPmw9gSjKiPwqLx8/JVAlo6s5+t8XGJxm315IAImvV4RjpFhdjJHLmDi5JPd7dSYW+Lc
 		<td class="opCredit">&nbsp;</td>
 		<td class="opDebit">{$espece|nbfr:$devise}</td>
 	</tr>
-		<tr >
-			<td colspan="3" class="cptLabel footerBar">Solde</td><td colspan="2" class="cptSolde footerBar">{$solde_compte|nbfr:$devise}</td>
+		<tr class="footerbar">
+			<td colspan="3" class="cptLabel">Solde</td><td colspan="2" class="cptSolde">{$solde_compte|nbfr:$devise}</td>
 		</tr>
 </table>
 </body>

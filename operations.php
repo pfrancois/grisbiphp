@@ -82,7 +82,6 @@ $tpl->assign('solde_compte', ($compte->get_solde_courant()/100)) ;
 $tpl->assign('devise',$compte->get_devise()->get_isocode());
 //afichage final
 if ($compte->is_cloture()){
-	$tpl->display('cloture.smarty') ;
-	}else {
-	$tpl->display('operations.smarty') ;
-}
+	$tpl->assign("cloture",true);
+	}
+$tpl->display('operations.smarty') ;
