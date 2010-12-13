@@ -140,7 +140,8 @@ foreach ($compte->iter_moyens() as $moyen) {
 	)
 	);
 }
-elseif (stripos($_SERVER['HTTP_USER_AGENT'], 'n95') || stripos($_SERVER['HTTP_USER_AGENT'], 'iPhone')) {
+
+if (stripos($_SERVER['HTTP_USER_AGENT'], 'n95') || stripos($_SERVER['HTTP_USER_AGENT'], 'iPhone')) {
 	$tpl->display('operation_n95.smarty');
 } else {
 	$tpl->display('operation.smarty');
