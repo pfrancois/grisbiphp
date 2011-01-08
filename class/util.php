@@ -228,5 +228,16 @@ class util {
 		}
 		fclose($handle);
 	}
+/**
+ * affiche le fichier xml
+ *
+ * @param simplexml $xml
+ */
+function debogXML($xml){
+	$t=$xml->AsXML();
+	$t=str_replace('><','>'.N.'<',$t);
+	highlight_string($t);
+}
+
 //@codeCoverageIgnoreEnd
 }
