@@ -1,7 +1,7 @@
 <?php /* coding: utf-8 */
 
-require_once 'PHPUnit/Framework.php';
-require_once 'G:\zmws\_web.zmwsc\comptes\class\loader.php';
+
+require_once dirname(__file__).'/../../class/loader.php';
 
 /**
  * Test class for ib.
@@ -93,7 +93,7 @@ class ibTest extends PHPUnit_Framework_TestCase{
 		global $gsb_ibs;
 		$x=$gsb_ibs->get_by_id(2)->iter_sub();
 		foreach ($x as $y){
-			$this->assertType('sib',$y);
+			$this->assertInstanceOf('sib',$y);
 		}
 		$this->assertEquals(1,count($x));
 	}
@@ -130,7 +130,7 @@ class ibTest extends PHPUnit_Framework_TestCase{
 	public function testGet_sub_by_id()	{
 		global $gsb_ibs;
 		$r=$gsb_ibs->get_by_id(2)->get_sub_by_id(1);
-		$this->assertType('sib',$r);
+		$this->assertInstanceOf('sib',$r);
 		$this->assertEquals(1,$r->get_id());
 
 	}

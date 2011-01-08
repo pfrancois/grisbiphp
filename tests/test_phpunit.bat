@@ -1,1 +1,1 @@
-phpunit
+phpunit  --coverage-html coverage

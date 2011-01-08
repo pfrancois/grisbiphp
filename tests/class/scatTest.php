@@ -1,8 +1,8 @@
 <?php /* coding: utf-8 */
 
-require_once 'PHPUnit/Framework.php';
 
-require_once 'G:\zmws\_web.zmwsc\comptes\class\loader.php';
+
+require_once dirname(__file__).'/../../class/loader.php';
 
 /**
  * Test class for scat.

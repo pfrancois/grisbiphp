@@ -1,7 +1,7 @@
 <?php  /* coding: utf-8 */
 
-require_once 'PHPUnit/Framework.php';
-require_once 'G:\zmws\_web.zmwsc\comptes\class\loader.php' ;
+
+require_once dirname(__file__).'/../../class/loader.php';
 
 /**
  * Test class for xml.
@@ -11,49 +11,43 @@ class xmlTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @var xml
 	 */
-	protected $object ;
+	protected $object;
 	/**
 	 * Sets up the fixture, for example, opens a network connection.
 	 * This method is called before a test is executed.
 	 */
 	protected function setUp() {
 		//on prend le fichier de test et on remplace avec celui actuel
-		copy('G:/zmws/_web.zmwsc/comptes/tests/fichiers/test_original.gsb', 'test.gsb') ;
-	}
-	protected function tearDown() {
-		@unlink('test.gsb') ;
+		copy(GSB_DIR.'/tests/fichiers/test_original.gsb', 'test.gsb');
 	}
 
 	public function testGet_nom_de_fichier_inconnu() {
-		$this->setExpectedException('InvalidArgumentException') ;
-		$fichier_xml = new xml('ceciestunfichierinconnu.gsb') ;
-	}
-	public function testsur_free() {
-		$fichier_xml = new xml('test.gsb', true) ;
+		$this->setExpectedException('InvalidArgumentException');
+		$fichier_xml = new xml('ceciestunfichierinconnu.gsb');
 	}
 
 	public function testGet_fichier_invalide() {
-		$this->setExpectedException('UnexpectedValueException') ;
-		$fichier_xml = new xml(GSB_DIR.'/tests/fichiers/test_mauvaise_version.gsb') ;
+		$this->setExpectedException('UnexpectedValueException');
+		$fichier_xml = new xml(GSB_DIR.'/tests/fichiers/test_mauvaise_version.gsb');
 	}
 
 	public function testGet_fichier_normal() {
-		$fichier_xml = new xml('test.gsb') ;
-		$this->assertTrue($fichier_xml instanceof xml) ;
+		$fichier_xml = new xml('test.gsb');
+		$this->assertInstanceOf('xml',$fichier_xml);
 	}
 
 	/**
 	 * verifie que xpth_iter nous renvoie bien un tableau qui contient 11 SimpleXMLElement
 	 */
 	public function testXpath_iter_normal() {
-		$f = new xml('test.gsb') ;
-		$r = $f->xpath_iter("//Compte") ;
+		$f = new xml('test.gsb');
+		$r = $f->xpath_iter("//Compte");
 		//on verifie que c'est bien un tableau
-		$this->assertType('array', $r) ;
+		$this->assertInternalType('array', $r);
 		//on verifie qu'il y a bien nos 11 comptes
-		$this->assertEquals(7, count($r)) ;
+		$this->assertEquals(7, count($r));
 		foreach ($r as $x) {
-			$this->assertType('SimpleXMLElement', $x) ;
+			$this->assertInstanceOf('SimpleXMLElement', $x);
 		}
 	}
 	/**
@@ -61,8 +55,8 @@ class xmlTest extends PHPUnit_Framework_TestCase {
 	 * @expectedException Exception_no_reponse
 	 */
 	public function testXpath_iter_no_reponse() {
-		$f = new xml('test.gsb') ;
-		$r = $f->xpath_iter("//ceciestunegrandeinconnu") ;
+		$f = new xml('test.gsb');
+		$r = $f->xpath_iter("//ceciestunegrandeinconnu");
 	}
 
 	/**
@@ -70,9 +64,9 @@ class xmlTest extends PHPUnit_Framework_TestCase {
 	 * @depends testGet_fichier_normal
 	 */
 	public function testXpath_reponse_normal() {
-		$f = new xml('test.gsb') ;
-		$r = $f->xpath_uniq("//Compte/Details/No_de_compte[.='0']") ;
-		$this->assertEquals(0, (int)$r) ;
+		$f = new xml('test.gsb');
+		$r = $f->xpath_uniq("//Compte/Details/No_de_compte[.='0']");
+		$this->assertEquals(0, (int)$r);
 	}
 	/**
 	 *on demande le numero du compte 0. donc ca doit donner int(0)
@@ -80,8 +74,8 @@ class xmlTest extends PHPUnit_Framework_TestCase {
 	 * @expectedException Exception_no_reponse
 	 */
 	public function testXpath_non_existant() {
-		$f = new xml('test.gsb') ;
-		$r = $f->xpath_uniq("//ceciestunegrandeinconnu") ;
+		$f = new xml('test.gsb');
+		$r = $f->xpath_uniq("//ceciestunegrandeinconnu");
 	}
 
 	/**
@@ -91,29 +85,29 @@ class xmlTest extends PHPUnit_Framework_TestCase {
 	 * @expectedException Exception_many_reponse
 	 */
 	public function testXpath_renvoi_reponse_multiple() {
-		$f = new xml('test.gsb') ;
-		$r = $f->xpath_uniq("//Compte") ;
+		$f = new xml('test.gsb');
+		$r = $f->xpath_uniq("//Compte");
 	}
 	/**
 	 * @depends testGet_fichier_normal
 	 * verifie que l'on peut sauvegarder dans un autre nom
 	 */
 	public function testSave() {
-		$f = new xml('test.gsb') ;
-		$f->save() ;
-		//~ $this->assertFileEquals(GSB_DIR.'/tests/fichiers/test_original.gsb', 'test.gsb') ;
+		$f = new xml('test.gsb');
+		$f->save();
+		$this->assertXmlFileEqualsXmlFile(GSB_DIR.'/tests/fichiers/test_original.gsb', 'test.gsb');
 	}
 	/**
 	 * @depends testGet_fichier_normal
 	 * verifie que l'on peut sauvegarder dans un autre nom
 	 */
 	public function testSave_nom_change() {
-		$f = new xml('test.gsb') ;
-		$f->save('test_reussi.gsb') ;
-		$this->assertFileExists('test_reussi.gsb') ;
-		//~ $this->assertFileEquals(GSB_DIR.'/tests/fichiers/test_original.gsb', 'test_reussi.gsb') ;
+		$f = new xml('test.gsb');
+		$f->save('test_reussi.gsb');
+		$this->assertFileExists('test_reussi.gsb');
+		//~ $this->assertFileEquals(GSB_DIR.'/tests/fichiers/test_original.gsb', 'test_reussi.gsb');
 		//enlevé car enregistrement problemetique pour les retour de ligne
-		unlink('test_reussi.gsb') ;
+		unlink('test_reussi.gsb');
 	}
 	/**
 	 * verifie que le nom du fichier est bien celui attendu
@@ -121,18 +115,18 @@ class xmlTest extends PHPUnit_Framework_TestCase {
 	 * @depends testGet_fichier_normal
 	 */
 	public function testget_xmlfile() {
-		$f = new xml('test.gsb') ;
-		$this->assertEquals('test.gsb', basename((string )$f->get_xmlfile())) ;
+		$f = new xml('test.gsb');
+		$this->assertEquals('test.gsb', basename((string )$f->get_xmlfile()));
 	}
 	public function test_reload() {
-		$f = new xml('test.gsb') ;
-		$f->get_xml()->Generalites->Titre = 'ceci est faux' ;
-		$f->reload() ;
-		$this->assertEquals('tiitre du fichier', (string )$f->get_xml()->Generalites->Titre) ;
+		$f = new xml('test.gsb');
+		$f->get_xml()->Generalites->Titre = 'ceci est faux';
+		$f->reload();
+		$this->assertEquals('tiitre du fichier', (string )$f->get_xml()->Generalites->Titre);
 	}
 	public function test_iter_class_faux() {
-		$f = new xml('test.gsb') ;
-		$this->assertEquals(array(), $f->iter_class('toto', 'operation')) ;
+		$f = new xml('test.gsb');
+		$this->assertEquals(array(), $f->iter_class('toto', 'operation'));
 	}
 }
 

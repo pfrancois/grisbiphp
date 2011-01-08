@@ -1,6 +1,6 @@
 <?php /* coding: utf-8 */
 
-require_once 'PHPUnit/Framework.php';
+
 require_once 'G:\zmws\_web.zmwsc\comptes\class\util.php';
 date_default_timezone_set('Europe/Paris');
 class utilTest extends PHPUnit_Framework_TestCase {
@@ -48,15 +48,9 @@ class utilTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testget_page_param(){
-		$_GET['toto']=addslashes("ceci'est'u\"");
+		$_GET['toto']="ceci'est'u\"";
 		$this->assertEquals('',util::get_page_param('atat'));
 		$this->assertEquals("ceci'est'u\"",util::get_page_param('toto'));
-		set_magic_quotes_runtime(false);
-		$this->assertEquals("ceci'est'u\"",util::get_page_param('toto'));
-	}
-	public function test_dump(){
-		$this->assertEquals("<pre>1</pre>", util::dump(1));
-		$this->assertEquals("<pre>Array\n(\n    [0] => 1\n    [1] => 2\n)\n</pre>", util::dump(1,2));
 	}
 
 	public function test_rib(){

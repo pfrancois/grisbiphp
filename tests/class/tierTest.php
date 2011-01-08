@@ -1,7 +1,7 @@
 <?php  /* coding: utf-8 */
 
-require_once 'PHPUnit/Framework.php';
-require_once 'G:\zmws\_web.zmwsc\comptes\class\loader.php';
+
+require_once dirname(__file__).'/../../class/loader.php';
 
 /**
  * Test class for tier.
@@ -76,7 +76,7 @@ class tierTest extends PHPUnit_Framework_TestCase{
 	 */
 	public function testDelete_integrite_echeance(){
 		global $gsb_tiers;
-		//~ $this->setExpectedException('exception_integrite_referentielle');
+        $this->setExpectedException('exception_integrite_referentielle');
 		$gsb_tiers->get_by_id(4)->delete();
 	}
 

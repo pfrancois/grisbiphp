@@ -1,7 +1,7 @@
 <?php /* coding: utf-8 */
 
-require_once 'PHPUnit/Framework.php';
-require_once 'G:\zmws\_web.zmwsc\comptes\class\loader.php';
+
+require_once dirname(__file__).'/../../class/loader.php';
 
 /**
  * Test class for moyen.
@@ -40,7 +40,7 @@ class moyenTest extends PHPUnit_Framework_TestCase{
 	public function testGet_mere(){
 		$c=$this->object->get_mere();
 		$this->assertEquals(0,$c->get_id());
-		$this->assertType('compte',$c);
+		$this->assertInstanceOf('compte',$c);
 	}
 	public function test_get_id(){
 		$this->assertEquals(1,$this->object->get_id());

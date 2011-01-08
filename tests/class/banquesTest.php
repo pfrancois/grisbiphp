@@ -1,6 +1,5 @@
 <?php /* coding: utf-8 */
-//require_once 'PHPUnit/Framework.php';
-require_once 'G:\zmws\_web.zmwsc\comptes\class\loader.php';
+require_once dirname(__file__).'/../../class/loader.php';
 
 /**
  * Test class for banques.
@@ -37,7 +36,7 @@ class banquesTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testGet_by_id()	{
 		$r=$this->object->get_by_id(1);
-		$this->assertType('banque',$r);
+		$this->assertInstanceOf('banque',$r);
 		$this->assertEquals(1,$r->get_id());
 	}
 	/**
@@ -83,7 +82,7 @@ class banquesTest extends PHPUnit_Framework_TestCase
 	public function testiter_tiers(){
 		$x=$this->object->iter();
 		foreach ($x as $y){
-			$this->assertType('banque',$y);
+			$this->assertInstanceOf('banque',$y);
 		}
 		$this->assertEquals(2,count($x));
 	}

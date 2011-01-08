@@ -1,7 +1,7 @@
 <?php /* coding: utf-8 */
 
-require_once 'PHPUnit/Framework.php';
-require_once 'G:\zmws\_web.zmwsc\comptes\class\loader.php';
+
+require_once dirname(__file__).'/../../class/loader.php';
 
 /**
  * Test class for categorie.
@@ -100,7 +100,7 @@ class categorieTest extends PHPUnit_Framework_TestCase{
 		global $gsb_categories;
 		$x=$gsb_categories->get_by_id(6)->iter_sub();
 		foreach ($x as $y){
-			$this->assertType('scat',$y);
+			$this->assertInstanceOf('scat',$y);
 		}
 		$this->assertEquals(9,count($x));
 	}
@@ -137,7 +137,7 @@ class categorieTest extends PHPUnit_Framework_TestCase{
 	public function testGet_sub_by_id()	{
 		global $gsb_categories;
 		$r=$gsb_categories->get_by_id(6)->get_sub_by_id(1);
-		$this->assertType('scat',$r);
+		$this->assertInstanceOf('scat',$r);
 		$this->assertEquals(1,$r->get_id());
 
 	}

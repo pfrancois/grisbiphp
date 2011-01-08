@@ -1,7 +1,7 @@
 <?php /* coding: utf-8 */
 
-require_once 'PHPUnit/Framework.php';
-require_once 'G:\zmws\_web.zmwsc\comptes\class\loader.php';
+
+require_once dirname(__file__).'/../../class/loader.php';
 
 /**
  * Test class for compte.
@@ -75,7 +75,7 @@ class compteTest extends PHPUnit_Framework_TestCase{
 		$this->assertEquals(true, $gsb_comptes->get_by_id(1)->is_cloture());
 	}
 	public function testGet_devise() {
-		$this->assertType('devise', $this->object->get_devise());
+		$this->assertInstanceOf('devise', $this->object->get_devise());
 		$this->assertEquals(1,$this->object->get_devise()->get_id());
 	}
 
@@ -105,7 +105,7 @@ class compteTest extends PHPUnit_Framework_TestCase{
 	}
 
 	public function testGet_moyen_by_id() {
-		$this->assertType('moyen', $this->object->get_moyen_by_id(2));
+		$this->assertInstanceOf('moyen', $this->object->get_moyen_by_id(2));
 		$this->assertEquals(2,$this->object->get_moyen_by_id(2)->get_id());
 	}
 
@@ -189,7 +189,7 @@ class compteTest extends PHPUnit_Framework_TestCase{
 	{
 		$x=$this->object->iter_operations();
 		foreach ($x as $y){
-			$this->assertType('operation',$y);
+			$this->assertInstanceOf('operation',$y);
 		}
 		$this->assertEquals(9,count($x));
 	}
@@ -198,7 +198,7 @@ class compteTest extends PHPUnit_Framework_TestCase{
 	{
 		$x=$this->object->iter_moyens();
 		foreach ($x as $y){
-			$this->assertType('moyen',$y);
+			$this->assertInstanceOf('moyen',$y);
 		}
 		$this->assertEquals(5,count($x));
 

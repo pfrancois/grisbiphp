@@ -1,8 +1,8 @@
 <?php /* coding: utf-8 */
 
 
-require_once 'PHPUnit/Framework.php';
-require_once 'G:\zmws\_web.zmwsc\comptes\class\loader.php';
+
+require_once dirname(__file__).'/../../class/loader.php';
 
 /**
  * Test class for operation.
@@ -139,13 +139,13 @@ class operationTest extends PHPUnit_Framework_TestCase {
 
 	public function testGet_compte() {
 		$c = $this->object->get_compte();
-		$this->assertType('compte', $c);
+		$this->assertInstanceOf('compte', $c);
 		$this->assertEquals(0, $c->get_id());
 	}
 
 	public function testGet_tiers() {
 		$c = $this->object->get_tiers();
-		$this->assertType('tier', $c);
+		$this->assertInstanceOf('tier', $c);
 		$this->assertEquals(1, $c->get_id());
 	}
 
@@ -161,19 +161,19 @@ class operationTest extends PHPUnit_Framework_TestCase {
 
 	public function testGet_categorie() {
 		$c = $this->object->get_categorie();
-		$this->assertType('categorie', $c);
+		$this->assertInstanceOf('categorie', $c);
 		$this->assertEquals(6, $c->get_id());
 	}
 
 	public function testGet_scat() {
 		$c = $this->object->get_scat();
-		$this->assertType('scat', $c);
+		$this->assertInstanceOf('scat', $c);
 		$this->assertEquals(2, $c->get_id());
 	}
 
 	public function testGet_moyen() {
 		$c = $this->object->get_moyen();
-		$this->assertType('moyen', $c);
+		$this->assertInstanceOf('moyen', $c);
 		$this->assertEquals(5, $c->get_id());
 		$this->assertEquals(0, $c->get_mere()->get_id());
 	}
@@ -187,7 +187,7 @@ class operationTest extends PHPUnit_Framework_TestCase {
 		global $gsb_operations;
 		$this->object = $gsb_operations->get_by_id(5);
 		$c = $this->object->get_rapp();
-		$this->assertType('rapp', $c);
+		$this->assertInstanceOf('rapp', $c);
 		$this->assertEquals(1, $c->get_id());
 	}
 
@@ -195,7 +195,7 @@ class operationTest extends PHPUnit_Framework_TestCase {
 		global $gsb_operations;
 		$this->object = $gsb_operations->get_by_id(9);
 		$c = $this->object->get_operation_contrepartie();
-		$this->assertType('operation', $c);
+		$this->assertInstanceOf('operation', $c);
 		$this->assertEquals(10, $c->get_id());
 	}
 
@@ -203,7 +203,7 @@ class operationTest extends PHPUnit_Framework_TestCase {
 		global $gsb_operations;
 		$this->object = $gsb_operations->get_by_id(10);
 		$c = $this->object->get_cpt_contrepartie();
-		$this->assertType('compte', $c);
+		$this->assertInstanceOf('compte', $c);
 		$this->assertEquals(2, $c->get_id());
 	}
 
@@ -211,12 +211,12 @@ class operationTest extends PHPUnit_Framework_TestCase {
 		global $gsb_operations;
 		$this->object = $gsb_operations->get_by_id(3);
 		$c = $this->object->get_operation_mere();
-		$this->assertType('operation', $c);
+		$this->assertInstanceOf('operation', $c);
 		$this->assertEquals(2, $c->get_id());
 	}
 
 	public function testget_exercice() {
-		$this->assertType('exercice', $this->object->get_exercice());
+		$this->assertInstanceOf('exercice', $this->object->get_exercice());
 		$this->assertEquals("2010", $this->object->get_exercice()->get_nom());
 	}
 
@@ -226,12 +226,12 @@ class operationTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testget_ib() {
-		$this->assertType('ib', $this->object->get_ib());
+		$this->assertInstanceOf('ib', $this->object->get_ib());
 		$this->assertEquals("2", $this->object->get_ib()->get_id());
 	}
 
 	public function testget_sib() {
-		$this->assertType('sib', $this->object->get_sib());
+		$this->assertInstanceOf('sib', $this->object->get_sib());
 		$this->assertEquals("1", $this->object->get_sib()->get_id());
 	}
 
@@ -268,7 +268,7 @@ class operationTest extends PHPUnit_Framework_TestCase {
 
 	public function test_get_xml	() {
 		$x=$this->object->get_xml();
-		$this->assertType('SimpleXMLElement',$x);
+		$this->assertInstanceOf('SimpleXMLElement',$x);
 		$this->assertEquals(1,(int)$x['No']);
 	}
 
@@ -361,7 +361,7 @@ class operationTest extends PHPUnit_Framework_TestCase {
 	public function testSet_ope_mere() {
 		global $gsb_operations;
 		$this->object->set_ope_mere($gsb_operations->get_by_id(2));
-		$this->assertType('operation', $this->object->get_operation_mere());
+		$this->assertInstanceOf('operation', $this->object->get_operation_mere());
 		$this->assertEquals(2, $this->object->get_operation_mere()->get_id());
 	}
 
@@ -382,7 +382,7 @@ class operationTest extends PHPUnit_Framework_TestCase {
 	public function testset_categorie() {
 		global $gsb_categories;
 		$this->object->set_categorie($gsb_categories->get_by_id(5));
-		$this->assertType('categorie', $this->object->get_categorie());
+		$this->assertInstanceOf('categorie', $this->object->get_categorie());
 		$this->assertEquals(5, $this->object->get_categorie()->get_id());
 	}
 
@@ -390,7 +390,7 @@ class operationTest extends PHPUnit_Framework_TestCase {
 		global $gsb_categories;
 		$this->object->set_categorie($gsb_categories->get_by_id(6));
 		$this->object->set_scat($this->object->get_categorie()->get_sub_by_id(3));
-		$this->assertType('scat', $this->object->get_scat());
+		$this->assertInstanceOf('scat', $this->object->get_scat());
 		$this->assertEquals(6, $this->object->get_categorie()->get_id());
 		$this->assertEquals(3, $this->object->get_scat()->get_id());
 	}
@@ -398,7 +398,7 @@ class operationTest extends PHPUnit_Framework_TestCase {
 	public function testset_scat_version_raccourci() {
 		global $gsb_categories;
 		$this->object->set_scat($gsb_categories->get_by_id(7)->get_sub_by_id(3));
-		$this->assertType('scat', $this->object->get_scat());
+		$this->assertInstanceOf('scat', $this->object->get_scat());
 		$this->assertEquals(7, $this->object->get_categorie()->get_id());
 		$this->assertEquals(3, $this->object->get_scat()->get_id());
 	}
@@ -443,7 +443,7 @@ class operationTest extends PHPUnit_Framework_TestCase {
 		global $gsb_operations;
 		$x = $gsb_operations->get_by_id(2)->iter_operation_ventilees();
 		foreach ($x as $y) {
-			$this->assertType('operation', $y);
+			$this->assertInstanceOf('operation', $y);
 		}
 		$this->assertEquals(2, count($x));
 	}
@@ -467,7 +467,7 @@ class operationTest extends PHPUnit_Framework_TestCase {
 	public function testset_ib() {
 		global $gsb_ibs;
 		$this->object->set_ib($gsb_ibs->get_by_id(1));
-		$this->assertType('ib', $this->object->get_ib());
+		$this->assertInstanceOf('ib', $this->object->get_ib());
 		$this->assertEquals(1, $this->object->get_ib()->get_id());
 	}
 
@@ -475,7 +475,7 @@ class operationTest extends PHPUnit_Framework_TestCase {
 		global $gsb_ibs;
 		$this->object->set_ib($gsb_ibs->get_by_id(2));
 		$this->object->set_sib($this->object->get_ib()->get_sub_by_id(1));
-		$this->assertType('sib', $this->object->get_sib());
+		$this->assertInstanceOf('sib', $this->object->get_sib());
 		$this->assertEquals(2, $this->object->get_ib()->get_id());
 		$this->assertEquals(1, $this->object->get_sib()->get_id());
 	}
@@ -483,7 +483,7 @@ class operationTest extends PHPUnit_Framework_TestCase {
 	public function testset_sib_version_raccourci() {
 		global $gsb_ibs;
 		$this->object->set_sib($gsb_ibs->get_by_id(3)->get_sub_by_id(1));
-		$this->assertType('sib', $this->object->get_sib());
+		$this->assertInstanceOf('sib', $this->object->get_sib());
 		$this->assertEquals(3, $this->object->get_ib()->get_id());
 		$this->assertEquals(1, $this->object->get_sib()->get_id());
 	}
