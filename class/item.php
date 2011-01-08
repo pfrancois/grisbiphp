@@ -7,7 +7,7 @@ abstract class item{
 	 * @var $c_xml SimpleXMLElement le compte simplexml
 	 * @todo remettre en protected
 	 */
-	public $_item_xml ;
+	protected $_item_xml ;
 	protected $_dom ;
 	/**
 	 *
