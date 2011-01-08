@@ -135,17 +135,6 @@ class util {
 		return trim($r) ;
 	}
 
-	/**
-	 * fonction dump qui marche avec plusieurs variabales
-	 *
-	 * @param mixed $data la liste des choses a dumper
-	 */
-	public static function dump($data) {
-		if (func_num_args() > 1) {
-			$data = func_get_args() ;
-		}
-		return "<pre>" . var_dump($data, true) . "</pre>" ;
-	}
 
 	// @codeCoverageIgnoreEnd
 
