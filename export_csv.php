@@ -1,6 +1,6 @@
-<?php  /* coding: utf-8 */
+<?php /* coding: utf-8 */
 
-require_once ('header.php') ;
+require_once ('header.php');
 $csv=array();
 //on parcourt les operations
 foreach ($gsb_operations->iter() as $ope) {
@@ -10,7 +10,7 @@ foreach ($gsb_operations->iter() as $ope) {
 		$scat="";
 	} else {
 		if ($ope->is_ventilee()) {
-			continue;// on  ne prend pas les operation meres des ventilees
+			continue;// on ne prend pas les operation meres des ventilees
 		}else {
 			if (is_null($ope->get_categorie())){
 				$cat="";
@@ -63,5 +63,3 @@ readfile($file);
 //nettoyage
 unlink($file);
 exit();
-
-

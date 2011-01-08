@@ -46,9 +46,9 @@ else {//edition
 foreach ($gsb_comptes->iter('all') as $compte) {
 	if (!$compte->is_cloture()){
 		$tpl->append('comptes', array("id" => $compte->get_id(),
-									  "nom" => $compte->get_nom()
+									 "nom" => $compte->get_nom()
 					)
-		) ;
+		);
 	}
 }
 $ua=$_SERVER['HTTP_USER_AGENT'];

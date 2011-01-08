@@ -24,11 +24,11 @@ j7HK8QSqCTSglPmw9gSjKiPwqLx8/JVAlo6s5+t8XGJxm315IAImvV4RjpFhdjJHLmDi5JPd7dSYW+Lc
 <table width="100%" id="boutons">
 	<tr>
 	{if $cloture}
-		<td  width="100%"  class="boutton" ><a href="comptes.php">retour liste comptes</a></td>
+		<td width="100%" class="boutton" ><a href="comptes.php">retour liste comptes</a></td>
 	</tr>
 	{else}
 		<td width="50%" class="boutton" ><a href="operation.php?cpt_id={$cpt_id}">Nouvelle Op.</a></td>
-		<td  width="50%"  class="boutton" ><a href="comptes.php">retour liste comptes</a></td>
+		<td width="50%" class="boutton" ><a href="comptes.php">retour liste comptes</a></td>
 			</tr>
 	<tr>
 		<td width="100%" class="boutton" colspan="2"> <a href="virement.php?cpt_id={$cpt_id}" > Nouveau Virement vers {$compte_nom|escape:'htmlall':'UTF-8'} </a></td>
@@ -41,9 +41,9 @@ j7HK8QSqCTSglPmw9gSjKiPwqLx8/JVAlo6s5+t8XGJxm315IAImvV4RjpFhdjJHLmDi5JPd7dSYW+Lc
 		<tr>
 			<th >Date</th>
 			<th >Tiers</th>
-			<th >Cat&eacute;gorie</th>
-			<th >Cr&eacute;dit</th>
-			<th >D&eacute;bit</th>
+			<th >Catégorie</th>
+			<th >Crédit</th>
+			<th >Débit</th>
 		</tr>
 	</thead>
 	{foreach from=$opes item=ope}
@@ -87,11 +87,11 @@ j7HK8QSqCTSglPmw9gSjKiPwqLx8/JVAlo6s5+t8XGJxm315IAImvV4RjpFhdjJHLmDi5JPd7dSYW+Lc
 	{foreachelse}
 		<tr class="item">
 			<td colspan="5">
-				aucune op&eacute;ration n&apos;est affich&eacute;.<br/>
+				aucune opération n'est affichée.<br/>
 				{if $nbfiltre>1}
-					{$nbfiltre} op&eacute;rations ont &eacute;t&eacute; filtr&eacute;es car elles sont au del&agrave; de la limite des {$smarty.const.NB_JOURS_AFF} jours maximum.<br/>
+					{$nbfiltre} opérations ont été filtrées car elles sont au delà de la limite des {$smarty.const.NB_JOURS_AFF} jours maximum.<br/>
 				{elseif $nbfiltre==1}
-					1 op&eacute;ration a &eacute;t&eacute; filtr&eacute;e car elle est au del&agrave; de la limite des {$smarty.const.NB_JOURS_AFF} jours maximum.<br/>
+					1 opération a été filtrée car elle est au delà de la limite des {$smarty.const.NB_JOURS_AFF} jours maximum.<br/>
 				{/if}
 
 			</td>
@@ -102,9 +102,9 @@ j7HK8QSqCTSglPmw9gSjKiPwqLx8/JVAlo6s5+t8XGJxm315IAImvV4RjpFhdjJHLmDi5JPd7dSYW+Lc
 		</tr>
 </table>
 {if $nbrapp>1}
-	note: {$nbrapp} op&eacute;rations ont &eacute;t&eacute; filtr&eacute;es car elles sont rapproch&eacute;es.<br/>
+	note: {$nbrapp} opérations ont été filtrées car elles sont rapprochées.<br/>
 {elseif $nbrapp==1}
-	note: 1 op&eacute;ration a &eacute;t&eacute; filtr&eacute;e car elle est rapproch&eacute;e.<br/>
+	note: 1 opération a été filtrée car elle est rapprochée.<br/>
 {/if}
 </body>
 </html>

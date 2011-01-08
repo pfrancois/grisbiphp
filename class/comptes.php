@@ -7,9 +7,9 @@ class comptes extends items {
 	/**
 	 * @var la chaine qui permet une iteration facile
 	 */
-	protected $_xpath = '//Compte' ;
-	public $nom_classe = __class__ ;
-	protected $_categories ;
+	protected $_xpath = '//Compte';
+	public $nom_classe = __class__;
+	protected $_categories;
 	/**
 	 * renvoi le compte dont on donne l'id
 	 *
@@ -19,18 +19,18 @@ class comptes extends items {
 	 * @throws exception_parametre_invalide si $id n'est integer
 	 */
 	public function get_by_id($id) {
-		global $gsb_xml ;
+		global $gsb_xml;
 		try {
 			if (is_numeric($id)) {
-				$r = $gsb_xml->xpath_uniq("//Compte/Details/No_de_compte[.='$id']/../..") ;
+				$r = $gsb_xml->xpath_uniq("//Compte/Details/No_de_compte[.='$id']/../..");
 			} else {
-				throw new exception_parametre_invalide('$id') ;
+				throw new exception_parametre_invalide('$id');
 			}
 		}
 		catch (Exception_no_reponse $except) {
-			throw new exception_not_exist("compte", $id) ;
+			throw new exception_not_exist("compte", $id);
 		}
-		return new compte($r) ;
+		return new compte($r);
 	}
 
 	/**
@@ -41,14 +41,14 @@ class comptes extends items {
 	 * @throws exception_not_exist si le nom ne renvoit rien
 	 */
 	public function get_id_by_name($nom) {
-		global $gsb_xml ;
+		global $gsb_xml;
 		try {
-			$r = $gsb_xml->xpath_uniq("//Compte/Details/Nom[.='$nom']/../No_de_compte") ;
+			$r = $gsb_xml->xpath_uniq("//Compte/Details/Nom[.='$nom']/../No_de_compte");
 		}
 		catch (Exception_no_reponse $except) {
-			throw new exception_not_exist("compte", $nom) ;
+			throw new exception_not_exist("compte", $nom);
 		}
-		return (int)$r ;
+		return (int)$r;
 	}
 
 	/**
@@ -57,15 +57,15 @@ class comptes extends items {
 	 * @return int le prochain id
 	 */
 	public function get_next() {
-		global $gsb_xml ;
-		$r = $gsb_xml->xpath_iter("//Compte/Details/No_de_compte") ;
-		$max = 0 ;
+		global $gsb_xml;
+		$r = $gsb_xml->xpath_iter("//Compte/Details/No_de_compte");
+		$max = 0;
 		foreach ($r as $ope) {
 			if ((int)$ope > $max) {
-				$max = (int)$ope ;
+				$max = (int)$ope;
 			}
 		}
-		return $max + 1 ;
+		return $max + 1;
 	}
 
 	/**
@@ -74,8 +74,8 @@ class comptes extends items {
 	 * @return integer renvoie le compte courant
 	 */
 	public function get_compte_courant() {
-		global $gsb_xml ;
-		return (int)$gsb_xml->xpath_uniq("//Comptes/Generalites/Compte_courant") ;
+		global $gsb_xml;
+		return (int)$gsb_xml->xpath_uniq("//Comptes/Generalites/Compte_courant");
 	}
 	/**
 	 * change le compte courant
@@ -86,18 +86,18 @@ class comptes extends items {
 	 */
 
 	public function set_compte_courant($id) {
-		global $gsb_xml ;
+		global $gsb_xml;
 		if (is_numeric($id)) {
-			$r = $gsb_xml->xpath_uniq("//Comptes/Generalites") ;
+			$r = $gsb_xml->xpath_uniq("//Comptes/Generalites");
 			try {
-				$this->get_by_id($id) ;
-				$r->Compte_courant = $id ;
+				$this->get_by_id($id);
+				$r->Compte_courant = $id;
 			}
 			catch (Exception_not_exist $except) {
-				throw new exception_not_exist("compte", $id) ;
+				throw new exception_not_exist("compte", $id);
 			}
 		} else {
-			throw new exception_parametre_invalide('$id:' . $id) ;
+			throw new exception_parametre_invalide('$id:' . $id);
 		}
 	}
 	/**
@@ -107,17 +107,17 @@ class comptes extends items {
 	 * @return compte
 	 */
 	public function iter($type_inclus = array(compte::T_BANCAIRE, compte::T_ESPECE)) {
-		global $gsb_xml ;
-		$cpts = $gsb_xml->xpath_iter("//Compte") ;
+		global $gsb_xml;
+		$cpts = $gsb_xml->xpath_iter("//Compte");
 		if ($type_inclus==='all'){
 			$type_inclus=array(compte::T_ACTIF,compte::T_BANCAIRE,compte::T_ESPECE,compte::T_PASSIF);
 		}
-		$r = array() ;
+		$r = array();
 		foreach ($cpts as $c) {
 			if (in_array((int)$c->Details->Type_de_compte, $type_inclus)) {
-				$r[] = new compte($c) ;
+				$r[] = new compte($c);
 			}
 		}
-		return $r ;
+		return $r;
 	}
 }

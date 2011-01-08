@@ -4,8 +4,8 @@ class etats extends items {
 	/**
 	 * @const la chaine qui permet une iteration facile
 	 */
-	protected $_xpath = '//Etat' ;
-	public $nom_classe = __class__ ;
+	protected $_xpath = '//Etat';
+	public $nom_classe = __class__;
 
 	/**
 	 * renvoi l'operation dont on donne l'id
@@ -16,18 +16,18 @@ class etats extends items {
 	 * @throws exception_parametre_invalide si $id n'est integer
 	 */
 	public function get_by_id($id) {
-		global $gsb_xml ;
+		global $gsb_xml;
 		try {
 			if (is_numeric($id)) {
-				$r = $gsb_xml->xpath_uniq("//Etat/No[.='$id']/..") ;
+				$r = $gsb_xml->xpath_uniq("//Etat/No[.='$id']/..");
 			} else {
-				throw new exception_parametre_invalide('$id') ;
+				throw new exception_parametre_invalide('$id');
 			}
 		}
 		catch (Exception_no_reponse $except) {
-			throw new exception_not_exist("etat", $id) ;
+			throw new exception_not_exist("etat", $id);
 		}
-		return new etat($r) ;
+		return new etat($r);
 	}
 
 	/**
@@ -38,14 +38,14 @@ class etats extends items {
 	 * @throws exception_not_exist si le nom ne renvoit rien
 	 */
 	public function get_id_by_name($nom) {
-		global $gsb_xml ;
+		global $gsb_xml;
 		try {
-			$r = $gsb_xml->xpath_uniq("//Etat/Nom[.='$nom']/..") ;
+			$r = $gsb_xml->xpath_uniq("//Etat/Nom[.='$nom']/..");
 		}
 		catch (Exception_no_reponse $except) {
-			throw new exception_not_exist("etat", $nom) ;
+			throw new exception_not_exist("etat", $nom);
 		}
-		return (int)$r->No ;
+		return (int)$r->No;
 	}
 
 	/**
@@ -54,22 +54,22 @@ class etats extends items {
 	 * @return int le prochain id
 	 */
 	public function get_next() {
-		global $gsb_xml ;
-		$r = $gsb_xml->xpath_iter("//Etat") ;
-		$max = 0 ;
+		global $gsb_xml;
+		$r = $gsb_xml->xpath_iter("//Etat");
+		$max = 0;
 		foreach ($r as $element) {
 			if ((int)$element->No > $max) {
-				$max = (int)$element->No ;
+				$max = (int)$element->No;
 			}
 		}
-		return $max + 1 ;
+		return $max + 1;
 	}
 	/**
 	 * @return etat
 	 * @see class/items::iter()
 	 */
 	public function iter() {
-		global $gsb_xml ;
-		return $gsb_xml->iter_class("//Etat", 'etat') ;
+		global $gsb_xml;
+		return $gsb_xml->iter_class("//Etat", 'etat');
 	}
 }

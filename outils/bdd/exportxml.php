@@ -1,7 +1,7 @@
 <?php /* coding: utf-8 */
-//mise � jour le samedi 19 janvier 2008 � 15:00
+//mise a jour le samedi 19 janvier 2008 a 15:00
 require_once 'include/functions.php';
-$db= new MySQLConnector( 'localhost', 'root', 'mdp','test') ;
+$db= new MySQLConnector( 'localhost', 'root', 'mdp','test');
 
 $xmlinitial="<?xml version=\"1.0\"?><Grisbi></Grisbi>";
 

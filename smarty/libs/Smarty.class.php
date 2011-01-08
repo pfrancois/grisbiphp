@@ -1534,7 +1534,7 @@ class Smarty
 		if(!isset($params['quiet'])) { $params['quiet'] = false; }
 
 		$_return = false;
-		$_params = array('resource_name' => $params['resource_name']) ;
+		$_params = array('resource_name' => $params['resource_name']);
 		if (isset($params['resource_base_path']))
 		$_params['resource_base_path'] = $params['resource_base_path'];
 		else

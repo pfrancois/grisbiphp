@@ -21,7 +21,7 @@ j7HK8QSqCTSglPmw9gSjKiPwqLx8/JVAlo6s5+t8XGJxm315IAImvV4RjpFhdjJHLmDi5JPd7dSYW+Lc
 </head>
 <body>
 <h1 class="survol"><a href="options.php">Comptes</a></h1>
-<h2>comptes esp&egrave;ces ou bancaires</h2>
+<h2>comptes espèces ou bancaires</h2>
 <table id="banques">
 {foreach from=$comptes item=cpt}
 		<tr class="item padding">
@@ -29,7 +29,7 @@ j7HK8QSqCTSglPmw9gSjKiPwqLx8/JVAlo6s5+t8XGJxm315IAImvV4RjpFhdjJHLmDi5JPd7dSYW+Lc
 			<td class="cptSolde"><a href="operations.php?cpt_id={$cpt.id}" >{$cpt.m|nbfr:$cpt.devise}</a></td>
 		</tr>
 {/foreach}
-	<tr class="entete"><td class="cptLabel">Solde comptes banques et comptes esp&egrave;ces</td><td class="cptSolde">{$total_bq|nbfr:$devise}</td></tr>
+	<tr class="entete"><td class="cptLabel">Solde comptes banques et comptes espèces</td><td class="cptSolde">{$total_bq|nbfr:$devise}</td></tr>
 </table>
 
 <h2>autres comptes (Actifs et Passifs)</h2>

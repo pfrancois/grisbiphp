@@ -7,8 +7,8 @@ class operations extends items {
 	/**
 	 * @const la chaine qui permet une iteration facile
 	 */
-	protected $_xpath = '//Operation' ;
-	public $nom_classe = __class__ ;
+	protected $_xpath = '//Operation';
+	public $nom_classe = __class__;
 
 	/**
 	 * renvoi l'operation dont on donne l'id
@@ -19,19 +19,19 @@ class operations extends items {
 	 * @return operation
 	 */
 	public function get_by_id($id) {
-		global $gsb_xml ;
+		global $gsb_xml;
 		try {
 			if (is_numeric((string)$id)) {
 				$id=(int)$id;
-				$req = $gsb_xml->xpath_uniq("//Operation[@No='$id']") ;
+				$req = $gsb_xml->xpath_uniq("//Operation[@No='$id']");
 			} else {
-				throw new exception_parametre_invalide('$id') ;
+				throw new exception_parametre_invalide('$id');
 			}
 		}
 		catch (Exception_no_reponse $except) {
-			throw new exception_not_exist("operation", $id) ;
+			throw new exception_not_exist("operation", $id);
 		}
-		return new operation($req, item::ANCIENNE, $id) ;
+		return new operation($req, item::ANCIENNE, $id);
 	}
 
 	/**
@@ -40,9 +40,9 @@ class operations extends items {
 	 * @return int le prochain id
 	 */
 	public function get_next() {
-		global $gsb_xml ;
-		$r = (int)$gsb_xml->xpath_uniq('//Generalites/Numero_derniere_operation') ;
-		return $r + 1 ;
+		global $gsb_xml;
+		$r = (int)$gsb_xml->xpath_uniq('//Generalites/Numero_derniere_operation');
+		return $r + 1;
 	}
 	
 }

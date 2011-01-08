@@ -5,7 +5,7 @@ class etat extends item {
 	 * @return int id de la categorie
 	 */
 	function get_id() {
-		return (int)$this->_item_xml->No ;
+		return (int)$this->_item_xml->No;
 	}
 	/**
 	 * item::get_nom()
@@ -13,6 +13,6 @@ class etat extends item {
 	 * @return string
 	 */
 	function get_nom() {
-		return (string)$this->_item_xml->Nom ;
+		return (string)$this->_item_xml->Nom;
 	}
 }

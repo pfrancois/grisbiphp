@@ -19,7 +19,7 @@ function start_timing() {
 /**
  * seconde fonction de chrono
  *
- * @param $start_time: le top depart pr�c�dement donn�
+ * @param $start_time: le top depart précédement donné
  * @return number le temps mit depuis le top depart
  */
 function print_timing($start_time) {
@@ -94,14 +94,6 @@ function ins($t){
 	return mysql_real_escape_string(utf8_decode((string) $t));
 }
 
-function sansaccent($t){
-	//retourne une chaine sans accent ni espace
-	$string= strtr($t,
-        "����������������������������������������������������� ", 
-        "AAAAAAaaaaaaOOOOOoooooooEEEEeeeeCcIIIIiiiiUUUUuuuuyNn_");  
-	return $string;
-}
-
 /**
  * retourne une chaine en utf8
  *
@@ -109,8 +101,6 @@ function sansaccent($t){
  * @return string utf8
  */
 function unins($t){
-	//
-
 	return iconv("iso-8859-1","UTF-8",stripslashes($t));
 }
 /**
@@ -119,7 +109,7 @@ function unins($t){
  */
 class MySQLConnector {
 	/**
-	 * permet le passage en mode debogage, si true , cela affiche la requete et le nombre de lignes affect�s
+	 * permet le passage en mode debogage, si true , cela affiche la requete et le nombre de lignes affectés
 	 */
 	public $debogagesql=false;
 	/**
@@ -166,7 +156,7 @@ class MySQLConnector {
 		if ($this->debogagesql) {
 			printf("requete sql: \"%s\" \n", $sql);
 		}
-		$result = mysql_query($sql,$this->link) ;
+		$result = mysql_query($sql,$this->link);
 		if (($this->debogagesql)&& (mysql_affected_rows($this->link)!=1)){
 			printf("lignes affect�es: %d\n", mysql_affected_rows($this->link));
 			echo("<BR>\n");
@@ -250,9 +240,9 @@ class MySQLConnector {
 
 
 /**
- * Affiche le contenu d'une variable (pour d�bugage, pratique pour les bool�ens et les tableaux).
+ * Affiche le contenu d'une variable (pour débugage, pratique pour les bool�ens et les tableaux).
  *
- * @param string $var le nom de la variable � tester (chaine)
+ * @param string $var le nom de la variable à tester (chaine)
  * @return void
  */
 function debog($nomvar,$v,$html=true) {
@@ -269,28 +259,14 @@ function debog($nomvar,$v,$html=true) {
 	}
 }
 
-/**
- * affiche le fichier xml
- *
- * @param simplexml $xml
- */
-function debogXML($xml){
-	$t=$xml->AsXML();
-	$t=str_replace('><','>'.N.'<',$t);
-	highlight_string($t);
-}
 
 /**
- * affiche $s plus retour � la ligne
+ * affiche $s plus retour à la ligne
  *
  * @param string $s
  */
 function aff($s)
 {
 	echo (string)$s.N;
-}
-
-function vardump($n){
-	var_dump($n);
 }
 ?>

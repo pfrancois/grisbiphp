@@ -1,4 +1,4 @@
-<?php  /* coding: utf-8 */
+<?php /* coding: utf-8 */
 
 /**
  * Classe utilitaire qui donne des differentes fonctions utilise ailleurs.
@@ -9,13 +9,13 @@
  */
 class util {
 	/**
-	 *  Fonction de conversion de date du format francais  en Timestamp.
+	 * Fonction de conversion de date du format francais en Timestamp.
 	 *
-	 *  les formats acceptes sont :
-	 *  JJ/MM/AAAA
-	 *  JJ/MM/AA
-	 *  J/M/AA
-	 *  JJMMAAAA
+	 * les formats acceptes sont :
+	 * JJ/MM/AAAA
+	 * JJ/MM/AA
+	 * J/M/AA
+	 * JJMMAAAA
 	 * @param string $gd date au format francais (JJ/MM/AAAA)
 	 * @throws InvalidArgumentException date invalide
 	 * @return int Timestamp en secondes
@@ -26,27 +26,27 @@ class util {
 			$tab=array(substr($gd,0,2),substr($gd,2,2),substr($gd,4,4));
 			$gd=implode("/",$tab);
 		}
-		$date = sscanf($gd, '%d/%d/%d') ;
-		$day = (int)$date[0] ;
-		$month = (int)$date[1] ;
-		$year = (int)$date[2] ;
+		$date = sscanf($gd, '%d/%d/%d');
+		$day = (int)$date[0];
+		$month = (int)$date[1];
+		$year = (int)$date[2];
 		if (!checkdate($month, $day, $year)) {
-			throw new InvalidArgumentException("la date '$gd' est invalide") ;
+			throw new InvalidArgumentException("la date '$gd' est invalide");
 		}
-		return mktime(0, 0, 0, $month, $day, $year) ;
+		return mktime(0, 0, 0, $month, $day, $year);
 	}
 
 	/**
 	 * fonction qui permet d'ajouter une duree a une date
 	 * @param int $cd timestamp
-	 * @param integer $day  nombre de jour a ajouter
+	 * @param integer $day nombre de jour a ajouter
 	 * @param integer $mth nombre de mois a ajouter
-	 * @param integer $yr   nombre de yr a ajouter
+	 * @param integer $yr  nombre de yr a ajouter
 	 * @return int date nouvelle
 	 */
 	public static function add_date($cd, $day = 0, $mth = 0, $yr = 0) {
-		$newdate =  mktime(0, 0, 0, (int)date('m', $cd) + $mth, (int)date('d',$cd) + $day, (int)date('Y', $cd) + $yr) ;
-		return $newdate ;
+		$newdate = mktime(0, 0, 0, (int)date('m', $cd) + $mth, (int)date('d',$cd) + $day, (int)date('Y', $cd) + $yr);
+		return $newdate;
 	}
 
 	/**
@@ -57,14 +57,14 @@ class util {
 	 */
 	public static function get_page_param($paramName) {
 		if (isset($_GET[$paramName])) {
-			$t = (string )$_GET[$paramName] ;
+			$t = (string )$_GET[$paramName];
 			if ((bool)get_magic_quotes_gpc()) {
-				$t = stripslashes($t) ;
+				$t = stripslashes($t);
 			}
 			$t=trim($t);
-			return (string) $t ;
+			return (string) $t;
 		} else {
-			return "" ;
+			return "";
 		}
 	}
 
@@ -72,18 +72,18 @@ class util {
 	 * transforme un nombre francais en centimes
 	 * @param string $n le nombre
 	 * @return int
-	 * @throws  InvalidArgumentException si $n non possible
+	 * @throws InvalidArgumentException si $n non possible
 	 */
 	public static function fr2cent($n) {
-		$n = (string)$n ;
-		$n = str_replace(' ', '', $n) ;
-		$n=str_replace(',', '.', $n) ;
+		$n = (string)$n;
+		$n = str_replace(' ', '', $n);
+		$n=str_replace(',', '.', $n);
 		if (is_numeric($n)){
 			$n=(float)$n;
 		} else {
 			throw new InvalidArgumentException('probleme, '.$n."n'est pas un nombre");
 		}
-		return intval(round($n * 100)) ;
+		return intval(round($n * 100));
 	}
 
 	/**
@@ -99,7 +99,7 @@ class util {
 			throw new InvalidArgumentException('probleme, '.$n."n'est pas un nombre");
 		}
 		$n = floatval($n / 100 );
-		return str_replace('.', ',', sprintf("%01.".$digit."f", $n)) ;
+		return str_replace('.', ',', sprintf("%01.".$digit."f", $n));
 	}
 
 
@@ -114,25 +114,25 @@ class util {
 	 *
 	 */
 	public static function extract_mots($s, $nb = null, $debut = 0) {
-		$data = explode(" ", $s) ;
-		$r = "" ;
+		$data = explode(" ", $s);
+		$r = "";
 		// fonction pour enlever le cas des doubles espaces
 		foreach ($data as $k => $l) {
 			if (trim($l) === "") {
-				unset($data[$k]) ;
+				unset($data[$k]);
 			} else {
-				$data[$k] = trim($l) ;
+				$data[$k] = trim($l);
 			}
 		}
-		$data = explode(" ", implode(" ", $data)) ;
+		$data = explode(" ", implode(" ", $data));
 		// si nb est null, on le fait jusqu'a la fin avec les ajustement du a $debut
 		if ($nb == null) {
-			$nb = count($data) - $debut + 2 ;
+			$nb = count($data) - $debut + 2;
 		}
 		for ($i = $debut; $i < $nb + 1; $i++) {
-			$r = $r . " " . $data[$i] ;
+			$r = $r . " " . $data[$i];
 		}
-		return trim($r) ;
+		return trim($r);
 	}
 
 
@@ -150,20 +150,20 @@ class util {
 	 **/
 	public static function calculerCleRib($sCodeBanque, $sCodeGuichet, $sNumeroCompte) {
 		// Variables locales
-		$iCleRib = 0 ;
-		$sCleRib = '' ;
+		$iCleRib = 0;
+		$sCleRib = '';
 
 		// Calcul de la clé RIB a partir des informations bancaires
-		$sNumeroCompte = strtr(strtoupper($sNumeroCompte), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', '12345678912345678923456789') ;
-		$iCleRib = 97 - (int)fmod(89 * $sCodeBanque + 15 * $sCodeGuichet + 3 * $sNumeroCompte, 97) ;
+		$sNumeroCompte = strtr(strtoupper($sNumeroCompte), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', '12345678912345678923456789');
+		$iCleRib = 97 - (int)fmod(89 * $sCodeBanque + 15 * $sCodeGuichet + 3 * $sNumeroCompte, 97);
 
 		// Valeur de retour
 		if ($iCleRib < 10) {
-			$sCleRib = '0' . (string )$iCleRib ;
+			$sCleRib = '0' . (string )$iCleRib;
 		} else {
-			$sCleRib = (string )$iCleRib ;
+			$sCleRib = (string )$iCleRib;
 		}
-		return $sCleRib ;
+		return $sCleRib;
 	}
 	//@codeCoverageIgnoreStart
 	/**

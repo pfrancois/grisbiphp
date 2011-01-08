@@ -1,24 +1,24 @@
 <?php /* coding: utf-8 */
 
 class moyen extends subitem {
-	const NEUTRE = 0 ;
-	const DEBIT = 1 ;
-	const CREDIT = 2 ;
+	const NEUTRE = 0;
+	const DEBIT = 1;
+	const CREDIT = 2;
 
 
 	/**
 	 * @return compte le compte mere
 	 */
 	public function get_mere() {
-		global $gsb_xml ;
-		return new compte($gsb_xml->xpath_uniq('../..', $this->_item_xml)) ;
+		global $gsb_xml;
+		return new compte($gsb_xml->xpath_uniq('../..', $this->_item_xml));
 	}
 
 	/**
 	 * @return int (retourne le signe du moyen (0,1 ou 2) cf constante de la classe
 	 */
 	public function get_signe() {
-		return (int)$this->_item_xml['Signe'] ;
+		return (int)$this->_item_xml['Signe'];
 	}
 
 	/**
@@ -30,9 +30,9 @@ class moyen extends subitem {
 	 */
 	public function set_signe($type) {
 		if ($type === 0 || $type === 1 || $type === 2) {
-			$this->_item_xml['Signe']=$type ;
+			$this->_item_xml['Signe']=$type;
 		} else {
-			throw new exception_parametre_invalide("'$type' parametre invalide. il doit etre 0, 1 ou 2") ;
+			throw new exception_parametre_invalide("'$type' parametre invalide. il doit etre 0, 1 ou 2");
 		}
 	}
 
@@ -40,11 +40,11 @@ class moyen extends subitem {
 	@return bool
 	*/
 	public function has_numerotation_auto() {
-		$r = (string )$this->_item_xml['Numerotation_auto'] ;
+		$r = (string )$this->_item_xml['Numerotation_auto'];
 		if ($r === '1') {
-			return true ;
+			return true;
 		} else {
-			return false ;
+			return false;
 		}
 	}
 
@@ -55,13 +55,13 @@ class moyen extends subitem {
 	public function set_numerotation_auto($etat) {
 		if ($etat === true || $etat === false) {
 			if ($etat == true) {
-				$etat = 1 ;
+				$etat = 1;
 			} else {
-				$etat = 0 ;
+				$etat = 0;
 			}
 			$this->_item_xml['Numerotation_auto']=$etat;
 		} else {
-			throw new exception_parametre_invalide("'$etat' parametre invalide. il doit etre soit true soit false") ;
+			throw new exception_parametre_invalide("'$etat' parametre invalide. il doit etre soit true soit false");
 		}
 	}
 	/**
@@ -69,11 +69,11 @@ class moyen extends subitem {
 	 * @return bool
 	 */
 	public function has_entree_compl() {
-		$r = (string )$this->_item_xml['Affiche_entree'] ;
+		$r = (string )$this->_item_xml['Affiche_entree'];
 		if ($r === '1') {
-			return true ;
+			return true;
 		} else {
-			return false ;
+			return false;
 		}
 	}
 
@@ -81,7 +81,7 @@ class moyen extends subitem {
 	 * @return string
 	 */
 	public function get_entree_comp() {
-		return (string )$this->_item_xml['No_en_cours'] ;
+		return (string )$this->_item_xml['No_en_cours'];
 	}
 
 	/**
@@ -89,17 +89,17 @@ class moyen extends subitem {
 	@return void
 	*/
 	public function set_entree_comp($entree) {
-		$this->_item_xml['Affiche_entree']=1 ;
-		$id = (string )$entree ;
-		$this->_item_xml['No_en_cours']=$entree ;
+		$this->_item_xml['Affiche_entree']=1;
+		$id = (string )$entree;
+		$this->_item_xml['No_en_cours']=$entree;
 	}
 
 	/**
 	 * @return void
 	 */
 	public function efface_entree_comp() {
-		$this->_item_xml['Affiche_entree']=0 ;
-		$this->_item_xml['No_en_cours']="" ;
+		$this->_item_xml['Affiche_entree']=0;
+		$this->_item_xml['No_en_cours']="";
 	}
 
 	/**

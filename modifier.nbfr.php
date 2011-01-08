@@ -4,7 +4,7 @@
  * Smarty plugin
  * @package Smarty
  * @subpackage plugins
- * @author  francois pegory
+ * @author francois pegory
  * @2010-01-01
  */
 /**

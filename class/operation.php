@@ -1,4 +1,4 @@
-<?php  /* coding: utf-8 */
+<?php /* coding: utf-8 */
 
 class operation extends item {
 	/**
@@ -8,12 +8,12 @@ class operation extends item {
 	 * @throws exception_index
 	 */
 	public function __construct(SimpleXMLElement $c, $nouvelle = false, $id = null) {
-		global $gsb_xml ;
-		global $gsb_operations ;
-		parent::__construct($c) ;
+		global $gsb_xml;
+		global $gsb_operations;
+		parent::__construct($c);
 		if ($nouvelle) {
 			if (is_null($id)) {
-				$id = $gsb_operations->get_next() ;
+				$id = $gsb_operations->get_next();
 			}
 			//verification avant la creation
 			try{
@@ -23,40 +23,40 @@ class operation extends item {
 			//numerotation generale
 			if ($id > ($gsb_operations->get_next() - 1)) {
 				//gestion des id a changer
-				$gsb_xml->xpath_uniq('Generalites')->Numero_derniere_operation = $id ;
+				$gsb_xml->xpath_uniq('Generalites')->Numero_derniere_operation = $id;
 			}
 
 			//numerotation dans le compte
 			// on ajoute l'attribut comme on ne peut pas le changer
-			$this->_dom->setAttributeNode(new DOMAttr('No', $id)) ;
+			$this->_dom->setAttributeNode(new DOMAttr('No', $id));
 			//pour les autres champs qui ne sont pas changés par l'application
-			$this->_dom->setAttributeNode(new DOMAttr('Id', '')) ;
-			$this->_dom->setAttributeNode(new DOMAttr('D', '0/0/0')) ;
-			$this->set_date(time()) ; //date du jour par defaut
-			$this->_dom->setAttributeNode(new DOMAttr('Db', '0/0/0')) ;
-			$this->_dom->setAttributeNode(new DOMAttr('M', '0')) ;
-			$this->_dom->setAttributeNode(new DOMAttr('De', '1')) ;
-			$this->_dom->setAttributeNode(new DOMAttr('Rdc', '0')) ;
-			$this->_dom->setAttributeNode(new DOMAttr('Tc', '0,0000000')) ;
-			$this->_dom->setAttributeNode(new DOMAttr('Fc', '0,0000000')) ;
-			$this->_dom->setAttributeNode(new DOMAttr('T', '0')) ;
-			$this->_dom->setAttributeNode(new DOMAttr('C', '0')) ;
-			$this->_dom->setAttributeNode(new DOMAttr('Sc', '0')) ;
-			$this->_dom->setAttributeNode(new DOMAttr('Ov', '0')) ;
-			$this->_dom->setAttributeNode(new DOMAttr('N', '')) ;
-			$this->_dom->setAttributeNode(new DOMAttr('Ty', '0')) ;
-			$this->_dom->setAttributeNode(new DOMAttr('Ct', '')) ;
-			$this->_dom->setAttributeNode(new DOMAttr('P', '0')) ;
-			$this->_dom->setAttributeNode(new DOMAttr('A', '0')) ;
-			$this->_dom->setAttributeNode(new DOMAttr('R', '0')) ;
-			$this->_dom->setAttributeNode(new DOMAttr('E', '0')) ;
-			$this->_dom->setAttributeNode(new DOMAttr('I', '0')) ;
-			$this->_dom->setAttributeNode(new DOMAttr('Si', '0')) ;
-			$this->_dom->setAttributeNode(new DOMAttr('Pc', '')) ;
-			$this->_dom->setAttributeNode(new DOMAttr('Ibg', '')) ;
-			$this->_dom->setAttributeNode(new DOMAttr('Ro', '0')) ;
-			$this->_dom->setAttributeNode(new DOMAttr('Rc', '0')) ;
-			$this->_dom->setAttributeNode(new DOMAttr('Va', '0')) ;
+			$this->_dom->setAttributeNode(new DOMAttr('Id', ''));
+			$this->_dom->setAttributeNode(new DOMAttr('D', '0/0/0'));
+			$this->set_date(time()); //date du jour par defaut
+			$this->_dom->setAttributeNode(new DOMAttr('Db', '0/0/0'));
+			$this->_dom->setAttributeNode(new DOMAttr('M', '0'));
+			$this->_dom->setAttributeNode(new DOMAttr('De', '1'));
+			$this->_dom->setAttributeNode(new DOMAttr('Rdc', '0'));
+			$this->_dom->setAttributeNode(new DOMAttr('Tc', '0,0000000'));
+			$this->_dom->setAttributeNode(new DOMAttr('Fc', '0,0000000'));
+			$this->_dom->setAttributeNode(new DOMAttr('T', '0'));
+			$this->_dom->setAttributeNode(new DOMAttr('C', '0'));
+			$this->_dom->setAttributeNode(new DOMAttr('Sc', '0'));
+			$this->_dom->setAttributeNode(new DOMAttr('Ov', '0'));
+			$this->_dom->setAttributeNode(new DOMAttr('N', ''));
+			$this->_dom->setAttributeNode(new DOMAttr('Ty', '0'));
+			$this->_dom->setAttributeNode(new DOMAttr('Ct', ''));
+			$this->_dom->setAttributeNode(new DOMAttr('P', '0'));
+			$this->_dom->setAttributeNode(new DOMAttr('A', '0'));
+			$this->_dom->setAttributeNode(new DOMAttr('R', '0'));
+			$this->_dom->setAttributeNode(new DOMAttr('E', '0'));
+			$this->_dom->setAttributeNode(new DOMAttr('I', '0'));
+			$this->_dom->setAttributeNode(new DOMAttr('Si', '0'));
+			$this->_dom->setAttributeNode(new DOMAttr('Pc', ''));
+			$this->_dom->setAttributeNode(new DOMAttr('Ibg', ''));
+			$this->_dom->setAttributeNode(new DOMAttr('Ro', '0'));
+			$this->_dom->setAttributeNode(new DOMAttr('Rc', '0'));
+			$this->_dom->setAttributeNode(new DOMAttr('Va', '0'));
 		}
 	}
 
@@ -65,7 +65,7 @@ class operation extends item {
 	 * @return int
 	 */
 	public function get_id() {
-		return (int)$this->_item_xml['No'] ;
+		return (int)$this->_item_xml['No'];
 	}
 
 	/**
@@ -73,9 +73,9 @@ class operation extends item {
 	 * @return compte
 	 */
 	public function get_compte() {
-		global $gsb_xml ;
-		$req = $gsb_xml->xpath_uniq('./../..', $this->_item_xml) ;
-		return new compte($req) ;
+		global $gsb_xml;
+		$req = $gsb_xml->xpath_uniq('./../..', $this->_item_xml);
+		return new compte($req);
 	}
 
 	/**
@@ -83,9 +83,9 @@ class operation extends item {
 	 * @return string
 	 */
 	public function get_date() {
-		$date = (string )$this->_item_xml['D'] ;
-		$date = util::datefr2time($date) ;
-		return $date ;
+		$date = (string )$this->_item_xml['D'];
+		$date = util::datefr2time($date);
+		return $date;
 	}
 
 	/**
@@ -93,7 +93,7 @@ class operation extends item {
 	 * @return int
 	 */
 	public function get_montant() {
-		return util::fr2cent((string )$this->_item_xml['M']) ;
+		return util::fr2cent((string )$this->_item_xml['M']);
 	}
 
 	/**
@@ -101,9 +101,9 @@ class operation extends item {
 	 * @return tiers|null
 	 */
 	public function get_tiers() {
-		global $gsb_tiers ;
-		$t = (int)$this->_item_xml['T'] ;
-		return $gsb_tiers->get_by_id($t) ;
+		global $gsb_tiers;
+		$t = (int)$this->_item_xml['T'];
+		return $gsb_tiers->get_by_id($t);
 	}
 
 	/**
@@ -111,12 +111,12 @@ class operation extends item {
 	 * @return categorie|null
 	 */
 	public function get_categorie() {
-		global $gsb_categories ;
-		$t = (int)$this->_item_xml['C'] ;
+		global $gsb_categories;
+		$t = (int)$this->_item_xml['C'];
 		if ($t==0){
 			return null;
 		}else {
-			return $gsb_categories->get_by_id($t) ;
+			return $gsb_categories->get_by_id($t);
 		}
 	}
 
@@ -124,11 +124,11 @@ class operation extends item {
 	 * @return scat|null
 	 **/
 	public function get_scat() {
-		$t = (int)$this->_item_xml['Sc'] ;
+		$t = (int)$this->_item_xml['Sc'];
 		if ($t==0){
 			return null;
 		}else {
-			return  $this->get_categorie()->get_sub_by_id($t) ;
+			return $this->get_categorie()->get_sub_by_id($t);
 		}
 	}
 
@@ -136,11 +136,11 @@ class operation extends item {
 	 * @return bool
 	 */
 	public function is_ventilee() {
-		$t = (int)$this->_item_xml['Ov'] ;
+		$t = (int)$this->_item_xml['Ov'];
 		if ($t === 1) {
-			return true ;
+			return true;
 		} else {
-			return false ;
+			return false;
 		}
 	}
 
@@ -150,7 +150,7 @@ class operation extends item {
 	 * @return string
 	 */
 	public function get_notes() {
-		return (string )$this->_item_xml['N'] ;
+		return (string )$this->_item_xml['N'];
 	}
 
 	/**
@@ -159,11 +159,11 @@ class operation extends item {
 	 * @return moyen
 	 */
 	public function get_moyen() {
-		$t = (int)$this->_item_xml['Ty'] ;
+		$t = (int)$this->_item_xml['Ty'];
 		if ($t==0){
 			return null;
 		}else {
-			return $this->get_compte()->get_moyen_by_id($t) ;
+			return $this->get_compte()->get_moyen_by_id($t);
 		}
 	}
 
@@ -173,7 +173,7 @@ class operation extends item {
 	 * @return string
 	 */
 	public function get_num_chq() {
-		return (string )$this->_item_xml['Ct'] ;
+		return (string )$this->_item_xml['Ct'];
 	}
 
 	/**
@@ -183,19 +183,19 @@ class operation extends item {
 	 * @return int
 	 */
 	public function get_statut_pointage() {
-		$t = (int)$this->_item_xml['P'] ;
-		return $t ;
+		$t = (int)$this->_item_xml['P'];
+		return $t;
 	}
 
 	/**
 	 * @return bool
 	 */
 	public function is_planifie() {
-		$r = (int)$this->_item_xml['A'] ;
+		$r = (int)$this->_item_xml['A'];
 		if ($r === 1) {
-			return true ;
+			return true;
 		} else {
-			return false ;
+			return false;
 		}
 	}
 
@@ -205,9 +205,9 @@ class operation extends item {
 	 * @return rapp
 	 */
 	public function get_rapp() {
-		global $gsb_rapps ;
-		$t = (int)$this->_item_xml['R'] ;
-		return $gsb_rapps->get_by_id($t) ;
+		global $gsb_rapps;
+		$t = (int)$this->_item_xml['R'];
+		return $gsb_rapps->get_by_id($t);
 	}
 
 	/**
@@ -216,12 +216,12 @@ class operation extends item {
 	 * @return exercice|null
 	 */
 	public function get_exercice() {
-		global $gsb_exercices ;
-		$t = (int)$this->_item_xml['E'] ;
+		global $gsb_exercices;
+		$t = (int)$this->_item_xml['E'];
 		if ($t==0){
 			return null;
 		}else {
-			return $gsb_exercices->get_by_id($t) ;
+			return $gsb_exercices->get_by_id($t);
 		}
 	}
 
@@ -231,8 +231,8 @@ class operation extends item {
 	 * @return ib
 	 */
 	public function get_ib() {
-		global $gsb_ibs ;
-		$t = (int)$this->_item_xml['I'] ;
+		global $gsb_ibs;
+		$t = (int)$this->_item_xml['I'];
 		if ($t==0){
 			return null;
 		}else {
@@ -246,11 +246,11 @@ class operation extends item {
 	 * @return sib
 	 */
 	public function get_sib() {
-		$t = (int)$this->_item_xml['Si'] ;
+		$t = (int)$this->_item_xml['Si'];
 		if ($t==0){
 			return null;
 		}else {
-			return  $this->get_ib()->get_sub_by_id($t);
+			return $this->get_ib()->get_sub_by_id($t);
 		}
 	}
 
@@ -260,9 +260,9 @@ class operation extends item {
 	 * @return operation
 	 */
 	public function get_operation_contrepartie() {
-		global $gsb_operations ;
-		$t = (int)$this->_item_xml['Ro'] ;
-		return $gsb_operations->get_by_id($t) ;
+		global $gsb_operations;
+		$t = (int)$this->_item_xml['Ro'];
+		return $gsb_operations->get_by_id($t);
 	}
 
 	/**
@@ -271,20 +271,20 @@ class operation extends item {
 	 * @return operation
 	 */
 	public function get_cpt_contrepartie() {
-		global $gsb_comptes ;
-		$t = (int)$this->_item_xml['Rc'] ;
-		return $gsb_comptes->get_by_id($t) ;
+		global $gsb_comptes;
+		$t = (int)$this->_item_xml['Rc'];
+		return $gsb_comptes->get_by_id($t);
 	}
 
 	/**
 	 * @return bool
 	 */
 	public function is_ventilation() {
-		$t = (int)$this->_item_xml['Va'] ;
+		$t = (int)$this->_item_xml['Va'];
 		if ($t != 0) {
-			return true ;
+			return true;
 		} else {
-			return false ;
+			return false;
 		}
 	}
 
@@ -294,11 +294,11 @@ class operation extends item {
 	 * @return bool
 	 */
 	public function is_virement() {
-		$t = (int)$this->_item_xml['Ro'] ;
+		$t = (int)$this->_item_xml['Ro'];
 		if ($t != 0) {
-			return true ;
+			return true;
 		} else {
-			return false ;
+			return false;
 		}
 
 	}
@@ -309,9 +309,9 @@ class operation extends item {
 	 * @return operation
 	 */
 	public function get_operation_mere() {
-		global $gsb_operations ;
-		$t = (int)$this->_item_xml['Va'] ;
-		return $gsb_operations->get_by_id($t) ;
+		global $gsb_operations;
+		$t = (int)$this->_item_xml['Va'];
+		return $gsb_operations->get_by_id($t);
 	}
 
 	/** ------------------------------- SETTER -------------------------------------------------------*/
@@ -327,11 +327,11 @@ class operation extends item {
 			if (is_numeric($id)) {
 				$compte = $gsb_comptes->get_by_id($id);
 			} else {
-				throw new exception_parametre_invalide('$id') ;
+				throw new exception_parametre_invalide('$id');
 			}
 		}
 		catch (Exception_no_reponse $except) {
-			throw new exception_not_exist("compte", $id) ;
+			throw new exception_not_exist("compte", $id);
 		}
 		$op=array(
 		(string) $this->_item_xml['No'] ,
@@ -396,7 +396,7 @@ class operation extends item {
 
 		//modification des soldes
 		//ancien compte
-		$m=util::fr2cent($op[4])/100 ;
+		$m=util::fr2cent($op[4])/100;
 		$compte_ancien->set_solde_courant($compte_ancien->get_solde_courant()-$m);
 		//nouveau compte
 		$compte->set_solde_courant($compte->get_solde_courant()+$m);
@@ -408,7 +408,7 @@ class operation extends item {
 	 */
 	public function set_date($date) {
 		if (is_int($date)) {
-			$date = date('j/n/Y', $date) ;
+			$date = date('j/n/Y', $date);
 			$this->_item_xml['D']=$date;
 		} else {
 			throw new exception_parametre_invalide("la date '$date' doit être au format timestamp. il s'agit de l'opération".$this->get_id());
@@ -423,11 +423,11 @@ class operation extends item {
 	public function set_montant($value){
 		global $gsb_xml;
 		if (is_numeric($value)) {
-			$this->_item_xml['M']=util::cent2fr($value) ;
+			$this->_item_xml['M']=util::cent2fr($value);
 			$compte=$this->get_compte();
 			$compte->set_solde_courant($value+$compte->get_solde_courant());
 		} else {
-			throw new exception_parametre_invalide("le montant '$value' doit être en centime. il s'agit de l'opération".$this->get_id()) ;
+			throw new exception_parametre_invalide("le montant '$value' doit être en centime. il s'agit de l'opération".$this->get_id());
 		}
 	}
 
@@ -448,7 +448,7 @@ class operation extends item {
 	public function set_categorie(categorie $id) {
 		$this->_item_xml['C']=$id->get_id();
 		if (!$id->has_sub()) {
-			$this->_item_xml['Sc']= 0 ;
+			$this->_item_xml['Sc']= 0;
 		}
 	}
 
@@ -458,7 +458,7 @@ class operation extends item {
 	 * @return void
 	 */
 	public function set_scat(scat $id) {
-		$cat = $this->get_categorie() ;
+		$cat = $this->get_categorie();
 		if ($id->get_mere()->get_id() == $cat->get_id()) {
 			$this->_item_xml['Sc']=$id->get_id();
 		} else {
@@ -477,7 +477,7 @@ class operation extends item {
 	public function set_ventilee($v) {
 		if (!is_bool($v)) {
 			throw new exception_parametre_invalide('$v non bool dans opération' . $this->get_id
-			()) ;
+			());
 		}
 		$this->_item_xml['Ov']=$v;
 	}
@@ -489,7 +489,7 @@ class operation extends item {
 	 * @return void
 	 */
 	public function set_notes($n) {
-		$this->_item_xml['N']=(string )$n ;
+		$this->_item_xml['N']=(string )$n;
 	}
 
 	/**
@@ -501,11 +501,11 @@ class operation extends item {
 	 * @throw exception_parametre_invalide si le moyen en fait pas parti du compte
 	 */
 	public function set_moyen(moyen $id) {
-		$compte = $id->get_mere() ;
+		$compte = $id->get_mere();
 		if ($compte->get_id() == (int)$this->get_compte()->get_id()) {
 			$this->_item_xml['Ty']=$id->get_id();
 		} else {
-			throw new exception_parametre_invalide("moyen invalide. vous donnez un moyen du compte " . $compte . " alors que l'opération est dans le compte" . (int)$this->get_compte()->get_id()) ;
+			throw new exception_parametre_invalide("moyen invalide. vous donnez un moyen du compte " . $compte . " alors que l'opération est dans le compte" . (int)$this->get_compte()->get_id());
 		}
 	}
 
@@ -516,7 +516,7 @@ class operation extends item {
 	 * @return void
 	 */
 	public function set_num_chq($n) {
-		$this->_item_xml['Ct']=(string )$n ;
+		$this->_item_xml['Ct']=(string )$n;
 	}
 
 	/**
@@ -524,13 +524,13 @@ class operation extends item {
 	 *
 	 * @param int $v
 	 * @return void
-	 * @throw exception_parametre_invalide si pas o  1 ou 2 ou rapp::
+	 * @throw exception_parametre_invalide si pas o 1 ou 2 ou rapp::
 	 */
 	public function set_statut_pointage($type) {
 		if ($type === 0 || $type === 1 || $type === 2) {
 			$this->_item_xml['P']=$type;
 		} else {
-			throw new exception_parametre_invalide("'$type' parametre invalide. il doit être  0, 1 ou 2") ;
+			throw new exception_parametre_invalide("'$type' parametre invalide. il doit être 0, 1 ou 2");
 		}
 	}
 
@@ -539,17 +539,17 @@ class operation extends item {
 	 *
 	 * @param bool $v
 	 * @return void
-	 * @throw exception_parametre_invalide  si pas bool
+	 * @throw exception_parametre_invalide si pas bool
 	 */
 	public function set_planifie($v) {
 		if (!is_bool($v)) {
 			throw new exception_parametre_invalide('$v non bool dans operation ' . $this->get_id
-			()) ;
+			());
 		}
 		if ($v) {
-			$this->_item_xml['A']= 1 ;
+			$this->_item_xml['A']= 1;
 		} else {
-			$this->_item_xml['A']=0 ;
+			$this->_item_xml['A']=0;
 		}
 	}
 
@@ -562,7 +562,7 @@ class operation extends item {
 	public function set_rapp(rapp $id) {
 		$this->_item_xml['R']=$id->get_id();
 		if ($this->get_statut_pointage() != rapp::RAPPROCHEE) {
-			$this->set_statut_pointage(rapp::RAPPROCHEE) ;
+			$this->set_statut_pointage(rapp::RAPPROCHEE);
 		}
 	}
 
@@ -593,7 +593,7 @@ class operation extends item {
 	 * @return void
 	 */
 	public function set_sib(sib $id) {
-		$ib = $this->get_ib() ;
+		$ib = $this->get_ib();
 		if ($id->get_mere()->get_id() == $ib->get_id()) {
 			$this->_item_xml['Si']=$id->get_id();
 		} else {
@@ -625,7 +625,7 @@ class operation extends item {
 	 *@throw exception_base
 	 */
 	public function get_nom() {
-		throw new exception_base("attention, une operation n'a pas de nom") ;
+		throw new exception_base("attention, une operation n'a pas de nom");
 	}
 
 	/**
@@ -634,7 +634,7 @@ class operation extends item {
 	 *@throw exception_base
 	 */
 	public function set_nom($nom) {
-		throw new exception_base("attention, une operation n'a pas de nom alors que vous voulez lui mettre comme nom '$nom'") ;
+		throw new exception_base("attention, une operation n'a pas de nom alors que vous voulez lui mettre comme nom '$nom'");
 	}
 
 
@@ -646,12 +646,12 @@ class operation extends item {
 	 * @thrown Exception_no_reponse si pas d'operation ventilee
 	 */
 	public function iter_operation_ventilees() {
-		global $gsb_xml ;
+		global $gsb_xml;
 		if ($this->is_ventilee()) {
-			$id = $this->get_id() ;
-			return $gsb_xml->iter_class("//Operation[@Va='$id']", "operation") ;
+			$id = $this->get_id();
+			return $gsb_xml->iter_class("//Operation[@Va='$id']", "operation");
 		} else {
-			throw new Exception_no_reponse("pas possible car $this n'est pas une operation ventilee") ;
+			throw new Exception_no_reponse("pas possible car $this n'est pas une operation ventilee");
 		}
 	}
 
@@ -659,63 +659,63 @@ class operation extends item {
 	 *@param bool $controle_integrite gere l'integrité référentielle
 	 */
 	public function delete($controle_integrite = true) {
-		global $gsb_operations ;
-		global $gsb_xml ;
-		$id = $this->get_id() ;
+		global $gsb_operations;
+		global $gsb_xml;
+		$id = $this->get_id();
 		if ($controle_integrite) {
 			if ($this->is_ventilee() == true) {
 				try {
-					$iterateur = $this->iter_operation_ventilees() ;
-					$id_fille = $iterateur[0]->get_id() ;
-					throw new exception_integrite_referentielle('operation', $id, 'operation', $id_fille) ;
+					$iterateur = $this->iter_operation_ventilees();
+					$id_fille = $iterateur[0]->get_id();
+					throw new exception_integrite_referentielle('operation', $id, 'operation', $id_fille);
 				}
 				catch (exception_not_exist $e) {
 					// @codeCoverageIgnoreStart
 					throw new BadMethodCallException("cette operation " . $this->get_id() .
-						" a été définie comme une ventilation mais n'a pas d'opération fille. probleme dans la structure du fichier. effacement annulé") ;
+						" a été définie comme une ventilation mais n'a pas d'opération fille. probleme dans la structure du fichier. effacement annulé");
 					// @codeCoverageIgnoreEnd
 				}
 			}
 			if ($this->is_virement() == true) {
 				try {
-					$this->get_operation_contrepartie()->get_id() ;
+					$this->get_operation_contrepartie()->get_id();
 					throw new exception_integrite_referentielle('operation', $this->get_id(),
-						'operation', $this->get_operation_contrepartie()->get_id()) ;
+						'operation', $this->get_operation_contrepartie()->get_id());
 				}
 				catch (exception_not_exist $e) {
 					// @codeCoverageIgnoreStart
 					throw new BadMethodCallException("cette operation " . $this->get_id() .
-						" a été définie comme une ventilation mais n'a pas d'opération en contrepartie. probleme dans l'effacement") ;
+						" a été définie comme une ventilation mais n'a pas d'opération en contrepartie. probleme dans l'effacement");
 					// @codeCoverageIgnoreEnd
 				}
 			}
 			if ($this->is_ventilation() == true) {
-				$this->get_operation_mere() ;
-				throw new exception_integrite_referentielle('operation', $this->get_id(),'operation', $this->get_operation_mere()->get_id()) ;
+				$this->get_operation_mere();
+				throw new exception_integrite_referentielle('operation', $this->get_id(),'operation', $this->get_operation_mere()->get_id());
 			}
 
 		}
-		$mere = $this->get_compte() ;
+		$mere = $this->get_compte();
 		$montant=$this->get_montant();
-		$this->_dom->parentNode->removeChild($this->_dom) ;
+		$this->_dom->parentNode->removeChild($this->_dom);
 		//recuperation du dernier numero
 		if ($id >= (($gsb_operations->get_next()) - 1)) {
 			//recuperation du dernier numero (dans tous les comptes)
-			$nb_next = 0 ;
+			$nb_next = 0;
 			foreach ($gsb_xml->iter_class('//Operation', 'operation') as $ope) {
 				if ($ope->get_id() > $nb_next) {
-					$nb_next = $ope->get_id() ;
+					$nb_next = $ope->get_id();
 				}
 			}
 			if ($id > $nb_next) {
-				$gsb_xml->get_xml()->Generalites->Numero_derniere_operation = $nb_next ;
+				$gsb_xml->get_xml()->Generalites->Numero_derniere_operation = $nb_next;
 			}
 		}
 		//nb d'operations pour ce compte
-		$nb = count($mere->iter_operations()) ;
-        //gestion de id
-		$req = $gsb_xml->xpath_uniq("//Compte/Details/No_de_compte[.='" . $mere->get_id() . "']/..") ;
-		$req->Nb_operations = $nb ;
+		$nb = count($mere->iter_operations());
+    //gestion de id
+		$req = $gsb_xml->xpath_uniq("//Compte/Details/No_de_compte[.='" . $mere->get_id() . "']/..");
+		$req->Nb_operations = $nb;
 		//gestion des soldes
 		//ancien compte
 		$mere->set_solde_courant($mere->get_solde_courant()-$montant);

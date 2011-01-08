@@ -56,13 +56,13 @@ if(isset($_GET['xpath'])){
 	echo 'requete:<pre style="font-family: monospace;font-size: 1.2em;border: solid #BBB;background: #DDD;">'.$xpath.'</pre><br/>';
 	$req=xpath_tab($xpath);
 	if (!$req){
-		echo 'aucune r&eacute;ponse';
+		echo 'aucune réponse';
 	}else{
 		if (count($req)==1){
 			$req=$req[0];
 			echo 'reponse:<pre>';
 		} else {
-			echo count($req).' r&eacute;ponses:<pre>';
+			echo count($req).' réponses:<pre>';
 		}
 		var_dump($req);
 		echo '</pre>';

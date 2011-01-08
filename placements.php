@@ -1,16 +1,16 @@
 <?php /* coding: utf-8 */
 
-require_once 'header.php' ;
-$cpt_id = (int)util::get_page_param('cpt_id') ;
+require_once 'header.php';
+$cpt_id = (int)util::get_page_param('cpt_id');
 //si pas de compte defini, on revient vers compte.php
-if (empty($cpt_id) &&  $cpt_id!==0){
+if (empty($cpt_id) && $cpt_id!==0){
 	util::redirection_header("comptes.php");
 	exit();
 }
 //on recupere la liste des operation du compte
-$compte = $gsb_comptes->get_by_id($cpt_id) ;
-$tpl->assign('compte_nom', $compte->get_nom()) ;
-$tpl->assign('cpt_id', $cpt_id) ;
+$compte = $gsb_comptes->get_by_id($cpt_id);
+$tpl->assign('compte_nom', $compte->get_nom());
+$tpl->assign('cpt_id', $cpt_id);
 if ($compte->get_type_compte() != compte::T_ACTIF){
 	util::redirection_header("operations.php?cpt_id=$cpt_id");
 	exit();
@@ -57,7 +57,7 @@ foreach($titres as $titre){
 }
 $tpl->assign('titres',$titres);
 $tpl->assign('espece',($compte->get_solde_courant()/100)-$total_titres);
-$tpl->assign('solde_compte', ($compte->get_solde_courant()/100)) ;
+$tpl->assign('solde_compte', ($compte->get_solde_courant()/100));
 $tpl->assign('devise',$compte->get_devise()->get_isocode());
 //afichage final
-	$tpl->display('cpt_placement.smarty') ;
+	$tpl->display('cpt_placement.smarty');

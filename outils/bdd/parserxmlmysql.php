@@ -29,7 +29,7 @@ if (isset($_GET['xml'])) {
 	aff("on debute");
 	$starttime=start_timing();
 	//on recupere les noms des tables
-	$db= new MySQLConnector( 'localhost', 'root', 'mdp','test') ;
+	$db= new MySQLConnector( 'localhost', 'root', 'mdp','test');
 
 	$db->efface_tables();
 	aff('tables effac�s');
@@ -52,27 +52,27 @@ if (isset($_GET['xml'])) {
 	$general['Fichier_ouvert']=(string)$xml->Generalites->Fichier_ouvert;
 	#1 si le fichier declar� d�ja ouvert par gribsi
 	$general['Backup']=(string)$xml->Generalites->Backup;
-	$general['Titre']=(string)$xml->Generalites->Titre ;
-	$general['Adresse_commune']=(string)$xml->Generalites->Adresse_commune ;
-	$general['Adresse_secondaire']=(string)$xml->Generalites->Adresse_secondaire ;
-	$general['Utilise_exercices']=(string)$xml->Generalites->Utilise_exercices ;
-	$general['Utilise_IB']=(string)$xml->Generalites->Utilise_IB ;
+	$general['Titre']=(string)$xml->Generalites->Titre;
+	$general['Adresse_commune']=(string)$xml->Generalites->Adresse_commune;
+	$general['Adresse_secondaire']=(string)$xml->Generalites->Adresse_secondaire;
+	$general['Utilise_exercices']=(string)$xml->Generalites->Utilise_exercices;
+	$general['Utilise_IB']=(string)$xml->Generalites->Utilise_IB;
 	#0: n'utilise pas les imp et les simp
 	#1: les utilises
-	$general['Utilise_PC']=(string)$xml->Generalites->Utilise_PC ;
+	$general['Utilise_PC']=(string)$xml->Generalites->Utilise_PC;
 	#0: n'utilise pas les pieces comptables
 	#1: les utilises
-	$general['Utilise_info_BG']=(string)$xml->Generalites->Utilise_info_BG ;
-	$general['Numero_devise_totaux_tiers']=(string)$xml->Generalites->Numero_devise_totaux_tiers ;
-	$general['Type_affichage_des_echeances']=(string)$xml->Generalites->Type_affichage_des_echeances ;
-	$general['Affichage_echeances_perso_nb_libre']=(string)$xml->Generalites->Affichage_echeances_perso_nb_libre ;
-	$general['Type_affichage_perso_echeances']=(string)$xml->Generalites->Type_affichage_perso_echeances ;
-	$general['Chemin_logo']=(string)$xml->Generalites->Chemin_logo ;
+	$general['Utilise_info_BG']=(string)$xml->Generalites->Utilise_info_BG;
+	$general['Numero_devise_totaux_tiers']=(string)$xml->Generalites->Numero_devise_totaux_tiers;
+	$general['Type_affichage_des_echeances']=(string)$xml->Generalites->Type_affichage_des_echeances;
+	$general['Affichage_echeances_perso_nb_libre']=(string)$xml->Generalites->Affichage_echeances_perso_nb_libre;
+	$general['Type_affichage_perso_echeances']=(string)$xml->Generalites->Type_affichage_perso_echeances;
+	$general['Chemin_logo']=(string)$xml->Generalites->Chemin_logo;
 	#chemin absolu du logo qui s'affiche dans grisbi
-	$general['Affichage_opes']=(string)$xml->Generalites->Affichage_opes ;
-	$general['Rapport_largeur_col']=(string)$xml->Generalites->Rapport_largeur_col ;
-	$general['Ligne_aff_une_ligne']=(string)$xml->Generalites->Ligne_aff_une_ligne ;
-	$general['Lignes_aff_deux_lignes']=(string)$xml->Generalites->Lignes_aff_deux_lignes ;
+	$general['Affichage_opes']=(string)$xml->Generalites->Affichage_opes;
+	$general['Rapport_largeur_col']=(string)$xml->Generalites->Rapport_largeur_col;
+	$general['Ligne_aff_une_ligne']=(string)$xml->Generalites->Ligne_aff_une_ligne;
+	$general['Lignes_aff_deux_lignes']=(string)$xml->Generalites->Lignes_aff_deux_lignes;
 	$general['Lignes_aff_trois_lignes']=(string)$xml->Generalites->Lignes_aff_trois_lignes;
 	$db->insert('generalite',$general);
 	unset($general);
@@ -389,7 +389,7 @@ if (isset($_GET['xml'])) {
 }
 else {
 	//affiche le nom des xml et des gsb avec un
-	echo "selectionner le fichier &agrave; importer \n";
+	echo "selectionner le fichier à importer \n";
 	$rep=scandir(getcwd());
 	echo ('<ul>');
 	foreach ($rep as $fic) {

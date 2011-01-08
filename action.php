@@ -22,7 +22,7 @@ $ope_notes=util::get_page_param( 'rem' );
 $ope_moyen=(integer)util::get_page_param('moyen');
 //---------------------------gestion du processus---------------
 //creation du nouveau tiers au besoin
-if (  $tiers_id== -1 ) {
+if ( $tiers_id== -1 ) {
 	if ( $tiers_nom != "" ) {
 		try {
 			$tier=$gsb_tiers->new_tier();
@@ -46,10 +46,10 @@ if ($action=="edit"){
 	$operation = $gsb_operations->get_by_id($ope_id);
 	if (($operation->is_ventilee()) || ($operation->is_ventilation()) || ($operation->get_statut_pointage()==rapp::RAPPROCHEE)) {
 		//pas d'edition d'une ope ventilee, si va=0, cela veut dire pas d'ope mere, on ne modifie que les ope non rappro
-		$tpl->critic("impossible d'&eacute;diter une operation point&eacute;e ou rapproch&eacute;e".PHP_EOL."impossible d'editer une operation ventil&eacute;e" ,
+		$tpl->critic("impossible d'éditer une operation pointée ou rapprochée".PHP_EOL."impossible d'editer une operation ventilée" ,
 		 "operations.php?cpt_id=$cpt_id");
 	}
-	$tpl->assign('titre',"op&eacute;ration modifi&eacute;e");
+	$tpl->assign('titre',"opération modifiée");
 } elseif ($action=="new"){
 	try{
 		$compte=$gsb_comptes->get_by_id($cpt_id);
@@ -61,7 +61,7 @@ if ($action=="edit"){
 			$tpl->critic( "{$except->message}" , "operations.php?cpt_id=$cpt_id");
 		}
 	}
-	$tpl->assign('titre',"op&eacute;ration ajout&eacute;e");
+	$tpl->assign('titre',"opération ajoutée");
 }else {
 	$tpl->critic('il faut choisir soit edit ou new' , "operations.php?cpt_id=$cpt_id");
 }

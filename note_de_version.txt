@@ -1,4 +1,4 @@
-﻿tout marche en version 2
+tout marche en version 2
 
 2010-04-18
 correction bug virement(maintenant, il affiche comme prevu, en destinataire le compte)
@@ -23,14 +23,14 @@ creation de fonction de retour retour_id_nom_(categorie,tiers,compte)
 
 2009-12-06 20:31:00
 correction d'un bug sur les ajout de tiers
-verification que la date est bien  JJMMAAAA
+verification que la date est bien JJMMAAAA
 rajout d'un index.php
 xpath.php utilise maintenant les fonctions usuelles
 
 2009-11-15 22:23:55
 gestion des virement
 lorsque on cree une nouvelle operation, le moyen de paiment selectionné est celui par défaut du compte
-gestion  d'un bug de free qui fait que l'on ne peut pas utiliser libcompact
+gestion d'un bug de free qui fait que l'on ne peut pas utiliser libcompact
 
 7/11
 ajout d'un template operation special n95
@@ -57,7 +57,7 @@ affiche d'abord les categories de depenses puis les autres
 logger marche
 si pas d'operation ni de compte ca marche, ca prend le dernier numero et le compte courant
 
-2009-08-25  lafayette  <lafayette@lafayette-laptop>
+2009-08-25 lafayette <lafayette@lafayette-laptop>
 n'affiche que les operations des 60 derniers jours
 pour les types: si il y a une etoile, il faut noter le numero du cheqUE
 lors d'une nouvelle operation, le type par defaut est le type de depense par defaut

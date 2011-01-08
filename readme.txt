@@ -6,12 +6,12 @@
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  ***************************************************
  
 pour installer.
@@ -28,4 +28,3 @@ pour que ca marche, il faut renommer le fichier __index.php__ en index.php
 
 petite chose: actuellemnent, il n'y a pas de moyen d'uploader le fichier vers le serveur.
 je pense que cela va le rester tant que j'aurais pas mis une bonne securité (afin de limiter les problemes)
-

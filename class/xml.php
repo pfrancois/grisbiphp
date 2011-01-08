@@ -1,17 +1,17 @@
-<?php  /* coding: utf-8 */
+<?php /* coding: utf-8 */
 
 class xml {
 	/**
 	 * ficher xml simplexmlise
 	 * @var simplexml
 	 */
-	protected $_xml_complet ;
+	protected $_xml_complet;
 
 	/**
 	 * le nom du fichier xml source
 	 * @var string
 	 */
-	protected $_xmlfile ;
+	protected $_xmlfile;
 
 	/**
 	 * variable qui permet de savoir si le fichier est le server free.
@@ -27,20 +27,20 @@ class xml {
 	 * @throws InvalidArgumentException si le fichier n'existe pas
 	 */
 	public function __construct($_xmlfile, $sur_free = false) {
-		$this->xmlfile = $_xmlfile ;
+		$this->xmlfile = $_xmlfile;
 		if (!file_exists($_xmlfile)) {
-			throw new InvalidArgumentException("le fichier '$_xmlfile' n'existe pas") ;
+			throw new InvalidArgumentException("le fichier '$_xmlfile' n'existe pas");
 		} else {
 			if ($sur_free) {
-				$this->_xml_complet = simplexml_load_file($_xmlfile) ;
+				$this->_xml_complet = simplexml_load_file($_xmlfile);
 			} else {
 				$this->_xml_complet = simplexml_load_file($_xmlfile, 'SimpleXMLElement',
-				LIBXML_COMPACT) ;
+				LIBXML_COMPACT);
 			}
 		}
 		$this->_surfree=$sur_free;
 		if ($this->_xml_complet->Generalites->Version_fichier != '0.5.0') {
-			throw new UnexpectedValueException("le fichier n'est pas au bon format") ;
+			throw new UnexpectedValueException("le fichier n'est pas au bon format");
 		}
 		$this->version="0.5";
 	}
@@ -55,18 +55,18 @@ class xml {
 	 */
 	public function iter_class($chaine, $type, SimpleXMLElement $_xml = null) {
 		if ($_xml === null) {
-			$_xml = $this->_xml_complet ;
+			$_xml = $this->_xml_complet;
 		}
 		try {
-			$iter = $this->xpath_iter($chaine, $_xml) ;
-			$req = array() ;
+			$iter = $this->xpath_iter($chaine, $_xml);
+			$req = array();
 			foreach ($iter as $object) {
-				$req[] = new $type($object) ;
+				$req[] = new $type($object);
 			}
-			return $req ;
+			return $req;
 		}
 		catch (Exception_no_reponse $except) {
-			return array() ;
+			return array();
 		}
 	}
 
@@ -79,13 +79,13 @@ class xml {
 	 */
 	public function xpath_iter($chaine, SimpleXMLElement $_xml = null) {
 		if ($_xml === null) {
-			$_xml = $this->_xml_complet ;
+			$_xml = $this->_xml_complet;
 		}
-		$req = $_xml->xpath($chaine) ;
+		$req = $_xml->xpath($chaine);
 		if (empty($req)) {
-			throw new Exception_no_reponse($chaine) ;
+			throw new Exception_no_reponse($chaine);
 		}
-		return $req ;
+		return $req;
 	}
 
 	/**
@@ -98,17 +98,17 @@ class xml {
 	 */
 	public function xpath_uniq($chaine, SimpleXMLElement $_xml = null) {
 		if ($_xml === null) {
-			$_xml = $this->_xml_complet ;
+			$_xml = $this->_xml_complet;
 		}
-		$req = $_xml->xpath($chaine) ;
+		$req = $_xml->xpath($chaine);
 		if (empty($req)) {
-			throw new Exception_no_reponse($chaine) ;
+			throw new Exception_no_reponse($chaine);
 		}
 		if (count($req) > 1) {
-			throw new Exception_many_reponse($chaine) ;
+			throw new Exception_many_reponse($chaine);
 		}
-		$req = $req[0] ;
-		return $req ;
+		$req = $req[0];
+		return $req;
 	}
 
 	/**
@@ -116,7 +116,7 @@ class xml {
 	 * @return string le nom du fichier xml
 	 */
 	public function get_xmlfile() {
-		return realpath($this->xmlfile) ;
+		return realpath($this->xmlfile);
 	}
 
 	/**
@@ -128,13 +128,13 @@ class xml {
 		if ($_xmlfile <> '') {
 			if (!$this->_xml_complet->asXML($_xmlfile)) {
 				// @codeCoverageIgnoreStart
-				throw new Exception("erreur dans l'ecriture du fichier $_xmlfile") ;
+				throw new Exception("erreur dans l'ecriture du fichier $_xmlfile");
 				// @codeCoverageIgnoreEnd
 			}
 		} else {
 			if (!$this->_xml_complet->asXML($this->xmlfile)) {
 				// @codeCoverageIgnoreStart
-				throw new Exception("erreur dans l'ecriture du fichier {$this->xmlfile}") ;
+				throw new Exception("erreur dans l'ecriture du fichier {$this->xmlfile}");
 				// @codeCoverageIgnoreEnd
 			}
 		}
@@ -146,7 +146,7 @@ class xml {
 	 * @return SimpleXMLElement
 	 */
 	public function get_xml() {
-		return $this->_xml_complet ;
+		return $this->_xml_complet;
 	}
 
 	/**
@@ -155,22 +155,22 @@ class xml {
 	 * @throws UnexpectedValueException si le fichier n'est pas au bon format
 	 */
 	public function reload() {
-		$_xmlfile = $this->xmlfile ;
+		$_xmlfile = $this->xmlfile;
 		if (!file_exists($_xmlfile)) {
 			// @codeCoverageIgnoreStart
-			throw new InvalidArgumentException("le fichier '$_xmlfile' n'existe pas") ;
+			throw new InvalidArgumentException("le fichier '$_xmlfile' n'existe pas");
 			// @codeCoverageIgnoreEnd
 		} else {
 			if ($this->_sur_free) {
-				$this->_xml_complet = simplexml_load_file($_xmlfile) ;
+				$this->_xml_complet = simplexml_load_file($_xmlfile);
 			} else {
 				$this->_xml_complet = simplexml_load_file($_xmlfile, 'SimpleXMLElement',
-				LIBXML_COMPACT) ;
+				LIBXML_COMPACT);
 			}
 		}
 		if ($this->_xml_complet->Generalites->Version_fichier != '0.5.0') {
 			// @codeCoverageIgnoreStart
-			throw new UnexpectedValueException("le fichier n'est pas au bon format") ;
+			throw new UnexpectedValueException("le fichier n'est pas au bon format");
 			// @codeCoverageIgnoreEnd
 		}
 	}

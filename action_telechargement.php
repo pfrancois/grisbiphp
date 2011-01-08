@@ -8,17 +8,17 @@ if (!isset($_FILES['temp_gsb'])){
 if ($_FILES['temp_gsb']['error']) {
 	switch ($_FILES['temp_gsb']['error']){
 		case 1: // UPLOAD_ERR_INI_SIZE
-		   $tpl->critic("Le fichier dépasse la limite autorisée par le serveur (fichier php.ini) !","outils.php");
-		   break;
+		  $tpl->critic("Le fichier dépasse la limite autorisée par le serveur (fichier php.ini) !","outils.php");
+		  break;
 		case 2: // UPLOAD_ERR_FORM_SIZE
-		   $tpl->critic("Le fichier dépasse la limite autorisée dans le formulaire HTML !","outils.php");
-		   break;
+		  $tpl->critic("Le fichier dépasse la limite autorisée dans le formulaire HTML !","outils.php");
+		  break;
 		case 3: // UPLOAD_ERR_PARTIAL
-		   $tpl->critic("L'envoi du fichier a été interrompu pendant le transfert !","outils.php");
-		   break;
+		  $tpl->critic("L'envoi du fichier a été interrompu pendant le transfert !","outils.php");
+		  break;
 		case 4: // UPLOAD_ERR_NO_FILE
-		   $tpl->critic("Le fichier que vous avez envoyé une taille nulle !","outils.php");
-		   break;
+		  $tpl->critic("Le fichier que vous avez envoyé une taille nulle !","outils.php");
+		  break;
 	}
 }
 //c'est ok
@@ -29,7 +29,7 @@ else {
 		$tpl->critic("pas le bon format de fichier","outils.php");
 	}
 	try{
-		@$temp_gsb=new xml($_FILES['temp_gsb']['tmp_name'] , SUR_FREE) ;
+		@$temp_gsb=new xml($_FILES['temp_gsb']['tmp_name'] , SUR_FREE);
 	} catch (Exception $e) {
 		$tpl->critic($e->getMessage(),"outils.php");
 	}
@@ -51,5 +51,3 @@ else {
 }
 //~ $tpl->assign("lien","options.php");
 //~ $tpl->display('resultats.smarty');
-
-

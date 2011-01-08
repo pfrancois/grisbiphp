@@ -16,10 +16,10 @@ if ($action=="edit") {
 		$ope_orig=$gsb_operations->get_by_id($ope_id_origine);
 		$ope_dest=$gsb_operations->get_by_id($ope_id_destination);
 		if (($ope_orig->is_ventilation()) && (!$ope_orig->is_ventilee()) && ($ope_orig->get_statut_pointage()==rapp::RAPPROCHEE)) {
-			$tpl->critic('error',"le virement de ".$compte_origine." vers ".$compte_destination." n'est pas modifiable car l'op&eacute;ration est soit ventil&eacute;e soit rapproch&eacute; dans le compte".$compte_origine,'operations.php?cpt_id='.$compte_destination->get_id(),true);
+			$tpl->critic('error',"le virement de ".$compte_origine." vers ".$compte_destination." n'est pas modifiable car l'opération est soit ventilée soit rapproché dans le compte".$compte_origine,'operations.php?cpt_id='.$compte_destination->get_id(),true);
 		}
 		if (($ope_dest->is_ventilation()) && (!$ope_dest->is_ventilee()) && ($ope_dest->get_statut_pointage()==rapp::RAPPROCHEE)) {
-			$tpl->critic('error',"le virement de ".$compte_origine." vers ".$compte_destination." n'est pas modifiable car l'op&eacute;ration est soit ventil&eacute;e soit rapproch&eacute; dans le compte".$compte_destination,'operations.php?cpt_id='.$compte_destination->get_id(),true);
+			$tpl->critic('error',"le virement de ".$compte_origine." vers ".$compte_destination." n'est pas modifiable car l'opération est soit ventilée soit rapproché dans le compte".$compte_destination,'operations.php?cpt_id='.$compte_destination->get_id(),true);
 		}
 
 		if ($ope_date!=$ope_orig->get_date()){
@@ -51,7 +51,7 @@ if ($action=="edit") {
 			$tpl->critic("{$except->message}" , "operations.php?cpt_id=$compte_destination");
 		}
 	}//end try
-	$tpl->assign('titre',"op&eacute;rations modifi&eacute;es");
+	$tpl->assign('titre',"opérations modifiées");
 }elseif ($action=="new"){
 	//verification de l'integrite referentielle
 	try {
@@ -65,7 +65,7 @@ if ($action=="edit") {
 			$tpl->critic("{$except->message}" , "operations.php?cpt_id=$compte_destination");
 		}
 	}//end try
-	$tpl->assign('titre',"op&eacute;rations ajout&eacute;es");
+	$tpl->assign('titre',"opérations ajoutées");
 }else{
 	$tpl->critic('type d\'operation invalide, il doit etre soit "edit" soit "new"','operations.php?cpt_id ='.$compte_destination->get_id());
 }

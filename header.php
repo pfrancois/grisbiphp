@@ -1,12 +1,12 @@
 <?php /* coding: utf-8 */
 
-require_once ('class/loader.php') ;
+require_once ('class/loader.php');
 require_once('basic_ope_inc.php');
 
 /**
  * nom du fichier
  */
-define('CPT_FILE', "outils/20040701.gsb") ;
+define('CPT_FILE', "outils/20040701.gsb");
 
 /**
  * tableau des comptes affiches
@@ -16,15 +16,15 @@ $cpt_aff=array(compte::T_BANCAIRE,compte::T_ESPECE);
 /*
  * nombre de jours maximum d'affichage
  */
-define('NB_JOURS_AFF', 600) ;
+define('NB_JOURS_AFF', 600);
 /**
  * numero du compte d'origine par defaut pour les virement
  */
-define("CPT_VIREMENT", 0) ;
+define("CPT_VIREMENT", 0);
 /**
  * est ce que ce site est heberge sur free
  */
-define("SUR_FREE", true) ;
+define("SUR_FREE", true);
 /**
  * id de la devise generalement utilise
  */
@@ -32,7 +32,7 @@ define("DEVISE",1);
 /**
  * variable de debug
  * debug affiche des ecrans intermediaires
-  * debug_smarty affiche la fenetre debug smarty
+ * debug_smarty affiche la fenetre debug smarty
 */
 define('DEBUG', true);
 define('DEBUG_SMARTY', false);
@@ -60,30 +60,30 @@ define('OPE_TITRE',31);
  global $tpl;
  fb($tpl->_tpl_vars["$var"],$var);
  }*/
-require_once ('smarty/libs/Smarty.class.php') ;
+require_once ('smarty/libs/Smarty.class.php');
 
 /**
- * class template qui etend smarty et qui sert a  l'affichage
+ * class template qui etend smarty et qui sert a l'affichage
  *
  */
 class template extends Smarty {
 	function __construct() {
-		$this->Smarty() ;
-		$this->template_dir = './templates' ;
-		$this->compile_dir = './templates/compiled' ;
-		$this->config_dir = './templates/config' ;
-		$this->cache_dir = './templates/cache' ;
+		$this->Smarty();
+		$this->template_dir = './templates';
+		$this->compile_dir = './templates/compiled';
+		$this->config_dir = './templates/config';
+		$this->cache_dir = './templates/cache';
 
 		if (DEBUG_SMARTY){
 			$this->debugging=true;
 		}
-		$this->caching = false ;
-		$this->config_read_hidden = true ;
+		$this->caching = false;
+		$this->config_read_hidden = true;
 		if ($this->caching) {
-			$this->cache_lifetime = 180 ;
+			$this->cache_lifetime = 180;
 		} else {
-			$this->_CachePath = null ;
-			$this->_CacheLifeTime = null ; // En secondes
+			$this->_CachePath = null;
+			$this->_CacheLifeTime = null; // En secondes
 		}
 	}
 
@@ -98,7 +98,7 @@ class template extends Smarty {
 		$this->assign("titre","erreur critique");
 		$this->append("resultats",array("texte"=>$msg,"css"=>"error"));
 		$this->assign('lien',"$lien");
-		$this->display('resultats.smarty') ;
+		$this->display('resultats.smarty');
 		exit( 1 );
 	}
 
@@ -116,52 +116,52 @@ class template extends Smarty {
 
 	public function DebugFirePHP() {
 		//get required debug variables
-		$assigned_vars = $this->_tpl_vars ;
-		ksort($assigned_vars) ;
-		$config_vars = array() ;
+		$assigned_vars = $this->_tpl_vars;
+		ksort($assigned_vars);
+		$config_vars = array();
 		if (@is_array($this->_config[0])) {
-			$config_vars = $this->_config[0] ;
-			ksort($config_vars) ;
+			$config_vars = $this->_config[0];
+			ksort($config_vars);
 		}
 		//permet comme ca d'eviter a avoir a changer
 		if (class_exists(FirePHP)) {
-			$firephp = FirePHP::getInstance(true) ;
+			$firephp = FirePHP::getInstance(true);
 
-			$firephp->group('Smarty Debug Output') ;
+			$firephp->group('Smarty Debug Output');
 			/*Log template files*/
-			$firephp->group('included templates & config files (load time in seconds)') ;
+			$firephp->group('included templates & config files (load time in seconds)');
 			foreach ($this->_smarty_debug_info as $tml) {
-				$msg = str_repeat('--', $tml['depth']) ;
-				$msg .= ($tml['depth'] != 0) ? '>' : '' ;
-				$msg .= $tml['filename'] . ' (' . substr($tml['exec_time'], 0, 7) . 's)' ;
-				$firephp->log($msg) ;
+				$msg = str_repeat('--', $tml['depth']);
+				$msg .= ($tml['depth'] != 0) ? '>' : '';
+				$msg .= $tml['filename'] . ' (' . substr($tml['exec_time'], 0, 7) . 's)';
+				$firephp->log($msg);
 			}
-			$firephp->groupEnd() ; //end group 'included templates &...'
+			$firephp->groupEnd(); //end group 'included templates &...'
 
 			/*Log assigned template variables*/
-			$firephp->group('assigned template variables') ;
+			$firephp->group('assigned template variables');
 			foreach ($assigned_vars as $key => $value) {
 				if (is_array($value)) {
-					$firephp->dump('{$' . $key . '}', $value) ;
-					$firephp->log($value, '{$' . $key . '}') ;
+					$firephp->dump('{$' . $key . '}', $value);
+					$firephp->log($value, '{$' . $key . '}');
 				} else {
-					$firephp->log($value, '{$' . $key . '}') ;
+					$firephp->log($value, '{$' . $key . '}');
 				}
 			}
-			$firephp->groupEnd() ; //end group 'assigned template variables'
+			$firephp->groupEnd(); //end group 'assigned template variables'
 
 			/*Log assigned config file variables (outer template scope)*/
-			$firephp->group('assigned config file variables (outer template scope)') ;
+			$firephp->group('assigned config file variables (outer template scope)');
 			/*Check if there is something in the config*/
 			if (!empty($config_vars)) {
 				foreach ($config_vars as $key => $value) {
-					$firephp->log($value, '{#' . $key . '#}') ;
+					$firephp->log($value, '{#' . $key . '#}');
 				}
 			} else {
-				$firephp->log("No configuration values available") ;
+				$firephp->log("No configuration values available");
 			}
-			$firephp->groupEnd() ; //end group 'assigned config file variables (outer template scope)'
-			$firephp->groupEnd() ; //end group 'Smarty Debug Output'
+			$firephp->groupEnd(); //end group 'assigned config file variables (outer template scope)'
+			$firephp->groupEnd(); //end group 'Smarty Debug Output'
 		}
 	}
 }
@@ -170,9 +170,9 @@ class template extends Smarty {
  * objet smarty optimise avec les ajout pour
  * @var template
  */
-$tpl = new template() ;
+$tpl = new template();
 //ajoute un composant specifique pour smarty a cette application
-require_once ('modifier.nbfr.php') ;
+require_once ('modifier.nbfr.php');
 
 //chargement du fichier xml
 /**
@@ -180,4 +180,4 @@ require_once ('modifier.nbfr.php') ;
  * objet xml
  * @var xml
  */
-$gsb_xml = new xml(CPT_FILE, SUR_FREE) ;
+$gsb_xml = new xml(CPT_FILE, SUR_FREE);

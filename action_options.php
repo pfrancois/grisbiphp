@@ -22,7 +22,7 @@ if ($action=="get_file"){
 
 //------------------effacer les tiers qui n'ont ni operation ni echeances
 if ($action=="effacer_tiers_vides"){
-	$tpl->assign('titre',"tiers supprim&eacute;s");
+	$tpl->assign('titre',"tiers supprimés");
 	if ($phase==""){
 		$i=0;
 		foreach ($gsb_tiers->iter() as $tier) {
@@ -54,7 +54,7 @@ if ($action=="effacer_tiers_vides"){
 		}
 		$gsb_xml->save();
 		if ($i>0){
-			$tpl->ral("$i tiers effac&eacute;s","progress");
+			$tpl->ral("$i tiers effacés","progress");
 		} else {$tpl->ral("aucun tiers effacé","progress");}
 		$tpl->assign("lien","options.php");
 		$tpl->display('resultats.smarty');

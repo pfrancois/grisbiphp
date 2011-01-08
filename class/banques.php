@@ -4,8 +4,8 @@ class banques extends items {
 	/**
 	 * @const la chaine qui permet une iteration facile
 	 */
-	protected $_xpath = '//Banques/Detail_des_banques/Banque' ;
-	public $nom_classe = __class__ ;
+	protected $_xpath = '//Banques/Detail_des_banques/Banque';
+	public $nom_classe = __class__;
 	/**
 	 * renvoi la banque dont on donne l'id
 	 *
@@ -15,19 +15,19 @@ class banques extends items {
 	 * @throws exception_parametre_invalide si $id n'est integer
 	 */
 	public function get_by_id($id) {
-		global $gsb_xml ;
+		global $gsb_xml;
 		try {
 			if (is_numeric((string)$id)) {
 				$id=(int)$id;
-				$r = $gsb_xml->xpath_uniq("//Banque[@No='$id']") ;
+				$r = $gsb_xml->xpath_uniq("//Banque[@No='$id']");
 			} else {
-				throw new exception_parametre_invalide('$id') ;
+				throw new exception_parametre_invalide('$id');
 			}
 		}
 		catch (Exception_no_reponse $except) {
-			throw new exception_not_exist("banque", $id) ;
+			throw new exception_not_exist("banque", $id);
 		}
-		return new banque($r) ;
+		return new banque($r);
 	}
 
 	/**
@@ -36,12 +36,12 @@ class banques extends items {
 	 * @return int le prochain id
 	 */
 	public function get_next() {
-		$nb = 0 ;
+		$nb = 0;
 		foreach ($this->iter() as $banque) {
 			if ($banque->get_id() > $nb) {
-				$nb = $banque->get_id() ;
+				$nb = $banque->get_id();
 			}
 		}
-		return $nb + 1 ;
+		return $nb + 1;
 	}
 }

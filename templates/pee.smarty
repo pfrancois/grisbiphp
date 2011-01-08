@@ -19,24 +19,24 @@ j7HK8QSqCTSglPmw9gSjKiPwqLx8/JVAlo6s5+t8XGJxm315IAImvV4RjpFhdjJHLmDi5JPd7dSYW+Lc
 
 </head>
 <body>
-la derniere mise &agrave; jour des cours a &eacute;t&eacute; le {$derniere_date_maj}
+la derniere mise à jour des cours a été le {$derniere_date_maj}
 <form method="get" action="{$smarty.server.SCRIPT_NAME}">
 <p>date de mise a jour <input type="text" name="date" value='{$date|date_format:"%d/%m/%Y"}'/></p>
-<p>montant affect&eacute; sur le peeA <input type="text" name='montantA' value='{$ma}' ></input> total PEEA: <input type="text" name='totalA' value='{$ta}'></input> actuellement il y a {$total_init_PEEA|nbfr} sur le PEEA</p>
-<p>montant affect&eacute; sur le peeB <input type="text" name='montantB' value='{$mb}'></input> total PEEB: <input type="text" name='totalB' value='{$tb}'></input> actuellement il y a {$total_init_PEEB|nbfr} sur le PEEB </p>
-<p>montant affect&eacute; sur le peeD <input type="text" name='montantD' value='{$md}'></input> total PEED: <input type="text" name='totalD'value='{$td}'></input> actuellement il y a {$total_init_PEED|nbfr} sur le PEED </p>
-<p>montant affect&eacute; sur le peeE <input type="text" name='montantE' value='{$me}'></input> total PEEE: <input type="text" name='totalE' value='{$te}'></input> actuellement il y a {$total_init_PEEE|nbfr} sur le PEEE</p>
+<p>montant affecté sur le peeA <input type="text" name='montantA' value='{$ma}' ></input> total PEEA: <input type="text" name='totalA' value='{$ta}'></input> actuellement il y a {$total_init_PEEA|nbfr} sur le PEEA</p>
+<p>montant affecté sur le peeB <input type="text" name='montantB' value='{$mb}'></input> total PEEB: <input type="text" name='totalB' value='{$tb}'></input> actuellement il y a {$total_init_PEEB|nbfr} sur le PEEB </p>
+<p>montant affecté sur le peeD <input type="text" name='montantD' value='{$md}'></input> total PEED: <input type="text" name='totalD'value='{$td}'></input> actuellement il y a {$total_init_PEED|nbfr} sur le PEED </p>
+<p>montant affecté sur le peeE <input type="text" name='montantE' value='{$me}'></input> total PEEE: <input type="text" name='totalE' value='{$te}'></input> actuellement il y a {$total_init_PEEE|nbfr} sur le PEEE</p>
 <p>soit un total de {$total_init_PEEA+$total_init_PEEB+$total_init_PEED+$total_init_PEEE|nbfr}</p>
 <p>montant des frais <input type="text" name='montantfrais' value='{$mfrais}'></input></p>
 <p>montant des impots <input type="text" name='montantimpots' value='{$mimpots}'></input></p>
-    <input type="submit" name="partie1" />
+  <input type="submit" name="partie1" />
 </form>
 {if $partie eq 1}
-<p>on arrivera &agrave; un total de {$ta+$tb+$td+$te|nbfr}</p>
+<p>on arrivera à un total de {$ta+$tb+$td+$te|nbfr}</p>
 <p><a href='pee.php?montantA={$ma}&amp;totalA={$ta}&amp;montantB={$mb}&amp;totalB={$tb}&amp;montantD={$md}&amp;totalD={$td}&amp;montantE={$me}&amp;totalE={$te}&amp;date={$date}&amp;partie2=Envoyer&amp;frais={$mfrais}&amp;impots={$mimpots}'> cliquer ici pour confirmer </a></p>
 {/if}
 {if $partie eq 2}
-<p>mise &agrave; faite.</p>
+<p>mise à jour faite.</p>
 {/if}
 </body>
 </html>

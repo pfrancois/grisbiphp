@@ -4,8 +4,8 @@ class ibs extends items {
 	/**
 	 * @const la chaine qui permet une iteration facile
 	 */
-	protected $_xpath = '//Imputation' ;
-	public $nom_classe = __class__ ;
+	protected $_xpath = '//Imputation';
+	public $nom_classe = __class__;
 	/**
 	 * renvoi l'ib dont on donne l'id
 	 *
@@ -15,18 +15,18 @@ class ibs extends items {
 	 * @throws exception_parametre_invalide si $id n'est integer
 	 */
 	public function get_by_id($id) {
-		global $gsb_xml ;
+		global $gsb_xml;
 		try {
 			if (is_numeric($id)) {
-				$r = $gsb_xml->xpath_uniq("//Imputation[@No='$id']") ;
+				$r = $gsb_xml->xpath_uniq("//Imputation[@No='$id']");
 			} else {
-				throw new exception_parametre_invalide('$id') ;
+				throw new exception_parametre_invalide('$id');
 			}
 		}
 		catch (Exception_no_reponse $except) {
-			throw new exception_not_exist("imputations", $id) ;
+			throw new exception_not_exist("imputations", $id);
 		}
-		return new ib($r) ;
+		return new ib($r);
 	}
 
 	/**
@@ -35,9 +35,9 @@ class ibs extends items {
 	 * @return int le prochain id
 	 */
 	public function get_next() {
-		global $gsb_xml ;
-		(int)$r = $gsb_xml->xpath_uniq('//Imputations/Generalites/No_derniere_imputation') ;
-		return $r + 1 ;
+		global $gsb_xml;
+		(int)$r = $gsb_xml->xpath_uniq('//Imputations/Generalites/No_derniere_imputation');
+		return $r + 1;
 	}
 	/**
 	 * renvoi l'id de l'ib dont on a donné le nom
@@ -48,13 +48,13 @@ class ibs extends items {
 	 * @assert
 	 */
 	public function get_id_by_name($nom) {
-		global $gsb_xml ;
+		global $gsb_xml;
 		try {
-			$r = $gsb_xml->xpath_uniq("//Imputation[@Nom='$nom']") ;
+			$r = $gsb_xml->xpath_uniq("//Imputation[@Nom='$nom']");
 		}
 		catch (Exception_no_reponse $except) {
-			throw new exception_not_exist("ib", $nom) ;
+			throw new exception_not_exist("ib", $nom);
 		}
-		return (int)$r['No'] ;
+		return (int)$r['No'];
 	}
 }
