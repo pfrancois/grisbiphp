@@ -322,9 +322,10 @@ class operation extends item {
 	 */
 	public function set_compte($id) {
 		global $gsb_xml;
+		global $gsb_comptes;
 		try {
 			if (is_numeric($id)) {
-				$compte = $gsb_xml->xpath_uniq("//Compte/Details/No_de_compte[.='$id']/../..") ;
+				$compte = $gsb_comptes->get_by_id($id);
 			} else {
 				throw new exception_parametre_invalide('$id') ;
 			}
@@ -362,36 +363,36 @@ class operation extends item {
 		(string) $this->_item_xml['Va']
 		);
 		$compte_ancien=$this->get_compte();
-		$this->_dom->parentNode->removeChild($this->_dom) ;
-		$t=$compte->Detail_des_operations->addChild("Operation");
-		$t->setAttributeNode(new DOMAttr('No', $op[0])) ;
+		$this->_dom->parentNode->removeChild($this->_dom);
+		$t=$compte->get_xml()->Detail_des_operations->addChild("Operation");
+		$t->AddAttribute('No', $op[0]);
 		//pour les autres champs qui ne sont pas changés par l'application
-		$t->setAttributeNode(new DOMAttr('Id', $op[1])) ;
-		$t->setAttributeNode(new DOMAttr('D', $op[2])) ;
-		$t->setAttributeNode(new DOMAttr('Db', $op[3])) ;
-		$t->setAttributeNode(new DOMAttr('M', $op[4])) ;
-		$t->setAttributeNode(new DOMAttr('De', $op[5])) ;
-		$t->setAttributeNode(new DOMAttr('Rdc', $op[6])) ;
-		$t->setAttributeNode(new DOMAttr('Tc', $op[7])) ;
-		$t->setAttributeNode(new DOMAttr('Fc', $op[8])) ;
-		$t->setAttributeNode(new DOMAttr('T', $op[9])) ;
-		$t->setAttributeNode(new DOMAttr('C', $op[10])) ;
-		$t->setAttributeNode(new DOMAttr('Sc', $op[11])) ;
-		$t->setAttributeNode(new DOMAttr('Ov', $op[12])) ;
-		$t->setAttributeNode(new DOMAttr('N', $op[13])) ;
-		$t->setAttributeNode(new DOMAttr('Ty', $op[14])) ;
-		$t->setAttributeNode(new DOMAttr('Ct', $op[15])) ;
-		$t->setAttributeNode(new DOMAttr('P', $op[16])) ;
-		$t->setAttributeNode(new DOMAttr('A', $op[17])) ;
-		$t->setAttributeNode(new DOMAttr('R', $op[18])) ;
-		$t->setAttributeNode(new DOMAttr('E', $op[19])) ;
-		$t->setAttributeNode(new DOMAttr('I', $op[20])) ;
-		$t->setAttributeNode(new DOMAttr('Si', $op[21])) ;
-		$t->setAttributeNode(new DOMAttr('Pc', $op[22])) ;
-		$t->setAttributeNode(new DOMAttr('Ibg', $op[23])) ;
-		$t->setAttributeNode(new DOMAttr('Ro', $op[24])) ;
-		$t->setAttributeNode(new DOMAttr('Rc', $op[25])) ;
-		$t->setAttributeNode(new DOMAttr('Va', $op[26])) ;
+		$t->AddAttribute('Id', $op[1]);
+		$t->AddAttribute('D', $op[2]);
+		$t->AddAttribute('Db', $op[3]);
+		$t->AddAttribute('M', $op[4]);
+		$t->AddAttribute('De', $op[5]);
+		$t->AddAttribute('Rdc', $op[6]);
+		$t->AddAttribute('Tc', $op[7]);
+		$t->AddAttribute('Fc', $op[8]);
+		$t->AddAttribute('T', $op[9]);
+		$t->AddAttribute('C', $op[10]);
+		$t->AddAttribute('Sc', $op[11]);
+		$t->AddAttribute('Ov', $op[12]);
+		$t->AddAttribute('N', $op[13]);
+		$t->AddAttribute('Ty', $op[14]);
+		$t->AddAttribute('Ct', $op[15]);
+		$t->AddAttribute('P', $op[16]);
+		$t->AddAttribute('A', $op[17]);
+		$t->AddAttribute('R', $op[18]);
+		$t->AddAttribute('E', $op[19]);
+		$t->AddAttribute('I', $op[20]);
+		$t->AddAttribute('Si', $op[21]);
+		$t->AddAttribute('Pc', $op[22]);
+		$t->AddAttribute('Ibg', $op[23]);
+		$t->AddAttribute('Ro', $op[24]);
+		$t->AddAttribute('Rc', $op[25]);
+		$t->AddAttribute('Va', $op[26]);
 
 		//modification des soldes
 		//ancien compte
