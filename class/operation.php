@@ -103,13 +103,7 @@ class operation extends item {
 	public function get_tiers() {
 		global $gsb_tiers ;
 		$t = (int)$this->_item_xml['T'] ;
-		//@codeCoverageIgnoreStart
-		if ($t==0){
-			return null;
-		}else {
-		//@codeCoverageIgnoreEnd
-			return $gsb_tiers->get_by_id($t) ;
-		}
+		return $gsb_tiers->get_by_id($t) ;
 	}
 
 	/**
@@ -367,36 +361,44 @@ class operation extends item {
 		(string) $this->_item_xml['Rc'],
 		(string) $this->_item_xml['Va']
 		);
+		$compte_ancien=$this->get_compte();
 		$this->_dom->parentNode->removeChild($this->_dom) ;
-		$compte->Detail_des_operations->addChild("Operation");
-		$this->_dom->setAttributeNode(new DOMAttr('No', $op[0])) ;
+		$t=$compte->Detail_des_operations->addChild("Operation");
+		$t->setAttributeNode(new DOMAttr('No', $op[0])) ;
 		//pour les autres champs qui ne sont pas changés par l'application
-		$this->_dom->setAttributeNode(new DOMAttr('Id', $op[1])) ;
-		$this->_dom->setAttributeNode(new DOMAttr('D', $op[2])) ;
-		$this->_dom->setAttributeNode(new DOMAttr('Db', $op[3])) ;
-		$this->_dom->setAttributeNode(new DOMAttr('M', $op[4])) ;
-		$this->_dom->setAttributeNode(new DOMAttr('De', $op[5])) ;
-		$this->_dom->setAttributeNode(new DOMAttr('Rdc', $op[6])) ;
-		$this->_dom->setAttributeNode(new DOMAttr('Tc', $op[7])) ;
-		$this->_dom->setAttributeNode(new DOMAttr('Fc', $op[8])) ;
-		$this->_dom->setAttributeNode(new DOMAttr('T', $op[9])) ;
-		$this->_dom->setAttributeNode(new DOMAttr('C', $op[10])) ;
-		$this->_dom->setAttributeNode(new DOMAttr('Sc', $op[11])) ;
-		$this->_dom->setAttributeNode(new DOMAttr('Ov', $op[12])) ;
-		$this->_dom->setAttributeNode(new DOMAttr('N', $op[13])) ;
-		$this->_dom->setAttributeNode(new DOMAttr('Ty', $op[14])) ;
-		$this->_dom->setAttributeNode(new DOMAttr('Ct', $op[15])) ;
-		$this->_dom->setAttributeNode(new DOMAttr('P', $op[16])) ;
-		$this->_dom->setAttributeNode(new DOMAttr('A', $op[17])) ;
-		$this->_dom->setAttributeNode(new DOMAttr('R', $op[18])) ;
-		$this->_dom->setAttributeNode(new DOMAttr('E', $op[19])) ;
-		$this->_dom->setAttributeNode(new DOMAttr('I', $op[20])) ;
-		$this->_dom->setAttributeNode(new DOMAttr('Si', $op[21])) ;
-		$this->_dom->setAttributeNode(new DOMAttr('Pc', $op[22])) ;
-		$this->_dom->setAttributeNode(new DOMAttr('Ibg', $op[23])) ;
-		$this->_dom->setAttributeNode(new DOMAttr('Ro', $op[24])) ;
-		$this->_dom->setAttributeNode(new DOMAttr('Rc', $op[25])) ;
-		$this->_dom->setAttributeNode(new DOMAttr('Va', $op[26])) ;
+		$t->setAttributeNode(new DOMAttr('Id', $op[1])) ;
+		$t->setAttributeNode(new DOMAttr('D', $op[2])) ;
+		$t->setAttributeNode(new DOMAttr('Db', $op[3])) ;
+		$t->setAttributeNode(new DOMAttr('M', $op[4])) ;
+		$t->setAttributeNode(new DOMAttr('De', $op[5])) ;
+		$t->setAttributeNode(new DOMAttr('Rdc', $op[6])) ;
+		$t->setAttributeNode(new DOMAttr('Tc', $op[7])) ;
+		$t->setAttributeNode(new DOMAttr('Fc', $op[8])) ;
+		$t->setAttributeNode(new DOMAttr('T', $op[9])) ;
+		$t->setAttributeNode(new DOMAttr('C', $op[10])) ;
+		$t->setAttributeNode(new DOMAttr('Sc', $op[11])) ;
+		$t->setAttributeNode(new DOMAttr('Ov', $op[12])) ;
+		$t->setAttributeNode(new DOMAttr('N', $op[13])) ;
+		$t->setAttributeNode(new DOMAttr('Ty', $op[14])) ;
+		$t->setAttributeNode(new DOMAttr('Ct', $op[15])) ;
+		$t->setAttributeNode(new DOMAttr('P', $op[16])) ;
+		$t->setAttributeNode(new DOMAttr('A', $op[17])) ;
+		$t->setAttributeNode(new DOMAttr('R', $op[18])) ;
+		$t->setAttributeNode(new DOMAttr('E', $op[19])) ;
+		$t->setAttributeNode(new DOMAttr('I', $op[20])) ;
+		$t->setAttributeNode(new DOMAttr('Si', $op[21])) ;
+		$t->setAttributeNode(new DOMAttr('Pc', $op[22])) ;
+		$t->setAttributeNode(new DOMAttr('Ibg', $op[23])) ;
+		$t->setAttributeNode(new DOMAttr('Ro', $op[24])) ;
+		$t->setAttributeNode(new DOMAttr('Rc', $op[25])) ;
+		$t->setAttributeNode(new DOMAttr('Va', $op[26])) ;
+
+		//modification des soldes
+		//ancien compte
+		$m=util::fr2cent($op[4])/100 ;
+		$compte_ancien->set_solde_courant($compte_ancien->get_solde_courant()-$m);
+		//nouveau compte
+		$compte->set_solde_courant($compte->get_solde_courant()+$m);
 	}
 
 	/**
@@ -408,7 +410,7 @@ class operation extends item {
 			$date = date('j/n/Y', $date) ;
 			$this->_item_xml['D']=$date;
 		} else {
-			throw new exception_parametre_invalide("la date '$date' doit &ecirc;tre au format timestamp. il s'agit de l'op&eacute;ration".$this->get_id());
+			throw new exception_parametre_invalide("la date '$date' doit être au format timestamp. il s'agit de l'opération".$this->get_id());
 		}
 	}
 
@@ -424,7 +426,7 @@ class operation extends item {
 			$compte=$this->get_compte();
 			$compte->set_solde_courant($value+$compte->get_solde_courant());
 		} else {
-			throw new exception_parametre_invalide("le montant '$value' doit &ecirc;tre en centime. il s'agit de l'op&eacute;ration".$this->get_id()) ;
+			throw new exception_parametre_invalide("le montant '$value' doit être en centime. il s'agit de l'opération".$this->get_id()) ;
 		}
 	}
 
@@ -502,7 +504,7 @@ class operation extends item {
 		if ($compte->get_id() == (int)$this->get_compte()->get_id()) {
 			$this->_item_xml['Ty']=$id->get_id();
 		} else {
-			throw new exception_parametre_invalide("moyen invalide. vous donnez un moyen du compte " . $compte . " alors que l'op&eacute;ration est dans le compte" . (int)$this->get_compte()->get_id()) ;
+			throw new exception_parametre_invalide("moyen invalide. vous donnez un moyen du compte " . $compte . " alors que l'opération est dans le compte" . (int)$this->get_compte()->get_id()) ;
 		}
 	}
 
@@ -527,7 +529,7 @@ class operation extends item {
 		if ($type === 0 || $type === 1 || $type === 2) {
 			$this->_item_xml['P']=$type;
 		} else {
-			throw new exception_parametre_invalide("'$type' parametre invalide. il doit &ecirc;tre  0, 1 ou 2") ;
+			throw new exception_parametre_invalide("'$type' parametre invalide. il doit être  0, 1 ou 2") ;
 		}
 	}
 
@@ -687,18 +689,13 @@ class operation extends item {
 				}
 			}
 			if ($this->is_ventilation() == true) {
-				try {
-					$this->get_operation_mere() ;
-					throw new exception_integrite_referentielle('operation', $this->get_id(),'operation', $this->get_operation_mere()->get_id()) ;
-					// @codeCoverageIgnoreStart
-				}
-				catch (exception_not_exist $e) {
-					throw new BadMethodCallException("cette operation a été définie " . $this->get_id() . " mais aucune operation ventilée. attention, impossible d'effacer") ;
-				} // @codeCoverageIgnoreEnd
+				$this->get_operation_mere() ;
+				throw new exception_integrite_referentielle('operation', $this->get_id(),'operation', $this->get_operation_mere()->get_id()) ;
 			}
 
 		}
 		$mere = $this->get_compte() ;
+		$montant=$this->get_montant();
 		$this->_dom->parentNode->removeChild($this->_dom) ;
 		//recuperation du dernier numero
 		if ($id >= (($gsb_operations->get_next()) - 1)) {
@@ -715,7 +712,11 @@ class operation extends item {
 		}
 		//nb d'operations pour ce compte
 		$nb = count($mere->iter_operations()) ;
+        //gestion de id
 		$req = $gsb_xml->xpath_uniq("//Compte/Details/No_de_compte[.='" . $mere->get_id() . "']/..") ;
 		$req->Nb_operations = $nb ;
+		//gestion des soldes
+		//ancien compte
+		$mere->set_solde_courant($mere->get_solde_courant()-$montant);
 	}
 }

@@ -17,7 +17,7 @@ if (util::get_page_param('action')=='delete' && date('dmY',time())==util::get_pa
 			}
 		}//end try
 		$gsb_xml->save();
-		$tpl->append("resultat","suppression de l'op&eacute;ration: Ok");
+		$tpl->append("resultat","suppression de l'opération: Ok");
 
 	}else{
 		try{
@@ -39,7 +39,7 @@ if (util::get_page_param('action')=='delete' && date('dmY',time())==util::get_pa
 		}//end try
 	}
 	if (DEBUG){
-		$tpl->assign('titre',"op&eacute;rations &eacute;fface&eacute;es");
+		$tpl->assign('titre',"opérationu effacées");
 		$tpl->assign('lien','operations.php?cpt_id='.$cpt_id);
 		$tpl->assign("nom_classe_css","progress");
 		$tpl->display('resultats.smarty');

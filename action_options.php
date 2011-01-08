@@ -55,7 +55,7 @@ if ($action=="effacer_tiers_vides"){
 		$gsb_xml->save();
 		if ($i>0){
 			$tpl->ral("$i tiers effac&eacute;s","progress");
-		} else {$tpl->ral("aucun tiers effacés","progress");}
+		} else {$tpl->ral("aucun tiers effacé","progress");}
 		$tpl->assign("lien","options.php");
 		$tpl->display('resultats.smarty');
 		exit();
@@ -64,16 +64,16 @@ if ($action=="effacer_tiers_vides"){
 
 //---------------------------verifications des differents totaux
 if ($action=="verif_totaux"){
-	function callback(){
+	function callback($phase){
 		global $gsb_xml;
 		global $gsb_comptes;
 		global $gsb_tiers;
 		global $tpl;
 		global $gsb_operations;
-
+		$err=false;
 		if ($gsb_xml->version!="0.5"){
 			if (DEBUG){
-				$tpl->critic("mauvais format de fichier, il faut que le fichier bsg soit au format 0.5.","outils.php");
+				$tpl->critic("mauvais format de fichier, il faut que le fichier gsb soit au format 0.5.","outils.php");
 			}else {
 				util::redirection_header("comptes.php");
 			}
@@ -100,16 +100,24 @@ if ($action=="verif_totaux"){
 			}
 			//verification
 			if ($nb_ope_c!=(int)$compte->get_xml()->Details->Nb_operations) {
-				$tpl->ral ("problème dans le comptage des opération du compte ". $compte->get_nom()." il y a noté ".$compte->get_xml()->Details->Nb_operations." alors qu'il y a ".$nb_ope_c,"error" );
+				$tpl->ral ("problème dans le comptage des opérations du compte ". $compte->get_nom()." il est noté ".$compte->get_xml()->Details->Nb_operations." alors qu'il y a ".$nb_ope_c."opérations","error" );
 				$compte->get_xml()->Details->Nb_operations=$nb_ope_c;
+				$err=true;
+				if ($phase==2){
+					$tpl->ral("correction ok","progress");
+				}
 			}else {
-				$tpl->ral ("ok dans le comptage des opération du compte ". $compte->get_nom());
+				$tpl->ral ("ok dans le comptage des opérations du compte ". $compte->get_nom());
 			}
 			if ($solde!=util::fr2cent($compte->get_xml()->Details->Solde_courant)){
-				$tpl->ral ("problème dans le solde des opération du compte ". $compte->get_nom()." il y a noté ".(util::fr2cent($compte->get_xml()->Details->Solde_courant)/100).$compte->get_devise()->get_isocode()." alors qu'il y a ".($solde/100).$compte->get_devise()->get_isocode(),"error" );
+				$tpl->ral ("problème dans le solde des opérations du compte ". $compte->get_nom()." il est noté ".(util::fr2cent($compte->get_xml()->Details->Solde_courant)/100).$compte->get_devise()->get_isocode()." alors que le solde calculé est de ".($solde/100).$compte->get_devise()->get_isocode(),"error" );
 				$compte->get_xml()->Details->Solde_courant=util::cent2fr($solde);
+				$err=true;
+				if ($phase==2){
+					$tpl->ral("correction ok","progress");
+				}
 			}else {
-				$tpl->ral ("ok pour le solde des opération du compte ". $compte->get_nom());
+				$tpl->ral ("ok pour le solde des opérations du compte ". $compte->get_nom());
 			}
 
 			//moyens de p du cpt
@@ -120,44 +128,66 @@ if ($action=="verif_totaux"){
 		}
 		//verifications globales
 		if ($nb_ope_max<$nb_ope){
-			$tpl->ral("le numero max est trop petit.");
+			$tpl->ral("le numero max est trop inférieur au nombre total d'opérations.");
 			$nb_ope_max=$nb_ope;
+			$err=true;
+			if ($phase==2){
+				$tpl->ral("correction ok","progress");
+			}
 		}else {
 			$tpl->ral("numero max d'opération ok");
 		}
 		if ($nb_ope_max != ($gsb_operations->get_next())-1) {
-			$tpl->ral("numero derniere operation incorrect");
 			$x->Generalites->Numero_derniere_operation=$nb_ope_max;
+			$tpl->ral("id dernière opération incorrect","error");
+			$err=true;
+			if ($phase==2){
+				$tpl->ral("correction ok","progress");
+			}
 		}else {
 			$tpl->ral("numero derniere opération ok");
 		}
 		$id_tiers_max=(int)$gsb_xml->xpath_uniq('/Grisbi/Tiers/Detail_des_tiers/Tiers[not(@No < /Grisbi/Tiers/Detail_des_tiers/Tiers/@No)]/@No');
 		$nb_tiers=count($gsb_xml->xpath_iter('/Grisbi/Tiers/Detail_des_tiers/Tiers'));
 		if ((int)$x->Tiers->Generalites->Nb_tiers != $nb_tiers){
-			$tpl->ral("probleme dans le nombre de tiers. il y a $nb_tiers alors qu'il est noté ".(int)$x->Tiers->Generalites->Nb_tiers." tiers de noté","error");
+			$tpl->ral("probleme dans le nombre de tiers. il y a $nb_tiers alors qu'il est inscrit ".(int)$x->Tiers->Generalites->Nb_tiers." de tiers dans le fichier","error");
 			$x->Tiers->Generalites->Nb_tiers=$nb_tiers;
+			$err=true;
+			if ($phase==2){
+				$tpl->ral("correction ok","progress");
+			}
 		} else {
 			$tpl->ral ("ok pour le nombre de tiers ");
 		}
 		if ((int)$x->Tiers->Generalites->No_dernier_tiers < $id_tiers_max){
-			$tpl->ral("probleme pour le dernier id. il y a $id_tiers_max alors qu'il est noté ".(int)$x->Tiers->Generalites->No_dernier_tiers." tiers de noté","error");
+			$tpl->ral("probleme pour le dernier id. l'id le max est $id_tiers_max alors qu'il est noté comme étant ".(int)$x->Tiers->Generalites->No_dernier_tiers,"error");
 			$x->Tiers->Generalites->No_dernier_tiers=$id_tiers_max;
+			$err=true;
+			if ($phase==2){
+				$tpl->ral("correction ok","progress");
+			}
 		} else {
 			$tpl->ral ("ok pour le dernier id des tiers ");
 
 		}
-			}
+		return $err;
+	}
 	if ($phase==""){
 		$tpl->assign('titre','liste des actions à effectuer sur '.$gsb_xml->get_xmlfile());
-		callback();
-		$tpl->assign("lien","action_options.php?action=verif_totaux&amp;phase=2");
+		$err=callback(1);
+		// si il n'y pas d'erreur pas besoin de faire la seconde phase
+		if ($err){
+			$tpl->assign("lien","action_options.php?action=verif_totaux&amp;phase=2");
+		} else {
+			$tpl->assign("lien","options.php");
+		}
 		$tpl->display('resultats.smarty');
 		exit();
 	}
 	if ($phase==2){
-		$tpl->assign('titre','liste des actions effectues sur '.$gsb_xml->get_xmlfile());
+		$tpl->assign('titre','liste des actions effectuées sur '.$gsb_xml->get_xmlfile());
 		//remplissez la requete xpath
-		callback();
+		callback(2);
 		$gsb_xml->save();
 		$tpl->assign("lien","options.php");
 		$tpl->display('resultats.smarty');
@@ -187,7 +217,7 @@ if ($action=="dates_ope_diff"){
 					}
 				}
 			}
-			throw new Exception_no_reponse('pas de reponse');
+			throw new Exception_no_reponse('pas de réponse');
 		} catch (Exception_no_reponse $e) {
 			return 0;
 		}
@@ -206,7 +236,7 @@ if ($action=="dates_ope_diff"){
 	}
 	if ($phase==2){
 		$i=0;
-		$tpl->assign('titre','liste des actions effectues sur '.$gsb_xml->get_xmlfile());
+		$tpl->assign('titre','liste des actions effectuées sur '.$gsb_xml->get_xmlfile());
 		foreach ($gsb_operations->iter() as $iter) {
 			$i=$i+callback($iter);
 		}
