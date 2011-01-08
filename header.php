@@ -29,7 +29,13 @@ define("SUR_FREE", true) ;
  * id de la devise generalement utilise
  */
 define("DEVISE",1);
-define('DEBUG', false);
+/**
+ * variable de debug
+ * debug affiche des ecrans intermediaires
+  * debug_smarty affiche la fenetre debug smarty
+*/
+define('DEBUG', true);
+define('DEBUG_SMARTY', false);
 /**
  * Id du tiers par defaut pour les virement
  */
@@ -67,11 +73,8 @@ class template extends Smarty {
 		$this->compile_dir = './templates/compiled' ;
 		$this->config_dir = './templates/config' ;
 		$this->cache_dir = './templates/cache' ;
-		if (!defined("DEBUG")) {
-			define("DEBUG", false);
-		}
 
-		if (DEBUG){
+		if (DEBUG_SMARTY){
 			$this->debugging=true;
 		}
 		$this->caching = false ;
