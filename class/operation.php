@@ -317,22 +317,11 @@ class operation extends item {
 	/** ------------------------------- SETTER -------------------------------------------------------*/
 
 	/**
-	 * @param int $id
+	 * @param compte $compte
 	 * @return void
 	 */
-	public function set_compte($id) {
+	public function set_compte(compte $compte) {
 		global $gsb_xml;
-		global $gsb_comptes;
-		try {
-			if (is_numeric($id)) {
-				$compte = $gsb_comptes->get_by_id($id);
-			} else {
-				throw new exception_parametre_invalide('$id');
-			}
-		}
-		catch (Exception_no_reponse $except) {
-			throw new exception_not_exist("compte", $id);
-		}
 		$op=array(
 		(string) $this->_item_xml['No'] ,
 		(string) $this->_item_xml['Id'],
