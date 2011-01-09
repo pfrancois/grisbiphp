@@ -4,10 +4,12 @@ abstract class item{
 	const NOUVELLE = true;
 	const ANCIENNE = false;
 	/**
-	 * @var $c_xml SimpleXMLElement le compte simplexml
-	 * @todo remettre en protected
+	 * @var $_item_xml SimpleXMLElement le compte simplexml
 	 */
 	protected $_item_xml;
+	/**
+	 * @var $_dom SimpleXMLElement le compte simplexml
+	 */
 	protected $_dom;
 	/**
 	 *

@@ -25,7 +25,7 @@ j7HK8QSqCTSglPmw9gSjKiPwqLx8/JVAlo6s5+t8XGJxm315IAImvV4RjpFhdjJHLmDi5JPd7dSYW+Lc
 
 <form id="form1" method="get" action="action_virement.php" >
 	<fieldset id="operationMainTable">
-		<legend>détails virement interne</legend>
+		<legend>dÃ©tails virement interne</legend>
 		<input type="hidden" name="ope_origine_id" value="{$ope_origine_id}" />
 		<input type="hidden" name="ope_destination_id" value="{$ope_destination_id}" />
 		{if ($type_action=='new')}

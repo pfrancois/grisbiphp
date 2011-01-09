@@ -11,7 +11,7 @@ $compte=$gsb_comptes->get_by_id($cpt_id);
 
 if ($ope_id === 0) {//nouvelle operation
 	if ($compte->is_cloture()){
-		$tpl->critic('attention, impossible de creer une operation dans un compte cloturé','./operations.php?cpt_id='.$cpt_id);
+		$tpl->critic('attention, impossible de creer une opération dans un compte cloturé','./operations.php?cpt_id='.$cpt_id);
 	} else {
 		$tpl->assign('type_action', 'new');
 		$ope_id=$gsb_operations->get_next();

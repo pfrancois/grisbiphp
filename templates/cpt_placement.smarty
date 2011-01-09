@@ -31,7 +31,7 @@ j7HK8QSqCTSglPmw9gSjKiPwqLx8/JVAlo6s5+t8XGJxm315IAImvV4RjpFhdjJHLmDi5JPd7dSYW+Lc
 	<thead>
 		<tr>
 			<th >placement</th>
-			<th align="right">montant placé</th>
+			<th align="right">montant placÃ©</th>
 			<th >+/- values</th>
 			<th >total</th>
 		</tr>
@@ -51,7 +51,7 @@ j7HK8QSqCTSglPmw9gSjKiPwqLx8/JVAlo6s5+t8XGJxm315IAImvV4RjpFhdjJHLmDi5JPd7dSYW+Lc
 		</tr>
 	{/foreach}
 	<tr class="item hover">
-		<td class="opTier">compte espèce</td>
+		<td class="opTier">compte espÃ¨ce</td>
 		<td class="opDebit">{$espece|nbfr:$devise}</td>
 		<td class="opCredit">&nbsp;</td>
 		<td class="opDebit">{$espece|nbfr:$devise}</td>

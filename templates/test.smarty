@@ -16,7 +16,7 @@ j7HK8QSqCTSglPmw9gSjKiPwqLx8/JVAlo6s5+t8XGJxm315IAImvV4RjpFhdjJHLmDi5JPd7dSYW+Lc
 </head>
 <body>
 {if $partie eq 2}
-<p>mise à jour faite.</p>
+<p>mise Ã  jour faite.</p>
 {/if}
 </body>
 </html>

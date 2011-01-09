@@ -20,11 +20,11 @@ j7HK8QSqCTSglPmw9gSjKiPwqLx8/JVAlo6s5+t8XGJxm315IAImvV4RjpFhdjJHLmDi5JPd7dSYW+Lc
 <title>Options</title>
 </head>
 <body>
-<p><a href="action_options.php?action=get_file"> télécharger le fichier </a></p>
+<p><a href="action_options.php?action=get_file"> tÃ©lÃ©charger le fichier </a></p>
 <p><a href="export_csv.php"> exporter l'ensemble des comptes en csv </a></p>
 <p><a href="action_options.php?action=effacer_tiers_vides"> effacer les tiers vides </a></p>
-<p><a href="action_options.php?action=dates_ope_diff">change les date des operations cartes differés</a></p>
-<p><a href="action_options.php?action=verif_totaux">vérifier les totaux</a></p>
+<p><a href="action_options.php?action=dates_ope_diff">change les date des operations cartes differÃ©s</a></p>
+<p><a href="action_options.php?action=verif_totaux">vÃ©rifier les totaux</a></p>
 <p><a href="action_options.php?action=specifique"> travaux en batch </a></p>
 <form method="post" action="action_telechargement.php" enctype="multipart/form-data">
 	<fieldset class="operationMainTable">
@@ -33,6 +33,6 @@ j7HK8QSqCTSglPmw9gSjKiPwqLx8/JVAlo6s5+t8XGJxm315IAImvV4RjpFhdjJHLmDi5JPd7dSYW+Lc
 	<input type="submit" value="Envoyer"/><br/>
 	</fieldset>
 </form>
-<p><a href="comptes.php">retour vers le menu général</a></p>
+<p><a href="comptes.php">retour vers le menu gÃ©nÃ©ral</a></p>
 </body>
 </html>
