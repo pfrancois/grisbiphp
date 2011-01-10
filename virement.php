@@ -18,10 +18,13 @@ if ($ope_destination_id === "") {//nouvelle operation
 }
 else {//edition
 	$tpl->assign('type_action','edit');
-
+	try {
 	$operation=$gsb_operations->get_by_id($ope_destination_id);
 	// operation jumelle
 	$jumelle=$operation->get_operation_contrepartie();
+	} catch (Exception_not_exist $except) {
+		$tpl->critic("opération ".$except->id." inconnue",'./operations.php?cpt_id='.$cpt_destination_id);
+	}
 	if ($operation->get_montant()>0) {
 		// on inverse les deux car normalement c'est le negatif en premier
 		$transfert=$jumelle;

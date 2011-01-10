@@ -34,7 +34,11 @@ if ($ope_id === 0) {//nouvelle operation
 } else {
 	$tpl->assign('type_action', 'edit');
 	$tpl->assign('compte_cloture',$compte->is_cloture());
-	$operation=$gsb_operations->get_by_id($ope_id);
+	try {
+		$operation=$gsb_operations->get_by_id($ope_id);
+	} catch (Exception_not_exist $except) {
+		$tpl->critic("opération $ope_id inconnue",'./operations.php?cpt_id='.$cpt_id);
+		}
 	// montant
 	$value=$operation->get_montant();
 	if ($operation->get_categorie()->get_type()==categorie::DEBIT) {

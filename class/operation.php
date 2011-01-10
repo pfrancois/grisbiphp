@@ -653,30 +653,13 @@ class operation extends item {
 		$id = $this->get_id();
 		if ($controle_integrite) {
 			if ($this->is_ventilee() == true) {
-				try {
-					$iterateur = $this->iter_operation_ventilees();
-					$id_fille = $iterateur[0]->get_id();
-					throw new exception_integrite_referentielle('operation', $id, 'operation', $id_fille);
-				}
-				catch (exception_not_exist $e) {
-					// @codeCoverageIgnoreStart
-					throw new BadMethodCallException("cette operation " . $this->get_id() .
-						" a été définie comme une ventilation mais n'a pas d'opération fille. probleme dans la structure du fichier. effacement annulé");
-					// @codeCoverageIgnoreEnd
-				}
+				$iterateur = $this->iter_operation_ventilees();
+				$id_fille = $iterateur[0]->get_id();
+				throw new exception_integrite_referentielle('operation', $id, 'operation', $id_fille);
 			}
 			if ($this->is_virement() == true) {
-				try {
-					$this->get_operation_contrepartie()->get_id();
-					throw new exception_integrite_referentielle('operation', $this->get_id(),
-						'operation', $this->get_operation_contrepartie()->get_id());
-				}
-				catch (exception_not_exist $e) {
-					// @codeCoverageIgnoreStart
-					throw new BadMethodCallException("cette operation " . $this->get_id() .
-						" a été définie comme une ventilation mais n'a pas d'opération en contrepartie. probleme dans l'effacement");
-					// @codeCoverageIgnoreEnd
-				}
+				$this->get_operation_contrepartie()->get_id();
+				throw new exception_integrite_referentielle('operation', $this->get_id(),'operation', $this->get_operation_contrepartie()->get_id());
 			}
 			if ($this->is_ventilation() == true) {
 				$this->get_operation_mere();
@@ -684,7 +667,7 @@ class operation extends item {
 			}
 
 		}
-		$mere = $this->get_compte();
+		$compte = $this->get_compte();
 		$montant=$this->get_montant();
 		$this->_dom->parentNode->removeChild($this->_dom);
 		//recuperation du dernier numero
@@ -701,12 +684,12 @@ class operation extends item {
 			}
 		}
 		//nb d'operations pour ce compte
-		$nb = count($mere->iter_operations());
+		$nb = count($compte->iter_operations());
     //gestion de id
-		$req = $gsb_xml->xpath_uniq("//Compte/Details/No_de_compte[.='" . $mere->get_id() . "']/..");
+		$req = $gsb_xml->xpath_uniq("//Compte/Details/No_de_compte[.='" . $compte->get_id() . "']/..");
 		$req->Nb_operations = $nb;
 		//gestion des soldes
 		//ancien compte
-		$mere->set_solde_courant($mere->get_solde_courant()-$montant);
+		$compte->set_solde_courant($compte->get_solde_courant()-$montant);
 	}
 }
