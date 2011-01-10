@@ -86,7 +86,7 @@ try{
 	$operation->set_notes($ope_notes);
 	$operation->set_tiers($tier);
 	$gsb_xml->save();
-	$t=" opération $ope_id, d'un montant de $ope_montant ".$operation->get_compte()->get_devise()->get_isocode().", à ".$tier->get_nom()." le ".date('d/m/Y',$ope_date)." ok";
+	$t=" opération n° $ope_id, d'un montant de $ope_montant ".$operation->get_compte()->get_devise()->get_isocode().", à ".$tier->get_nom()." le ".date('d/m/Y',$ope_date)." ok";
 	$tpl->ral($action.$t);
 } catch (Exception $except) {
 	if (DEBUG){
