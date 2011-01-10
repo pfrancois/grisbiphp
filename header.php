@@ -34,7 +34,7 @@ define("DEVISE",1);
  * debug affiche des ecrans intermediaires
  * debug_smarty affiche la fenetre debug smarty
 */
-define('DEBUG', true);
+define('DEBUG', false);
 define('DEBUG_SMARTY', false);
 /**
  * Id du tiers par defaut pour les virement
