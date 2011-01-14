@@ -12,12 +12,19 @@ class echeance extends item {
 	public function verif_echus(){
 		$date_ech=util::datefr2time($this->_item_xml['Date']);
 		if ($date_ech<time()) {
-			if (datefr2time($this->_item_xml['Date_limite'])>time()){
-				return true;
-			}
-		}
+		  try{
+    			if (util::datefr2time($this->_item_xml['Date_limite'])>time()){
+    				return true;
+    			}
+            }catch (InvalidArgumentException $except){
+                return true;
+            }
+        }
 	}
-
+    public function get_compte(){
+        global $gsb_comptes;
+        return $gsb_comptes->get_by_id((int)$this->_item_xml['Compte']);
+    }
 	public function enregistre_echus(){
 		global $gsb_comptes;
 		global $gsb_categories;
