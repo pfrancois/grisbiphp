@@ -19,7 +19,11 @@ class xml {
 	 * @var bool
 	 */
 	protected $_sur_free;
-
+	/**
+	 *variable qui affiche la version du xml
+	 * @var string
+	 */
+	 protected $version;
 	/**
 	 * fonction de creation de la classe
 	 *
@@ -39,12 +43,16 @@ class xml {
 			}
 		}
 		$this->_surfree=$sur_free;
-		if ($this->_xml_complet->Generalites->Version_fichier != '0.5.0') {
-			throw new UnexpectedValueException("le fichier n'est pas au bon format");
+		if ((string)$this->_xml_complet->Generalites->Version_fichier === '0.5.0') {
+				$this->version="0.5";
+		}else {
+			throw new UnexpectedValueException("le fichier n'est pas dans un format lisible");
 		}
-		$this->version="0.5";
-	}
 
+	}
+	public function get_version(){
+		return $this->version;
+	}
 	/**
 	 * renvoi un tableau de la classe demandée suite a la requete demande
 	 * @param string $chaine la chaine xpath qui renvoit la collection
@@ -168,10 +176,10 @@ class xml {
 				LIBXML_COMPACT);
 			}
 		}
-		if ($this->_xml_complet->Generalites->Version_fichier != '0.5.0') {
-			// @codeCoverageIgnoreStart
-			throw new UnexpectedValueException("le fichier n'est pas au bon format");
-			// @codeCoverageIgnoreEnd
+		if ((string)$this->_xml_complet->Generalites->Version_fichier === '0.5.0') {
+				$this->version="0.5";
+		}else {
+			throw new UnexpectedValueException("le fichier n'est pas dans un format lisible");
 		}
 	}
 	/**
@@ -187,4 +195,5 @@ class xml {
 			return false;
 		}
 	}
+
 }

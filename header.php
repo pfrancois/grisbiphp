@@ -1,13 +1,25 @@
 <?php /* coding: utf-8 */
 
-require_once ('class/loader.php');
-require_once('basic_ope_inc.php');
-
 /**
  * nom du fichier
  */
 define('CPT_FILE', "outils/20040701.gsb");
+/**
+ * est ce que ce site est heberge sur free
+ */
+define("SUR_FREE", true);
+require_once('class/xml.php');
 
+//chargement du fichier xml
+/**
+ *
+ * objet xml
+ * @var xml
+ */
+$gsb_xml = new xml(CPT_FILE, SUR_FREE);
+define("VERSION_UTILISE",$gsb_xml->get_version());
+require_once ('class/loader.php');
+require_once('basic_ope_inc.php');
 /**
  * tableau des comptes affiches
  * @see compte::T_*
@@ -21,10 +33,7 @@ define('NB_JOURS_AFF', 600);
  * numero du compte d'origine par defaut pour les virement
  */
 define("CPT_VIREMENT", 0);
-/**
- * est ce que ce site est heberge sur free
- */
-define("SUR_FREE", true);
+
 /**
  * id de la devise generalement utilise
  */
@@ -173,11 +182,3 @@ class template extends Smarty {
 $tpl = new template();
 //ajoute un composant specifique pour smarty a cette application
 require_once ('modifier.nbfr.php');
-
-//chargement du fichier xml
-/**
- *
- * objet xml
- * @var xml
- */
-$gsb_xml = new xml(CPT_FILE, SUR_FREE);

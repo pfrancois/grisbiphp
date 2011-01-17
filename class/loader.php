@@ -6,10 +6,13 @@
  * @param string $className
  */
 function autoload_grisbi_base($className) {
-	if (strripos($className, 'exception') !== false) {
-		require (dirname(__file__) . DIRECTORY_SEPARATOR . 'exceptions.php');
-	} else {
+	if (strripos($className, 'exception') !== false ) {
+		require_once (dirname(__file__) . DIRECTORY_SEPARATOR . 'exceptions.php');
+
+	} elseif (in_array($className,array("util"))) {
 		require (dirname(__file__) . DIRECTORY_SEPARATOR . $className . '.php');
+	} else {
+		require (dirname(__file__) . DIRECTORY_SEPARATOR .VERSION_UTILISE. DIRECTORY_SEPARATOR . $className . '.php');
 	}
 }
 
