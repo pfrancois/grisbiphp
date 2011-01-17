@@ -23,7 +23,7 @@ class categorie extends subitems {
 		if ($type === 0 || $type === 1 || $type === 2) {
 			$this->_item_xml['Type']=$type;
 		} else {
-			throw new exception_parametre_invalide("'$type' parametre invalide. il doit etre 0, 1 ou 2");
+			throw new exception_parametre_invalide("'$type' paramètre invalide. il doit être 0, 1 ou 2");
 		}
 	}
 
@@ -35,8 +35,7 @@ class categorie extends subitems {
 			$id = $this->get_id();
 			$q = $gsb_xml->xpath_iter("//Operation[@C='$id']");
 			$q = $q[0];
-			throw new exception_integrite_referentielle('categorie', $this->get_id(),
-        'operation', $q['No']);
+			throw new exception_integrite_referentielle('categorie', $this->get_id(),'operation', $q['No']);
 		}
 		catch (Exception_no_reponse $except) {
 			$this->_dom->parentNode->removeChild($this->_dom);

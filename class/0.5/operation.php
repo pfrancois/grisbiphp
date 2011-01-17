@@ -304,7 +304,7 @@ class operation extends item {
 	}
 
 	/**
-	 * operation::get_operation_mere() dans le cadre des operations ventilees
+	 * operation::get_operation_mere() dans le cadre des operations ventilées
 	 *
 	 * @return operation
 	 */
@@ -421,7 +421,7 @@ class operation extends item {
 	}
 
 	/**
-	 * change le tiers en rapport avec cette operation
+	 * change le tiers en rapport avec cette opération
 	 * @param tier $id
 	 * @return void
 	 */
@@ -457,7 +457,7 @@ class operation extends item {
 	}
 
 	/**
-	 * pas encore fais mais normalement cela permet de gerer les operations ventilées
+	 * pas encore fais mais normalement cela permet de gerer les opérations ventilées
 	 * operation::set_ventilee()
 	 *
 	 * @param bool $v
@@ -532,7 +532,7 @@ class operation extends item {
 	 */
 	public function set_planifie($v) {
 		if (!is_bool($v)) {
-			throw new exception_parametre_invalide('$v non bool dans operation ' . $this->get_id
+			throw new exception_parametre_invalide('$v non bool dans opération ' . $this->get_id
 			());
 		}
 		if ($v) {
@@ -610,20 +610,20 @@ class operation extends item {
 	}
 
 	/**
-	 *attention, une operation n'a pas de nom
+	 *attention, une opération n'a pas de nom
 	 *@throw exception_base
 	 */
 	public function get_nom() {
-		throw new exception_base("attention, une operation n'a pas de nom");
+		throw new exception_base("attention, une opération n'a pas de nom");
 	}
 
 	/**
-	 *attention, une operation n'a pas de nom
+	 *attention, une opération n'a pas de nom
 	 *@param string $nom
 	 *@throw exception_base
 	 */
 	public function set_nom($nom) {
-		throw new exception_base("attention, une operation n'a pas de nom alors que vous voulez lui mettre comme nom '$nom'");
+		throw new exception_base("attention, une opération n'a pas de nom alors que vous voulez lui mettre comme nom '$nom'");
 	}
 
 
@@ -632,7 +632,7 @@ class operation extends item {
 	 * operation::get_operation_ventilees()
 	 *
 	 * @return array of operation
-	 * @thrown Exception_no_reponse si pas d'operation ventilee
+	 * @thrown Exception_no_reponse si pas d'operation ventilée
 	 */
 	public function iter_operation_ventilees() {
 		global $gsb_xml;
@@ -640,7 +640,7 @@ class operation extends item {
 			$id = $this->get_id();
 			return $gsb_xml->iter_class("//Operation[@Va='$id']", "operation");
 		} else {
-			throw new Exception_no_reponse("pas possible car $this n'est pas une operation ventilee");
+			throw new Exception_no_reponse("pas possible car $this n'est pas une opération ventilée");
 		}
 	}
 

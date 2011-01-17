@@ -5,7 +5,7 @@
  */
 class operations extends items {
 	/**
-	 * @const la chaine qui permet une iteration facile
+	 * @const la chaine qui permet une itération facile
 	 */
 	protected $_xpath = '//Operation';
 	public $nom_classe = __class__;
@@ -44,5 +44,5 @@ class operations extends items {
 		$r = (int)$gsb_xml->xpath_uniq('//Generalites/Numero_derniere_operation');
 		return $r + 1;
 	}
-	
+
 }

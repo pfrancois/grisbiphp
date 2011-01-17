@@ -1,7 +1,7 @@
 <?php /* coding: utf-8 */
 
 /**
- * Classe utilitaire qui donne des differentes fonctions utilise ailleurs.
+ * Classe utilitaire qui donne des différentes fonctions utilisées ailleurs.
 
  * @since 2009-08-25
  * @version 1.2 modification de add_date
@@ -11,7 +11,7 @@ class util {
 	/**
 	 * Fonction de conversion de date du format francais en Timestamp.
 	 *
-	 * les formats acceptes sont :
+	 * les formats acceptés sont :
 	 * JJ/MM/AAAA
 	 * JJ/MM/AA
 	 * J/M/AA
@@ -37,11 +37,11 @@ class util {
 	}
 
 	/**
-	 * fonction qui permet d'ajouter une duree a une date
+	 * fonction qui permet d'ajouter une duree à une date
 	 * @param int $cd timestamp
-	 * @param integer $day nombre de jour a ajouter
-	 * @param integer $mth nombre de mois a ajouter
-	 * @param integer $yr  nombre de yr a ajouter
+	 * @param integer $day nombre de jour à ajouter
+	 * @param integer $mth nombre de mois à ajouter
+	 * @param integer $yr  nombre de yr à ajouter
 	 * @return int date nouvelle
 	 */
 	public static function add_date($cd, $day = 0, $mth = 0, $yr = 0) {
@@ -50,10 +50,10 @@ class util {
 	}
 
 	/**
-	 * renvoit un get apres les controle de base
+	 * renvoit un get apres les contrôles de base
 	 *
-	 * @param string $paramName nom de la variable a recuperer
-	 * @return mixed la variable verifie
+	 * @param string $paramName nom de la variable à récuperer
+	 * @return mixed la variable verifiée
 	 */
 	public static function get_page_param($paramName) {
 		if (isset($_GET[$paramName])) {
@@ -81,13 +81,13 @@ class util {
 		if (is_numeric($n)){
 			$n=(float)$n;
 		} else {
-			throw new InvalidArgumentException('probleme, '.$n."n'est pas un nombre");
+			throw new InvalidArgumentException('problème, '.$n."n'est pas un nombre");
 		}
 		return intval(round($n * 100));
 	}
 
 	/**
-	 *transforme un nombre anglais en centimes
+	 *transforme un nombre en centimes en nombre francais
 	 * @param int $n le nombre a transformer en float
 	 * @param int $digit le nombre de chiffres apres la virgule
 	 * @return string
@@ -96,7 +96,7 @@ class util {
 		if (is_numeric($n)){
 			$n=(float)$n;
 		} else {
-			throw new InvalidArgumentException('probleme, '.$n."n'est pas un nombre");
+			throw new InvalidArgumentException('problème, '.$n."n'est pas un nombre");
 		}
 		$n = floatval($n / 100 );
 		return str_replace('.', ',', sprintf("%01.".$digit."f", $n));
@@ -185,7 +185,7 @@ class util {
 	 *
 	 * @param array $assoc_arr (array imbriqué si sections)
 	 * @param string $path chmin du fichier ini
-	 * @throws exception_parametre_invalide si probleme fichier
+	 * @throws exception_parametre_invalide si problème fichier
 	 * @return void
 	 */
 	public static function write_ini_file($assoc_arr, $path) {
