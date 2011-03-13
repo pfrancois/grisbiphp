@@ -395,14 +395,12 @@ foreach ($xml->xpath('//Exercice') as $exo) {
 }
 aff($nbexo.' exercices insérées');
 //gestion des operations
-// $db->debogagesql = true;
 aff('-----------------------------------------------------------');
 $nbope = 0;
 $nbopemax = (int) $xml->Generalites->Numero_derniere_operation;
 $ope_exist = array();
 $db->total = true;
 foreach ($xml->xpath('//Operation') as $ope) {
-    // $db->q('DELETE FROM `grisbi`.`ope` WHERE `ope`.`id` = '.((int) $ope['No'] + 1).';', false);
     $nbope++;
     $q_ope['id'] = (int) $ope['No'] + 1;//numero de l'operation
     $ope_exist[] = $q_ope['id'];
@@ -419,7 +417,6 @@ foreach ($xml->xpath('//Operation') as $ope) {
     $q_ope['tiers_id'] = $db->ins((int) $ope['T'] + 1);//tiers
     $q_ope['cat_id'] = $db->ins((int) $ope['C'] + 1);//categorie
     $q_ope['scat_id'] = $db->ins((int) $ope['Sc'] + 1);//souscat
-    $q_ope['is_mere'] = (int) $ope['Ov'];// 1 si opventilemere
     $q_ope['notes'] = $db->ins($ope['N']);//note
     $q_ope['moyen_id'] = $db->ins((int) $ope['Ty'] + 1);//type de paiment de l'operation
     $moyen = $db->ins($ope['Ct'] + 1);
