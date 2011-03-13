@@ -17,7 +17,7 @@ TODO gestion des etats
  */
 require_once 'functions.php';
 $titre   = "parser";
-$xmlfile = 'fichier_test.gsb';
+$xmlfile = '20040701.gsb';
 /*----------------principal--------------------*/
 $maxnivlog = 2;
 $starttime = microtime(true);
@@ -461,7 +461,9 @@ foreach ($xml->xpath('//Operation') as $ope) {
     }
     $result = $db->insert('ope', $q_ope);
     unset($q_ope);
-    if ($nbope % 50 == 0) aff($nbope.' opes inserés');
+    $db->debogagesql=false;
+    if ($nbope % 50 == 0) echo $nbope.' opes inserés'.N;
+    $db->debogagesql=true;
 }//end foreach
 $db->save('ope');
 aff($nbope.' ope insérées');
