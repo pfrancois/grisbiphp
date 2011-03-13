@@ -1,15 +1,6 @@
 <?php /* coding: utf-8 */
-
-/**
- * nom du fichier
- */
-define('CPT_FILE', "outils/20040701.gsb");
-/**
- * est ce que ce site est heberge sur free
- */
-define("SUR_FREE", true);
-require_once('class/xml.php');
-
+require('config.php');
+require('class/xml.php');
 //chargement du fichier xml
 /**
  *
@@ -19,48 +10,14 @@ require_once('class/xml.php');
 $gsb_xml = new xml(CPT_FILE, SUR_FREE);
 define("VERSION_UTILISE",$gsb_xml->get_version());
 require_once ('class/loader.php');
-require_once('basic_ope_inc.php');
 /**
  * tableau des comptes affiches
  * @see compte::T_*
  */
 $cpt_aff=array(compte::T_BANCAIRE,compte::T_ESPECE);
-/*
- * nombre de jours maximum d'affichage
- */
-define('NB_JOURS_AFF', 600);
-/**
- * numero du compte d'origine par defaut pour les virement
- */
-define("CPT_VIREMENT", 0);
+require_once('basic_ope_inc.php');
+require_once('class/xml.php');
 
-/**
- * id de la devise generalement utilise
- */
-define("DEVISE",1);
-/**
- * variable de debug
- * debug affiche des ecrans intermediaires
- * debug_smarty affiche la fenetre debug smarty
-*/
-define('DEBUG', false);
-define('DEBUG_SMARTY', false);
-/**
- * Id du tiers par defaut pour les virement
- */
-define('TIERS_VIREMENT',2);
-/**
-* id de la categorie pour plus ou moins values latentes
-*/
-define('PMVALUES',25);
-/**
-* id de la categorie des operations sur titres
-*/
-define('OSTITRES',31);
-/**
-* id de la categorie pour operations sur titres
-*/
-define('OPE_TITRE',31);
 
 //-----------fin de la configuration a changer, normalement vous n'avez pas a modifier en dessous
 
