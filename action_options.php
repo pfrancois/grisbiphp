@@ -71,7 +71,7 @@ if ($action=="verif_totaux"){
 		global $tpl;
 		global $gsb_operations;
 		$err=false;
-		if ($gsb_xml->version!="0.5"){
+		if ($gsb_xml->get_version()!="0.5"){
 			if (DEBUG){
 				$tpl->critic("mauvais format de fichier, il faut que le fichier gsb soit au format 0.5.","outils.php");
 			}else {
