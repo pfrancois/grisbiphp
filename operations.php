@@ -83,7 +83,7 @@ $tpl->assign('devise',$compte->get_devise()->get_isocode());
 //gestion des écheances
 $nb_ope_echus=0;
 foreach($gsb_echeances->iter() as $ech){
-    if ($ech->verif_echus()){
+    if ($ech->verif_echus() && ($ech->get_compte()->get_id()===$cpt_id)){
         $nb_ope_echus++;
     }
 }
