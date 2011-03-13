@@ -3,7 +3,7 @@
 /**
  * nom du fichier
  */
-define('CPT_FILE', "outils/20040701.gsb");
+define('CPT_FILE', "outils/bdd/fichier_test.gsb");
 /**
  * est ce que ce site est heberge sur free
  */
@@ -12,7 +12,7 @@ define("SUR_FREE", true);
 /*
  * nombre de jours maximum d'affichage
  */
-define('NB_JOURS_AFF', 60);
+define('NB_JOURS_AFF', 6000);
 /**
  * numero du compte d'origine par defaut pour les virement
  */
