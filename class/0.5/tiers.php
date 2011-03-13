@@ -27,7 +27,11 @@ class tiers extends items {
 			}
 		}
 		catch (Exception_no_reponse $except) {
-			throw new exception_not_exist("tiers", $id);
+            if ($id==0){
+                return null;
+            } else {
+                throw new exception_not_exist("tiers", $id);
+            }
 		}
 		return new tier($req);
 	}
