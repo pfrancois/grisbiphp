@@ -87,7 +87,7 @@ foreach ($gsb_tiers->iter() as $tier) {
 	$tab_nom_tiers[$tier->get_id()]=$tier->get_nom();
 }
 
-asort($tab_nom_tiers);
+$tab_nom_tiers=util::asorti($tab_nom_tiers);
 $ltiers=array();
 foreach ($tab_nom_tiers as $no => $tier) {
 	$ltiers[]=array("id" => $no, "nom" => $tier);
