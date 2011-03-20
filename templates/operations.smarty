@@ -36,8 +36,11 @@ j7HK8QSqCTSglPmw9gSjKiPwqLx8/JVAlo6s5+t8XGJxm315IAImvV4RjpFhdjJHLmDi5JPd7dSYW+Lc
 	{/if}
 </table>
 <br/>
-{if $nb_ope_echus>0}
+{if $nb_ope_echus>1}
 {$nb_ope_echus} opérations échues. </p>
+{/if}
+{if $nb_ope_echus}
+{$nb_ope_echus} opération échue. </p>
 {/if}
 <table width="100%" id="main">
 	<thead>
@@ -111,4 +114,3 @@ j7HK8QSqCTSglPmw9gSjKiPwqLx8/JVAlo6s5+t8XGJxm315IAImvV4RjpFhdjJHLmDi5JPd7dSYW+Lc
 {/if}
 </body>
 </html>
-
