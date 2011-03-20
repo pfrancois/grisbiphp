@@ -107,7 +107,23 @@ class util {
         $newdate = mktime(0, 0, 0, (int) date('m', $cd) + $mth, (int) date('d', $cd) + $day, (int) date('Y', $cd) + $yr);
         return $newdate;
     }
-
+    /**
+     * fonction qui trie un tableau associatif non case sensitive
+     *
+     * @param array $arr tableau a trier
+     * @return array
+     */
+    public static function asorti($arr) {
+       $arr2 = $arr;
+       foreach($arr2 as $key => $val) {
+          $arr2[$key] = strtolower($val);
+       }
+       asort($arr2);
+       foreach($arr2 as $key => $val) {
+          $arr2[$key] = $arr[$key];
+       }
+       return $arr2;
+    }
     /**
      * renvoit un get apres les contrôles de base
      *

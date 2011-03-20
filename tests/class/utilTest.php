@@ -26,10 +26,42 @@ class utilTest extends PHPUnit_Framework_TestCase {
 		$this->setExpectedException('InvalidArgumentException');
 		util::datefr2time('32/12/2009');
 	}
-	public function test_fr2cent_et_cent2fr(){
+	public function testdatefr2time_null1(){
+		$this->assertEquals(null,util::datefr2time("0/0/00",true));
+	}
+	public function testdatefr2time_null2(){
+		$this->assertEquals(null,util::datefr2time('',true));
+	}
+	public function testtime2date(){
+        $this->assertEquals("2011-01-01 00:00:00", util::time2date(mktime(0,0,0,1,1,2011)) );
+    }
+	public function testdatefr2date(){
+        $this->assertEquals("2011-01-01 00:00:00", util::datefr2date("01/01/2011") );
+    }
+    public function testdatefr2date2(){
+        $this->assertEquals("2011-01-01 00:00:00", util::datefr2date("01012011") );
+    }
+    public function testdatefr2date3(){
+        $this->assertEquals(null, util::datefr2date("") );
+    }
+    public function testdatefr2date4(){
+        $this->assertEquals(null, util::datefr2date("0/0/0") );
+    }
+    public function testdatefr2date5(){
+        $this->setExpectedException('InvalidArgumentException');
+        util::datefr2date("31/13/2010");
+    }
+
+	public function test_fr2cent(){
 		$this->assertEquals(100001,util::fr2cent('1 000,01'));
+	}
+	public function test_cent2fr_1(){
 		$this->assertEquals('1000,0100000',util::cent2fr(100001));
+	}
+	public function test_cent2fr_2(){
 		$this->assertEquals('1000,0000000',util::cent2fr(100000));
+	}
+	public function test_cent2fr_3(){
 		$this->assertEquals('-2594,9100000',util::cent2fr(-259491));
 	}
 	/**
@@ -39,6 +71,19 @@ class utilTest extends PHPUnit_Framework_TestCase {
 	public function test_cent2fr_argument_non_decimal(){
 		util::cent2fr('tptp');
 	}
+    public function test_fr2uk(){
+        $this->assertEquals(1000,util::fr2uk('1000,0000000'));
+    }
+    public function test_fr2uk2(){
+        $this->assertEquals(1000.25,util::fr2uk('1000,2500000'));
+    }
+    public function test_fr2uk3(){
+        $this->setExpectedException('InvalidArgumentException');
+        util::fr2uk('nbjhfk');
+    }
+    public function test_fr2uk4(){
+        $this->assertEquals(-1000,util::fr2uk('-1000,0000000'));
+    }
 	/**
 	 * permet de voir si lorsque on lui met des mauvaises donn�es, il dit merde
 	 * @expectedException InvalidArgumentException

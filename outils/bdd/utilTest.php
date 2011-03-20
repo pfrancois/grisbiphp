@@ -18,6 +18,7 @@ class utilTest extends PHPUnit_Framework_TestCase {
 	public function test_add_date(){
 		$this->assertEquals(mktime(0,0,0,1,2,2009),util::add_date(util::datefr2time("01/01/2009"),1));
 	}
+
 	public function testdatefr2time_valide_1_1_2009(){
 		$this->assertEquals(mktime(0,0,0,1,1,2009),util::datefr2time("1/1/2009"));
 	}
