@@ -80,7 +80,7 @@ if (isset($operations_apres_filtre)) {
 }
 $tpl->assign('solde_compte', ($compte->get_solde_courant()/100));
 $tpl->assign('devise',$compte->get_devise()->get_isocode());
-//gestion des écheances
+//gestion des Ã©cheances
 $nb_ope_echus=0;
 foreach($gsb_echeances->iter() as $ech){
     if ($ech->verif_echus() && ($ech->get_compte()->get_id()===$cpt_id)){

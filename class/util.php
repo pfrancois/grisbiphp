@@ -54,9 +54,14 @@ class util {
         return date("Y-m-d H:i:s", $timestamp);
     }
 
+	/**
+     * equivalent de la fonction now en format mysql
+     * @return string
+     */
     public static function now() {
         return date("Y-m-d");
     }
+
     /**
      * transforme une date francaise en date mysql
      *
@@ -332,7 +337,5 @@ class util {
         return $t;
     }
 
-    //@codeCoverageIgnoreEnd
 }
 //@codeCoverageIgnoreEnd
-}
