@@ -26,7 +26,7 @@ require_once('class/xml.php');
  global $tpl;
  fb($tpl->_tpl_vars["$var"],$var);
  }*/
-require_once ('smarty/libs/Smarty.class.php');
+require_once ('libs/smarty/libs/Smarty.class.php');
 
 /**
  * class template qui etend smarty et qui sert a l'affichage
