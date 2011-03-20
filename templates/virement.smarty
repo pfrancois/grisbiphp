@@ -19,7 +19,7 @@ j7HK8QSqCTSglPmw9gSjKiPwqLx8/JVAlo6s5+t8XGJxm315IAImvV4RjpFhdjJHLmDi5JPd7dSYW+Lc
 <link rel="stylesheet" type="text/css" href="css/common.css" />
 <link rel="stylesheet" type="text/css" href="css/operation.css" />
 <link rel="stylesheet" type="text/css" href="css/calendar.css" />
-<script type="text/javascript" language="JavaScript1.2" src="lib/basiccalendar.js"></script>
+<script type="text/javascript" language="JavaScript1.2" src="js/basiccalendar.js"></script>
 <title>{if ($type_action=='edit')}modification d'un virement{/if}{if ($type_action=='new')}nouveau virement{/if} </title>
 </head>
 <body>
