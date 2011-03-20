@@ -407,7 +407,7 @@ foreach ($xml->xpath('//Operation') as $ope) {
     $catexist = 0;
     $idcompte = $ope->xpath('../../Details/No_de_compte');//recuperation du no du compte
     $q_ope['compte_id'] = (int) $idcompte[0] + 1;
-    $q_ope['date_ope'] = util::datefr2date($ope['D'], true); //date de l'operation
+    $q_ope['date'] = util::datefr2date($ope['D'], true); //date de l'operation
     $q_ope['date_val'] = util::datefr2time($ope['Db'], true);//date de valeur
     $q_ope['montant'] = util::fr2uk($ope['M']);//montant
     $q_ope['devise_id'] = (int) $ope['De'] + 1;//devise utilisé
