@@ -532,7 +532,6 @@ class MySQLConnector {
                     $val = $s['val'];
                 }
                 else{
-                    echo $s['val'].N;
                     $val = $val.', '.N.$s['val'];
                 }
             }
