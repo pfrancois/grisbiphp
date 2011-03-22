@@ -17,7 +17,7 @@ function autoload_grisbi_base($className) {
 }
 
 spl_autoload_register('autoload_grisbi_base');
-date_default_timezone_set("Europe/Paris");
+
 //definitions des variables globales
 
 /**
