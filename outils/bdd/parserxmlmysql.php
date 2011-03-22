@@ -17,7 +17,7 @@ TODO gestion des etats
  */
 require_once 'functions.php';
 $titre   = "parser";
-$xmlfile = '20040701.gsb';
+$xmlfile = '../20040701.gsb';
 /*----------------principal--------------------*/
 $maxnivlog = 2;
 $starttime = microtime(true);
@@ -27,12 +27,13 @@ $db = new MySQLConnector('localhost', 'root', '', 'grisbi');
 //on ouvre le fichier xml en simplexml
 $xml = simplexml_load_file($xmlfile);
 $version = (string) $xml->Generalites->Version_fichier;
-$db->debogagesql = true;
+$db->debogagesql = false;
 //verification du numero de version
 if ($version <> "0.5.0") {
     throw new Exception (" attention, votre fichier grisbi qui se trouve etre en version $version n'est pas en version 0.5.0.et ce logiciel n'importe que cette version pour l'instant.");
 }
 //attention l'ordre des tables a une importance.on doit effacer les tables dependantes avant.
+
 foreach (array('generalite', 'ope', 'echeance', 'rapp', 'moyen', 'compte', 'scat', 'cat', 'exercice', 'sib', 'ib', 'banque', 'titre', 'devise', 'tiers') as $r) {
         $db->q("delete from $r;");
 }
@@ -394,6 +395,7 @@ foreach ($xml->xpath('//Exercice') as $exo) {
     unset($q_exo);
 }
 aff($nbexo.' exercices insérées');
+
 //gestion des operations
 aff('-----------------------------------------------------------');
 $nbope = 0;
@@ -441,16 +443,15 @@ foreach ($xml->xpath('//Operation') as $ope) {
     $q_ope['ib_id'] = $db->ins((int) $ope['I'] + 1);//numero de l'imputation budgetaire
     $q_ope['sib_id'] = $db->ins((int) $ope['Si'] + 1);//numero de la sous imputation budgetaire
     // $q_ope['idpcompt'] = $db->ins($ope['Pc'] + 1);//no_piece_comptable
-    if (in_array((int) $ope['Ro'] + 1, $ope_exist)) {
+    if (((int) $ope['Ro']) + 1!=1) {
         $q_ope['jumelle_id'] = $ope['Ro'] + 1;//transaction jumelle
     }else{
         $q_ope['jumelle_id'] = NULL;
     }
-    if (in_array((int) $ope['Va'] + 1, $ope_exist)) {
+    if ((int)$ope['Va']!==0) {
         $q_ope['mere_id'] = $ope['Va'] + 1;//id de l'operation mere pour les operations ventiles
-    }else{
-        $q_ope['mere_id'] = NULL;
     }
+    $q_ope['is_mere']=(int)$ope['Ov'];
     // $q_ope['infobq'] = $ope['Ibg'];//idbanque
     //verification
     if ($nbope > $nbopemax) {
@@ -458,13 +459,11 @@ foreach ($xml->xpath('//Operation') as $ope) {
     }
     $result = $db->insert('ope', $q_ope);
     unset($q_ope);
-    $db->debogagesql=false;
-    if ($nbope % 50 == 0) echo $nbope.' opes inserés'.N;
-    $db->debogagesql=true;
+    if ($nbope % 200 == 0) echo $nbope.' opes inserés'.N;
 }//end foreach
 $db->save('ope');
 aff($nbope.' ope insérées');
-
+/*
 //gestion des rapprochements
 aff('-----------------------------------------------------------');
 //gestion des echeances
@@ -483,7 +482,7 @@ foreach ($xml->xpath('//Echeance') as $ech) {
     $q_ech['compte_virement_id'] = $db->ins((int) $ech['Virement_compte'] + 1);
     $q_ech['moyen_id'] = $db->ins((int) $ech['Type'] + 1);
     $q_ech['moyen_virement_id'] = $db->ins((int) $ech['Contenu_du_type'] + 1);
-    $q_ech['exercice_id'] = NULL;//$db->ins((int) $ech['Exercice'] + 1); je l'enleve car c'est pas ca.//TODO
+    $q_ech['exercice_id'] = $db->ins((int) $ech['Exercice'] + 1);// je l'enleve car c'est pas ca.//TODO
     $q_ech['ib_id'] = $db->ins((int) $ech['Imputation'] + 1);
     $q_ech['sib_id'] = $db->ins((int) $ech['Sous-imputation'] + 1);
     $q_ech['notes'] = $db->ins($ech['Notes']);
@@ -499,3 +498,4 @@ foreach ($xml->xpath('//Echeance') as $ech) {
 }//end foreach
 aff($nbecheances." échéances");
 //gestion des etats
+            */
