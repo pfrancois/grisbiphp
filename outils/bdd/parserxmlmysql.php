@@ -278,6 +278,8 @@ foreach ($xml->xpath('//Detail_des_banques/Banque') as $banque) {
 aff($nbbanques.' banques insérées');
 unset($q_ban);
 
+
+
 aff('-----------------------------------------------------------');
 //gestion des comptes
 $nbcompte = 0;
@@ -316,7 +318,7 @@ foreach ($xml->xpath('//Compte/Details') as $compte) {
     // $q_cpt['solde_courant'] = util::fr2uk((string) $compte->Solde_courant);
     $q_cpt['date_dernier_releve'] = util::datefr2date($compte->Date_dernier_releve);
     $q_cpt['solde_dernier_releve'] = util::fr2uk((string) $compte->Solde_dernier_releve);
-    $q_cpt['cloture'] = (int) $compte->compte_cloture; // si = 1 => cloture
+    $q_cpt['cloture'] = (int) $compte->Compte_cloture; // si = 1 => cloture
     // $q_cpt['Affichage_r'] = $compte->Affichage_r;
 
     $q_cpt['notes'] = $db->ins($compte->Commentaires);
@@ -328,7 +330,6 @@ foreach ($xml->xpath('//Compte/Details') as $compte) {
     // $q_cpt['tri_par_type'] = $db->ins($compte->Tri_par_type);// si = 1 => tri en fonction des types, si 0 => des dates
     // $q_cpt['neutres_inclus'] = $db->ins($compte->Neutres_inclus);
     // $q_cpt['ordre_du_tri'] = $db->ins($compte->Ordre_du_tri);//contient la liste des types dans l'ordre du tri du compte
-
     $result = $db->insert('compte', $q_cpt);
     unset($q_cpt);
 }//end foreach
@@ -498,4 +499,3 @@ foreach ($xml->xpath('//Echeance') as $ech) {
 }//end foreach
 aff($nbecheances." échéances");
 //gestion des etats
-            */
