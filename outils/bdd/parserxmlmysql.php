@@ -316,7 +316,7 @@ foreach ($xml->xpath('//Compte/Details') as $compte) {
     // $q_cpt['solde_courant'] = util::fr2uk((string) $compte->Solde_courant);
     $q_cpt['date_dernier_releve'] = util::datefr2date($compte->Date_dernier_releve);
     $q_cpt['solde_dernier_releve'] = util::fr2uk((string) $compte->Solde_dernier_releve);
-    $q_cpt['compte_cloture'] = (int) $compte->compte_cloture; // si = 1 => cloture
+    $q_cpt['cloture'] = (int) $compte->compte_cloture; // si = 1 => cloture
     // $q_cpt['Affichage_r'] = $compte->Affichage_r;
 
     $q_cpt['notes'] = $db->ins($compte->Commentaires);
@@ -332,7 +332,7 @@ foreach ($xml->xpath('//Compte/Details') as $compte) {
     $result = $db->insert('compte', $q_cpt);
     unset($q_cpt);
 }//end foreach
-aff($nbcompte.' comptes insérées');
+aff($nbcompte.' comptes insérés');
 
 aff(N.'-----------------------------------------------------------'.N);
 //gestion des types de paiments
