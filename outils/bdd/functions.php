@@ -406,9 +406,7 @@ class MySQLConnector {
         if ($escape) {
             $sql = mysqli_real_escape_string($this->link, $sql);
         }
-        if ($this->debogagesql) {
-            printf("%s\n", $sql);
-        }
+           $this->aff($sql);
         $result = mysqli_query($this->link, $sql);
         if (($this->debogagesql) && (mysqli_affected_rows($this->link) > 1)) {
             printf("lignes affectées: %d\n", mysqli_affected_rows($this->link));
@@ -477,9 +475,8 @@ class MySQLConnector {
         $result = $this->q("SHOW TABLES FROM $this->dbname");
         while ($r = mysqli_fetch_row($result)) {
             $q = "DELETE from `$r[0]`";
-            aff($q);
             $result2 = $this->q($q, false);
-            //if ($this->debogagesql) echo "$r[0] est effacé.\n";
+            $this->aff($r[0]." est effacé");
             if (!$result2) {
                 throw new Exception("imposible d'effacer les tables \n en particulier".mysqli_error($this->link)." \n à la ligne ".xdebug_call_line().' du fichier '.xdebug_call_file()."à la fonction ".xdebug_call_function()."\n alors que la requete sql était ".$q);
             }
@@ -587,6 +584,17 @@ class MySQLConnector {
     public function unins($t) {
         return iconv("iso-8859-1", "UTF-8", stripslashes($t));
     }
+    /**
+    * affiche $s plus retour à la ligne
+    *
+    * @param string $s
+    * @return void
+    */
+    public function aff($s){
+        if ($this->debogagesql) {
+            echo (string) $s.N;
+        }
+    }
 }
 
 /**
@@ -619,12 +627,5 @@ function debog($nomvar, $v, $html=true) {
  * @return void
  */
 function aff($s) {
-    global $db;
-    if (isset($db)){
-        if ($db->debogagesql) {
-            echo (string) $s.N;
-        }
-    } else {
-        echo (string) $s.N;
-    }
+    echo (string) $s.N;
 }
