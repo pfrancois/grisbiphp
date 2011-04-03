@@ -438,7 +438,7 @@ class MySQLConnector {
     /**
      * liste les tables de la bases
      *
-     * @return tables array
+     * @return array tables
      */
     public function liste_tables() {
         $r = $this->q("SHOW TABLES FROM $this->dbname");
@@ -448,7 +448,14 @@ class MySQLConnector {
         }
         return $tables;
     }
-
+    /**
+     * verifie si un id exist
+     *
+     * @param string table la table où verifier
+     * @param int id l'id a verifier
+     * @param string index la colonne de l'index par defaut "id"
+     * @return bool
+     */
     public function exist($table, $id, $index='id') {
         $id = (int) $id;
         if ($id === 1 && $table === "ope") {
@@ -516,7 +523,11 @@ class MySQLConnector {
                                                     );
         }
     }
-
+    /**
+     * sauvegarde les donnes de la table si utilisation du mode total
+     *
+     * @param string $table le nom de la table ou enregistrer
+     */
     public function save($table) {
         if (!isset($this->total_query[$table])) {
             throw new Exception("probleme de sauvegarde \n à la ligne ".xdebug_call_line().' du fichier '.xdebug_call_file()." à la fonction ".xdebug_call_function()."\n");
@@ -544,7 +555,11 @@ class MySQLConnector {
         $this->total = false;
 
     }
-
+    /**
+     * renvoie dans un tableau toutes les données d'une requete
+     *
+     * @param string $q la requete sql
+     */
     public function tab($q) {
         $r = $this->q($q, false);
         if (!$r) {
@@ -559,7 +574,15 @@ class MySQLConnector {
         }
         return $tab;
     }
-
+    /**
+     * nettoie une chaine
+     * specificités:
+     * si t=1: renvoie null
+     * decode utf8 et escaping
+     *
+     * @param string $t la chaine a nettoyer
+     * @return various
+     */
     public function ins($t) {
         if (is_numeric($t)) {
             if (!is_int($t)) {
@@ -585,7 +608,7 @@ class MySQLConnector {
         return iconv("iso-8859-1", "UTF-8", stripslashes($t));
     }
     /**
-    * affiche $s plus retour à la ligne
+    * affiche $s plus retour à la ligne seulement si debogage sql
     *
     * @param string $s
     * @return void
