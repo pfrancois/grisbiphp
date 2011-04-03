@@ -132,6 +132,11 @@ foreach ( $liste as $objet) {
         if ($nb > $nbmax) {
             throw new Exception ('probleme de coherence au tiers Ne '.$objet['No'].' : "'.(string) $objet['Nom'].'" car il y a plus de tiers que le max tiers');
         }
+        if (stristr((string) $objet['Nom'],"titre_")){
+            $q['is_titre']=true;
+        } else {
+            $q['is_titre']=false;
+        }
         $db->insert('tiers', $q);
     }
     if ($nb % 50 === 0) {
@@ -144,7 +149,9 @@ $nb_tot_sous=$db->s('SELECT MAX(id) FROM titre');
 if (is_null($nb_tot_sous)){
     $nb_tot_sous=0;
 }
+
 aff('-----------------------------------------------------------');
+//gestion des titres
 $nb=0;
 foreach ( $liste as $objet) {
     $q=array();
