@@ -171,15 +171,30 @@ foreach ( $liste as $objet) {
             $q['type']='XXX';
         } else {
             $q['type']=substr($q['type'],1);
+            switch ($q['type']){
+                case 'action':
+                    $q['type']='ACT';
+                    break;
+                case 'opcvm':
+                    $q['type']='OPC';
+                    break;
+                case 'csl':
+                    $q['type']='CSL';
+                    break;
+                case 'obligation':
+                    $q['type']='OBL';
+                    break;
+                default:
+                    $q['type']='XXX';
+            }
         }
-        $q['tiers_id']=(int)$objet['No'];
+        $q['tiers_id']=(int)$objet['No']+1;
         $db->insert('titre',$q);
     }
 }
 aff($nb.' titres inserés');
 
 aff('-----------------------------------------------------------');
-die();
 //insertion des categories
 $nb = 0;
 $nbmax = (int) $xml->Categories->Generalites->Nb_categories;
