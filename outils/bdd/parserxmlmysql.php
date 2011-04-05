@@ -459,8 +459,7 @@ aff($nb.' exercices insérées');
 aff('-----------------------------------------------------------');
 $nb = 0;
 $nbmax = (int) $xml->Generalites->Numero_derniere_operation;
-//$ope_exist = array();
-$db->total = true;
+//$db->total = true;
 foreach ($xml->xpath('//Operation') as $ope) {
     $q=array();
     $nb++;
@@ -520,7 +519,7 @@ foreach ($xml->xpath('//Operation') as $ope) {
     $db->insert('ope', $q);
     if ($nb % 200 == 0) aff($nb.' opes inserés');
 }//end foreach
-$db->save('ope');
+//$db->save('ope');
 aff($nb.' ope insérées');
 
 //gestion des rapprochements
@@ -542,7 +541,11 @@ foreach ($xml->xpath('//Echeance') as $objet) {
     $q['compte_virement_id'] = $db->ins((int) $objet['Virement_compte'] + 1);
     $q['moyen_id'] = $db->ins((int) $objet['Type'] + 1);
     $q['moyen_virement_id'] = $db->ins((int) $objet['Contenu_du_type'] + 1);
-    $q['exercice_id'] = $db->ins((int) $objet['Exercice'] + 1);// je l'enleve car c'est pas ca.//TODO
+    if ($objet['Exercice']==-2){
+        $q['exercice_id'] = NULL;
+    } else {
+        $q['exercice_id'] = $objet['Exercice'];
+    }
     $q['ib_id'] = $db->ins((int) $objet['Imputation'] + 1);
     $q['sib_id'] = $db->ins((int) $objet['Sous-imputation'] + 1);
     $q['notes'] = $db->ins($objet['Notes']);
