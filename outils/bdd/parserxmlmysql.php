@@ -16,7 +16,7 @@ TODO gestion des etats
  prendre les bons numeros dans idgrsibi pour les tiers et les categories
  */
 require_once 'functions.php';
-$xmlfile = '../20040701.gsb';
+$xmlfile = '../../tests/fichiers/test_original.gsb';
 /*----------------principal--------------------*/
 $starttime = microtime(true);
 register_shutdown_function(create_function('$s', 'echo (microtime(true)-$s);'), $starttime);
@@ -191,6 +191,18 @@ foreach ( $liste as $objet) {
                 case 'obligation':
                     $q['type']='OBL';
                     break;
+                case 'ACT':
+                    $q['type']='ACT';
+                    break;
+                case 'OPC':
+                    $q['type']='OPC';
+                    break;
+                case 'CSL':
+                    $q['type']='CSL';
+                    break;
+                case 'OBL':
+                    $q['type']='OBL';
+                    break;
                 default:
                     $q['type']='XXX';
             }
@@ -213,13 +225,13 @@ foreach ($xml->xpath('//Categorie') as $objet) {
     $q['nom'] = $db->ins($objet['Nom']);
     switch ((int) $objet['Type']) {
         case 0:
-            $q['typecat'] = 'd';
+            $q['type'] = 'd';
             break;
         case 1:
-            $q['typecat'] = 'r';
+            $q['type'] = 'r';
             break;
         case 2:
-            $q['typecat'] = 'v';
+            $q['type'] = 'v';
             break;
         default:
             throw new Exception ("id de la categorie ".$q['id']." inconnu");
@@ -243,7 +255,7 @@ foreach ($xml->xpath('//Categorie') as $objet) {
         $nb_tot_sous++;
        $sous['id'] = $nb_tot_sous + 1;
        $sous['nom'] = $db->ins($sous_liste['Nom']);
-       $sous['grisbi_id'] = (int) $sous_liste['No'] + 1;
+       $sous['grisbi_id'] = (int) $sous_liste['No'];
        $sous['cat_id'] = (int) $objet['No'] + 1;
         //verification
         if ($nb_sous > (int) $objet['No_derniere_sous_cagegorie']) {
@@ -267,13 +279,13 @@ foreach ($xml->xpath('//Imputation') as $liste) {
     $q['nom'] = $db->ins($liste['Nom']);
     switch ((int) $liste['Type']) {
         case 0:
-            $q['typeimp'] = 'd';
+            $q['type'] = 'd';
             break;
         case 1:
-            $q['typeimp'] = 'r';
+            $q['type'] = 'r';
             break;
         case 2:
-            $q['typeimp'] = 'v';
+            $q['type'] = 'v';
             break;
         default:
             throw new Exception ("id de la categorie ".$q['id']." inconnu");
@@ -297,7 +309,7 @@ foreach ($xml->xpath('//Imputation') as $liste) {
         $nb_tot_sous++;
         $sous['id'] = $nb_tot_sous;
         $sous['nom'] = $db->ins($sous_liste['Nom']);
-        $sous['grisbi_id'] = (int) $sous_liste['No'] + 1;
+        $sous['grisbi_id'] = (int) $sous_liste['No'];
         $sous['ib_id'] = (int) $liste['No'] + 1;
         //verification
         if ($nb_sous > (int) $liste['No_derniere_sous_imputation']) {
@@ -384,8 +396,8 @@ foreach ($xml->xpath('//Compte/Details') as $objet) {
 
     // $q['adresse_du_titulaire'] = $db->ins($objet->Adresse_du_titulaire);
     // //nombre_de_types : nombre des types differents par comptes
-    // $q['type_defaut_debit'] = $db->ins($objet->Type_defaut_debit);
-    // $q['type_defaut_credit'] = $db->ins($objet->Type_defaut_credit);
+    $q['moyen_debit_defaut_id'] = intval($objet->Type_defaut_debit)+1;
+    $q['moyen_credit_defaut_id'] = intval($objet->Type_defaut_credit)+1;
     // $q['tri_par_type'] = $db->ins($objet->Tri_par_type);// si = 1 => tri en fonction des types, si 0 => des dates
     // $q['neutres_inclus'] = $db->ins($objet->Neutres_inclus);
     // $q['ordre_du_tri'] = $db->ins($objet->Ordre_du_tri);//contient la liste des types dans l'ordre du tri du compte
@@ -399,9 +411,25 @@ foreach ($xml->xpath('//Type') as $type) {
     $q=array();
     $nb_tot_sous++;
     $q['id'] = $nb_tot_sous;
-    $q['grisbi_id'] = (int) $type['No'] + 1;
+    $q['grisbi_id'] = (int) $type['No'] ;
     $q['nom'] = $db->ins($type['Nom']);
-    $q['signe'] = (int) $type['Signe'] + 1;
+    $tb = (int) $type['Signe'];
+    switch ($tb) {
+    //0 = bancaire, 1 = espece, 2 = passif, 3 = actif
+        case 0:
+            $q['signe'] = "v";
+            break;
+        case 1:
+            $q['signe'] = "d";
+            break;
+        case 2:
+            $q['signe'] = "r";
+            break;
+        default:
+            throw new Exception ("signe du moyen ".$q['id']." inconnu. c'est le moyen ".$tb);
+            break;
+    }
+
     //0 pour les virements
     //1 pour les depenses
     //2 pour les recettes
@@ -544,7 +572,7 @@ foreach ($xml->xpath('//Echeance') as $objet) {
     if ($objet['Exercice']==-2){
         $q['exercice_id'] = NULL;
     } else {
-        $q['exercice_id'] = $objet['Exercice'];
+        $q['exercice_id'] = $objet['Exercice']+1;
     }
     $q['ib_id'] = $db->ins((int) $objet['Imputation'] + 1);
     $q['sib_id'] = $db->ins((int) $objet['Sous-imputation'] + 1);
