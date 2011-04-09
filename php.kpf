@@ -1,6 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Komodo Project File - DO NOT EDIT -->
 <project id="45cd86d8-32ae-4990-9f1e-962d21a56667" kpf_version="4" name="php.kpf">
+<preference-set idref="13e76ef5-42b2-476a-9bd0-f8af07414cfb">
+<preference-set id="Invocations">
+<preference-set id="default">
+  <string id="cookieparams"></string>
+  <string id="cwd"></string>
+  <boolean id="disableOutputBuffering">1</boolean>
+  <string id="documentRoot"></string>
+  <boolean id="enableImplicitFlush">1</boolean>
+  <string id="executable-params"></string>
+  <string relative="path" id="filename">outils/bdd/parserxmlmysql.php</string>
+  <string id="getparams"></string>
+  <string id="language">PHP</string>
+  <string id="mpostparams"></string>
+  <string id="params"></string>
+  <string id="phpInterpreterType">php-cli</string>
+  <string id="postparams"></string>
+  <string id="posttype">application/x-www-form-urlencoded</string>
+  <string id="request-method">GET</string>
+  <boolean id="show-dialog">1</boolean>
+  <boolean id="sim-cgi">0</boolean>
+  <boolean id="use-console">0</boolean>
+  <string id="userCGIEnvironment"></string>
+  <string id="userEnvironment"></string>
+</preference-set>
+</preference-set>
+  <string id="lastInvocation">default</string>
+</preference-set>
+<preference-set idref="2d1d39e8-755e-4a82-8a8e-cae63858d761">
+<preference-set id="Invocations">
+<preference-set id="default">
+  <string id="cookieparams"></string>
+  <string id="cwd"></string>
+  <boolean id="disableOutputBuffering">1</boolean>
+  <string id="documentRoot"></string>
+  <boolean id="enableImplicitFlush">1</boolean>
+  <string id="executable-params"></string>
+  <string relative="path" id="filename">outils/bdd/parserxmlmysql.php</string>
+  <string id="getparams"></string>
+  <string id="language">PHP</string>
+  <string id="mpostparams"></string>
+  <string id="params"></string>
+  <string id="phpInterpreterType">php-cli</string>
+  <string id="postparams"></string>
+  <string id="posttype">application/x-www-form-urlencoded</string>
+  <string id="request-method">GET</string>
+  <boolean id="show-dialog">1</boolean>
+  <boolean id="sim-cgi">0</boolean>
+  <boolean id="use-console">0</boolean>
+  <string id="userCGIEnvironment"></string>
+  <string id="userEnvironment"></string>
+</preference-set>
+</preference-set>
+  <string id="lastInvocation">default</string>
+</preference-set>
+<preference-set idref="318ae35a-6901-4f16-af30-53c83350d239">
+<preference-set id="Invocations">
+<preference-set id="default">
+  <string id="cookieparams"></string>
+  <string id="cwd"></string>
+  <boolean id="disableOutputBuffering">1</boolean>
+  <string id="documentRoot"></string>
+  <boolean id="enableImplicitFlush">1</boolean>
+  <string id="executable-params"></string>
+  <string relative="path" id="filename">outils/bdd/parserxmlmysql.php</string>
+  <string id="getparams"></string>
+  <string id="language">PHP</string>
+  <string id="mpostparams"></string>
+  <string id="params"></string>
+  <string id="phpInterpreterType">php-cli</string>
+  <string id="postparams"></string>
+  <string id="posttype">application/x-www-form-urlencoded</string>
+  <string id="request-method">GET</string>
+  <boolean id="show-dialog">1</boolean>
+  <boolean id="sim-cgi">0</boolean>
+  <boolean id="use-console">0</boolean>
+  <string id="userCGIEnvironment"></string>
+  <string id="userEnvironment"></string>
+</preference-set>
+</preference-set>
+  <string id="lastInvocation">default</string>
+</preference-set>
 <preference-set idref="45cd86d8-32ae-4990-9f1e-962d21a56667">
 <preference-set id="Invocations">
 <preference-set id="Project">
@@ -126,7 +207,88 @@
 </preference-set>
   <string id="lastInvocation">default</string>
 </preference-set>
+<preference-set idref="8a3bc6d4-4f05-4fcd-bd89-0b32609d31b0">
+<preference-set id="Invocations">
+<preference-set id="default">
+  <string id="cookieparams"></string>
+  <string id="cwd"></string>
+  <boolean id="disableOutputBuffering">1</boolean>
+  <string id="documentRoot"></string>
+  <boolean id="enableImplicitFlush">1</boolean>
+  <string id="executable-params"></string>
+  <string relative="path" id="filename">outils/bdd/parserxmlmysql.php</string>
+  <string id="getparams"></string>
+  <string id="language">PHP</string>
+  <string id="mpostparams"></string>
+  <string id="params"></string>
+  <string id="phpInterpreterType">php-cli</string>
+  <string id="postparams"></string>
+  <string id="posttype">application/x-www-form-urlencoded</string>
+  <string id="request-method">GET</string>
+  <boolean id="show-dialog">1</boolean>
+  <boolean id="sim-cgi">0</boolean>
+  <boolean id="use-console">0</boolean>
+  <string id="userCGIEnvironment"></string>
+  <string id="userEnvironment"></string>
+</preference-set>
+</preference-set>
+  <string id="lastInvocation">default</string>
+</preference-set>
+<preference-set idref="92eb29bb-1bd5-4872-a191-65ff9bcdbb2c">
+<preference-set id="Invocations">
+<preference-set id="default">
+  <string id="cookieparams"></string>
+  <string id="cwd"></string>
+  <boolean id="disableOutputBuffering">1</boolean>
+  <string id="documentRoot"></string>
+  <boolean id="enableImplicitFlush">1</boolean>
+  <string id="executable-params"></string>
+  <string relative="path" id="filename">outils/bdd/parserxmlmysql.php</string>
+  <string id="getparams"></string>
+  <string id="language">PHP</string>
+  <string id="mpostparams"></string>
+  <string id="params"></string>
+  <string id="phpInterpreterType">php-cli</string>
+  <string id="postparams"></string>
+  <string id="posttype">application/x-www-form-urlencoded</string>
+  <string id="request-method">GET</string>
+  <boolean id="show-dialog">1</boolean>
+  <boolean id="sim-cgi">0</boolean>
+  <boolean id="use-console">0</boolean>
+  <string id="userCGIEnvironment"></string>
+  <string id="userEnvironment"></string>
+</preference-set>
+</preference-set>
+  <string id="lastInvocation">default</string>
+</preference-set>
 <preference-set idref="b0ac6e6a-d04c-40a3-8785-f3ac8f11490b">
+<preference-set id="Invocations">
+<preference-set id="default">
+  <string id="cookieparams"></string>
+  <string id="cwd"></string>
+  <boolean id="disableOutputBuffering">1</boolean>
+  <string id="documentRoot"></string>
+  <boolean id="enableImplicitFlush">1</boolean>
+  <string id="executable-params"></string>
+  <string relative="path" id="filename">outils/bdd/parserxmlmysql.php</string>
+  <string id="getparams"></string>
+  <string id="language">PHP</string>
+  <string id="mpostparams"></string>
+  <string id="params"></string>
+  <string id="phpInterpreterType">php-cli</string>
+  <string id="postparams"></string>
+  <string id="posttype">application/x-www-form-urlencoded</string>
+  <string id="request-method">GET</string>
+  <boolean id="show-dialog">1</boolean>
+  <boolean id="sim-cgi">0</boolean>
+  <boolean id="use-console">0</boolean>
+  <string id="userCGIEnvironment"></string>
+  <string id="userEnvironment"></string>
+</preference-set>
+</preference-set>
+  <string id="lastInvocation">default</string>
+</preference-set>
+<preference-set idref="dc50f081-00fe-48e6-a395-e35da46622d5">
 <preference-set id="Invocations">
 <preference-set id="default">
   <string id="cookieparams"></string>
