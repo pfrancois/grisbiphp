@@ -1,4 +1,8 @@
 <?php /* coding: utf-8 */
+//config
+$nomfich='../tests/fichiers/test_original.gsb';
+
+
 
 require_once('../class/util.php');
 /**
@@ -41,7 +45,7 @@ function xpath_tab($chaine){
 <title>xpath</title>
 </head>
 <body>
-<h1><?php echo realpath('20040701.gsb')?></h1>
+<h1><?php echo realpath($nomfich)?></h1>
 
 <form method="get" action="<?php echo $_SERVER['SCRIPT_NAME'];?>">
 <fieldset><legend>xpath</legend> <input type="text" name="xpath"
@@ -50,7 +54,7 @@ function xpath_tab($chaine){
 </fieldset>
 <input type="submit" name="ok" /></form>
 <?php
-$xml = simplexml_load_file('20040701.gsb');
+$xml = simplexml_load_file($nomfich);
 if(isset($_GET['xpath'])){
 	$xpath=util::get_page_param('xpath');
 	echo 'requete:<pre style="font-family: monospace;font-size: 1.2em;border: solid #BBB;background: #DDD;">'.$xpath.'</pre><br/>';

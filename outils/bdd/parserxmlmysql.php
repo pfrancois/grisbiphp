@@ -31,7 +31,7 @@ if ($version <> "0.5.0") {
     throw new Exception (" attention, votre fichier grisbi qui se trouve etre en version $version n'est pas en version 0.5.0.et ce logiciel n'importe que cette version pour l'instant.");
 }
 //attention l'ordre des tables a une importance.on doit effacer les tables dependantes avant.
-
+$db->debogagesql=true;
 foreach (array('generalite', 'ope', 'echeance', 'rapp', 'moyen', 'compte', 'scat', 'cat', 'exercice', 'sib', 'ib', 'banque', 'titre', 'devise', 'tiers') as $objet) {
         $db->q("delete from $objet;");
 }
@@ -347,9 +347,52 @@ foreach ($xml->xpath('//Detail_des_banques/Banque') as $objet) {
     $db->insert('banque', $q);
 }//end foreach
 aff($nb.' banques insérées');
+aff('-----------------------------------------------------------');
+//gestion des types de paiments
+$nb_tot_sous = 0;
+$tab_passage_moyen_id_grisbi_id=array();
+$compte_actuel=0;
+foreach ($xml->xpath('//Type') as $type) {
+    $q=array();
+    $nb_tot_sous++;
+    $q['id'] = $nb_tot_sous;
+    $q['grisbi_id'] = intval($type['No']) ;
+    $q['nom'] = $db->ins($type['Nom']);
+    $tb = (int) $type['Signe'];
+    switch ($tb) {
+    //0 = bancaire, 1 = espece, 2 = passif, 3 = actif
+        case 0:
+            $q['signe'] = "v";
+            break;
+        case 1:
+            $q['signe'] = "d";
+            break;
+        case 2:
+            $q['signe'] = "r";
+            break;
+        default:
+            throw new Exception ("signe du moyen ".$q['id']." inconnu. c'est le moyen ".$tb);
+            break;
+    }
 
-
-
+    //0 pour les virements
+    //1 pour les depenses
+    //2 pour les recettes
+    $q['affiche_numero'] = $db->ins($type['Affiche_entree']);
+    $q['num_auto'] = $db->ins($type['Numerotation_auto']);
+    $q['num_en_cours'] = (int) $type['No_en_cours'];
+    $q['compte_id'] = intval(implode('', $type->xpath('../../Details/No_de_compte'))) + 1;//implode car xpath renvoie un tableau
+    if ($compte_actuel != $q['compte_id']){
+        if ($compte_actuel != 0) {
+            $tab_passage_moyen_id_grisbi_id[$compte_actuel]=$ligne;
+        }
+        $compte_actuel = $q['compte_id'];
+    } else {
+        $ligne[$q['grisbi_id']]=$q['id'];
+    }
+    $db->insert('moyen', $q);
+}
+aff($nb_tot_sous.' moyens insérées');
 aff('-----------------------------------------------------------');
 //gestion des comptes
 $nb = 0;
@@ -396,8 +439,14 @@ foreach ($xml->xpath('//Compte/Details') as $objet) {
 
     // $q['adresse_du_titulaire'] = $db->ins($objet->Adresse_du_titulaire);
     // //nombre_de_types : nombre des types differents par comptes
-    $q['moyen_debit_defaut_id'] = intval($objet->Type_defaut_debit)+1;
-    $q['moyen_credit_defaut_id'] = intval($objet->Type_defaut_credit)+1;
+    if (isset($tab_passage_moyen_id_grisbi_id[$q['id']])){
+        $q['moyen_debit_defaut_id'] = intval($objet->Type_defaut_debit)==0?$tab_passage_moyen_id_grisbi_id[$q['id']][intval($objet->Type_defaut_debit)+1]:NULL;
+        $q['moyen_credit_defaut_id'] =intval($objet->Type_defaut_credit)==0?$tab_passage_moyen_id_grisbi_id[$q['id']][intval($objet->Type_defaut_credit)+1]:NULL;
+    } else {
+        $q['moyen_debit_defaut_id'] = NULL;
+        $q['moyen_credit_defaut_id'] = NULL;
+    }
+
     // $q['tri_par_type'] = $db->ins($objet->Tri_par_type);// si = 1 => tri en fonction des types, si 0 => des dates
     // $q['neutres_inclus'] = $db->ins($objet->Neutres_inclus);
     // $q['ordre_du_tri'] = $db->ins($objet->Ordre_du_tri);//contient la liste des types dans l'ordre du tri du compte
@@ -405,42 +454,7 @@ foreach ($xml->xpath('//Compte/Details') as $objet) {
 }//end foreach
 aff($nb.' comptes insérés');
 aff('-----------------------------------------------------------');
-//gestion des types de paiments
-$nb_tot_sous = 0;
-foreach ($xml->xpath('//Type') as $type) {
-    $q=array();
-    $nb_tot_sous++;
-    $q['id'] = $nb_tot_sous;
-    $q['grisbi_id'] = (int) $type['No'] ;
-    $q['nom'] = $db->ins($type['Nom']);
-    $tb = (int) $type['Signe'];
-    switch ($tb) {
-    //0 = bancaire, 1 = espece, 2 = passif, 3 = actif
-        case 0:
-            $q['signe'] = "v";
-            break;
-        case 1:
-            $q['signe'] = "d";
-            break;
-        case 2:
-            $q['signe'] = "r";
-            break;
-        default:
-            throw new Exception ("signe du moyen ".$q['id']." inconnu. c'est le moyen ".$tb);
-            break;
-    }
 
-    //0 pour les virements
-    //1 pour les depenses
-    //2 pour les recettes
-    $q['affiche_numero'] = $db->ins($type['Affiche_entree']);
-    $q['num_auto'] = $db->ins($type['Numerotation_auto']);
-    $q['num_en_cours'] = (int) $type['No_en_cours'];
-    $q['compte_id'] = (int) implode('', $type->xpath('../../Details/No_de_compte')) + 1;//implode car xpath renvoie un tableau
-    $db->insert('moyen', $q);
-}
-aff($nb_tot_sous.' moyens insérées');
-aff('-----------------------------------------------------------');
 //gestion des rapprochements
 
 $nb = 0;

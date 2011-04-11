@@ -327,20 +327,21 @@
             <No_derniere_echeance>3</No_derniere_echeance>
         </Generalites>
         <Detail_des_echeances>
-            <Echeance No="3" Date="31/12/2010" Compte="0" Montant="-123,0000000" Devise="2" Tiers="4" Categorie="6" Sous-categorie="2" Virement_compte="0" Type="3" Type_contre_ope="0" Contenu_du_type="" Exercice="5" Imputation="0" Sous-imputation="0" Notes="automatique" Automatique="1" Periodicite="2" Intervalle_periodicite="0" Periodicite_personnalisee="0" Date_limite="" Ech_ventilee="0" No_ech_associee="0" />
-            <Echeance No="2" Date="31/12/2010" Compte="0" Montant="-123,0000000" Devise="2" Tiers="4" Categorie="21" Sous-categorie="6" Virement_compte="0" Type="1" Type_contre_ope="0" Contenu_du_type="" Exercice="5" Imputation="0" Sous-imputation="0" Notes="echeance" Automatique="0" Periodicite="0" Intervalle_periodicite="0" Periodicite_personnalisee="0" Date_limite="" Ech_ventilee="0" No_ech_associee="0" />
+      <Echeance No="3" Date="31/12/2012" Compte="0" Montant="-123,0000000" Devise="2" Tiers="4" Categorie="6" Sous-categorie="2" Virement_compte="0" Type="3" Type_contre_ope="0" Contenu_du_type="" Exercice="5" Imputation="0" Sous-imputation="0" Notes="automatique" Automatique="1" Periodicite="2" Intervalle_periodicite="0" Periodicite_personnalisee="0" Date_limite="" Ech_ventilee="0" No_ech_associee="0"/>
+      <Echeance No="2" Date="31/12/2012" Compte="0" Montant="-123,0000000" Devise="2" Tiers="4" Categorie="21" Sous-categorie="6" Virement_compte="0" Type="1" Type_contre_ope="0" Contenu_du_type="" Exercice="5" Imputation="0" Sous-imputation="0" Notes="echeance" Automatique="0" Periodicite="0" Intervalle_periodicite="0" Periodicite_personnalisee="0" Date_limite="" Ech_ventilee="0" No_ech_associee="0"/>
         </Detail_des_echeances>
     </Echeances>
     <Tiers>
         <Generalites>
-            <Nb_tiers>4</Nb_tiers>
-            <No_dernier_tiers>5</No_dernier_tiers>
+      <Nb_tiers>5</Nb_tiers>
+      <No_dernier_tiers>6</No_dernier_tiers>
         </Generalites>
         <Detail_des_tiers>
             <Tiers No="1" Nom="premier" Informations="" Liaison="0" />
             <Tiers No="2" Nom="second" Informations="" Liaison="0" />
             <Tiers No="4" Nom="quatrieme" Informations="" Liaison="0" />
             <Tiers No="5" Nom="tiers isole" Informations="" Liaison="0" />
+      <Tiers No="6" Nom="titre_ SG" Informations="FR0000130809@ACT" Liaison="0"/>
         </Detail_des_tiers>
     </Tiers>
     <Categories>
