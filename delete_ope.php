@@ -6,9 +6,10 @@ $ope_id=(int) util::get_page_param('ope_id');
 $cpt_id=(int) util::get_page_param('cpt_id');
 if (util::get_page_param('action')=='delete' && date('dmY',time())==util::get_page_param('date')){
 	$operation=$gsb_operations->get_by_id($ope_id);
+
 	if (!$operation->is_virement()){
 		$tpl->assign('titre',"Opération effacée");
-		$t=" opération $ope_id, d'un montant de ".$operation->get_montant()." ".$operation->get_compte()->get_devise()->get_isocode().", à ".$tier->get_nom()." le ".date('d/m/Y',$ope_date)." ok";
+		$t=" opération $ope_id, d'un montant de ".$operation->get_montant()." ".$operation->get_compte()->get_devise()->get_isocode().", à ".$operation->get_tiers()->get_nom()." le ".date('d/m/Y',$operation->get_date())." ok";
 		try {
 			$operation->delete();
 		} catch (Exception $except) {
